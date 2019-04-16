@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butter", "Butter\Butter.csproj", "{AD66A0BC-D73D-4AE1-A89A-2FC9DA2D372F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butter.Tests", "Butter.Tests\Butter.Tests.csproj", "{2C712D03-A47A-4AF8-A256-84FD2212A562}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD66A0BC-D73D-4AE1-A89A-2FC9DA2D372F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD66A0BC-D73D-4AE1-A89A-2FC9DA2D372F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD66A0BC-D73D-4AE1-A89A-2FC9DA2D372F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD66A0BC-D73D-4AE1-A89A-2FC9DA2D372F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
