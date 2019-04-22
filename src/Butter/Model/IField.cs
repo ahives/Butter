@@ -12,13 +12,12 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Metadata
+namespace Butter.Model
 {
-    public enum ConvertedType
+    using Metadata;
+
+    interface IField
     {
-        UTF8,
-        MAP,
-        MAP_KEY_VALUE,
-        LIST
+        DataType Type { get; }
     }
 }

@@ -12,13 +12,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Metadata
+namespace Butter.Model
 {
-    public enum ConvertedType
+    using Metadata;
+
+    public static class DataTypes
     {
-        UTF8,
-        MAP,
-        MAP_KEY_VALUE,
-        LIST
+        public static DataType Convert<T>()
+        {
+            if (typeof(T) == typeof(int))
+                return DataType.INT32;
+            
+            if (typeof(T) == typeof(byte[]))
+                return DataType.BYTE_ARRAY;
+            
+            throw new System.NotSupportedException();
+        }
     }
 }

@@ -12,22 +12,23 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Metadata
+namespace Butter
 {
-    public interface PageHeader
+    using Model;
+
+    public static class FieldExtensions
     {
-        PageType Type { get; }
-        
-        int UncompressedPageSize { get; }
-        
-        int CompressedPageSize { get; }
-        
-        int CRC { get; }
-        
-        DataPageHeader DataPageHeader { get; }
-        
-        IndexPageHeader IndexPageHeader { get; }
-        
-        DictionaryPageHeader DictionaryPageHeader { get; }
+        public static bool EqualTo<T>(this Field<T> source, Field<T> target)
+        {
+            if (source == null && target == null)
+                return true;
+            
+            if (source != null && target != null)
+            {
+                return (source.Name == target.Name);
+            }
+
+            return false;
+        }
     }
 }

@@ -12,13 +12,30 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Metadata
+namespace Butter
 {
-    public enum ConvertedType
+    using System;
+    using System.Runtime.Serialization;
+
+    public class EntityCreationException :
+        Exception
     {
-        UTF8,
-        MAP,
-        MAP_KEY_VALUE,
-        LIST
+        public EntityCreationException()
+        {
+        }
+
+        protected EntityCreationException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+        }
+
+        public EntityCreationException(string message) : base(message)
+        {
+        }
+
+        public EntityCreationException(string message, Exception innerException)
+            : base(message, innerException)
+        {
+        }
     }
 }
