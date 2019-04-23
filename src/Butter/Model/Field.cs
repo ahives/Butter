@@ -17,9 +17,9 @@ namespace Butter.Model
     using System;
     using Metadata;
 
-    public interface Field<out TValue>
+    public interface Field<out T>
     {
-        TValue Value { get; }
+        T Value { get; }
         
         string Name { get; }
         
@@ -61,7 +61,11 @@ namespace Butter.Model
             return new FieldImpl<T>(name, value);
         }
 
-        
+        public static Field<T> OutOfRange<T>(int index, int count) => new OutOfRangeField<T>(index, count);
+
+        public static Field<T> Empty<T>() => FieldCache<T>.EmptyField;
+
+
         class FieldImpl<T> :
             Field<T>
         {
@@ -84,6 +88,12 @@ namespace Butter.Model
             public Type Type { get; }
             public T Value { get; }
             public string Name { get; }
+        }
+
+        
+        static class FieldCache<T>
+        {
+            public static readonly Field<T> EmptyField = new EmptyField<T>();
         }
     }
 }
