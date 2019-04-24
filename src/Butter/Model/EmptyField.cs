@@ -25,4 +25,12 @@ namespace Butter.Model
         public DataType DataType => DataTypes.Convert<T>();
         public Type Type => typeof(T);
     }
+
+    public class EmptyField :
+        Field
+    {
+        public string Name { get; }
+        public DataType DataType => DataType.None;
+        public Type Type => ClrType.Convert(DataType.None);
+    }
 }

@@ -23,6 +23,7 @@ namespace Butter.Metadata
         FLOAT,
         DOUBLE,
         BYTE_ARRAY,
-        FIXED_LENGTH_BYTE_ARRAY
+        FIXED_LENGTH_BYTE_ARRAY,
+        None
     }
 }

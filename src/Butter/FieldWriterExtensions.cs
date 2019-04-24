@@ -20,13 +20,22 @@ namespace Butter
 
     public static class FieldWriterExtensions
     {
-        internal static Field<T> Write<T>(this Field<T> field, T value)
+        public static Field<T> Write<T>(this Field<T> field, T value)
         {
             if (field == null)
                 throw new ArgumentNullException(nameof(field));
 
             return new FieldImpl<T>(field, value);
         }
+
+//        public static Field Write(this Field field, string value)
+//        {
+//            if (field == null)
+//                throw new ArgumentNullException(nameof(field));
+//
+//            ConvertValue(field.Type)
+//            return new FieldImpl<T>(field, value);
+//        }
 
         
         class FieldImpl<T> :
