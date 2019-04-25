@@ -18,7 +18,7 @@ namespace Butter
 
     public static class FieldExtensions
     {
-        public static bool EqualTo<T>(this Field<T> source, Field<T> target)
+        public static bool EqualTo(this Field source, Field target)
         {
             if (source == null && target == null)
                 return true;

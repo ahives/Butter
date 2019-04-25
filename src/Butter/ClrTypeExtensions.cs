@@ -3,9 +3,9 @@ namespace Butter
     using System;
     using Metadata;
 
-    public static class ClrType
+    public static class ClrTypeExtensions
     {
-        public static Type Convert(DataType dataType)
+        public static Type Convert(this DataType dataType)
         {
             switch (dataType)
             {

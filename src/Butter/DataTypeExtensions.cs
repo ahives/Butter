@@ -14,16 +14,20 @@
 // ***********************************************************************************
 namespace Butter
 {
+    using System;
     using Metadata;
 
-    public static class DataTypes
+    public static class DataTypeExtensions
     {
-        public static DataType Convert<T>()
+        public static DataType Convert(this Type type)
         {
-            if (typeof(T) == typeof(int))
+            if (type == typeof(int))
                 return DataType.INT32;
             
-            if (typeof(T) == typeof(byte[]))
+            if (type == typeof(long))
+                return DataType.INT64;
+            
+            if (type == typeof(byte[]))
                 return DataType.BYTE_ARRAY;
             
             throw new System.NotSupportedException();

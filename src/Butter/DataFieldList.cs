@@ -19,22 +19,6 @@ namespace Butter
 
     public static class DataFieldList
     {
-        public static FieldList<T> Create<T>(params Field<T>[] fields)
-        {
-            if (fields.Length <= 0)
-                return Empty<T>();
-            
-            return new FieldListImpl<T>(fields);
-        }
-
-        public static FieldList<T> Create<T>(IReadOnlyList<Field<T>> fields)
-        {
-            if (fields == null || fields.Count == 0)
-                return Empty<T>();
-            
-            return new FieldListImpl<T>(fields);
-        }
-
         public static FieldList Create(params Field[] fields)
         {
             if (fields.Length <= 0)
@@ -51,49 +35,7 @@ namespace Butter
             return new FieldListImpl(fields);
         }
 
-        public static FieldList<T> Empty<T>() => TypedFieldListCache<T>.EmptyFieldList;
-
         public static FieldList Empty() => FieldListCache.EmptyFieldList;
-
-
-        class FieldListImpl<T> :
-            FieldList<T>
-        {
-            readonly IReadOnlyList<Field<T>> _values;
-
-            public FieldListImpl(IReadOnlyList<Field<T>> fields)
-            {
-                _values = fields;
-            }
-
-            public Field<T> this[int index]
-            {
-                get
-                {
-                    TryGetValue(index, out var field);
-
-                    return field;
-                }
-            }
-
-            public bool TryGetValue(int index, out Field<T> field)
-            {
-                if (index < 0)
-                {
-                    field = DataField.OutOfRange<T>(index, _values.Count);
-                    return false;
-                }
-
-                if (index < _values.Count)
-                {
-                    field = _values[index];
-                    return true;
-                }
-
-                field = DataField.OutOfRange<T>(index, _values.Count);
-                return false;
-            }
-        }
 
 
         class FieldListImpl :
@@ -135,12 +77,6 @@ namespace Butter
             }
         }
 
-        
-        static class TypedFieldListCache<T>
-        {
-            public static readonly FieldList<T> EmptyFieldList = new EmptyFieldList<T>();
-        }
-        
         
         static class FieldListCache
         {

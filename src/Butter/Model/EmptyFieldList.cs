@@ -14,18 +14,6 @@
 // ***********************************************************************************
 namespace Butter.Model
 {
-    public class EmptyFieldList<T> :
-        FieldList<T>
-    {
-        public Field<T> this[int index] => DataField.Empty<T>();
-
-        public bool TryGetValue(int index, out Field<T> field)
-        {
-            field = DataField.Empty<T>();
-            return false;
-        }
-    }
-    
     public class EmptyFieldList :
         FieldList
     {

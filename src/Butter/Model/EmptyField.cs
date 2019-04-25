@@ -18,11 +18,26 @@ namespace Butter.Model
     using Metadata;
 
     public class EmptyField<T> :
-        Field<T>
+        Field
     {
-        public T Value => throw new ValueEmptyException("The field value is empty.");
+        public EmptyField()
+        {
+            Value = new ValueImpl();
+        }
+
+        class ValueImpl :
+            Value
+        {
+            public string Data { get; }
+            public DataType DataType => DataType.None;
+            public Type ClrType { get; }
+        }
+
+//        public Value Value => throw new ValueEmptyException("The field value is empty.");
+//        public Value Value => throw new ValueEmptyException("The field value is empty.");
         public string Name { get; }
-        public DataType DataType => DataTypes.Convert<T>();
+        public Value Value { get; }
+        public DataType DataType => typeof(T).Convert();
         public Type Type => typeof(T);
     }
 
@@ -30,7 +45,9 @@ namespace Butter.Model
         Field
     {
         public string Name { get; }
+        public Value Value { get; }
+
         public DataType DataType => DataType.None;
-        public Type Type => ClrType.Convert(DataType.None);
+//        public Type Type => typeof().Convert(DataType.None);
     }
 }

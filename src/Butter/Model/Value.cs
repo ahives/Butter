@@ -14,10 +14,15 @@
 // ***********************************************************************************
 namespace Butter.Model
 {
-    public interface Field
+    using System;
+    using Metadata;
+
+    public interface Value
     {
-        string Name { get; }
+        string Data { get; }
         
-        Value Value { get; }
+        DataType DataType { get; }
+        
+        Type ClrType { get; }
     }
 }

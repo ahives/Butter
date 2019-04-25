@@ -14,13 +14,6 @@
 // ***********************************************************************************
 namespace Butter.Model
 {
-    public interface FieldList<T>
-    {
-        Field<T> this[int index] { get; }
-
-        bool TryGetValue(int index, out Field<T> field);
-    }
-    
     public interface FieldList
     {
         Field this[int index] { get; }
