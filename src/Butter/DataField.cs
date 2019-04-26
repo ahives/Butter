@@ -20,39 +20,8 @@ namespace Butter
 
     public static class DataField
     {
-//        /// <summary>
-//        /// Creates a new instance of a <see cref="Field{TValue}"/> given <see cref="fieldName"/>
-//        /// </summary>
-//        /// <param name="fieldName"></param>
-//        /// <typeparam name="T"></typeparam>
-//        /// <returns></returns>
-//        /// <exception cref="EntityCreationException"></exception>
-//        public static Field<T> Create<T>(string fieldName)
-//        {
-//            if (string.IsNullOrWhiteSpace(fieldName))
-//                throw new EntityCreationException("Cannot create a field with a missing name");
-//
-//            return new FieldImpl<T>(fieldName);
-//        }
-//
-//        /// <summary>
-//        /// Creates a new instance of a <see cref="Field{TValue}"/> given <see cref="fieldName"/> and <see cref="value"/>
-//        /// </summary>
-//        /// <param name="fieldName"></param>
-//        /// <param name="value"></param>
-//        /// <typeparam name="T"></typeparam>
-//        /// <returns></returns>
-//        /// <exception cref="EntityCreationException"></exception>
-//        public static Field<T> Create<T>(string fieldName, T value)
-//        {
-//            if (string.IsNullOrWhiteSpace(fieldName))
-//                throw new EntityCreationException("Cannot create a field with a missing name");
-//
-//            return new FieldImpl<T>(fieldName, value);
-//        }
-
         /// <summary>
-        /// 
+        /// Creates a new instance of a <see cref="Field"/> 
         /// </summary>
         /// <param name="fieldName"></param>
         /// <param name="dataType"></param>
@@ -66,6 +35,14 @@ namespace Butter
             return new FieldImpl(fieldName, dataType);
         }
         
+        /// <summary>
+        /// Creates a new instance of a <see cref="Field"/> 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="dataType"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityCreationException"></exception>
         public static Field Create(string fieldName, DataType dataType, string value)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -73,7 +50,15 @@ namespace Butter
 
             return new FieldImpl(fieldName, dataType, value);
         }
-        
+
+        /// <summary>
+        /// Creates a new instance of a <see cref="Field"/> 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="EntityCreationException"></exception>
         public static Field Create<T>(string fieldName, string value)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -81,7 +66,14 @@ namespace Butter
 
             return new FieldImpl(fieldName, typeof(T), value);
         }
-        
+
+        /// <summary>
+        /// Creates a new instance of a <see cref="Field"/> 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="EntityCreationException"></exception>
         public static Field Create<T>(string fieldName)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -89,7 +81,14 @@ namespace Butter
 
             return new FieldImpl(fieldName, typeof(T));
         }
-        
+
+        /// <summary>
+        /// Creates a new instance of a <see cref="Field"/> 
+        /// </summary>
+        /// <param name="fieldName"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="EntityCreationException"></exception>
         public static Field Create(string fieldName, Value value)
         {
             if (string.IsNullOrWhiteSpace(fieldName))
@@ -98,38 +97,9 @@ namespace Butter
             return new FieldImpl(fieldName, value);
         }
 
-//        public static Field<T> OutOfRange<T>(int index, int count) => new OutOfRangeField<T>(index, count);
-
         public static Field OutOfRange(int index, int count) => new OutOfRangeField(index, count);
 
-//        public static Field<T> Empty<T>() => TypedFieldCache<T>.EmptyField;
-
-        public static Field Empty() => FieldCache.EmptyField;
-
-
-//        class FieldImpl<T> :
-//            Field<T>
-//        {
-//            public FieldImpl(string name)
-//            {
-//                Name = name;
-//                DataType = DataTypes.Convert<T>();
-//                Type = typeof(T);
-//            }
-//
-//            public FieldImpl(string name, T value)
-//            {
-//                Name = name;
-//                DataType = DataTypes.Convert<T>();
-//                Value = value;
-//                Type = typeof(T);
-//            }
-//
-//            public DataType DataType { get; }
-//            public Type Type { get; }
-//            public T Value { get; }
-//            public string Name { get; }
-//        }
+        public static Field Missing() => FieldCache.MissingField;
 
 
         class FieldImpl :
@@ -141,28 +111,25 @@ namespace Butter
                 Value = new ValueImpl(dataType);
             }
 
-            public FieldImpl(string fieldName, DataType dataType, Value value)
-            {
-                Name = fieldName;
-                Value = value;
-            }
-
             public FieldImpl(string fieldName, Value value)
             {
                 Name = fieldName;
                 Value = value;
+                HasValue = value != null && !string.IsNullOrWhiteSpace(value.Data);
             }
 
             public FieldImpl(string fieldName, DataType dataType, string value)
             {
                 Name = fieldName;
                 Value = new ValueImpl(value, dataType);
+                HasValue = !string.IsNullOrWhiteSpace(value);
             }
 
             public FieldImpl(string fieldName, Type clrType, string value)
             {
                 Name = fieldName;
                 Value = new ValueImpl(value, clrType);
+                HasValue = !string.IsNullOrWhiteSpace(value);
             }
 
             public FieldImpl(string fieldName, Type clrType)
@@ -172,6 +139,7 @@ namespace Butter
             }
 
             public string Name { get; }
+            public bool HasValue { get; }
             public Value Value { get; }
 
             
@@ -211,16 +179,9 @@ namespace Butter
         }
 
         
-//        static class TypedFieldCache<T>
-//        {
-//            public static readonly Field<T> EmptyField = new EmptyField<T>();
-//        }
-
-        
         static class FieldCache
         {
-            public static readonly Field EmptyField = new EmptyField();
+            public static readonly Field MissingField = new MissingField();
         }
-
     }
 }

@@ -17,24 +17,24 @@ namespace Butter.Model
     using System;
     using System.Runtime.Serialization;
 
-    public class ValueEmptyException :
+    public class ValueMissingException :
         Exception
     {
-        public ValueEmptyException()
+        public ValueMissingException()
         {
         }
 
-        protected ValueEmptyException(SerializationInfo info, StreamingContext context)
+        protected ValueMissingException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
 
-        public ValueEmptyException(string message)
+        public ValueMissingException(string message)
             : base(message)
         {
         }
 
-        public ValueEmptyException(string message, Exception innerException)
+        public ValueMissingException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

@@ -17,37 +17,25 @@ namespace Butter.Model
     using System;
     using Metadata;
 
-    public class EmptyField<T> :
+    public class MissingField :
         Field
     {
-        public EmptyField()
+        public MissingField()
         {
             Value = new ValueImpl();
         }
 
+        public string Name { get; }
+        public bool HasValue => false;
+        public Value Value { get; }
+
+
         class ValueImpl :
             Value
         {
-            public string Data { get; }
+            public string Data => throw new ValueMissingException("Value is missing.");
             public DataType DataType => DataType.None;
-            public Type ClrType { get; }
+            public Type ClrType => DataType.None.Convert();
         }
-
-//        public Value Value => throw new ValueEmptyException("The field value is empty.");
-//        public Value Value => throw new ValueEmptyException("The field value is empty.");
-        public string Name { get; }
-        public Value Value { get; }
-        public DataType DataType => typeof(T).Convert();
-        public Type Type => typeof(T);
-    }
-
-    public class EmptyField :
-        Field
-    {
-        public string Name { get; }
-        public Value Value { get; }
-
-        public DataType DataType => DataType.None;
-//        public Type Type => typeof().Convert(DataType.None);
     }
 }

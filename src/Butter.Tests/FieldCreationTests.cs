@@ -29,7 +29,7 @@
         public void Verify_type_field_being_created()
         {
             Field field = DataField.Create("city", DataType.INT64);
-            
+
             Assert.AreEqual("city", field.Name);
             Assert.AreEqual(DataType.INT64, field.Value.DataType);
             Assert.AreEqual(typeof(long), field.Value.ClrType);

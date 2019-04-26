@@ -18,6 +18,8 @@ namespace Butter.Model
     {
         string Name { get; }
         
+        bool HasValue { get; }
+        
         Value Value { get; }
     }
 }

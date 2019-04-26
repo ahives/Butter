@@ -17,11 +17,11 @@ namespace Butter.Model
     public class EmptyFieldList :
         FieldList
     {
-        public Field this[int index] => DataField.Empty();
+        public Field this[int index] => DataField.Missing();
 
         public bool TryGetValue(int index, out Field field)
         {
-            field = DataField.Empty();
+            field = DataField.Missing();
             return false;
         }
     }

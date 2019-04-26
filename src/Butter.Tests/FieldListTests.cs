@@ -2,6 +2,7 @@ namespace Butter.Tests
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Xml.Linq;
     using Metadata;
     using Model;
     using NUnit.Framework;
@@ -12,7 +13,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_create_list_of_fields_with_variable_parameters()
         {
-            FieldList fields = DataFieldList.Create(
+            FieldList fields = DataFieldList.Initialize(
                 DataField.Create<int>("field1"),
                 DataField.Create<int>("field2"),
                 DataField.Create<int>("field3"),
@@ -38,7 +39,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            FieldList fields = DataFieldList.Create(
+            FieldList fields = DataFieldList.Initialize(
                 DataField.Create("field1", DataType.INT32),
                 DataField.Create("field2", DataType.INT32),
                 DataField.Create("field3", DataType.INT32),
@@ -75,7 +76,7 @@ namespace Butter.Tests
 
             var readOnlyFields = new ReadOnlyCollection<Field>(fieldList);
             
-            FieldList fields = DataFieldList.Create(readOnlyFields);
+            FieldList fields = DataFieldList.Initialize(readOnlyFields);
             
             Assert.IsTrue(fields.TryGetValue(0, out var field1));
             Assert.AreEqual("field1", field1.Name);
@@ -96,9 +97,9 @@ namespace Butter.Tests
         [Test]
         public void Test2()
         {
-            FieldList fields = DataFieldList.Create();
+            FieldList fields = DataFieldList.Initialize();
             
-            Assert.IsFalse(fields.TryGetValue(0, out var _));
+            Assert.IsFalse(fields.TryGetValue(0, out _));
         }
     }
 }

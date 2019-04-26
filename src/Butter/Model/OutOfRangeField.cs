@@ -42,6 +42,7 @@ namespace Butter.Model
         }
 
         public string Name { get; }
+        public bool HasValue => false;
         public Value Value { get; }
     }
 }

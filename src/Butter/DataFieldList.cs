@@ -19,7 +19,12 @@ namespace Butter
 
     public static class DataFieldList
     {
-        public static FieldList Create(params Field[] fields)
+        /// <summary>
+        /// Creates a new instance of a <see cref="FieldList"/> 
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static FieldList Initialize(params Field[] fields)
         {
             if (fields.Length <= 0)
                 return Empty();
@@ -27,7 +32,12 @@ namespace Butter
             return new FieldListImpl(fields);
         }
 
-        public static FieldList Create(IReadOnlyList<Field> fields)
+        /// <summary>
+        /// Creates a new instance of a <see cref="FieldList"/> 
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static FieldList Initialize(IReadOnlyList<Field> fields)
         {
             if (fields == null || fields.Count == 0)
                 return Empty();
