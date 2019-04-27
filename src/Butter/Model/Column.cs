@@ -16,6 +16,6 @@ namespace Butter.Model
 {
     public interface Column
     {
-        
+        Field Field { get; }
     }
 }
