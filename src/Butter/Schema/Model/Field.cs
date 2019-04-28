@@ -18,8 +18,15 @@ namespace Butter.Model
     {
         string Name { get; }
         
-        bool HasValue { get; }
-        
-        Value Value { get; }
+        FieldType FieldType { get; }
+    }
+
+    public enum FieldType
+    {
+        None,
+        Primitive,
+        List,
+        Map,
+        Structure
     }
 }

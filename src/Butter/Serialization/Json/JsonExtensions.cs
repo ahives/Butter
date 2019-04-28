@@ -4,7 +4,7 @@ namespace Butter.Serialization.Json
     using System.Text;
     using Newtonsoft.Json;
 
-    public class JsonExtensions
+    public static class JsonExtensions
     {
         /// <summary>
         /// Takes an object and returns the JSON text representation of said object.

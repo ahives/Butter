@@ -14,8 +14,12 @@
 // ***********************************************************************************
 namespace Butter.Model
 {
-    public interface Column
+    public interface FieldList
     {
-        Field Field { get; }
+        bool HasValues { get; }
+        
+        Field this[int index] { get; }
+
+        bool TryGetValue(int index, out Field field);
     }
 }

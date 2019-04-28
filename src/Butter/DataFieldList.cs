@@ -15,6 +15,7 @@
 namespace Butter
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Model;
 
     public static class DataFieldList
@@ -27,7 +28,7 @@ namespace Butter
         public static FieldList Initialize(params Field[] fields)
         {
             if (fields.Length <= 0)
-                return Empty();
+                return SchemaCache.EmptyFieldList;
             
             return new FieldListImpl(fields);
         }
@@ -40,12 +41,10 @@ namespace Butter
         public static FieldList Initialize(IReadOnlyList<Field> fields)
         {
             if (fields == null || fields.Count == 0)
-                return Empty();
+                return SchemaCache.EmptyFieldList;
             
             return new FieldListImpl(fields);
         }
-
-        public static FieldList Empty() => FieldListCache.EmptyFieldList;
 
 
         class FieldListImpl :
@@ -57,6 +56,8 @@ namespace Butter
             {
                 _values = fields;
             }
+
+            public bool HasValues => _values != null && _values.Any();
 
             public Field this[int index]
             {
@@ -85,12 +86,6 @@ namespace Butter
                 field = DataField.OutOfRange(index, _values.Count);
                 return false;
             }
-        }
-
-        
-        static class FieldListCache
-        {
-            public static readonly FieldList EmptyFieldList = new EmptyFieldList();
         }
     }
 }

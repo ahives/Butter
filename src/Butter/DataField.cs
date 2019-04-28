@@ -15,173 +15,132 @@
 namespace Butter
 {
     using System;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Threading;
     using Metadata;
     using Model;
 
     public static class DataField
     {
-        /// <summary>
-        /// Creates a new instance of a <see cref="Field"/> 
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="dataType"></param>
-        /// <returns></returns>
-        /// <exception cref="EntityCreationException"></exception>
-        public static Field Create(string fieldName, DataType dataType)
+        public static Field Create(Action<FieldDefinitionCriteria> criteria)
         {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new EntityCreationException("Cannot create a field with a missing name");
-
-            return new FieldImpl(fieldName, dataType);
+            var impl = new FieldDefinitionCriteriaImpl();
+            criteria(impl);
+            
+            return new FieldImpl(impl);
         }
+
         
-        /// <summary>
-        /// Creates a new instance of a <see cref="Field"/> 
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="dataType"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="EntityCreationException"></exception>
-        public static Field Create(string fieldName, DataType dataType, string value)
+        class FieldDefinitionCriteriaImpl :
+            FieldDefinitionCriteria, DefinedFieldCriteria
         {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new EntityCreationException("Cannot create a field with a missing name");
+            string _name;
+            FieldType _fieldType;
 
-            return new FieldImpl(fieldName, dataType, value);
-        }
+            public FieldDefinitionCriteriaImpl()
+            {
+                DefinedName = new Lazy<string>(() => _name, LazyThreadSafetyMode.PublicationOnly);
+                DefinedFieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
+            }
 
-        /// <summary>
-        /// Creates a new instance of a <see cref="Field"/> 
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="value"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="EntityCreationException"></exception>
-        public static Field Create<T>(string fieldName, string value)
-        {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new EntityCreationException("Cannot create a field with a missing name");
+            public void Name(string name)
+            {
+                _name = name;
+            }
 
-            return new FieldImpl(fieldName, typeof(T), value);
-        }
+            public void Type(FieldType fieldType)
+            {
+                _fieldType = fieldType;
+            }
 
-        /// <summary>
-        /// Creates a new instance of a <see cref="Field"/> 
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="EntityCreationException"></exception>
-        public static Field Create<T>(string fieldName)
-        {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new EntityCreationException("Cannot create a field with a missing name");
-
-            return new FieldImpl(fieldName, typeof(T));
-        }
-
-        /// <summary>
-        /// Creates a new instance of a <see cref="Field"/> 
-        /// </summary>
-        /// <param name="fieldName"></param>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="EntityCreationException"></exception>
-        public static Field Create(string fieldName, Value value)
-        {
-            if (string.IsNullOrWhiteSpace(fieldName))
-                throw new EntityCreationException("Cannot create a field with a missing name");
-
-            return new FieldImpl(fieldName, value);
+            public Lazy<string> DefinedName { get; }
+            public Lazy<FieldType> DefinedFieldType { get; }
         }
 
         public static Field OutOfRange(int index, int count) => new OutOfRangeField(index, count);
 
-        public static Field Missing() => FieldCache.MissingField;
+        public static Field Missing() => SchemaCache.MissingField;
 
 
         class FieldImpl :
             Field
         {
-            public FieldImpl(string fieldName, DataType dataType)
+            public FieldImpl(DefinedFieldCriteria criteria)
             {
-                Name = fieldName;
-                Value = new ValueImpl(dataType);
-            }
-
-            public FieldImpl(string fieldName, Value value)
-            {
-                Name = fieldName;
-                Value = value;
-                HasValue = value != null && !string.IsNullOrWhiteSpace(value.Data);
-            }
-
-            public FieldImpl(string fieldName, DataType dataType, string value)
-            {
-                Name = fieldName;
-                Value = new ValueImpl(value, dataType);
-                HasValue = !string.IsNullOrWhiteSpace(value);
-            }
-
-            public FieldImpl(string fieldName, Type clrType, string value)
-            {
-                Name = fieldName;
-                Value = new ValueImpl(value, clrType);
-                HasValue = !string.IsNullOrWhiteSpace(value);
-            }
-
-            public FieldImpl(string fieldName, Type clrType)
-            {
-                Name = fieldName;
-                Value = new ValueImpl(clrType);
+                Name = criteria.DefinedName.Value;
+                FieldType = criteria.DefinedFieldType.Value;
             }
 
             public string Name { get; }
-            public bool HasValue { get; }
-            public Value Value { get; }
-
-            
-            class ValueImpl :
-                Value
-            {
-                public ValueImpl(DataType dataType)
-                {
-                    DataType = dataType;
-                    ClrType = dataType.Convert();
-                }
-
-                public ValueImpl(string data, DataType dataType)
-                {
-                    Data = data;
-                    DataType = dataType;
-                    ClrType = dataType.Convert();
-                }
-
-                public ValueImpl(string data, Type clrType)
-                {
-                    Data = data;
-                    DataType = clrType.Convert();
-                    ClrType = clrType;
-                }
-
-                public ValueImpl(Type clrType)
-                {
-                    DataType = clrType.Convert();
-                    ClrType = clrType;
-                }
-
-                public string Data { get; }
-                public DataType DataType { get; }
-                public Type ClrType { get; }
-            }
+            public FieldType FieldType { get; }
         }
+    }
 
+    interface DefinedFieldCriteria
+    {
+        Lazy<string> DefinedName { get; }
         
-        static class FieldCache
+        Lazy<FieldType> DefinedFieldType { get; }
+    }
+
+    public interface FieldDefinitionCriteria
+    {
+        void Name(string name);
+
+        void Type(FieldType fieldType);
+    }
+
+    public interface SchemaFactory
+    {
+        T Factory<T>()
+            where T : SchemaEntity;
+    }
+
+    class SchemaFactoryImpl : SchemaFactory
+    {
+        public T Factory<T>()
+            where T : SchemaEntity
         {
-            public static readonly Field MissingField = new MissingField();
+            Type type = GetType()
+                .Assembly
+                .GetTypes()
+                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
+
+            if (type == null)
+                throw new SchemaFactoryInitException($"Failed to find implementation class for interface {typeof(T)}");
+
+            var resource = (T)Activator.CreateInstance(type);
+
+            return resource;
         }
+    }
+
+    class SchemaFactoryInitException : Exception
+    {
+        public SchemaFactoryInitException()
+        {
+        }
+
+        protected SchemaFactoryInitException(SerializationInfo info, StreamingContext context) : base(info, context)
+        {
+        }
+
+        public SchemaFactoryInitException(string message) : base(message)
+        {
+        }
+
+        public SchemaFactoryInitException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
+    }
+
+    public interface SchemaEntity
+    {
+    }
+
+    public static class ButterFactory
+    {
+        
     }
 }

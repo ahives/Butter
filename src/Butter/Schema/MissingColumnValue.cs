@@ -12,30 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter
 {
     using System;
     using Metadata;
+    using Model;
 
-    public class MissingField :
-        Field
+    public class MissingColumnValue :
+        Value
     {
-        public MissingField()
-        {
-            Value = new ValueImpl();
-        }
-
-        public string Name { get; }
-        public bool HasValue => false;
-        public Value Value { get; }
-
-
-        class ValueImpl :
-            Value
-        {
-            public string Data => throw new ValueMissingException("Value is missing.");
-            public DataType DataType => DataType.None;
-            public Type ClrType => DataType.None.Convert();
-        }
+        public string Data { get; }
+        public DataType DataType => DataType.None;
+        public Type ClrType => typeof(byte[]);
     }
 }
