@@ -15,30 +15,29 @@
 namespace Butter
 {
     using System;
-    using System.Linq;
-    using System.Runtime.Serialization;
     using System.Threading;
     using Metadata;
     using Model;
 
-    public static class DataField
+    class FieldBuilderImpl :
+        FieldBuilder
     {
-        public static Field Create(Action<FieldDefinitionCriteria> criteria)
+        public Field Create(Action<FieldBuilderCriteria> criteria)
         {
-            var impl = new FieldDefinitionCriteriaImpl();
+            var impl = new FieldBuilderDefinitionResultImpl();
             criteria(impl);
             
             return new FieldImpl(impl);
         }
 
         
-        class FieldDefinitionCriteriaImpl :
-            FieldDefinitionCriteria, DefinedFieldCriteria
+        class FieldBuilderDefinitionResultImpl :
+            FieldBuilderCriteria, FieldDefinitionResult
         {
             string _name;
             FieldType _fieldType;
 
-            public FieldDefinitionCriteriaImpl()
+            public FieldBuilderDefinitionResultImpl()
             {
                 DefinedName = new Lazy<string>(() => _name, LazyThreadSafetyMode.PublicationOnly);
                 DefinedFieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
@@ -49,7 +48,7 @@ namespace Butter
                 _name = name;
             }
 
-            public void Type(FieldType fieldType)
+            public void FieldType(FieldType fieldType)
             {
                 _fieldType = fieldType;
             }
@@ -66,10 +65,10 @@ namespace Butter
         class FieldImpl :
             Field
         {
-            public FieldImpl(DefinedFieldCriteria criteria)
+            public FieldImpl(FieldDefinitionResult definitionResult)
             {
-                Name = criteria.DefinedName.Value;
-                FieldType = criteria.DefinedFieldType.Value;
+                Name = definitionResult.DefinedName.Value;
+                FieldType = definitionResult.DefinedFieldType.Value;
             }
 
             public string Name { get; }
@@ -77,70 +76,10 @@ namespace Butter
         }
     }
 
-    interface DefinedFieldCriteria
+    interface FieldDefinitionResult
     {
         Lazy<string> DefinedName { get; }
         
         Lazy<FieldType> DefinedFieldType { get; }
-    }
-
-    public interface FieldDefinitionCriteria
-    {
-        void Name(string name);
-
-        void Type(FieldType fieldType);
-    }
-
-    public interface SchemaFactory
-    {
-        T Factory<T>()
-            where T : SchemaEntity;
-    }
-
-    class SchemaFactoryImpl : SchemaFactory
-    {
-        public T Factory<T>()
-            where T : SchemaEntity
-        {
-            Type type = GetType()
-                .Assembly
-                .GetTypes()
-                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
-
-            if (type == null)
-                throw new SchemaFactoryInitException($"Failed to find implementation class for interface {typeof(T)}");
-
-            var resource = (T)Activator.CreateInstance(type);
-
-            return resource;
-        }
-    }
-
-    class SchemaFactoryInitException : Exception
-    {
-        public SchemaFactoryInitException()
-        {
-        }
-
-        protected SchemaFactoryInitException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
-
-        public SchemaFactoryInitException(string message) : base(message)
-        {
-        }
-
-        public SchemaFactoryInitException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-    }
-
-    public interface SchemaEntity
-    {
-    }
-
-    public static class ButterFactory
-    {
-        
     }
 }

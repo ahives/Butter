@@ -17,8 +17,17 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_check_value_does_not_exist()
         {
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var field = builder.Create(x =>
+            {
+                x.Name("city");
+                x.FieldType(FieldType.Primitive);
+            });
+
+//            Schema.Field.Add(field);
+
 //            Field field = DataField.Create<int>("city");
-            
+
 //            Assert.IsFalse(field.HasValue);
         }
     }

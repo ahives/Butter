@@ -73,7 +73,7 @@ namespace Butter
             {
                 if (index < 0)
                 {
-                    field = DataField.OutOfRange(index, _values.Count);
+                    field = FieldBuilderImpl.OutOfRange(index, _values.Count);
                     return false;
                 }
 
@@ -83,7 +83,7 @@ namespace Butter
                     return true;
                 }
 
-                field = DataField.OutOfRange(index, _values.Count);
+                field = FieldBuilderImpl.OutOfRange(index, _values.Count);
                 return false;
             }
         }

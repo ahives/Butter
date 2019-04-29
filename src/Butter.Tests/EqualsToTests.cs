@@ -1,6 +1,5 @@
 namespace Butter.Tests
 {
-    using Metadata;
     using Model;
     using NUnit.Framework;
 
@@ -10,35 +9,39 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            bool isEqual = DataField.Create(x =>
-                {
-                    x.Name("city");
-                    x.Type(FieldType.Primitive);
-                })
-                .EqualTo(DataField.Create(x =>
-                {
-                    x.Name("city");
-                    x.Type(FieldType.Primitive);
-                }));
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            Field field1 = builder.Create(x =>
+            {
+                x.Name("city");
+                x.FieldType(FieldType.Primitive);
+            });
 
-            Assert.IsTrue(isEqual);
+            Field field2 = builder.Create(x =>
+            {
+                x.Name("city");
+                x.FieldType(FieldType.Primitive);
+            });
+
+            Assert.IsTrue(field1.EqualTo(field2));
         }
         
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            bool isEqual = DataField.Create(x =>
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            Field field1 = builder.Create(x =>
                 {
                     x.Name("city");
-                    x.Type(FieldType.Primitive);
-                })
-                .EqualTo(DataField.Create(x =>
-                {
-                    x.Name("state");
-                    x.Type(FieldType.Primitive);
-                }));
+                    x.FieldType(FieldType.Primitive);
+                });
 
-            Assert.IsFalse(isEqual);
+            Field field2 = builder.Create(x =>
+            {
+                x.Name("state");
+                x.FieldType(FieldType.Primitive);
+            });
+
+            Assert.IsFalse(field1.EqualTo(field2));
         }
     }
 }

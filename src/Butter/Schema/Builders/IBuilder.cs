@@ -12,18 +12,9 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter
 {
-    public class EmptyFieldList :
-        FieldList
+    public interface IBuilder
     {
-        public bool HasValues => false;
-        public Field this[int index] => SchemaCache.MissingField;
-
-        public bool TryGetValue(int index, out Field field)
-        {
-            field = FieldBuilderImpl.Missing();
-            return false;
-        }
     }
 }

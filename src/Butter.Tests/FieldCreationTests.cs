@@ -30,11 +30,17 @@
         [Test]
         public void Verify_type_field_being_created()
         {
-            Field field = DataField.Create(x =>
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var field = builder.Create(x =>
             {
-                x.Name("city"); 
-                x.Type(FieldType.Primitive);
+                x.Name("city");
+                x.FieldType(FieldType.Primitive);
             });
+//            Field field = DataField.Create(x =>
+//            {
+//                x.Name("city"); 
+//                x.Type(FieldType.Primitive);
+//            });
 
             Assert.AreEqual("city", field.Name);
             Assert.AreEqual(FieldType.Primitive, field.FieldType);

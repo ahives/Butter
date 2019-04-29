@@ -12,18 +12,28 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter
 {
-    public class EmptyFieldList :
-        FieldList
-    {
-        public bool HasValues => false;
-        public Field this[int index] => SchemaCache.MissingField;
+    using System;
+    using System.Linq;
 
-        public bool TryGetValue(int index, out Field field)
+    public class FactoryImpl :
+        IFactory
+    {
+        public T GetBuilder<T>()
+            where T : IBuilder
         {
-            field = FieldBuilderImpl.Missing();
-            return false;
+            Type type = GetType()
+                .Assembly
+                .GetTypes()
+                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
+
+            if (type == null)
+                throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
+
+            var resource = (T)Activator.CreateInstance(type);
+
+            return resource;
         }
     }
 }
