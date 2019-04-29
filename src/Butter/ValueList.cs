@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using Model;
+    using Entities.Model;
 
     public interface ValueList
     {

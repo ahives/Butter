@@ -12,21 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter.Entities.Model
 {
-    public interface Field
-    {
-        string Name { get; }
-        
-        FieldType FieldType { get; }
-    }
+    using System;
+    using Metadata;
 
-    public enum FieldType
+    public interface Value
     {
-        None,
-        Primitive,
-        List,
-        Map,
-        Structure
+        string Data { get; }
+        
+        DataType DataType { get; }
+        
+        Type ClrType { get; }
     }
 }

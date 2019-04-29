@@ -12,9 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Entities
 {
-    public interface IBuilder
+    using System;
+    using Metadata;
+    using Model;
+
+    public class MissingColumnValue :
+        Value
     {
+        public string Data { get; }
+        public DataType DataType => DataType.None;
+        public Type ClrType => typeof(byte[]);
     }
 }

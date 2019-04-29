@@ -12,14 +12,12 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Entities.Model
 {
-    using Model;
+    using Metadata;
 
-    public interface FieldBuilderCriteria
+    interface IField
     {
-        void Name(string name);
-
-        void FieldType(FieldType fieldType);
+        DataType Type { get; }
     }
 }

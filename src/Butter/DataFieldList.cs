@@ -16,7 +16,9 @@ namespace Butter
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Model;
+    using Entities;
+    using Entities.Model;
+    using Schema;
 
     public static class DataFieldList
     {
@@ -73,7 +75,7 @@ namespace Butter
             {
                 if (index < 0)
                 {
-                    field = FieldBuilderImpl.OutOfRange(index, _values.Count);
+                    field = SchemaCache.OutOfRangeField;
                     return false;
                 }
 
@@ -83,7 +85,7 @@ namespace Butter
                     return true;
                 }
 
-                field = FieldBuilderImpl.OutOfRange(index, _values.Count);
+                field = SchemaCache.OutOfRangeField;
                 return false;
             }
         }

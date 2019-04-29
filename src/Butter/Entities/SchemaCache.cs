@@ -12,14 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter.Entities
 {
-    public interface Column
+    using Model;
+
+    public static class SchemaCache
     {
-        Field Field { get; }
-        
-        ValueList Values { get; }
-        
-        bool HasValues { get; }
+        public static readonly Field MissingField = new MissingField();
+        public static readonly Value MissingValue = new MissingColumnValue();
+        public static readonly Column Empty = new EmptyColumn();
+        public static readonly ValueList MissingValueList = new MissingColumnValueList();
+        public static readonly FieldList EmptyFieldList = new EmptyFieldList();
+        public static readonly Field OutOfRangeField = new OutOfRangeField();
     }
 }

@@ -14,15 +14,28 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using System;
-    using Metadata;
-    using Model;
+    using Schema;
 
-    public class MissingColumnValue :
-        Value
+    public class SchemaFactory
     {
-        public string Data { get; }
-        public DataType DataType => DataType.None;
-        public Type ClrType => typeof(byte[]);
+        static IFactory _factory;
+        static readonly object _obj = new object();
+
+        public static IFactory Instance
+        {
+            get
+            {
+                if (_factory == null)
+                {
+                    lock (_obj)
+                    {
+                        if (_factory == null)
+                            _factory = new FactoryImpl();
+                    }
+                }
+
+                return _factory;
+            }
+        }
     }
 }

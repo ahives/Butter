@@ -12,14 +12,14 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Entities
 {
-    using System;
     using Model;
 
-    public interface FieldBuilder :
-        IBuilder
+    public class MissingField :
+        Field
     {
-        Field Create(Action<FieldBuilderCriteria> criteria);
+        public string Name { get; }
+        public FieldType FieldType => FieldType.None;
     }
 }

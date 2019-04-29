@@ -12,12 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
     using System;
     using System.Threading;
-    using Metadata;
-    using Model;
+    using Entities.Model;
 
     class FieldBuilderImpl :
         FieldBuilder
@@ -56,10 +55,6 @@ namespace Butter
             public Lazy<string> DefinedName { get; }
             public Lazy<FieldType> DefinedFieldType { get; }
         }
-
-        public static Field OutOfRange(int index, int count) => new OutOfRangeField(index, count);
-
-        public static Field Missing() => SchemaCache.MissingField;
 
 
         class FieldImpl :

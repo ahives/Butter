@@ -1,7 +1,9 @@
 namespace Butter.Tests
 {
-    using Model;
+    using Builders;
+    using Entities.Model;
     using NUnit.Framework;
+    using Schema;
 
     [TestFixture]
     public class FieldValueTests

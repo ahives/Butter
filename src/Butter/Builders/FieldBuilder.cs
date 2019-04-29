@@ -12,21 +12,14 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
-    using Model;
+    using System;
+    using Entities.Model;
 
-    public class MissingColumnValueList :
-        ValueList
+    public interface FieldBuilder :
+        IBuilder
     {
-        public bool HasValues => false;
-
-        public Value this[int index] => SchemaCache.MissingValue;
-
-        public bool TryGetValue(int index, out Value value)
-        {
-            value = SchemaCache.MissingValue;
-            return false;
-        }
+        Field Create(Action<FieldBuilderCriteria> criteria);
     }
 }

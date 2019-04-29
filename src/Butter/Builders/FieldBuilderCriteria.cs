@@ -12,28 +12,14 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
-    using System;
-    using System.Linq;
+    using Entities.Model;
 
-    public class FactoryImpl :
-        IFactory
+    public interface FieldBuilderCriteria
     {
-        public T GetBuilder<T>()
-            where T : IBuilder
-        {
-            Type type = GetType()
-                .Assembly
-                .GetTypes()
-                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
+        void Name(string name);
 
-            if (type == null)
-                throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
-
-            var resource = (T)Activator.CreateInstance(type);
-
-            return resource;
-        }
+        void FieldType(FieldType fieldType);
     }
 }

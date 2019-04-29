@@ -1,10 +1,8 @@
 ﻿namespace Butter.Tests
 {
-    using System;
-    using Metadata;
-    using Model;
+    using Builders;
+    using Entities.Model;
     using NUnit.Framework;
-    using Serialization.Json;
 
     [TestFixture]
     public class FieldCreationTests

@@ -1,6 +1,8 @@
 namespace Butter
 {
-    using Model;
+    using Entities;
+    using Entities.Model;
+    using Schema;
 
     public class DataColumn
     {

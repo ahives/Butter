@@ -12,24 +12,30 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Model
+namespace Butter.Schema
 {
     using System;
-    using Metadata;
+    using System.Linq;
+    using Builders;
+    using Exceptions;
 
-    public class OutOfRangeField :
-        Field
+    public class FactoryImpl :
+        IFactory
     {
-        readonly int _index;
-        readonly int _count;
-
-        public OutOfRangeField(int index, int count)
+        public T GetBuilder<T>()
+            where T : IBuilder
         {
-            _index = index;
-            _count = count;
-        }
+            Type type = GetType()
+                .Assembly
+                .GetTypes()
+                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
 
-        public string Name => throw new FieldOutOfRangeException($"The index is out of range (index: {_index}, count: {_count})");
-        public FieldType FieldType => FieldType.None;
+            if (type == null)
+                throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
+
+            var resource = (T)Activator.CreateInstance(type);
+
+            return resource;
+        }
     }
 }

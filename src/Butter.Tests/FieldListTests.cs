@@ -3,8 +3,8 @@ namespace Butter.Tests
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Xml.Linq;
+    using Entities.Model;
     using Metadata;
-    using Model;
     using NUnit.Framework;
 
     [TestFixture]

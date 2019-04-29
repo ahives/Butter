@@ -12,28 +12,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Entities
 {
-    public class SchemaFactory
+    using Model;
+
+    public class EmptyValueList :
+        ValueList
     {
-        static IFactory _factory;
-        static readonly object _obj = new object();
+        public bool HasValues => false;
 
-        public static IFactory Instance
+        public Value this[int index] => SchemaCache.MissingValue;
+
+        public bool TryGetValue(int index, out Value value)
         {
-            get
-            {
-                if (_factory == null)
-                {
-                    lock (_obj)
-                    {
-                        if (_factory == null)
-                            _factory = new FactoryImpl();
-                    }
-                }
-
-                return _factory;
-            }
+            value = SchemaCache.MissingValue;
+            return false;
         }
     }
 }
