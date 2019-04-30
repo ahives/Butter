@@ -17,13 +17,13 @@ namespace Butter.Entities.Model
     public class Schema :
         ISchema
     {
-        public FieldList Fields { get; }
+        public IEntityList<Field> Fields { get; }
     }
     
 //    public static class Schema
 
     public interface ISchema
     {
-        FieldList Fields { get; }
+        IEntityList<Field> Fields { get; }
     }
 }

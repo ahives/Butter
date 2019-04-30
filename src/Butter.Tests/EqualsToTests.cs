@@ -13,14 +13,14 @@ namespace Butter.Tests
             var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
             Field field1 = builder.Create(x =>
             {
-                x.Name("city");
-                x.FieldType(FieldType.Primitive);
+                x.Id("city");
+                x.Type(FieldType.Primitive);
             });
 
             Field field2 = builder.Create(x =>
             {
-                x.Name("city");
-                x.FieldType(FieldType.Primitive);
+                x.Id("city");
+                x.Type(FieldType.Primitive);
             });
 
             Assert.IsTrue(field1.EqualTo(field2));
@@ -32,14 +32,14 @@ namespace Butter.Tests
             var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
             Field field1 = builder.Create(x =>
                 {
-                    x.Name("city");
-                    x.FieldType(FieldType.Primitive);
+                    x.Id("city");
+                    x.Type(FieldType.Primitive);
                 });
 
             Field field2 = builder.Create(x =>
             {
-                x.Name("state");
-                x.FieldType(FieldType.Primitive);
+                x.Id("state");
+                x.Type(FieldType.Primitive);
             });
 
             Assert.IsFalse(field1.EqualTo(field2));

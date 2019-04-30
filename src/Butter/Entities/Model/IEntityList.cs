@@ -14,12 +14,14 @@
 // ***********************************************************************************
 namespace Butter.Entities.Model
 {
-    public interface FieldList
+    public interface IEntityList<T>
     {
+        void Add(T field);
+        
         bool HasValues { get; }
         
-        Field this[int index] { get; }
+        T this[int index] { get; }
 
-        bool TryGetValue(int index, out Field field);
+        bool TryGetValue(int index, out T entity);
     }
 }

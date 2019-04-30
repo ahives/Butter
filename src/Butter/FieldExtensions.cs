@@ -24,9 +24,7 @@ namespace Butter
                 return true;
             
             if (source != null && target != null)
-            {
-                return (source.Name == target.Name);
-            }
+                return source.Id == target.Id && source.Type == target.Type;
 
             return false;
         }

@@ -19,7 +19,7 @@ namespace Butter.Entities
     public class MissingField :
         Field
     {
-        public string Name { get; }
-        public FieldType FieldType => FieldType.None;
+        public string Id { get; }
+        public FieldType Type => FieldType.None;
     }
 }

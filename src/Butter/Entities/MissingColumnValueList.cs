@@ -17,7 +17,7 @@ namespace Butter.Entities
     using Model;
 
     public class MissingColumnValueList :
-        ValueList
+        IEntityList<Value>
     {
         public bool HasValues => false;
 
@@ -27,6 +27,10 @@ namespace Butter.Entities
         {
             value = SchemaCache.MissingValue;
             return false;
+        }
+        
+        public void Add(Value field)
+        {
         }
     }
 }

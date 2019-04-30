@@ -26,55 +26,48 @@ namespace Butter.Builders
             var impl = new FieldBuilderDefinitionResultImpl();
             criteria(impl);
             
-            return new FieldImpl(impl);
+            return new FieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
         
         class FieldBuilderDefinitionResultImpl :
-            FieldBuilderCriteria, FieldDefinitionResult
+            FieldBuilderCriteria
         {
             string _name;
             FieldType _fieldType;
 
             public FieldBuilderDefinitionResultImpl()
             {
-                DefinedName = new Lazy<string>(() => _name, LazyThreadSafetyMode.PublicationOnly);
-                DefinedFieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
+                FieldId = new Lazy<string>(() => _name, LazyThreadSafetyMode.PublicationOnly);
+                FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
             }
 
-            public void Name(string name)
+            public void Id(string name)
             {
                 _name = name;
             }
 
-            public void FieldType(FieldType fieldType)
+            public void Type(FieldType type)
             {
-                _fieldType = fieldType;
+                _fieldType = type;
             }
 
-            public Lazy<string> DefinedName { get; }
-            public Lazy<FieldType> DefinedFieldType { get; }
+            public Lazy<string> FieldId { get; }
+            public Lazy<FieldType> FieldType { get; }
         }
 
 
         class FieldImpl :
             Field
         {
-            public FieldImpl(FieldDefinitionResult definitionResult)
+            public FieldImpl(string id, FieldType type)
             {
-                Name = definitionResult.DefinedName.Value;
-                FieldType = definitionResult.DefinedFieldType.Value;
+                Id = id;
+                Type = type;
             }
 
-            public string Name { get; }
-            public FieldType FieldType { get; }
+            public string Id { get; }
+            public FieldType Type { get; }
         }
-    }
-
-    interface FieldDefinitionResult
-    {
-        Lazy<string> DefinedName { get; }
-        
-        Lazy<FieldType> DefinedFieldType { get; }
     }
 }

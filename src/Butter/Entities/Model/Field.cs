@@ -16,17 +16,8 @@ namespace Butter.Entities.Model
 {
     public interface Field
     {
-        string Name { get; }
+        string Id { get; }
         
-        FieldType FieldType { get; }
-    }
-
-    public enum FieldType
-    {
-        None,
-        Primitive,
-        List,
-        Map,
-        Structure
+        FieldType Type { get; }
     }
 }

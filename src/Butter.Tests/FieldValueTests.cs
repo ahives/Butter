@@ -22,8 +22,8 @@ namespace Butter.Tests
             var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
             var field = builder.Create(x =>
             {
-                x.Name("city");
-                x.FieldType(FieldType.Primitive);
+                x.Id("city");
+                x.Type(FieldType.Primitive);
             });
 
 //            Schema.Field.Add(field);

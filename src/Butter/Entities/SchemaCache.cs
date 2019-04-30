@@ -21,8 +21,8 @@ namespace Butter.Entities
         public static readonly Field MissingField = new MissingField();
         public static readonly Value MissingValue = new MissingColumnValue();
         public static readonly Column Empty = new EmptyColumn();
-        public static readonly ValueList MissingValueList = new MissingColumnValueList();
-        public static readonly FieldList EmptyFieldList = new EmptyFieldList();
+        public static readonly IEntityList<Value> MissingValueList = new MissingColumnValueList();
+        public static readonly IEntityList<Field> EmptyFieldList = new EmptyFieldList();
         public static readonly Field OutOfRangeField = new OutOfRangeField();
     }
 }

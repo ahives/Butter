@@ -18,8 +18,8 @@ namespace Butter.Builders
 
     public interface FieldBuilderCriteria
     {
-        void Name(string name);
+        void Id(string name);
 
-        void FieldType(FieldType fieldType);
+        void Type(FieldType type);
     }
 }

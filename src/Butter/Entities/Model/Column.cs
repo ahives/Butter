@@ -18,7 +18,7 @@ namespace Butter.Entities.Model
     {
         Field Field { get; }
         
-        ValueList Values { get; }
+        IEntityList<Value> Values { get; }
         
         bool HasValues { get; }
     }
