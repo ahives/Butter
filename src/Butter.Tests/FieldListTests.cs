@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using System;
     using Builders;
     using Data;
     using Data.Model;
@@ -125,6 +126,55 @@ namespace Butter.Tests
             
             Assert.IsNotNull(fields[4]);
             Assert.AreEqual("field5", fields[4].Id);
+        }
+
+        [Test]
+        public void Verify_can_access_list_with_multiple_field_types()
+        {
+            var fieldBuilder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var mapFieldBuilder = SchemaFactory.Instance.GetBuilder<MapFieldBuilder>();
+            var listFieldBuilder = SchemaFactory.Instance.GetBuilder<ListFieldBuilder>();
+            
+            Field field1 = fieldBuilder.Create(x => x.Id("field1"));
+            MapField field2 = mapFieldBuilder.Create(x => x.Id("field2"));
+            ListField field3 = listFieldBuilder.Create(x => x.Id("field3"));
+            Field field4 = fieldBuilder.Create(x => x.Id("field4"));
+            Field field5 = fieldBuilder.Create(x => x.Id("field5"));
+
+            IEntityList<Field> fields = new FieldList();
+            fields.Add(field1);
+            fields.Add(field2);
+            fields.Add(field3);
+            fields.Add(field4);
+            fields.Add(field5);
+
+            for (int i = 0; i < fields.Count; i++)
+            {
+                switch (fields[i].Type)
+                {
+                    case FieldType.None:
+                        break;
+                    case FieldType.Primitive:
+                        Field field = fields[i];
+                        Assert.IsNotNull(field);
+                        Assert.That(field.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
+                        break;
+                    case FieldType.List:
+                        ListField listField = (ListField) fields[i];
+                        Assert.IsNotNull(listField);
+                        Assert.AreEqual("field3", listField.Id);
+                        break;
+                    case FieldType.Map:
+                        MapField mapField = (MapField) fields[i];
+                        Assert.IsNotNull(mapField);
+                        Assert.AreEqual("field2", mapField.Id);
+                        break;
+                    case FieldType.Structure:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
         }
 
         [Test]
