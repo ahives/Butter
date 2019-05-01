@@ -18,7 +18,7 @@ namespace Butter.Schema
 
     public interface IFactory
     {
-        T GetBuilder<T>()
-            where T : IBuilder;
+        T GetCreator<T>()
+            where T : IFieldCreator;
     }
 }

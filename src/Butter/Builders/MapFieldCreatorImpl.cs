@@ -18,25 +18,25 @@ namespace Butter.Builders
     using System.Threading;
     using Data.Model;
 
-    class FieldBuilderImpl :
-        FieldBuilder
+    class MapFieldCreatorImpl :
+        MapFieldCreator
     {
-        public Field Create(Action<FieldBuilderCriteria> criteria)
+        public MapField Create(Action<MapFieldCreatorDefinition> criteria)
         {
-            var impl = new FieldBuilderCriteriaImpl();
+            var impl = new MapFieldCreatorDefinitionImpl();
             criteria(impl);
             
-            return new FieldImpl(impl.FieldId.Value, impl.FieldType.Value);
+            return new MapFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
 
-        class FieldBuilderCriteriaImpl :
-            FieldBuilderCriteria
+        class MapFieldCreatorDefinitionImpl :
+            MapFieldCreatorDefinition
         {
             string _id;
             FieldType _fieldType;
 
-            public FieldBuilderCriteriaImpl()
+            public MapFieldCreatorDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
                 FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
@@ -57,10 +57,10 @@ namespace Butter.Builders
         }
 
 
-        class FieldImpl :
-            Field
+        class MapFieldImpl :
+            MapField
         {
-            public FieldImpl(string id, FieldType type)
+            public MapFieldImpl(string id, FieldType type)
             {
                 Id = id;
                 Type = type;

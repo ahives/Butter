@@ -11,7 +11,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
             var field1 = builder.Create(x => x.Id("field1"));
             var field2 = builder.Create(x => x.Id("field2"));
             var field3 = builder.Create(x => x.Id("field3"));

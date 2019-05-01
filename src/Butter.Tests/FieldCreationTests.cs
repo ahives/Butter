@@ -10,7 +10,7 @@
         [Test]
         public void Verify_type_field_being_created()
         {
-            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
             var field = builder.Create(x =>
             {
                 x.Id("city");

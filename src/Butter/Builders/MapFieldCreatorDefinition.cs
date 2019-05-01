@@ -14,12 +14,8 @@
 // ***********************************************************************************
 namespace Butter.Builders
 {
-    using System;
-    using Data.Model;
-
-    public interface MapFieldBuilder :
-        IBuilder
+    public interface MapFieldCreatorDefinition :
+        FieldCreatorDefinition
     {
-        MapField Create(Action<MapFieldBuilderCriteria> criteria);
     }
 }

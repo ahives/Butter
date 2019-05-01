@@ -14,8 +14,12 @@
 // ***********************************************************************************
 namespace Butter.Builders
 {
-    public interface ListFieldBuilderCriteria :
-        FieldBuilderCriteria
+    using Data.Model;
+
+    public interface FieldCreatorDefinition
     {
+        void Id(string name);
+
+        void Type(FieldType type);
     }
 }

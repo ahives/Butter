@@ -12,7 +12,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
             Field field1 = builder.Create(x =>
             {
                 x.Id("city");
@@ -31,7 +31,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
             Field field1 = builder.Create(x =>
             {
                 x.Id("city");
@@ -50,7 +50,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
             Field field1 = builder.Create(x =>
                 {
                     x.Id("city");

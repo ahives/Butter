@@ -22,8 +22,8 @@ namespace Butter.Schema
     public class FactoryImpl :
         IFactory
     {
-        public T GetBuilder<T>()
-            where T : IBuilder
+        public T GetCreator<T>()
+            where T : IFieldCreator
         {
             Type type = GetType()
                 .Assembly

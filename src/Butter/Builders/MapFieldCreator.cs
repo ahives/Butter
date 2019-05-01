@@ -17,9 +17,9 @@ namespace Butter.Builders
     using System;
     using Data.Model;
 
-    public interface FieldBuilder :
-        IBuilder
+    public interface MapFieldCreator :
+        IFieldCreator
     {
-        Field Create(Action<FieldBuilderCriteria> criteria);
+        MapField Create(Action<MapFieldCreatorDefinition> criteria);
     }
 }

@@ -14,7 +14,8 @@
 // ***********************************************************************************
 namespace Butter.Builders
 {
-    public interface IBuilder
+    public interface ListFieldCreatorDefinition :
+        FieldCreatorDefinition
     {
     }
 }

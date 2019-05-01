@@ -18,25 +18,25 @@ namespace Butter.Builders
     using System.Threading;
     using Data.Model;
 
-    class ListFieldBuilderImpl :
-        ListFieldBuilder
+    class ListFieldCreatorImpl :
+        ListFieldCreator
     {
-        public ListField Create(Action<ListFieldBuilderCriteria> criteria)
+        public ListField Create(Action<ListFieldCreatorDefinition> criteria)
         {
-            var impl = new ListFieldBuilderCriteriaImpl();
+            var impl = new ListFieldCreatorDefinitionImpl();
             criteria(impl);
             
             return new ListFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
 
-        class ListFieldBuilderCriteriaImpl :
-            ListFieldBuilderCriteria
+        class ListFieldCreatorDefinitionImpl :
+            ListFieldCreatorDefinition
         {
             string _id;
             FieldType _fieldType;
 
-            public ListFieldBuilderCriteriaImpl()
+            public ListFieldCreatorDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
                 FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);

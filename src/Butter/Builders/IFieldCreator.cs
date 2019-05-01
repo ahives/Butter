@@ -14,12 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Builders
 {
-    using Data.Model;
-
-    public interface FieldBuilderCriteria
+    public interface IFieldCreator
     {
-        void Id(string name);
-
-        void Type(FieldType type);
     }
 }

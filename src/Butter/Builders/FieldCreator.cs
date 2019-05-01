@@ -17,9 +17,9 @@ namespace Butter.Builders
     using System;
     using Data.Model;
 
-    public interface ListFieldBuilder :
-        IBuilder
+    public interface FieldCreator :
+        IFieldCreator
     {
-        ListField Create(Action<ListFieldBuilderCriteria> criteria);
+        Field Create(Action<FieldCreatorDefinition> criteria);
     }
 }
