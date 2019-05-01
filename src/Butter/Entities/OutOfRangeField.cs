@@ -20,7 +20,7 @@ namespace Butter.Entities
     public class OutOfRangeField :
         Field
     {
-        public string Id => throw new FieldOutOfRangeException($"The index is out of range.");
+        public string Id => throw new FieldOutOfRangeException("The index is out of range.");
         public FieldType Type => FieldType.None;
     }
 }

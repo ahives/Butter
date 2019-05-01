@@ -27,6 +27,15 @@ namespace Butter
             if (type == typeof(long))
                 return DataType.INT64;
             
+            if (type == typeof(bool))
+                return DataType.BOOLEAN;
+            
+            if (type == typeof(float))
+                return DataType.FLOAT;
+            
+            if (type == typeof(double))
+                return DataType.DOUBLE;
+            
             if (type == typeof(byte[]))
                 return DataType.BYTE_ARRAY;
             

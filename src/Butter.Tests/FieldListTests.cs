@@ -1,11 +1,8 @@
 namespace Butter.Tests
 {
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Xml.Linq;
     using Builders;
     using Entities.Model;
-    using Metadata;
+    using Exceptions;
     using NUnit.Framework;
 
     [TestFixture]
@@ -67,11 +64,11 @@ namespace Butter.Tests
         public void Verify_can_create_list_of_fields_with_list()
         {
             var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
-            var field1 = builder.Create(x => { x.Id("field1"); });
-            var field2 = builder.Create(x => { x.Id("field2"); });
-            var field3 = builder.Create(x => { x.Id("field3"); });
-            var field4 = builder.Create(x => { x.Id("field4"); });
-            var field5 = builder.Create(x => { x.Id("field5"); });
+            var field1 = builder.Create(x => x.Id("field1"));
+            var field2 = builder.Create(x => x.Id("field2"));
+            var field3 = builder.Create(x => x.Id("field3"));
+            var field4 = builder.Create(x => x.Id("field4"));
+            var field5 = builder.Create(x => x.Id("field5"));
 
             IEntityList<Field> fields = new FieldList();
             fields.Add(field1);
@@ -94,6 +91,83 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.TryGetValue(4, out var f5));
             Assert.AreEqual("field5", f5.Id);
+        }
+
+        [Test]
+        public void Verify_can_access_list_using_indexer()
+        {
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var field1 = builder.Create(x => x.Id("field1"));
+            var field2 = builder.Create(x => x.Id("field2"));
+            var field3 = builder.Create(x => x.Id("field3"));
+            var field4 = builder.Create(x => x.Id("field4"));
+            var field5 = builder.Create(x => x.Id("field5"));
+
+            IEntityList<Field> fields = new FieldList();
+            fields.Add(field1);
+            fields.Add(field2);
+            fields.Add(field3);
+            fields.Add(field4);
+            fields.Add(field5);
+            
+            Assert.IsNotNull(fields[0]);
+            Assert.AreEqual("field1", fields[0].Id);
+            
+            Assert.IsNotNull(fields[1]);
+            Assert.AreEqual("field2", fields[1].Id);
+            
+            Assert.IsNotNull(fields[2]);
+            Assert.AreEqual("field3", fields[2].Id);
+            
+            Assert.IsNotNull(fields[3]);
+            Assert.AreEqual("field4", fields[3].Id);
+            
+            Assert.IsNotNull(fields[4]);
+            Assert.AreEqual("field5", fields[4].Id);
+        }
+
+        [Test]
+        public void Verify_does_not_throw_when_attempting_to_access_empty_list()
+        {
+            IEntityList<Field> fields = new FieldList();
+            
+            Assert.IsFalse(fields.TryGetValue(0, out _));
+        }
+
+        [Test]
+        public void Verify_does_not_throw_when_attempting_to_access_negative_index()
+        {
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var field = builder.Create(x => { x.Id("field1"); });
+
+            IEntityList<Field> fields = new FieldList();
+            fields.Add(field);
+            
+            Assert.IsFalse(fields.TryGetValue(-1, out _));
+        }
+
+        [Test]
+        public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
+        {
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            var field = builder.Create(x => { x.Id("field1"); });
+
+            IEntityList<Field> fields = new FieldList();
+            fields.Add(field);
+            
+            Assert.IsFalse(fields.TryGetValue(fields.Count + 1, out _));
+        }
+
+        [Test]
+        public void Verify_can_create_list_of_fields_with_list3()
+        {
+            IEntityList<Field> fields = new FieldList();
+            
+            Assert.IsFalse(fields.TryGetValue(0, out var f1));
+            Assert.Throws<FieldOutOfRangeException>(() =>
+            {
+                Assert.AreEqual("field1", f1.Id);
+            });
         }
 
         [Test]

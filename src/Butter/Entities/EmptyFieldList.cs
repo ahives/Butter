@@ -20,6 +20,7 @@ namespace Butter.Entities
         IEntityList<Field>
     {
         public bool HasValues => false;
+        public int Count => 0;
         public Field this[int index] => SchemaCache.MissingField;
 
         public bool TryGetValue(int index, out Field field)

@@ -20,6 +20,8 @@ namespace Butter.Entities.Model
         
         bool HasValues { get; }
         
+        int Count { get; }
+        
         T this[int index] { get; }
 
         bool TryGetValue(int index, out T entity);

@@ -23,18 +23,24 @@ namespace Butter
         IEntityList<Field>
     {
         readonly List<Field> _fields;
+        int _count;
 
         public bool HasValues => _fields != null && _fields.Any();
+        public int Count => _count;
 
         public FieldList()
         {
             _fields = new List<Field>();
+            _count = 0;
         }
 
         public void Add(Field field)
         {
-            if (!_fields.Contains(field, new FieldComparer()))
-                _fields.Add(field);
+            if (field == null || _fields.Contains(field, new FieldComparer()))
+                return;
+            
+            _fields.Add(field);
+            _count++;
         }
 
         public Field this[int index]

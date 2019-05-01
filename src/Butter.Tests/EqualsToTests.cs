@@ -2,6 +2,7 @@ namespace Butter.Tests
 {
     using Builders;
     using Entities.Model;
+    using Exceptions;
     using NUnit.Framework;
 
     [TestFixture]
@@ -27,6 +28,25 @@ namespace Butter.Tests
         }
         
         [Test]
+        public void Verify_EqualsTo_returns_false_when_types_different()
+        {
+            var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
+            Field field1 = builder.Create(x =>
+            {
+                x.Id("city");
+                x.Type(FieldType.Primitive);
+            });
+
+            Field field2 = builder.Create(x =>
+            {
+                x.Id("city");
+                x.Type(FieldType.List);
+            });
+
+            Assert.IsFalse(field1.EqualTo(field2));
+        }
+        
+        [Test]
         public void Verify_EqualsTo_returns_false()
         {
             var builder = SchemaFactory.Instance.GetBuilder<FieldBuilder>();
@@ -43,6 +63,28 @@ namespace Butter.Tests
             });
 
             Assert.IsFalse(field1.EqualTo(field2));
+        }
+
+        [Test]
+        public void Verify_throws_when_empty_field_accessed()
+        {
+            IEntityList<Field> fields = new FieldList();
+            fields.Add(null);
+            
+            Assert.IsFalse(fields.TryGetValue(0, out var f1));
+            Assert.Throws<FieldOutOfRangeException>(() =>
+            {
+                string fieldId = f1.Id;
+            });
+        }
+
+        [Test]
+        public void Verify_null_objects_are_equal()
+        {
+            Field field1 = null;
+            Field field2 = null;
+            
+            Assert.IsTrue(field1.EqualTo(field2));
         }
     }
 }
