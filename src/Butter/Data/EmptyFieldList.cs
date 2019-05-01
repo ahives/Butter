@@ -12,16 +12,25 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data
 {
-    using Data.Model;
+    using Model;
 
-    public interface ValueList
+    public class EmptyFieldList :
+        IEntityList<Field>
     {
-        bool HasValues { get; }
-        
-        Value this[int index] { get; }
+        public bool HasValues => false;
+        public int Count => 0;
+        public Field this[int index] => SchemaCache.MissingField;
 
-        bool TryGetValue(int index, out Value value);
+        public bool TryGetValue(int index, out Field field)
+        {
+            field = SchemaCache.MissingField;
+            return false;
+        }
+        
+        public void Add(Field field)
+        {
+        }
     }
 }

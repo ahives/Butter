@@ -15,7 +15,6 @@
 namespace Butter
 {
     using System;
-    using Metadata;
 
     public static class FieldWriterExtensions
     {

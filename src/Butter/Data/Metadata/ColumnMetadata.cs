@@ -12,16 +12,32 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Metadata
 {
-    using Data.Model;
+    using System.Collections.Generic;
 
-    public interface ValueList
+    public interface ColumnMetadata
     {
-        bool HasValues { get; }
+        DataType Type { get; }
         
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        List<DataEncoding> Encodings { get; }
+        
+        List<string> PathInSchema { get; }
+        
+        CompressionCodec Codec { get; }
+        
+        long TotalValues { get; }
+        
+        long TotalUncompressedSize { get; }
+        
+        long TotalCompressedSize { get; }
+        
+        List<KeyValue> KeyValueMetadata { get; }
+        
+        long DataPageOffset { get; }
+        
+        long IndexPageOffset { get; }
+        
+        long DictionaryPageOffset { get; }
     }
 }

@@ -12,16 +12,16 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Metadata
 {
-    using Data.Model;
+    using System.Collections.Generic;
 
-    public interface ValueList
+    public interface RowGroup
     {
-        bool HasValues { get; }
+        List<ColumnChunk> Columns { get; }
         
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        long TotalByteSize { get; }
+        
+        long TotalRows { get; }
     }
 }

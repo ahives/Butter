@@ -1,7 +1,8 @@
 namespace Butter.Tests
 {
     using Builders;
-    using Entities.Model;
+    using Data;
+    using Data.Model;
     using Exceptions;
     using NUnit.Framework;
 

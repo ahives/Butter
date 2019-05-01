@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Builders
 {
-    using Entities.Model;
+    using Data.Model;
 
     public interface FieldBuilderCriteria
     {

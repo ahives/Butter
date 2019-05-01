@@ -16,7 +16,7 @@ namespace Butter.Builders
 {
     using System;
     using System.Threading;
-    using Entities.Model;
+    using Data.Model;
 
     class FieldBuilderImpl :
         FieldBuilder

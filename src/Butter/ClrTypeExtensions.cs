@@ -15,7 +15,7 @@
 namespace Butter
 {
     using System;
-    using Metadata;
+    using Data.Metadata;
 
     public static class ClrTypeExtensions
     {

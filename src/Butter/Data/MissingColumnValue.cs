@@ -12,16 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data
 {
-    using Data.Model;
+    using System;
+    using Metadata;
+    using Model;
 
-    public interface ValueList
+    public class MissingColumnValue :
+        Value
     {
-        bool HasValues { get; }
-        
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        public string Data { get; }
+        public DataType DataType => DataType.NONE;
+        public Type ClrType => typeof(byte[]);
     }
 }

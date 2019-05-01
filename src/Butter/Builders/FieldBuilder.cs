@@ -15,7 +15,7 @@
 namespace Butter.Builders
 {
     using System;
-    using Entities.Model;
+    using Data.Model;
 
     public interface FieldBuilder :
         IBuilder

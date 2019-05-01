@@ -1,6 +1,6 @@
 namespace Butter.Tests
 {
-    using Metadata;
+    using Data.Metadata;
     using NUnit.Framework;
 
     [TestFixture]

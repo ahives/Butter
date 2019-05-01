@@ -12,16 +12,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Metadata
 {
-    using Data.Model;
-
-    public interface ValueList
+    public enum CompressionCodec
     {
-        bool HasValues { get; }
-        
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        UNCOMPRESSED,
+        SNAPPY,
+        GZIP,
+        LZO
     }
 }

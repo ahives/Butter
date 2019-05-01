@@ -12,16 +12,15 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data
 {
-    using Data.Model;
+    using Exceptions;
+    using Model;
 
-    public interface ValueList
+    public class OutOfRangeField :
+        Field
     {
-        bool HasValues { get; }
-        
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        public string Id => throw new FieldOutOfRangeException("The index is out of range.");
+        public FieldType Type => FieldType.None;
     }
 }
