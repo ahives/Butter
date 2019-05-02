@@ -22,7 +22,7 @@ namespace Butter.Schema
     public class FactoryImpl :
         IFactory
     {
-        public T GetCreator<T>()
+        public T Get<T>()
             where T : IFieldCreator
         {
             Type type = GetType()

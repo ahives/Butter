@@ -20,7 +20,7 @@ namespace Butter.Data
         Column
     {
         public Field Field => SchemaCache.MissingField;
-        public IEntityList<Value> Values => SchemaCache.MissingValueList;
+        public IValueList Values => SchemaCache.MissingValueList;
         public bool HasValues => false;
     }
 }

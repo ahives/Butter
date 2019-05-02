@@ -14,16 +14,16 @@
 // ***********************************************************************************
 namespace Butter.Data.Model
 {
-    public interface IEntityList<T>
+    public interface IValueList
     {
-        void Add(T field);
-        
-        bool HasValues { get; }
-        
-        int Count { get; }
-        
-        T this[int index] { get; }
+        void Add(Value value);
 
-        bool TryGetValue(int index, out T entity);
+        bool HasValues { get; }
+
+        int Count { get; }
+
+        Value this[int index] { get; }
+
+        bool TryGetValue(int index, out Value value);
     }
 }

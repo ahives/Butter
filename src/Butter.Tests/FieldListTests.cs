@@ -65,14 +65,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_create_list_of_fields_with_list()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var field1 = builder.Create(x => x.Id("field1"));
-            var field2 = builder.Create(x => x.Id("field2"));
-            var field3 = builder.Create(x => x.Id("field3"));
-            var field4 = builder.Create(x => x.Id("field4"));
-            var field5 = builder.Create(x => x.Id("field5"));
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field1 = creator.Create(x => x.Id("field1"));
+            var field2 = creator.Create(x => x.Id("field2"));
+            var field3 = creator.Create(x => x.Id("field3"));
+            var field4 = creator.Create(x => x.Id("field4"));
+            var field5 = creator.Create(x => x.Id("field5"));
 
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             fields.Add(field1);
             fields.Add(field2);
             fields.Add(field3);
@@ -98,14 +98,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_access_list_using_indexer()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var field1 = builder.Create(x => x.Id("field1"));
-            var field2 = builder.Create(x => x.Id("field2"));
-            var field3 = builder.Create(x => x.Id("field3"));
-            var field4 = builder.Create(x => x.Id("field4"));
-            var field5 = builder.Create(x => x.Id("field5"));
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field1 = creator.Create(x => x.Id("field1"));
+            var field2 = creator.Create(x => x.Id("field2"));
+            var field3 = creator.Create(x => x.Id("field3"));
+            var field4 = creator.Create(x => x.Id("field4"));
+            var field5 = creator.Create(x => x.Id("field5"));
 
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             fields.Add(field1);
             fields.Add(field2);
             fields.Add(field3);
@@ -131,16 +131,16 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_access_list_with_multiple_field_types()
         {
-            var fieldBuilder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var mapFieldBuilder = SchemaFactory.Instance.GetCreator<MapFieldCreator>();
-            var listFieldBuilder = SchemaFactory.Instance.GetCreator<ListFieldCreator>();
+            var fieldCreator = SchemaFactory.Factory.Get<FieldCreator>();
+            var mapFieldCreator = SchemaFactory.Factory.Get<MapFieldCreator>();
+            var listFieldCreator = SchemaFactory.Factory.Get<ListFieldCreator>();
 
-            IEntityList<Field> fields = new FieldList();
-            fields.Add(fieldBuilder.Create(x => x.Id("field1")));
-            fields.Add(mapFieldBuilder.Create(x => x.Id("field2")));
-            fields.Add(listFieldBuilder.Create(x => x.Id("field3")));
-            fields.Add(fieldBuilder.Create(x => x.Id("field4")));
-            fields.Add(fieldBuilder.Create(x => x.Id("field5")));
+            IFieldList fields = new FieldList();
+            fields.Add(fieldCreator.Create(x => x.Id("field1")));
+            fields.Add(mapFieldCreator.Create(x => x.Id("field2")));
+            fields.Add(listFieldCreator.Create(x => x.Id("field3")));
+            fields.Add(fieldCreator.Create(x => x.Id("field4")));
+            fields.Add(fieldCreator.Create(x => x.Id("field5")));
 
             for (int i = 0; i < fields.Count; i++)
             {
@@ -174,7 +174,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_attempting_to_access_empty_list()
         {
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             
             Assert.IsFalse(fields.TryGetValue(0, out _));
         }
@@ -182,10 +182,10 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_attempting_to_access_negative_index()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var field = builder.Create(x => { x.Id("field1"); });
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field = creator.Create(x => { x.Id("field1"); });
 
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             fields.Add(field);
             
             Assert.IsFalse(fields.TryGetValue(-1, out _));
@@ -194,10 +194,10 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var field = builder.Create(x => { x.Id("field1"); });
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field = creator.Create(x => { x.Id("field1"); });
 
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             fields.Add(field);
             
             Assert.IsFalse(fields.TryGetValue(fields.Count + 1, out _));
@@ -206,7 +206,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_create_list_of_fields_with_list3()
         {
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             
             Assert.IsFalse(fields.TryGetValue(0, out var f1));
             Assert.Throws<FieldOutOfRangeException>(() =>
@@ -218,7 +218,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryGetValue_does_not_throw_when_empty()
         {
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             
             Assert.IsFalse(fields.TryGetValue(0, out _));
         }

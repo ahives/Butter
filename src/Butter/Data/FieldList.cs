@@ -19,7 +19,7 @@ namespace Butter.Data
     using Model;
 
     public class FieldList :
-        IEntityList<Field>
+        IFieldList
     {
         readonly List<Field> _fields;
         int _count;

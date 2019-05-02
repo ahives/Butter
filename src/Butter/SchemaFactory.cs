@@ -21,7 +21,7 @@ namespace Butter
         static IFactory _factory;
         static readonly object _obj = new object();
 
-        public static IFactory Instance
+        public static IFactory Factory
         {
             get
             {

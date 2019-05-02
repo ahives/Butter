@@ -17,7 +17,7 @@ namespace Butter.Data
     using Model;
 
     public class EmptyFieldList :
-        IEntityList<Field>
+        IFieldList
     {
         public bool HasValues => false;
         public int Count => 0;

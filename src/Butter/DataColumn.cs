@@ -5,7 +5,7 @@ namespace Butter
 
     public class DataColumn
     {
-        public static Column Create(Field field, IEntityList<Value> values)
+        public static Column Create(Field field, IValueList values)
         {
             if (field == null || values == null)
                 return SchemaCache.Empty;
@@ -16,7 +16,7 @@ namespace Butter
         class ColumnImpl :
             Column
         {
-            public ColumnImpl(Field field, IEntityList<Value> values)
+            public ColumnImpl(Field field, IValueList values)
             {
                 Field = field;
                 Values = values;
@@ -24,7 +24,7 @@ namespace Butter
             }
 
             public Field Field { get; }
-            public IEntityList<Value> Values { get; }
+            public IValueList Values { get; }
             public bool HasValues { get; }
         }
     }

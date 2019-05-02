@@ -10,8 +10,8 @@
         [Test]
         public void Verify_type_field_being_created()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            var field = builder.Create(x =>
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field = creator.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.Primitive);

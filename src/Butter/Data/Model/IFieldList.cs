@@ -14,21 +14,16 @@
 // ***********************************************************************************
 namespace Butter.Data.Model
 {
-    using System.Linq;
-
-    public class Schema :
-        ISchema
+    public interface IFieldList
     {
-        public Schema(params Field[] fields)
-        {
-            Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
-        }
+        void Add(Field field);
+        
+        bool HasValues { get; }
+        
+        int Count { get; }
+        
+        Field this[int index] { get; }
 
-        public IFieldList Fields { get; }
-    }
-
-    public interface ISchema
-    {
-        IFieldList Fields { get; }
+        bool TryGetValue(int index, out Field field);
     }
 }

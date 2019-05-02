@@ -12,14 +12,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            Field field1 = builder.Create(x =>
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            Field field1 = creator.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.Primitive);
             });
 
-            Field field2 = builder.Create(x =>
+            Field field2 = creator.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.Primitive);
@@ -31,14 +31,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            Field field1 = builder.Create(x =>
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            Field field1 = creator.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.Primitive);
             });
 
-            Field field2 = builder.Create(x =>
+            Field field2 = creator.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.List);
@@ -50,14 +50,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var builder = SchemaFactory.Instance.GetCreator<FieldCreator>();
-            Field field1 = builder.Create(x =>
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            Field field1 = creator.Create(x =>
                 {
                     x.Id("city");
                     x.Type(FieldType.Primitive);
                 });
 
-            Field field2 = builder.Create(x =>
+            Field field2 = creator.Create(x =>
             {
                 x.Id("state");
                 x.Type(FieldType.Primitive);
@@ -69,7 +69,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_throws_when_empty_field_accessed()
         {
-            IEntityList<Field> fields = new FieldList();
+            IFieldList fields = new FieldList();
             fields.Add(null);
             
             Assert.IsFalse(fields.TryGetValue(0, out var f1));

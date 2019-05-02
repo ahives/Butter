@@ -17,7 +17,7 @@ namespace Butter.Data
     using Model;
 
     public class MissingColumnValueList :
-        IEntityList<Value>
+        IValueList
     {
         public bool HasValues => false;
         public int Count => 0;
