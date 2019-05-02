@@ -12,14 +12,14 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Builders
+namespace Butter.Creators
 {
     using System;
     using Data.Model;
 
-    public interface MapFieldCreator :
+    public interface ListFieldCreator :
         IFieldCreator
     {
-        MapField Create(Action<MapFieldCreatorDefinition> criteria);
+        ListField Create(Action<ListFieldCreatorDefinition> criteria);
     }
 }

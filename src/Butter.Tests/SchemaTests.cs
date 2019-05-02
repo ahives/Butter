@@ -1,6 +1,6 @@
 namespace Butter.Tests
 {
-    using Builders;
+    using Creators;
     using Data;
     using Data.Model;
     using NUnit.Framework;
@@ -11,12 +11,12 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            var builder = SchemaFactory.Factory.Get<FieldCreator>();
-            var field1 = builder.Create(x => x.Id("field1"));
-            var field2 = builder.Create(x => x.Id("field2"));
-            var field3 = builder.Create(x => x.Id("field3"));
-            var field4 = builder.Create(x => x.Id("field4"));
-            var field5 = builder.Create(x => x.Id("field5"));
+            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var field1 = creator.Create(x => x.Id("field1"));
+            var field2 = creator.Create(x => x.Id("field2"));
+            var field3 = creator.Create(x => x.Id("field3"));
+            var field4 = creator.Create(x => x.Id("field4"));
+            var field5 = creator.Create(x => x.Id("field5"));
             
             Schema schema = new Schema(field1, field2, field3, field4, field5);
             

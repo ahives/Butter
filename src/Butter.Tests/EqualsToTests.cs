@@ -1,6 +1,6 @@
 namespace Butter.Tests
 {
-    using Builders;
+    using Creators;
     using Data;
     using Data.Model;
     using Exceptions;

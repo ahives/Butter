@@ -12,28 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Creators
 {
-    public class SchemaFactory
+    public interface MapFieldCreatorDefinition :
+        FieldCreatorDefinition
     {
-        static IFactory _factory;
-        static readonly object _obj = new object();
-
-        public static IFactory Factory
-        {
-            get
-            {
-                if (_factory == null)
-                {
-                    lock (_obj)
-                    {
-                        if (_factory == null)
-                            _factory = new FactoryImpl();
-                    }
-                }
-
-                return _factory;
-            }
-        }
     }
 }

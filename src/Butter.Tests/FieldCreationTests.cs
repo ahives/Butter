@@ -1,6 +1,6 @@
 ﻿namespace Butter.Tests
 {
-    using Builders;
+    using Creators;
     using Data.Model;
     using NUnit.Framework;
 

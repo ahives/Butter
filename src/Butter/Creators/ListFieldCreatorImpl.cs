@@ -12,7 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Builders
+namespace Butter.Creators
 {
     using System;
     using System.Threading;
@@ -28,6 +28,8 @@ namespace Butter.Builders
             
             return new ListFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
+
+        public FieldCreatorType Type => FieldCreatorType.List;
 
 
         class ListFieldCreatorDefinitionImpl :

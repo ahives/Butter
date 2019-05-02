@@ -12,31 +12,33 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Builders
+namespace Butter.Creators
 {
     using System;
     using System.Threading;
     using Data.Model;
 
-    class FieldCreatorImpl :
-        FieldCreator
+    class MapFieldCreatorImpl :
+        MapFieldCreator
     {
-        public Field Create(Action<FieldCreatorDefinition> criteria)
+        public MapField Create(Action<MapFieldCreatorDefinition> criteria)
         {
-            var impl = new FieldCreatorDefinitionImpl();
+            var impl = new MapFieldCreatorDefinitionImpl();
             criteria(impl);
             
-            return new FieldImpl(impl.FieldId.Value, impl.FieldType.Value);
+            return new MapFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
+        public FieldCreatorType Type => FieldCreatorType.Map;
 
-        class FieldCreatorDefinitionImpl :
-            FieldCreatorDefinition
+
+        class MapFieldCreatorDefinitionImpl :
+            MapFieldCreatorDefinition
         {
             string _id;
             FieldType _fieldType;
 
-            public FieldCreatorDefinitionImpl()
+            public MapFieldCreatorDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
                 FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
@@ -57,10 +59,10 @@ namespace Butter.Builders
         }
 
 
-        class FieldImpl :
-            Field
+        class MapFieldImpl :
+            MapField
         {
-            public FieldImpl(string id, FieldType type)
+            public MapFieldImpl(string id, FieldType type)
             {
                 Id = id;
                 Type = type;
