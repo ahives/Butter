@@ -12,13 +12,23 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Creators
+namespace Butter.Data.Model
 {
-    public enum FieldCreatorType
+    using System.Linq;
+
+    public class DataSetSchema :
+        IDataSetSchema
     {
-        Primitive,
-        Map,
-        List,
-        Struct
+        public DataSetSchema(params Field[] fields)
+        {
+            Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
+        }
+
+        public DataSetSchema()
+        {
+            Fields = new FieldList();
+        }
+
+        public IFieldList Fields { get; }
     }
 }

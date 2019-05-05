@@ -14,20 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data.Model
 {
-    using System.Linq;
-
-    public class Schema :
-        ISchema
-    {
-        public Schema(params Field[] fields)
-        {
-            Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
-        }
-
-        public IFieldList Fields { get; }
-    }
-
-    public interface ISchema
+    public interface IDataSetSchema
     {
         IFieldList Fields { get; }
     }

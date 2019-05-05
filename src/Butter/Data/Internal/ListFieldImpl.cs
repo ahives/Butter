@@ -12,12 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Metadata
+namespace Butter.Data.Internal
 {
-    public enum FieldRepetitionType
+    using Model;
+
+    class ListFieldImpl :
+        ListField
     {
-        Required,
-        Optional,
-        Repeated
+        public ListFieldImpl(string id, FieldType type)
+        {
+            Id = id;
+            Type = type;
+        }
+
+        public string Id { get; }
+        public FieldType Type { get; }
     }
 }

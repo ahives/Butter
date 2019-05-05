@@ -12,14 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Creators
+namespace Butter.Data.Internal
 {
-    using Data.Model;
+    using Model;
 
-    public interface FieldCreatorDefinition
+    class FieldImpl :
+        Field
     {
-        void Id(string name);
+        public FieldImpl(string id, FieldType type)
+        {
+            Id = id;
+            Type = type;
+        }
 
-        void Type(FieldType type);
+        public string Id { get; }
+        public FieldType Type { get; }
     }
 }

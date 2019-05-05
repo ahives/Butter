@@ -1,7 +1,7 @@
 namespace Butter.Tests
 {
-    using Creators;
     using Data.Model;
+    using Data.Model.Descriptors;
     using NUnit.Framework;
 
     [TestFixture]
@@ -18,7 +18,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_check_value_does_not_exist()
         {
-            var builder = SchemaFactory.Factory.Get<FieldCreator>();
+            var builder = Schema.Factory.Get<FieldDescriptor>();
             var field = builder.Create(x =>
             {
                 x.Id("city");

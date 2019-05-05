@@ -14,11 +14,11 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using Creators;
+    using Data.Model.Descriptors;
 
     public interface IFactory
     {
         T Get<T>()
-            where T : IFieldCreator;
+            where T : IFieldDescriptor;
     }
 }

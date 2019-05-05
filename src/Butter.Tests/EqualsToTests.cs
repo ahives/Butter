@@ -1,8 +1,8 @@
 namespace Butter.Tests
 {
-    using Creators;
     using Data;
     using Data.Model;
+    using Data.Model.Descriptors;
     using Exceptions;
     using NUnit.Framework;
 
@@ -12,7 +12,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var creator = Schema.Factory.Get<FieldDescriptor>();
             Field field1 = creator.Create(x =>
             {
                 x.Id("city");
@@ -31,7 +31,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var creator = Schema.Factory.Get<FieldDescriptor>();
             Field field1 = creator.Create(x =>
             {
                 x.Id("city");
@@ -50,7 +50,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var creator = SchemaFactory.Factory.Get<FieldCreator>();
+            var creator = Schema.Factory.Get<FieldDescriptor>();
             Field field1 = creator.Create(x =>
                 {
                     x.Id("city");

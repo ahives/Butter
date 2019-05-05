@@ -12,28 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Internal
 {
-    public class SchemaFactory
+    using Model;
+
+    class MapFieldImpl :
+        MapField
     {
-        static IFactory _factory;
-        static readonly object _obj = new object();
-
-        public static IFactory Factory
+        public MapFieldImpl(string id, FieldType type)
         {
-            get
-            {
-                if (_factory == null)
-                {
-                    lock (_obj)
-                    {
-                        if (_factory == null)
-                            _factory = new FactoryImpl();
-                    }
-                }
-
-                return _factory;
-            }
+            Id = id;
+            Type = type;
         }
+
+        public string Id { get; }
+        public FieldType Type { get; }
     }
 }

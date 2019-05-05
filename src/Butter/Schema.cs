@@ -12,12 +12,31 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Metadata
+namespace Butter
 {
-    public enum FieldRepetitionType
+    public class Schema
     {
-        Required,
-        Optional,
-        Repeated
+        static IFactory _factory;
+        static readonly object _gate = new object();
+
+        /// <summary>
+        /// Gets the schema factory used to return field descriptors
+        /// </summary>
+        public static IFactory Factory
+        {
+            get
+            {
+                if (_factory == null)
+                {
+                    lock (_gate)
+                    {
+                        if (_factory == null)
+                            _factory = new FactoryImpl();
+                    }
+                }
+
+                return _factory;
+            }
+        }
     }
 }

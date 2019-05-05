@@ -12,33 +12,34 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Creators
+namespace Butter.Data.Model.Descriptors
 {
     using System;
     using System.Threading;
-    using Data.Model;
+    using Internal;
+    using Model;
 
-    class ListFieldCreatorImpl :
-        ListFieldCreator
+    class ListFieldDescriptorImpl :
+        ListFieldDescriptor
     {
-        public ListField Create(Action<ListFieldCreatorDefinition> criteria)
+        public ListField Create(Action<ListFieldDefinition> criteria)
         {
-            var impl = new ListFieldCreatorDefinitionImpl();
+            var impl = new ListFieldDefinitionImpl();
             criteria(impl);
             
             return new ListFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
-        public FieldCreatorType Type => FieldCreatorType.List;
+        public FieldDescriptorType Type => FieldDescriptorType.List;
 
 
-        class ListFieldCreatorDefinitionImpl :
-            ListFieldCreatorDefinition
+        class ListFieldDefinitionImpl :
+            ListFieldDefinition
         {
             string _id;
             FieldType _fieldType;
 
-            public ListFieldCreatorDefinitionImpl()
+            public ListFieldDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
                 FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
@@ -56,20 +57,6 @@ namespace Butter.Creators
 
             public Lazy<string> FieldId { get; }
             public Lazy<FieldType> FieldType { get; }
-        }
-
-        
-        class ListFieldImpl :
-            ListField
-        {
-            public ListFieldImpl(string id, FieldType type)
-            {
-                Id = id;
-                Type = type;
-            }
-
-            public string Id { get; }
-            public FieldType Type { get; }
         }
     }
 }

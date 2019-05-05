@@ -1,7 +1,7 @@
 ﻿namespace Butter.Tests
 {
-    using Creators;
     using Data.Model;
+    using Data.Model.Descriptors;
     using NUnit.Framework;
 
     [TestFixture]
@@ -10,8 +10,8 @@
         [Test]
         public void Verify_type_field_being_created()
         {
-            var creator = SchemaFactory.Factory.Get<FieldCreator>();
-            var field = creator.Create(x =>
+            var descriptor = Schema.Factory.Get<FieldDescriptor>();
+            var field = descriptor.Create(x =>
             {
                 x.Id("city");
                 x.Type(FieldType.Primitive);

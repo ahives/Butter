@@ -15,27 +15,41 @@
 namespace Butter
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
-    using Creators;
+    using Data.Model.Descriptors;
     using Exceptions;
 
     public class FactoryImpl :
         IFactory
     {
+        readonly IDictionary<string, object> _descriptorCache;
+
+        public FactoryImpl()
+        {
+            _descriptorCache = new Dictionary<string, object>();
+        }
+
         public T Get<T>()
-            where T : IFieldCreator
+            where T : IFieldDescriptor
         {
             Type type = GetType()
                 .Assembly
                 .GetTypes()
                 .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
-
+            
             if (type == null)
                 throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
 
-            var resource = (T)Activator.CreateInstance(type);
+            if (_descriptorCache.ContainsKey(type.FullName))
+                return (T)_descriptorCache[type.FullName];
 
-            return resource;
+            var descriptor = (T)Activator.CreateInstance(type);
+
+            if (!_descriptorCache.ContainsKey(type.FullName))
+                _descriptorCache.Add(type.FullName, descriptor);
+            
+            return descriptor;
         }
     }
 }

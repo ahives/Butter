@@ -12,33 +12,34 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Creators
+namespace Butter.Data.Model.Descriptors
 {
     using System;
     using System.Threading;
-    using Data.Model;
+    using Internal;
+    using Model;
 
-    class FieldCreatorImpl :
-        FieldCreator
+    class FieldDescriptorImpl :
+        FieldDescriptor
     {
-        public Field Create(Action<FieldCreatorDefinition> criteria)
+        public Field Create(Action<FieldDefinition> criteria)
         {
-            var impl = new FieldCreatorDefinitionImpl();
+            var impl = new FieldDefinitionImpl();
             criteria(impl);
             
             return new FieldImpl(impl.FieldId.Value, impl.FieldType.Value);
         }
 
-        public FieldCreatorType Type => FieldCreatorType.Primitive;
+        public FieldDescriptorType Type => FieldDescriptorType.Primitive;
 
 
-        class FieldCreatorDefinitionImpl :
-            FieldCreatorDefinition
+        class FieldDefinitionImpl :
+            FieldDefinition
         {
             string _id;
             FieldType _fieldType;
 
-            public FieldCreatorDefinitionImpl()
+            public FieldDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
                 FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
@@ -56,20 +57,6 @@ namespace Butter.Creators
 
             public Lazy<string> FieldId { get; }
             public Lazy<FieldType> FieldType { get; }
-        }
-
-
-        class FieldImpl :
-            Field
-        {
-            public FieldImpl(string id, FieldType type)
-            {
-                Id = id;
-                Type = type;
-            }
-
-            public string Id { get; }
-            public FieldType Type { get; }
         }
     }
 }

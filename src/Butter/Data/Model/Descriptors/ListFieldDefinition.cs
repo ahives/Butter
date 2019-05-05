@@ -12,14 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Creators
+namespace Butter.Data.Model.Descriptors
 {
-    using System;
-    using Data.Model;
-
-    public interface FieldCreator :
-        IFieldCreator
+    public interface ListFieldDefinition :
+        FieldDefinition
     {
-        Field Create(Action<FieldCreatorDefinition> criteria);
     }
 }

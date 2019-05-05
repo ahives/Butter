@@ -12,12 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Metadata
+namespace Butter.Data.Model.Descriptors
 {
-    public enum FieldRepetitionType
+    public interface IFieldDescriptor
     {
-        Required,
-        Optional,
-        Repeated
+        FieldDescriptorType Type { get; }
     }
 }
