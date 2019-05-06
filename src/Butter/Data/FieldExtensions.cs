@@ -21,7 +21,7 @@ namespace Butter.Data
         public static bool EqualTo(this Field source, Field target)
         {
             if (source == null && target == null)
-                return true;
+                return false;
             
             if (source != null && target != null)
                 return source.Id == target.Id && source.Type == target.Type;

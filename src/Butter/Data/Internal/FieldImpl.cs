@@ -14,12 +14,13 @@
 // ***********************************************************************************
 namespace Butter.Data.Internal
 {
+    using System;
     using Model;
 
     class FieldImpl :
         Field
     {
-        public FieldImpl(string id, FieldType type)
+        public FieldImpl(string id, FieldType type = FieldType.Primitive)
         {
             Id = id;
             Type = type;
@@ -27,5 +28,35 @@ namespace Butter.Data.Internal
 
         public string Id { get; }
         public FieldType Type { get; }
+
+        public bool Equals(Field other)
+        {
+            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
+                return false;
+
+            return string.Equals(Id, other.Id) && Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            
+            if (ReferenceEquals(this, obj))
+                return true;
+            
+            if (obj.GetType() != this.GetType())
+                return false;
+            
+            return Equals((Field)obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) Type;
+            }
+        }
     }
 }

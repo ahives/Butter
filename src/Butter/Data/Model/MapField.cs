@@ -1,7 +1,9 @@
 namespace Butter.Data.Model
 {
+    using System;
+
     public interface MapField :
-        Field
+        Field, IEquatable<MapField>
     {
         
     }

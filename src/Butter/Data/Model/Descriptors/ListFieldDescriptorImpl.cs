@@ -27,7 +27,7 @@ namespace Butter.Data.Model.Descriptors
             var impl = new ListFieldDefinitionImpl();
             criteria(impl);
             
-            return new ListFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
+            return new ListFieldImpl(impl.FieldId.Value);
         }
 
         public FieldDescriptorType Type => FieldDescriptorType.List;
@@ -42,7 +42,6 @@ namespace Butter.Data.Model.Descriptors
             public ListFieldDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
-                FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
             }
 
             public void Id(string name)
@@ -50,13 +49,7 @@ namespace Butter.Data.Model.Descriptors
                 _id = name;
             }
 
-            public void Type(FieldType type)
-            {
-                _fieldType = type;
-            }
-
             public Lazy<string> FieldId { get; }
-            public Lazy<FieldType> FieldType { get; }
         }
     }
 }

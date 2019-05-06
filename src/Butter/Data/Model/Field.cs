@@ -14,7 +14,10 @@
 // ***********************************************************************************
 namespace Butter.Data.Model
 {
-    public interface Field
+    using System;
+
+    public interface Field :
+        IEquatable<Field>
     {
         string Id { get; }
         

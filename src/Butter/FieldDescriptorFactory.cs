@@ -20,12 +20,12 @@ namespace Butter
     using Data.Model.Descriptors;
     using Exceptions;
 
-    public class FactoryImpl :
+    class FieldDescriptorFactory :
         IFactory
     {
         readonly IDictionary<string, object> _descriptorCache;
 
-        public FactoryImpl()
+        public FieldDescriptorFactory()
         {
             _descriptorCache = new Dictionary<string, object>();
         }

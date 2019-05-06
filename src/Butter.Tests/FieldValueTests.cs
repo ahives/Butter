@@ -22,7 +22,6 @@ namespace Butter.Tests
             var field = builder.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.Primitive);
             });
 
 //            Schema.Field.Add(field);

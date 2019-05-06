@@ -27,7 +27,7 @@ namespace Butter.Data.Model.Descriptors
             var impl = new MapFieldDefinitionImpl();
             criteria(impl);
             
-            return new MapFieldImpl(impl.FieldId.Value, impl.FieldType.Value);
+            return new MapFieldImpl(impl.FieldId.Value);
         }
 
         public FieldDescriptorType Type => FieldDescriptorType.Map;
@@ -37,12 +37,10 @@ namespace Butter.Data.Model.Descriptors
             MapFieldDefinition
         {
             string _id;
-            FieldType _fieldType;
 
             public MapFieldDefinitionImpl()
             {
                 FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
-                FieldType = new Lazy<FieldType>(() => _fieldType, LazyThreadSafetyMode.PublicationOnly);
             }
 
             public void Id(string name)
@@ -50,13 +48,7 @@ namespace Butter.Data.Model.Descriptors
                 _id = name;
             }
 
-            public void Type(FieldType type)
-            {
-                _fieldType = type;
-            }
-
             public Lazy<string> FieldId { get; }
-            public Lazy<FieldType> FieldType { get; }
         }
     }
 }

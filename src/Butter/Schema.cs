@@ -31,7 +31,7 @@ namespace Butter
                     lock (_gate)
                     {
                         if (_factory == null)
-                            _factory = new FactoryImpl();
+                            _factory = new FieldDescriptorFactory();
                     }
                 }
 

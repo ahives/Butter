@@ -22,5 +22,17 @@ namespace Butter.Data
     {
         public string Id => throw new FieldOutOfRangeException("The index is out of range.");
         public FieldType Type => FieldType.None;
+
+        public bool Equals(Field other) => false;
+
+        public override bool Equals(object obj) => Equals((Field)obj);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) Type;
+            }
+        }
     }
 }

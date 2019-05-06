@@ -19,7 +19,5 @@ namespace Butter.Data.Model.Descriptors
     public interface FieldDefinition
     {
         void Id(string name);
-
-        void Type(FieldType type);
     }
 }

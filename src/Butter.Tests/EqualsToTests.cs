@@ -16,13 +16,11 @@ namespace Butter.Tests
             Field field1 = creator.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.Primitive);
             });
 
             Field field2 = creator.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.Primitive);
             });
 
             Assert.IsTrue(field1.EqualTo(field2));
@@ -31,17 +29,16 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var creator = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = creator.Create(x =>
+            var fieldDescriptor = Schema.Factory.Get<FieldDescriptor>();
+            Field field1 = fieldDescriptor.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.Primitive);
             });
 
-            Field field2 = creator.Create(x =>
+            var listFieldDescriptor = Schema.Factory.Get<ListFieldDescriptor>();
+            ListField field2 = listFieldDescriptor.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.List);
             });
 
             Assert.IsFalse(field1.EqualTo(field2));
@@ -54,13 +51,11 @@ namespace Butter.Tests
             Field field1 = creator.Create(x =>
                 {
                     x.Id("city");
-                    x.Type(FieldType.Primitive);
                 });
 
             Field field2 = creator.Create(x =>
             {
                 x.Id("state");
-                x.Type(FieldType.Primitive);
             });
 
             Assert.IsFalse(field1.EqualTo(field2));
@@ -85,7 +80,7 @@ namespace Butter.Tests
             Field field1 = null;
             Field field2 = null;
             
-            Assert.IsTrue(field1.EqualTo(field2));
+            Assert.IsFalse(field1.EqualTo(field2));
         }
     }
 }

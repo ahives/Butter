@@ -14,7 +14,6 @@
             var field = descriptor.Create(x =>
             {
                 x.Id("city");
-                x.Type(FieldType.Primitive);
             });
 
             Assert.AreEqual("city", field.Id);
