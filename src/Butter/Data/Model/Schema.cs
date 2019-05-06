@@ -12,12 +12,30 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Model
 {
-    public class Schema
+    using System;
+    using System.Linq;
+    using Data;
+    using Descriptors;
+
+    public class Schema :
+        ISchema, IEquatable<Schema>
     {
         static IFactory _factory;
         static readonly object _gate = new object();
+
+        public IFieldList Fields { get; }
+
+        public Schema(params Field[] fields)
+        {
+            Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
+        }
+
+        public Schema()
+        {
+            Fields = new FieldList();
+        }
 
         /// <summary>
         /// Gets the schema factory used to return field descriptors
@@ -38,5 +56,32 @@ namespace Butter
                 return _factory;
             }
         }
+
+        public bool Equals(Schema other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            
+            if (ReferenceEquals(this, other))
+                return true;
+
+            return Fields.Equals(other.Fields);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            
+            if (ReferenceEquals(this, obj))
+                return true;
+            
+            if (obj.GetType() != this.GetType())
+                return false;
+            
+            return Equals((Schema) obj);
+        }
+
+        public override int GetHashCode() => (Fields != null ? Fields.GetHashCode() : 0);
     }
 }

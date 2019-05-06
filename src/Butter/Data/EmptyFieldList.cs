@@ -28,7 +28,9 @@ namespace Butter.Data
             field = SchemaCache.MissingField;
             return false;
         }
-        
+
+        public bool Contains(Field field) => false;
+
         public void Add(Field field)
         {
         }

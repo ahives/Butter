@@ -16,10 +16,10 @@ namespace Butter.Tests
             var field4 = Schema.Factory.Get<FieldDescriptor>().Create(x => x.Id("field4"));
             var field5 = Schema.Factory.Get<FieldDescriptor>().Create(x => x.Id("field5"));
             
-            IDataSetSchema dataSetSchema = new DataSetSchema(field1, field2, field3, field4, field5);
+            ISchema schema = new Schema(field1, field2, field3, field4, field5);
 
-            Assert.IsTrue(dataSetSchema.Fields.HasValues);
-            Assert.AreEqual(5, dataSetSchema.Fields.Count);
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(5, schema.Fields.Count);
         }
         
         [Test]
@@ -31,10 +31,10 @@ namespace Butter.Tests
             var field4 = Schema.Factory.Get<FieldDescriptor>().Create(x => x.Id("field4"));
             var field5 = Schema.Factory.Get<ListFieldDescriptor>().Create(x => x.Id("field5"));
             
-            IDataSetSchema dataSetSchema = new DataSetSchema(field1, field2, field3, field4, field5);
+            ISchema schema = new Schema(field1, field2, field3, field4, field5);
 
-            Assert.IsTrue(dataSetSchema.Fields.HasValues);
-            Assert.AreEqual(5, dataSetSchema.Fields.Count);
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(5, schema.Fields.Count);
         }
     }
 }

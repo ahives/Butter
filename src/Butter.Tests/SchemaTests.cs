@@ -17,10 +17,10 @@ namespace Butter.Tests
             var field4 = descriptor.Create(x => x.Id("field4"));
             var field5 = descriptor.Create(x => x.Id("field5"));
             
-            IDataSetSchema dataSetSchema = new DataSetSchema(field1, field2, field3, field4, field5);
+            ISchema schema = new Schema(field1, field2, field3, field4, field5);
 
-            Assert.IsTrue(dataSetSchema.Fields.HasValues);
-            Assert.AreEqual(5, dataSetSchema.Fields.Count);
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(5, schema.Fields.Count);
         }
         
         [Test]
@@ -28,15 +28,15 @@ namespace Butter.Tests
         {
             var descriptor = Schema.Factory.Get<FieldDescriptor>();
             
-            IDataSetSchema dataSetSchema = new DataSetSchema();
-            dataSetSchema.Fields.Add(descriptor.Create(x => x.Id("field1")));
-            dataSetSchema.Fields.Add(descriptor.Create(x => x.Id("field2")));
-            dataSetSchema.Fields.Add(descriptor.Create(x => x.Id("field3")));
-            dataSetSchema.Fields.Add(descriptor.Create(x => x.Id("field4")));
-            dataSetSchema.Fields.Add(descriptor.Create(x => x.Id("field5")));
+            ISchema schema = new Schema();
+            schema.Fields.Add(descriptor.Create(x => x.Id("field1")));
+            schema.Fields.Add(descriptor.Create(x => x.Id("field2")));
+            schema.Fields.Add(descriptor.Create(x => x.Id("field3")));
+            schema.Fields.Add(descriptor.Create(x => x.Id("field4")));
+            schema.Fields.Add(descriptor.Create(x => x.Id("field5")));
 
-            Assert.IsTrue(dataSetSchema.Fields.HasValues);
-            Assert.AreEqual(5, dataSetSchema.Fields.Count);
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(5, schema.Fields.Count);
         }
     }
 }

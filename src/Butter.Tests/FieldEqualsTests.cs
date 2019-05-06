@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Data.Model;
     using Data.Model.Descriptors;
     using NUnit.Framework;
 

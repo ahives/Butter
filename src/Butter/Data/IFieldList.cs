@@ -27,5 +27,7 @@ namespace Butter.Data
         Field this[int index] { get; }
 
         bool TryGetValue(int index, out Field field);
+
+        bool Contains(Field field);
     }
 }

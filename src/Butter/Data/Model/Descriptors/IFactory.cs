@@ -12,10 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Model
+namespace Butter.Data.Model.Descriptors
 {
-    public interface IDataSetSchema
+    public interface IFactory
     {
-        IFieldList Fields { get; }
+        T Get<T>()
+            where T : IFieldDescriptor;
     }
 }

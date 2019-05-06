@@ -14,12 +14,13 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Model;
 
     public class FieldList :
-        IFieldList
+        IFieldList, IEquatable<FieldList>
     {
         readonly List<Field> _fields;
         int _count;
@@ -41,11 +42,11 @@ namespace Butter.Data
 
         public void Add(Field field)
         {
-            if (field == null || _fields.Contains(field, new FieldComparer()))
+            if (Contains(field))
                 return;
             
             _fields.Add(field);
-            _count++;
+            _count = _fields.Count;
         }
 
         public Field this[int index]
@@ -76,7 +77,51 @@ namespace Butter.Data
             return false;
         }
 
-        
+        public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
+
+        public bool Equals(FieldList other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if (_count != other._count)
+                return false;
+
+            for (int i = 0; i < other.Count; i++)
+            {
+                if (!_fields.Contains(other[i]))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            
+            if (ReferenceEquals(this, obj))
+                return true;
+            
+            if (obj.GetType() != this.GetType())
+                return false;
+            
+            return Equals((FieldList) obj);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((_fields != null ? _fields.GetHashCode() : 0) * 397) ^ _count;
+            }
+        }
+
+
         class FieldComparer :
             IEqualityComparer<Field>
         {

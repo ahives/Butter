@@ -12,13 +12,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var creator = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = creator.Create(x =>
+            var descriptor = Schema.Factory.Get<FieldDescriptor>();
+            Field field1 = descriptor.Create(x =>
             {
                 x.Id("city");
             });
 
-            Field field2 = creator.Create(x =>
+            Field field2 = descriptor.Create(x =>
             {
                 x.Id("city");
             });
@@ -47,13 +47,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var creator = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = creator.Create(x =>
+            var descriptor = Schema.Factory.Get<FieldDescriptor>();
+            Field field1 = descriptor.Create(x =>
                 {
                     x.Id("city");
                 });
 
-            Field field2 = creator.Create(x =>
+            Field field2 = descriptor.Create(x =>
             {
                 x.Id("state");
             });
