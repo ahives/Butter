@@ -12,13 +12,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var descriptor = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Create(x =>
+            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            Field field1 = descriptor.Define(x =>
             {
                 x.Id("city");
             });
 
-            Field field2 = descriptor.Create(x =>
+            Field field2 = descriptor.Define(x =>
             {
                 x.Id("city");
             });
@@ -29,14 +29,14 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var fieldDescriptor = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = fieldDescriptor.Create(x =>
+            var fieldDescriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            Field field1 = fieldDescriptor.Define(x =>
             {
                 x.Id("city");
             });
 
-            var listFieldDescriptor = Schema.Factory.Get<ListFieldDescriptor>();
-            ListField field2 = listFieldDescriptor.Create(x =>
+            var listFieldDescriptor = Descriptor.Factory.Get<ListFieldDescriptor>();
+            ListField field2 = listFieldDescriptor.Define(x =>
             {
                 x.Id("city");
             });
@@ -47,13 +47,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var descriptor = Schema.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Create(x =>
+            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            Field field1 = descriptor.Define(x =>
                 {
                     x.Id("city");
                 });
 
-            Field field2 = descriptor.Create(x =>
+            Field field2 = descriptor.Define(x =>
             {
                 x.Id("state");
             });

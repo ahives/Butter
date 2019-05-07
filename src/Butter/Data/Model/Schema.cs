@@ -17,14 +17,10 @@ namespace Butter.Data.Model
     using System;
     using System.Linq;
     using Data;
-    using Descriptors;
 
     public class Schema :
         ISchema, IEquatable<Schema>
     {
-        static IFactory _factory;
-        static readonly object _gate = new object();
-
         public IFieldList Fields { get; }
 
         public Schema(params Field[] fields)
@@ -32,29 +28,14 @@ namespace Butter.Data.Model
             Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
         }
 
+        public Schema(IFieldList fields)
+        {
+            Fields = fields;
+        }
+
         public Schema()
         {
             Fields = new FieldList();
-        }
-
-        /// <summary>
-        /// Gets the schema factory used to return field descriptors
-        /// </summary>
-        public static IFactory Factory
-        {
-            get
-            {
-                if (_factory == null)
-                {
-                    lock (_gate)
-                    {
-                        if (_factory == null)
-                            _factory = new FieldDescriptorFactory();
-                    }
-                }
-
-                return _factory;
-            }
         }
 
         public bool Equals(Schema other)
@@ -82,6 +63,6 @@ namespace Butter.Data.Model
             return Equals((Schema) obj);
         }
 
-        public override int GetHashCode() => (Fields != null ? Fields.GetHashCode() : 0);
+        public override int GetHashCode() => Fields != null ? Fields.GetHashCode() : 0;
     }
 }

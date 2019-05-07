@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data.Model.Descriptors
 {
-    public interface IFactory
+    public interface IFieldDescriptorFactory
     {
         T Get<T>()
             where T : IFieldDescriptor;

@@ -22,7 +22,7 @@ namespace Butter.Data.Model.Descriptors
     class ListFieldDescriptorImpl :
         ListFieldDescriptor
     {
-        public ListField Create(Action<ListFieldDefinition> criteria)
+        public ListField Define(Action<ListFieldDefinition> criteria)
         {
             var impl = new ListFieldDefinitionImpl();
             criteria(impl);

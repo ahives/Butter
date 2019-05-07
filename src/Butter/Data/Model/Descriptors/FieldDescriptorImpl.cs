@@ -22,7 +22,7 @@ namespace Butter.Data.Model.Descriptors
     class FieldDescriptorImpl :
         FieldDescriptor
     {
-        public Field Create(Action<FieldDefinition> criteria)
+        public Field Define(Action<FieldDefinition> criteria)
         {
             var impl = new FieldDefinitionImpl();
             criteria(impl);

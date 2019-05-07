@@ -20,6 +20,6 @@ namespace Butter.Data.Model.Descriptors
     public interface ListFieldDescriptor :
         IFieldDescriptor
     {
-        ListField Create(Action<ListFieldDefinition> criteria);
+        ListField Define(Action<ListFieldDefinition> criteria);
     }
 }

@@ -20,7 +20,7 @@ namespace Butter.Data.Model.Descriptors
     using Exceptions;
 
     class FieldDescriptorFactory :
-        IFactory
+        IFieldDescriptorFactory
     {
         readonly IDictionary<string, object> _descriptorCache;
 

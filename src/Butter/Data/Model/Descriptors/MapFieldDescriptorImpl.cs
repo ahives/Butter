@@ -22,7 +22,7 @@ namespace Butter.Data.Model.Descriptors
     class MapFieldDescriptorImpl :
         MapFieldDescriptor
     {
-        public MapField Create(Action<MapFieldDefinition> criteria)
+        public MapField Define(Action<MapFieldDefinition> criteria)
         {
             var impl = new MapFieldDefinitionImpl();
             criteria(impl);

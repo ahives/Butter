@@ -14,12 +14,29 @@
 // ***********************************************************************************
 namespace Butter.Data.Model.Descriptors
 {
-    using System;
-    using Model;
-
-    public interface MapFieldDescriptor :
-        IFieldDescriptor
+    public class Descriptor
     {
-        MapField Define(Action<MapFieldDefinition> criteria);
+        static IFieldDescriptorFactory _factory;
+        static readonly object _gate = new object();
+
+        /// <summary>
+        /// Gets the schema factory used to return field descriptors
+        /// </summary>
+        public static IFieldDescriptorFactory Factory
+        {
+            get
+            {
+                if (_factory == null)
+                {
+                    lock (_gate)
+                    {
+                        if (_factory == null)
+                            _factory = new FieldDescriptorFactory();
+                    }
+                }
+
+                return _factory;
+            }
+        }
     }
 }

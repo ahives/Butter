@@ -18,8 +18,8 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_check_value_does_not_exist()
         {
-            var builder = Schema.Factory.Get<FieldDescriptor>();
-            var field = builder.Create(x =>
+            var builder = Descriptor.Factory.Get<FieldDescriptor>();
+            var field = builder.Define(x =>
             {
                 x.Id("city");
             });
