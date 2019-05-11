@@ -13,15 +13,9 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_true()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Define(x =>
-            {
-                x.Id("city");
-            });
+            Field field1 = descriptor.Define("city");
 
-            Field field2 = descriptor.Define(x =>
-            {
-                x.Id("city");
-            });
+            Field field2 = descriptor.Define("city");
 
             Assert.IsTrue(field1.EqualTo(field2));
         }
@@ -30,16 +24,10 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
             var fieldDescriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = fieldDescriptor.Define(x =>
-            {
-                x.Id("city");
-            });
+            Field field1 = fieldDescriptor.Define("city");
 
             var listFieldDescriptor = Descriptor.Factory.Get<ListFieldDescriptor>();
-            ListField field2 = listFieldDescriptor.Define(x =>
-            {
-                x.Id("city");
-            });
+            ListField field2 = listFieldDescriptor.Define("city");
 
             Assert.IsFalse(field1.EqualTo(field2));
         }
@@ -48,15 +36,9 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_false()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Define(x =>
-                {
-                    x.Id("city");
-                });
+            Field field1 = descriptor.Define("city");
 
-            Field field2 = descriptor.Define(x =>
-            {
-                x.Id("state");
-            });
+            Field field2 = descriptor.Define("state");
 
             Assert.IsFalse(field1.EqualTo(field2));
         }

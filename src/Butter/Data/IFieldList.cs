@@ -14,11 +14,18 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
+    using System.Collections.Generic;
     using Model;
 
     public interface IFieldList
     {
         void Add(Field field);
+
+//        void Add<T>(string fieldId, T criteria);
+
+        void AddRange(params Field[] fields);
+
+        void AddRange(IList<Field> fields);
         
         bool HasValues { get; }
         

@@ -15,19 +15,23 @@
 namespace Butter.Data.Model.Descriptors
 {
     using System;
-    using System.Threading;
     using Internal;
     using Model;
 
     class FieldDescriptorImpl :
         FieldDescriptor
     {
-        public Field Define(Action<FieldDefinition> criteria)
+        public Field Define(string fieldId, Action<FieldDefinition> criteria)
         {
             var impl = new FieldDefinitionImpl();
             criteria(impl);
             
-            return new FieldImpl(impl.FieldId.Value);
+            return new FieldImpl(fieldId);
+        }
+
+        public Field Define(string fieldId)
+        {
+            return new FieldImpl(fieldId);
         }
 
         public FieldDescriptorType Type => FieldDescriptorType.Primitive;
@@ -36,19 +40,6 @@ namespace Butter.Data.Model.Descriptors
         class FieldDefinitionImpl :
             FieldDefinition
         {
-            string _id;
-
-            public FieldDefinitionImpl()
-            {
-                FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
-            }
-
-            public void Id(string name)
-            {
-                _id = name;
-            }
-
-            public Lazy<string> FieldId { get; }
         }
     }
 }

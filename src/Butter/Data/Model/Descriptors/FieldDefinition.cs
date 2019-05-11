@@ -14,10 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data.Model.Descriptors
 {
-    using Model;
-
     public interface FieldDefinition
     {
-        void Id(string name);
     }
 }

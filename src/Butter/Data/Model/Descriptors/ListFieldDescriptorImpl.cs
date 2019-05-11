@@ -15,19 +15,23 @@
 namespace Butter.Data.Model.Descriptors
 {
     using System;
-    using System.Threading;
     using Internal;
     using Model;
 
     class ListFieldDescriptorImpl :
         ListFieldDescriptor
     {
-        public ListField Define(Action<ListFieldDefinition> criteria)
+        public ListField Define(string fieldId, Action<ListFieldDefinition> criteria)
         {
             var impl = new ListFieldDefinitionImpl();
             criteria(impl);
             
-            return new ListFieldImpl(impl.FieldId.Value);
+            return new ListFieldImpl(fieldId);
+        }
+
+        public ListField Define(string fieldId)
+        {
+            return new ListFieldImpl(fieldId);
         }
 
         public FieldDescriptorType Type => FieldDescriptorType.List;
@@ -36,20 +40,6 @@ namespace Butter.Data.Model.Descriptors
         class ListFieldDefinitionImpl :
             ListFieldDefinition
         {
-            string _id;
-            FieldType _fieldType;
-
-            public ListFieldDefinitionImpl()
-            {
-                FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
-            }
-
-            public void Id(string name)
-            {
-                _id = name;
-            }
-
-            public Lazy<string> FieldId { get; }
         }
     }
 }

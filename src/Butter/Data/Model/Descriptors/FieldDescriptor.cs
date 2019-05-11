@@ -20,6 +20,7 @@ namespace Butter.Data.Model.Descriptors
     public interface FieldDescriptor :
         IFieldDescriptor
     {
-        Field Define(Action<FieldDefinition> criteria);
+        Field Define(string fieldId, Action<FieldDefinition> criteria);
+        Field Define(string fieldId);
     }
 }

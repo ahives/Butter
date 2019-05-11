@@ -34,12 +34,6 @@ namespace Butter.Data
             _count = 0;
         }
 
-        public FieldList(List<Field> fields)
-        {
-            _fields = fields;
-            _count = fields.Count;
-        }
-
         public void Add(Field field)
         {
             if (Contains(field))
@@ -47,6 +41,30 @@ namespace Butter.Data
             
             _fields.Add(field);
             _count = _fields.Count;
+        }
+
+        public void AddRange(IList<Field> fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                if (Contains(fields[i]))
+                    continue;
+                
+                _fields.Add(fields[i]);
+                _count++;
+            }
+        }
+
+        public void AddRange(params Field[] fields)
+        {
+            for (int i = 0; i < fields.Length; i++)
+            {
+                if (Contains(fields[i]))
+                    continue;
+                
+                _fields.Add(fields[i]);
+                _count++;
+            }
         }
 
         public Field this[int index]
@@ -130,7 +148,7 @@ namespace Butter.Data
                 if (x == null || y == null)
                     return false;
 
-                return x.EqualTo(y);
+                return x.Id == y.Id;
             }
 
             public int GetHashCode(Field obj) => obj.Id.GetHashCode();

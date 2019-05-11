@@ -10,11 +10,11 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            var field1 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field1"));
-            var field2 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field2"));
-            var field3 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field3"));
-            var field4 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field4"));
-            var field5 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field5"));
+            var field1 = Descriptor.Factory.Get<FieldDescriptor>().Define("field1");
+            var field2 = Descriptor.Factory.Get<FieldDescriptor>().Define("field2");
+            var field3 = Descriptor.Factory.Get<FieldDescriptor>().Define("field3");
+            var field4 = Descriptor.Factory.Get<FieldDescriptor>().Define("field4");
+            var field5 = Descriptor.Factory.Get<FieldDescriptor>().Define("field5");
             
             ISchema schema = new Schema(field1, field2, field3, field4, field5);
 
@@ -25,11 +25,11 @@ namespace Butter.Tests
         [Test]
         public void Test2()
         {
-            var field1 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field1"));
-            var field2 = Descriptor.Factory.Get<ListFieldDescriptor>().Define(x => x.Id("field2"));
-            var field3 = Descriptor.Factory.Get<MapFieldDescriptor>().Define(x => x.Id("field3"));
-            var field4 = Descriptor.Factory.Get<FieldDescriptor>().Define(x => x.Id("field4"));
-            var field5 = Descriptor.Factory.Get<ListFieldDescriptor>().Define(x => x.Id("field5"));
+            var field1 = Descriptor.Factory.Get<FieldDescriptor>().Define("field1");
+            var field2 = Descriptor.Factory.Get<ListFieldDescriptor>().Define("field2");
+            var field3 = Descriptor.Factory.Get<MapFieldDescriptor>().Define("field3");
+            var field4 = Descriptor.Factory.Get<FieldDescriptor>().Define("field4");
+            var field5 = Descriptor.Factory.Get<ListFieldDescriptor>().Define("field5");
             
             ISchema schema = new Schema(field1, field2, field3, field4, field5);
 

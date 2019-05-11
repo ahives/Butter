@@ -1,6 +1,7 @@
 namespace Butter.Tests
 {
     using System;
+    using System.Collections.Generic;
     using Data;
     using Data.Model;
     using Data.Model.Descriptors;
@@ -11,66 +12,14 @@ namespace Butter.Tests
     public class FieldListTests
     {
         [Test]
-        public void Verify_can_create_list_of_fields_with_variable_parameters()
-        {
-//            FieldList fields = DataFieldList.Initialize(
-//                DataField.Create<int>("field1"),
-//                DataField.Create<int>("field2"),
-//                DataField.Create<int>("field3"),
-//                DataField.Create<int>("field4"),
-//                DataField.Create<int>("field5"));
-//            
-//            Assert.IsTrue(fields.TryGetValue(0, out var field1));
-//            Assert.AreEqual("field1", field1.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(1, out var field2));
-//            Assert.AreEqual("field2", field2.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(2, out var field3));
-//            Assert.AreEqual("field3", field3.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(3, out var field4));
-//            Assert.AreEqual("field4", field4.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(4, out var field5));
-//            Assert.AreEqual("field5", field5.Name);
-        }
-
-        [Test]
-        public void Test()
-        {
-//            FieldList fields = DataFieldList.Initialize(
-//                DataField.Create("field1", DataType.INT32),
-//                DataField.Create("field2", DataType.INT32),
-//                DataField.Create("field3", DataType.INT32),
-//                DataField.Create("field4", DataType.INT32),
-//                DataField.Create("field5", DataType.INT32));
-//            
-//            Assert.IsTrue(fields.TryGetValue(0, out var field1));
-//            Assert.AreEqual("field1", field1.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(1, out var field2));
-//            Assert.AreEqual("field2", field2.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(2, out var field3));
-//            Assert.AreEqual("field3", field3.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(3, out var field4));
-//            Assert.AreEqual("field4", field4.Name);
-//            
-//            Assert.IsTrue(fields.TryGetValue(4, out var field5));
-//            Assert.AreEqual("field5", field5.Name);
-        }
-
-        [Test]
         public void Verify_can_create_list_of_fields_with_list()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            var field1 = descriptor.Define(x => x.Id("field1"));
-            var field2 = descriptor.Define(x => x.Id("field2"));
-            var field3 = descriptor.Define(x => x.Id("field3"));
-            var field4 = descriptor.Define(x => x.Id("field4"));
-            var field5 = descriptor.Define(x => x.Id("field5"));
+            var field1 = descriptor.Define("field1");
+            var field2 = descriptor.Define("field2");
+            var field3 = descriptor.Define("field3");
+            var field4 = descriptor.Define("field4");
+            var field5 = descriptor.Define("field5");
 
             IFieldList fields = new FieldList();
             fields.Add(field1);
@@ -99,11 +48,11 @@ namespace Butter.Tests
         public void Verify_can_access_list_using_indexer()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            var field1 = descriptor.Define(x => x.Id("field1"));
-            var field2 = descriptor.Define(x => x.Id("field2"));
-            var field3 = descriptor.Define(x => x.Id("field3"));
-            var field4 = descriptor.Define(x => x.Id("field4"));
-            var field5 = descriptor.Define(x => x.Id("field5"));
+            var field1 = descriptor.Define("field1");
+            var field2 = descriptor.Define("field2");
+            var field3 = descriptor.Define("field3");
+            var field4 = descriptor.Define("field4");
+            var field5 = descriptor.Define("field5");
 
             IFieldList fields = new FieldList();
             fields.Add(field1);
@@ -129,6 +78,73 @@ namespace Butter.Tests
         }
 
         [Test]
+        public void Verify_cannot_add_fields_with_same_identifier()
+        {
+            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            var field1 = descriptor.Define("field1");
+            var field2 = descriptor.Define("field2");
+            var field3 = descriptor.Define("field3");
+            var field4 = descriptor.Define("field4");
+            var field5 = descriptor.Define("field5");
+            var field6 = descriptor.Define("field3");
+
+            IFieldList fields = new FieldList();
+            fields.Add(field1);
+            fields.Add(field2);
+            fields.Add(field3);
+            fields.Add(field4);
+            fields.Add(field5);
+            fields.Add(field6);
+            
+            Assert.IsTrue(fields.HasValues);
+            Assert.AreEqual(5, fields.Count);
+        }
+
+        [Test]
+        public void Verify_cannot_add_range_of_fields_with_same_identifier()
+        {
+            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            var field1 = descriptor.Define("field1");
+            var field2 = descriptor.Define("field2");
+            var field3 = descriptor.Define("field3");
+            var field4 = descriptor.Define("field4");
+            var field5 = descriptor.Define("field5");
+            var field6 = descriptor.Define("field3");
+
+            IFieldList fields = new FieldList();
+            fields.AddRange(field1, field2, field3, field4, field5, field6);
+            
+            Assert.IsTrue(fields.HasValues);
+            Assert.AreEqual(5, fields.Count);
+        }
+
+        [Test]
+        public void Verify_cannot_add_list_range_of_fields_with_same_identifier()
+        {
+            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
+            var field1 = descriptor.Define("field1");
+            var field2 = descriptor.Define("field2");
+            var field3 = descriptor.Define("field3");
+            var field4 = descriptor.Define("field4");
+            var field5 = descriptor.Define("field5");
+            var field6 = descriptor.Define("field3");
+
+            List<Field> listOfFields = new List<Field>();
+            listOfFields.Add(field1);
+            listOfFields.Add(field2);
+            listOfFields.Add(field3);
+            listOfFields.Add(field4);
+            listOfFields.Add(field5);
+            listOfFields.Add(field6);
+            
+            IFieldList fields = new FieldList();
+            fields.AddRange(listOfFields);
+            
+            Assert.IsTrue(fields.HasValues);
+            Assert.AreEqual(5, fields.Count);
+        }
+
+        [Test]
         public void Verify_can_access_list_with_multiple_field_types()
         {
             var fieldDescriptor = Descriptor.Factory.Get<FieldDescriptor>();
@@ -136,11 +152,11 @@ namespace Butter.Tests
             var listFieldDescriptor = Descriptor.Factory.Get<ListFieldDescriptor>();
 
             IFieldList fields = new FieldList();
-            fields.Add(fieldDescriptor.Define(x => x.Id("field1")));
-            fields.Add(mapFieldDescriptor.Define(x => x.Id("field2")));
-            fields.Add(listFieldDescriptor.Define(x => x.Id("field3")));
-            fields.Add(fieldDescriptor.Define(x => x.Id("field4")));
-            fields.Add(fieldDescriptor.Define(x => x.Id("field5")));
+            fields.Add(fieldDescriptor.Define("field1"));
+            fields.Add(mapFieldDescriptor.Define("field2"));
+            fields.Add(listFieldDescriptor.Define("field3"));
+            fields.Add(fieldDescriptor.Define("field4"));
+            fields.Add(fieldDescriptor.Define("field5"));
 
             for (int i = 0; i < fields.Count; i++)
             {
@@ -183,7 +199,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_negative_index()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            var field = descriptor.Define(x => x.Id("field1"));
+            var field = descriptor.Define("field1");
 
             IFieldList fields = new FieldList();
             fields.Add(field);
@@ -195,7 +211,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            var field = descriptor.Define(x => x.Id("field1"));
+            var field = descriptor.Define("field1");
 
             IFieldList fields = new FieldList();
             fields.Add(field);

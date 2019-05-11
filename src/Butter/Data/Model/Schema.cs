@@ -15,7 +15,6 @@
 namespace Butter.Data.Model
 {
     using System;
-    using System.Linq;
     using Data;
 
     public class Schema :
@@ -25,7 +24,8 @@ namespace Butter.Data.Model
 
         public Schema(params Field[] fields)
         {
-            Fields = fields == null || !fields.Any() ? new FieldList() : new FieldList(fields.ToList());
+            Fields = new FieldList();
+            Fields.AddRange(fields);
         }
 
         public Schema(IFieldList fields)

@@ -20,6 +20,7 @@ namespace Butter.Data.Model.Descriptors
     public interface MapFieldDescriptor :
         IFieldDescriptor
     {
-        MapField Define(Action<MapFieldDefinition> criteria);
+        MapField Define(string fieldId, Action<MapFieldDefinition> criteria);
+        MapField Define(string fieldId);
     }
 }

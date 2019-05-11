@@ -14,6 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
+    using System.Collections.Generic;
     using Model;
 
     public class EmptyFieldList :
@@ -31,8 +32,19 @@ namespace Butter.Data
 
         public bool Contains(Field field) => false;
 
+        public void AddRange(IList<Field> fields)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void Add(Field field)
         {
+            throw new System.NotImplementedException();
+        }
+
+        public void AddRange(params Field[] fields)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

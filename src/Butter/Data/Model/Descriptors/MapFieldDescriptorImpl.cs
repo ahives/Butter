@@ -15,19 +15,23 @@
 namespace Butter.Data.Model.Descriptors
 {
     using System;
-    using System.Threading;
     using Internal;
     using Model;
 
     class MapFieldDescriptorImpl :
         MapFieldDescriptor
     {
-        public MapField Define(Action<MapFieldDefinition> criteria)
+        public MapField Define(string fieldId, Action<MapFieldDefinition> criteria)
         {
             var impl = new MapFieldDefinitionImpl();
             criteria(impl);
             
-            return new MapFieldImpl(impl.FieldId.Value);
+            return new MapFieldImpl(fieldId);
+        }
+
+        public MapField Define(string fieldId)
+        {
+            return new MapFieldImpl(fieldId);
         }
 
         public FieldDescriptorType Type => FieldDescriptorType.Map;
@@ -36,19 +40,6 @@ namespace Butter.Data.Model.Descriptors
         class MapFieldDefinitionImpl :
             MapFieldDefinition
         {
-            string _id;
-
-            public MapFieldDefinitionImpl()
-            {
-                FieldId = new Lazy<string>(() => _id, LazyThreadSafetyMode.PublicationOnly);
-            }
-
-            public void Id(string name)
-            {
-                _id = name;
-            }
-
-            public Lazy<string> FieldId { get; }
         }
     }
 }

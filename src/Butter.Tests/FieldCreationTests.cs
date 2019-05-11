@@ -11,10 +11,7 @@
         public void Verify_type_field_being_created()
         {
             var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            var field = descriptor.Define(x =>
-            {
-                x.Id("city");
-            });
+            var field = descriptor.Define("city");
 
             Assert.AreEqual("city", field.Id);
             Assert.AreEqual(FieldType.Primitive, field.Type);
