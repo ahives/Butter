@@ -12,17 +12,22 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Model
+namespace Butter.Metadata
 {
-    using System;
-
-    public interface Field :
-        IEquatable<Field>
+    public interface PageHeader
     {
-        string Id { get; }
+        PageType Type { get; }
         
-        bool IsNullable { get; }
+        int UncompressedPageSize { get; }
         
-        FieldType Type { get; }
+        int CompressedPageSize { get; }
+        
+        int CRC { get; }
+        
+        DataPageHeader DataPageHeader { get; }
+        
+        IndexPageHeader IndexPageHeader { get; }
+        
+        DictionaryPageHeader DictionaryPageHeader { get; }
     }
 }

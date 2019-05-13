@@ -12,20 +12,45 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Data.Model.Internal
 {
     using Model;
 
-    public class MissingField :
+    class FieldImpl :
         Field
     {
+        public FieldImpl(string id, bool isNullable = false, FieldType type = FieldType.Primitive)
+        {
+            Id = id;
+            IsNullable = isNullable;
+            Type = type;
+        }
+
         public string Id { get; }
-        public bool IsNullable => true;
-        public FieldType Type => FieldType.None;
+        public bool IsNullable { get; }
+        public FieldType Type { get; }
 
-        public bool Equals(Field other) => false;
+        public bool Equals(Field other)
+        {
+            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
+                return false;
 
-        public override bool Equals(object obj) => Equals((Field)obj);
+            return string.Equals(Id, other.Id) && Type == other.Type;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj))
+                return false;
+            
+            if (ReferenceEquals(this, obj))
+                return true;
+            
+            if (obj.GetType() != this.GetType())
+                return false;
+            
+            return Equals((Field)obj);
+        }
 
         public override int GetHashCode()
         {

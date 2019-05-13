@@ -14,45 +14,14 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    using System.Collections.Generic;
     using Model;
 
-    public interface IFieldList
+    public interface ValueList
     {
-        void Add(Field field);
-
-//        ValidationResult Validate();
-
-        void AddRange(params Field[] fields);
-
-        void AddRange(IList<Field> fields);
-        
         bool HasValues { get; }
         
-        int Count { get; }
-        
-        Field this[int index] { get; }
+        Value this[int index] { get; }
 
-        bool TryGetValue(int index, out Field field);
-
-        bool Contains(Field field);
-    }
-
-    public interface ValidationResult
-    {
-        IValidationResultList ValidationResults { get; }
-    }
-
-    public interface IValidationResultList
-    {
-        bool HasErrors { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool Contains(Field field);
+        bool TryGetValue(int index, out Value value);
     }
 }

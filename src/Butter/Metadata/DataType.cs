@@ -12,27 +12,18 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Metadata
 {
-    using Model;
-
-    public class MissingField :
-        Field
+    public enum DataType
     {
-        public string Id { get; }
-        public bool IsNullable => true;
-        public FieldType Type => FieldType.None;
-
-        public bool Equals(Field other) => false;
-
-        public override bool Equals(object obj) => Equals((Field)obj);
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) Type;
-            }
-        }
+        BOOLEAN,
+        INT32,
+        INT64,
+        INT96,
+        FLOAT,
+        DOUBLE,
+        BYTE_ARRAY,
+        FIXED_LENGTH_BYTE_ARRAY,
+        NONE
     }
 }

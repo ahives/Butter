@@ -12,27 +12,18 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter
 {
-    using Model;
+    using System;
+    using Data.Model;
+    using Data.Model.Definition;
 
-    public class MissingField :
-        Field
+    public interface ISchemaBuilder
     {
-        public string Id { get; }
-        public bool IsNullable => true;
-        public FieldType Type => FieldType.None;
-
-        public bool Equals(Field other) => false;
-
-        public override bool Equals(object obj) => Equals((Field)obj);
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) Type;
-            }
-        }
+        ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable);
+        
+        ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable, Action<DecimalDefinition> definition);
+        
+        ISchema Build();
     }
 }

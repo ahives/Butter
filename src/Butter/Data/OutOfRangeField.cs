@@ -21,6 +21,7 @@ namespace Butter.Data
         Field
     {
         public string Id => throw new FieldOutOfRangeException("The index is out of range.");
+        public bool IsNullable => true;
         public FieldType Type => FieldType.None;
 
         public bool Equals(Field other) => false;

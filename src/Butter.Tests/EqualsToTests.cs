@@ -2,7 +2,6 @@ namespace Butter.Tests
 {
     using Data;
     using Data.Model;
-    using Data.Model.Descriptors;
     using Exceptions;
     using NUnit.Framework;
 
@@ -12,35 +11,34 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Define("city");
+            var schema = Schema.Builder()
+                .Field("city", FieldType.Primitive, false)
+                .Field("city", FieldType.Primitive, false)
+                .Build();
 
-            Field field2 = descriptor.Define("city");
-
-            Assert.IsTrue(field1.EqualTo(field2));
+            Assert.IsTrue(schema.Fields[0].EqualTo(schema.Fields[1]));
         }
         
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var fieldDescriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = fieldDescriptor.Define("city");
+            var schema = Schema.Builder()
+                .Field("city", FieldType.Primitive, false)
+                .Field("city", FieldType.List, false)
+                .Build();
 
-            var listFieldDescriptor = Descriptor.Factory.Get<ListFieldDescriptor>();
-            ListField field2 = listFieldDescriptor.Define("city");
-
-            Assert.IsFalse(field1.EqualTo(field2));
+            Assert.IsFalse(schema.Fields[0].EqualTo(schema.Fields[1]));
         }
         
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            var descriptor = Descriptor.Factory.Get<FieldDescriptor>();
-            Field field1 = descriptor.Define("city");
+            var schema = Schema.Builder()
+                .Field("city", FieldType.Primitive, false)
+                .Field("state", FieldType.Primitive, false)
+                .Build();
 
-            Field field2 = descriptor.Define("state");
-
-            Assert.IsFalse(field1.EqualTo(field2));
+            Assert.IsFalse(schema.Fields[0].EqualTo(schema.Fields[1]));
         }
 
         [Test]
