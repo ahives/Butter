@@ -30,6 +30,12 @@ namespace Butter.Data
             return false;
         }
 
+        public bool TryGetValue(string id, out Field field)
+        {
+            field = SchemaCache.MissingField;
+            return false;
+        }
+
         public bool Contains(Field field) => false;
 
         public void AddRange(IList<Field> fields)

@@ -1,7 +1,6 @@
 namespace Butter.Tests
 {
     using System;
-    using System.Collections.Generic;
     using Data;
     using Data.Model;
     using Exceptions;
@@ -77,6 +76,8 @@ namespace Butter.Tests
                 .Field("field1", FieldType.Primitive, false)
                 .Field("field2", FieldType.Map, false)
                 .Field("field3", FieldType.List, false)
+                .Field("field4", FieldType.Primitive, false)
+                .Field("field5", FieldType.Primitive, false)
                 .Build();
 
             for (int i = 0; i < schema.Fields.Count; i++)

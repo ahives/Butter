@@ -28,6 +28,16 @@ namespace Butter.Data
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
 
+        public Field this[int index]
+        {
+            get
+            {
+                TryGetValue(index, out var field);
+
+                return field;
+            }
+        }
+
         public FieldList()
         {
             _fields = new List<Field>();
@@ -67,30 +77,41 @@ namespace Butter.Data
             }
         }
 
-        public Field this[int index]
-        {
-            get
-            {
-                TryGetValue(index, out var field);
-
-                return field;
-            }
-        }
-
         public bool TryGetValue(int index, out Field field)
         {
-            if (index < 0)
+            if (index < 0 || _count <= 0)
             {
                 field = SchemaCache.OutOfRangeField;
                 return false;
             }
 
-            if (index < _fields.Count)
+            if (index < _count)
             {
                 field = _fields[index];
                 return true;
             }
 
+            field = SchemaCache.OutOfRangeField;
+            return false;
+        }
+
+        public bool TryGetValue(string id, out Field field)
+        {
+            if (_count <= 0)
+            {
+                field = SchemaCache.OutOfRangeField;
+                return false;
+            }
+
+            for (int i = 0; i < _count; i++)
+            {
+                if (_fields[i].Id != id)
+                    continue;
+                
+                field = _fields[i];
+                return true;
+            }
+            
             field = SchemaCache.OutOfRangeField;
             return false;
         }

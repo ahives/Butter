@@ -20,7 +20,7 @@ namespace Butter.Data
     public class OutOfRangeField :
         Field
     {
-        public string Id => throw new FieldOutOfRangeException("The index is out of range.");
+        public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");
         public bool IsNullable => true;
         public FieldType Type => FieldType.None;
 

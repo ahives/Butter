@@ -35,6 +35,8 @@ namespace Butter.Data
 
         bool TryGetValue(int index, out Field field);
 
+        bool TryGetValue(string id, out Field field);
+
         bool Contains(Field field);
     }
 

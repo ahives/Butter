@@ -16,9 +16,11 @@ namespace Butter.Data.Model
 {
     using System;
 
-    public interface MapField :
-        Field, IEquatable<MapField>
+    public interface DecimalField :
+        Field, IEquatable<DecimalField>
     {
+        int Scale { get; }
         
+        int Precision { get; }
     }
 }
