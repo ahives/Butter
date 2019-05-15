@@ -3,7 +3,6 @@ namespace Butter.Tests
     using System;
     using Data;
     using Data.Model;
-    using Exceptions;
     using NUnit.Framework;
 
     [TestFixture]

@@ -15,10 +15,14 @@
 namespace Butter.Data
 {
     using Model;
+    using Model.Internal;
 
     public static class SchemaCache
     {
         public static readonly Field MissingField = new MissingField();
+        public static readonly DecimalField MissingDecimalField = new MissingDecimalField();
+        public static readonly MapField MissingMapField = new MissingMapField();
+        public static readonly ListField MissingListField = new MissingListField();
         public static readonly Value MissingValue = new MissingColumnValue();
         public static readonly Column Empty = new EmptyColumn();
         public static readonly IValueList MissingValueList = new MissingColumnValueList();

@@ -12,26 +12,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Data.Model.Internal
 {
     using Model;
 
-    public class EmptyValueList :
-        IValueList
+    public class MissingDecimalField :
+        DecimalField
     {
-        public bool HasValues => false;
-        public int Count => 0;
+        public bool Equals(Field other) => false;
 
-        public Value this[int index] => SchemaCache.MissingValue;
+        public string Id { get; }
+        public bool IsNullable => true;
+        public FieldType Type => FieldType.Decimal;
+        public bool Equals(DecimalField other) => false;
 
-        public bool TryGetValue(int index, out Value value)
-        {
-            value = SchemaCache.MissingValue;
-            return false;
-        }
-
-        public void Add(Value field)
-        {
-        }
+        public int Scale { get; }
+        public int Precision { get; }
     }
 }

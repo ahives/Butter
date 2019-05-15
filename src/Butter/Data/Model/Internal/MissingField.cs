@@ -12,16 +12,16 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Data.Model.Internal
 {
     using Model;
 
-    public class MissingField :
+    class MissingField :
         Field
     {
         public string Id { get; }
         public bool IsNullable => true;
-        public FieldType Type => FieldType.None;
+        public FieldType Type => FieldType.Primitive;
 
         public bool Equals(Field other) => false;
 

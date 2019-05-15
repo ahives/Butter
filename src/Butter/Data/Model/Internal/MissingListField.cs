@@ -12,30 +12,18 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Model.Internal
 {
-    using System;
-    using System.Runtime.Serialization;
+    using Model;
 
-    public class EntityCreationException :
-        Exception
+    class MissingListField :
+        ListField
     {
-        public EntityCreationException()
-        {
-        }
+        public string Id { get; }
+        public bool IsNullable => true;
+        public FieldType Type => FieldType.List;
 
-        protected EntityCreationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        public EntityCreationException(string message) : base(message)
-        {
-        }
-
-        public EntityCreationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+        public bool Equals(ListField other) => false;
+        public bool Equals(Field other) => false;
     }
 }

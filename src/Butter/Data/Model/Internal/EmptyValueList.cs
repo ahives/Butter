@@ -12,45 +12,26 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Data.Model.Internal
 {
-    using System.Collections.Generic;
     using Model;
 
-    public class EmptyFieldList :
-        IFieldList
+    class EmptyValueList :
+        IValueList
     {
         public bool HasValues => false;
         public int Count => 0;
-        public Field this[int index] => SchemaCache.MissingField;
 
-        public bool TryGetValue(int index, out Field field)
+        public Value this[int index] => SchemaCache.MissingValue;
+
+        public bool TryGetValue(int index, out Value value)
         {
-            field = SchemaCache.MissingField;
+            value = SchemaCache.MissingValue;
             return false;
         }
 
-        public bool TryGetValue(string id, out Field field)
+        public void Add(Value field)
         {
-            field = SchemaCache.MissingField;
-            return false;
-        }
-
-        public bool Contains(Field field) => false;
-
-        public void AddRange(IList<Field> fields)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Add(Field field)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void AddRange(params Field[] fields)
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

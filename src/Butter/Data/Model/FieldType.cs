@@ -18,6 +18,7 @@ namespace Butter.Data.Model
     {
         None,
         Primitive,
+        Decimal,
         List,
         Map,
         Structure

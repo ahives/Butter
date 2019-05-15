@@ -12,30 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Model.Internal
 {
     using System;
-    using System.Runtime.Serialization;
+    using Metadata;
+    using Model;
 
-    public class EntityCreationException :
-        Exception
+    class MissingColumnValue :
+        Value
     {
-        public EntityCreationException()
-        {
-        }
-
-        protected EntityCreationException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
-        public EntityCreationException(string message) : base(message)
-        {
-        }
-
-        public EntityCreationException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+        public string Data { get; }
+        public DataType DataType => DataType.NONE;
+        public Type ClrType => typeof(byte[]);
     }
 }

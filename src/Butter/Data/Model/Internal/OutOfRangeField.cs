@@ -12,12 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Data.Model.Internal
 {
-    using Exceptions;
     using Model;
 
-    public class OutOfRangeField :
+    class OutOfRangeField :
         Field
     {
         public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");

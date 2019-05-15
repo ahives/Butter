@@ -17,23 +17,24 @@ namespace Butter
     using System;
     using System.Runtime.Serialization;
 
-    public class EntityCreationException :
+    public class NotSupportedCastException :
         Exception
     {
-        public EntityCreationException()
+        public NotSupportedCastException()
         {
         }
 
-        protected EntityCreationException(SerializationInfo info, StreamingContext context)
+        protected NotSupportedCastException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
 
-        public EntityCreationException(string message) : base(message)
+        public NotSupportedCastException(string message)
+            : base(message)
         {
         }
 
-        public EntityCreationException(string message, Exception innerException)
+        public NotSupportedCastException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

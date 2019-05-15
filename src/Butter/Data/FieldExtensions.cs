@@ -28,5 +28,36 @@ namespace Butter.Data
 
             return false;
         }
+
+        public static T As<T>(this Field field)
+        {
+            T Missing()
+            {
+                if (typeof(T) == typeof(DecimalField))
+                    return (T) SchemaCache.MissingDecimalField;
+
+                if (typeof(T) == typeof(MapField))
+                    return (T) SchemaCache.MissingMapField;
+
+                if (typeof(T) == typeof(ListField))
+                    return (T) SchemaCache.MissingListField;
+
+                return (T) SchemaCache.MissingField;
+            }
+
+            T Cast()
+            {
+                if (typeof(T) == typeof(DecimalField) ||
+                    typeof(T) == typeof(MapField) ||
+                    typeof(T) == typeof(ListField))
+                {
+                    return (T) field;
+                }
+
+                throw new NotSupportedCastException($"{typeof(T).FullName} is not a support object to cast to.");
+            }
+
+            return field == null ? Missing() : Cast();
+        }
     }
 }
