@@ -46,7 +46,7 @@ namespace Butter.Data
 
         public void Add(Field field)
         {
-            if (Contains(field))
+            if (field == null || Contains(field))
                 return;
             
             _fields.Add(field);
@@ -55,9 +55,12 @@ namespace Butter.Data
 
         public void AddRange(IList<Field> fields)
         {
+            if (fields == null)
+                return;
+            
             for (int i = 0; i < fields.Count; i++)
             {
-                if (Contains(fields[i]))
+                if (fields[i] == null || Contains(fields[i]))
                     continue;
                 
                 _fields.Add(fields[i]);
@@ -67,9 +70,12 @@ namespace Butter.Data
 
         public void AddRange(params Field[] fields)
         {
+            if (fields == null)
+                return;
+            
             for (int i = 0; i < fields.Length; i++)
             {
-                if (Contains(fields[i]))
+                if (fields[i] == null || Contains(fields[i]))
                     continue;
                 
                 _fields.Add(fields[i]);

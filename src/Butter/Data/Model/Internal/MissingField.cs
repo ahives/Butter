@@ -21,7 +21,7 @@ namespace Butter.Data.Model.Internal
     {
         public string Id { get; }
         public bool IsNullable => true;
-        public FieldType Type => FieldType.Primitive;
+        public FieldType Type => FieldType.None;
 
         public bool Equals(Field other) => false;
 

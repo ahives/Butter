@@ -12,12 +12,12 @@ namespace Butter.Tests
         public void Verify_can_access_list_using_indexer()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
-                .Field("field2", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
-                .Field("field4", FieldType.Primitive, false)
-                .Field("field5", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
+                .Field("field2", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
+                .Field("field4", FieldType.Primitive)
+                .Field("field5", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
                 .Build();
             
             Assert.IsNotNull(schema.Fields[0]);
@@ -40,12 +40,12 @@ namespace Butter.Tests
         public void Verify_cannot_add_fields_with_same_identifier()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
-                .Field("field2", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
-                .Field("field4", FieldType.Primitive, false)
-                .Field("field5", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
+                .Field("field2", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
+                .Field("field4", FieldType.Primitive)
+                .Field("field5", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
@@ -56,12 +56,12 @@ namespace Butter.Tests
         public void Verify_cannot_add_list_range_of_fields_with_same_identifier()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
-                .Field("field2", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
-                .Field("field4", FieldType.Primitive, false)
-                .Field("field5", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
+                .Field("field2", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
+                .Field("field4", FieldType.Primitive)
+                .Field("field5", FieldType.Primitive)
+                .Field("field3", FieldType.Primitive)
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
@@ -72,11 +72,16 @@ namespace Butter.Tests
         public void Verify_can_access_list_with_multiple_field_types()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
-                .Field("field2", FieldType.Map, false)
-                .Field("field3", FieldType.List, false)
-                .Field("field4", FieldType.Primitive, false)
-                .Field("field5", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
+                .Field("field2", FieldType.Map)
+                .Field("field3", FieldType.List)
+                .Field("field4", FieldType.Primitive)
+                .Field("field5", FieldType.Primitive)
+                .Field("field6", FieldType.Decimal, x =>
+                {
+                    x.SetPrecision(2);
+                    x.SetScale(4);
+                })
                 .Build();
 
             for (int i = 0; i < schema.Fields.Count; i++)
@@ -90,15 +95,20 @@ namespace Butter.Tests
                         Assert.IsNotNull(field);
                         Assert.That(field.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;
-                    case FieldType.List:
-                        ListField listField = (ListField) schema.Fields[i];
-                        Assert.IsNotNull(listField);
-                        Assert.AreEqual("field3", listField.Id);
-                        break;
                     case FieldType.Map:
-                        MapField mapField = (MapField) schema.Fields[i];
-                        Assert.IsNotNull(mapField);
-                        Assert.AreEqual("field2", mapField.Id);
+//                        MapField mapField = schema.Fields[i].Cast<MapField>();
+//                        Assert.IsNotNull(mapField);
+//                        Assert.AreEqual("field2", mapField.Id);
+                        break;
+                    case FieldType.List:
+//                        ListField listField = schema.Fields[i].Cast<ListField>();
+//                        Assert.IsNotNull(listField);
+//                        Assert.AreEqual("field3", listField.Id);
+                        break;
+                    case FieldType.Decimal:
+                        DecimalField decimalField = schema.Fields[i].Cast<DecimalField>();
+                        Assert.IsNotNull(decimalField);
+                        Assert.AreEqual("field6", decimalField.Id);
                         break;
                     case FieldType.Structure:
                         break;
@@ -120,7 +130,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_negative_index()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(-1, out _));
@@ -130,7 +140,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
+                .Field("field1", FieldType.Primitive)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(schema.Fields.Count + 1, out _));

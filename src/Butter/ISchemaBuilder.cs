@@ -20,9 +20,9 @@ namespace Butter
 
     public interface ISchemaBuilder
     {
-        ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable);
+        ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable = false);
         
-        ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable, Action<DecimalDefinition> definition);
+        ISchemaBuilder Field(string fieldId, FieldType fieldType, Action<DecimalDefinition> definition, bool nullable = false);
         
         ISchema Build();
     }

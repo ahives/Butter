@@ -26,14 +26,14 @@ namespace Butter
     {
         readonly FieldList _fields = new FieldList();
 
-        public ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable)
+        public ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable = false)
         {
-            _fields.Add(new FieldImpl(fieldId, nullable, fieldType));
+            _fields.Add(new FieldImpl(fieldId, fieldType, nullable));
             
             return this;
         }
 
-        public ISchemaBuilder Field(string fieldId, FieldType fieldType, bool nullable, Action<DecimalDefinition> definition)
+        public ISchemaBuilder Field(string fieldId, FieldType fieldType, Action<DecimalDefinition> definition, bool nullable = false)
         {
             var impl = new DecimalDefinitionImpl();
             definition(impl);
@@ -43,12 +43,9 @@ namespace Butter
             return this;
         }
 
-        public ISchema Build()
-        {
-            return new Schema(_fields);
-        }
+        public ISchema Build() => new Schema(_fields);
 
-        
+
         class DecimalDefinitionImpl :
             DecimalDefinition
         {

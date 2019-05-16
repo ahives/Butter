@@ -19,7 +19,7 @@ namespace Butter.Data.Model.Internal
     class FieldImpl :
         Field
     {
-        public FieldImpl(string id, bool isNullable = false, FieldType type = FieldType.Primitive)
+        public FieldImpl(string id, FieldType type = FieldType.Primitive, bool isNullable = false)
         {
             Id = id;
             IsNullable = isNullable;

@@ -29,7 +29,14 @@ namespace Butter.Data
             return false;
         }
 
-        public static T As<T>(this Field field)
+        /// <summary>
+        /// Cast the given field to a field of type <see cref="T"/>.
+        /// </summary>
+        /// <param name="field"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        /// <exception cref="NotSupportedCastException"></exception>
+        public static T Cast<T>(this Field field)
         {
             T Missing()
             {

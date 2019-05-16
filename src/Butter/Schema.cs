@@ -21,9 +21,6 @@ namespace Butter
     public class Schema :
         ISchema, IEquatable<Schema>
     {
-        static ISchemaBuilder _builder;
-        static readonly object _gate = new object();
-        
         public IFieldList Fields { get; }
 
         internal Schema(params Field[] fields)
@@ -42,13 +39,7 @@ namespace Butter
             Fields = new FieldList();
         }
 
-        public static ISchemaBuilder Builder()
-        {
-            lock (_gate)
-            {
-                return _builder ?? (_builder = new SchemaBuilder());
-            }
-        }
+        public static ISchemaBuilder Builder() => new SchemaBuilder();
 
         public bool Equals(Schema other)
         {

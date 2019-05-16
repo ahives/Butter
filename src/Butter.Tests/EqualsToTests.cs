@@ -10,23 +10,29 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            var schema = Schema.Builder()
+            var schema1 = Schema.Builder()
                 .Field("city", FieldType.Primitive, false)
+                .Build();
+            
+            var schema2 = Schema.Builder()
                 .Field("city", FieldType.Primitive, false)
                 .Build();
 
-            Assert.IsTrue(schema.Fields[0].EqualTo(schema.Fields[1]));
+            Assert.IsTrue(schema1.Fields[0].EqualTo(schema2.Fields[0]));
         }
         
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var schema = Schema.Builder()
+            var schema1 = Schema.Builder()
                 .Field("city", FieldType.Primitive, false)
+                .Build();
+
+            var schema2 = Schema.Builder()
                 .Field("city", FieldType.List, false)
                 .Build();
 
-            Assert.IsFalse(schema.Fields[0].EqualTo(schema.Fields[1]));
+            Assert.IsFalse(schema1.Fields[0].EqualTo(schema2.Fields[0]));
         }
         
         [Test]
