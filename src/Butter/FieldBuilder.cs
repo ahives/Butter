@@ -14,13 +14,13 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using Data.Model;
+    using Grammar;
 
     public interface FieldBuilder
     {
         FieldBuilder Identifier(string fieldId);
 
-        FieldBuilder DataType(FieldType dataType);
+        FieldBuilder DataType(FieldDataType fieldDataType);
 
         FieldBuilder IsNullable();
 

@@ -14,16 +14,15 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    public interface IValueList
+    using System;
+    using Metadata;
+
+    public interface Value
     {
-        void Add(Value value);
-
-        bool HasValues { get; }
-
-        int Count { get; }
-
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        string Data { get; }
+        
+        DataType DataType { get; }
+        
+        Type ClrType { get; }
     }
 }

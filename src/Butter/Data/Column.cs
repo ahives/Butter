@@ -14,16 +14,14 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    public interface IValueList
+    using Grammar;
+
+    public interface Column
     {
-        void Add(Value value);
-
+        Field Field { get; }
+        
+        IValueList Values { get; }
+        
         bool HasValues { get; }
-
-        int Count { get; }
-
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
     }
 }

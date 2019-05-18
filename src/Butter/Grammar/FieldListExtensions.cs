@@ -12,17 +12,23 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar
 {
-    using System;
-    using Grammar;
+    using System.Collections.Generic;
 
-    public interface ISchemaBuilder
+    public static class FieldListExtensions
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        /// <summary>
+        /// Returns a IEnumerable on <see cref="FieldList"/>
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                yield return fields[i];
+            }
+        }
     }
 }

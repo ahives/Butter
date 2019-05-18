@@ -15,6 +15,7 @@
 namespace Butter
 {
     using Data;
+    using Grammar;
 
     public interface ISchema
     {

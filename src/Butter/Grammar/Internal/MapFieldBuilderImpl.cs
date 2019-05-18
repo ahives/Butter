@@ -12,17 +12,28 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar.Internal
 {
-    using System;
-    using Grammar;
-
-    public interface ISchemaBuilder
+    class MapFieldBuilderImpl :
+        MapFieldBuilder
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        string _fieldId;
+        bool _nullable;
+
+        public MapFieldBuilder Identifier(string fieldId)
+        {
+            _fieldId = fieldId;
+            
+            return this;
+        }
+
+        public MapFieldBuilder IsNullable()
+        {
+            _nullable = true;
+            
+            return this;
+        }
+
+        public MapField Build() => new MapFieldImpl(_fieldId, _nullable);
     }
 }

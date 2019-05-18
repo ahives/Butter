@@ -27,8 +27,4 @@
         <PackageReference Include="System.Runtime.Serialization.Formatters" Version="4.3.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Grammar" />
-    </ItemGroup>
-
 </Project>

@@ -14,8 +14,6 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    using Model;
-
     public interface ValueList
     {
         bool HasValues { get; }

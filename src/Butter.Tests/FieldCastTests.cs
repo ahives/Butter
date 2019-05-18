@@ -1,7 +1,6 @@
 namespace Butter.Tests
 {
-    using Data;
-    using Data.Model;
+    using Grammar;
     using NUnit.Framework;
 
     [TestFixture]
@@ -11,7 +10,7 @@ namespace Butter.Tests
         public void Test()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Decimal, x =>
+                .Field("field1", FieldDataType.Decimal, x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);
@@ -29,7 +28,7 @@ namespace Butter.Tests
             Field field1 = field.Cast<Field>();
 
             Assert.IsNotNull(field1);
-            Assert.AreEqual(FieldType.None, field1.Type);
+            Assert.AreEqual(FieldDataType.None, field1.DataType);
         }
     }
 }

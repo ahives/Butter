@@ -16,14 +16,15 @@ namespace Butter
 {
     using System;
     using System.Collections.Generic;
-    using Data;
+    using Grammar;
+    using Grammar.Internal;
 
     public class Schema :
         ISchema, IEquatable<Schema>
     {
         public IFieldList Fields { get; }
 
-        internal Schema(params Data.Model.Field[] fields)
+        internal Schema(params Grammar.Field[] fields)
         {
             Fields = new FieldList();
             Fields.AddRange(fields);

@@ -12,17 +12,14 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data
 {
-    using System;
-    using Grammar;
+    using Internal;
 
-    public interface ISchemaBuilder
+    public class DataCache
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        public static readonly Value MissingValue = new MissingColumnValue();
+        public static readonly Column Empty = new EmptyColumn();
+        public static readonly IValueList MissingValueList = new MissingColumnValueList();
     }
 }

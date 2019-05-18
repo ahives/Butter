@@ -1,8 +1,7 @@
 namespace Butter.Tests
 {
     using System;
-    using Data;
-    using Data.Model;
+    using Grammar;
     using NUnit.Framework;
 
     [TestFixture]
@@ -12,12 +11,12 @@ namespace Butter.Tests
         public void Verify_can_access_list_using_indexer()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
-                .Field("field2", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
-                .Field("field4", FieldType.Primitive)
-                .Field("field5", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
                 .Build();
             
             Assert.IsNotNull(schema.Fields[0]);
@@ -40,12 +39,12 @@ namespace Butter.Tests
         public void Verify_cannot_add_fields_with_same_identifier()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
-                .Field("field2", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
-                .Field("field4", FieldType.Primitive)
-                .Field("field5", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
@@ -56,12 +55,12 @@ namespace Butter.Tests
         public void Verify_cannot_add_list_range_of_fields_with_same_identifier()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
-                .Field("field2", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
-                .Field("field4", FieldType.Primitive)
-                .Field("field5", FieldType.Primitive)
-                .Field("field3", FieldType.Primitive)
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
@@ -72,12 +71,12 @@ namespace Butter.Tests
         public void Verify_can_access_list_with_multiple_field_types()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
-                .Field("field2", FieldType.Map)
-                .Field("field3", FieldType.List)
-                .Field("field4", FieldType.Primitive)
-                .Field("field5", FieldType.Primitive)
-                .Field("field6", FieldType.Decimal, x =>
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Map)
+                .Field("field3", FieldDataType.List)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field6", FieldDataType.Decimal, x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);
@@ -86,31 +85,31 @@ namespace Butter.Tests
 
             for (int i = 0; i < schema.Fields.Count; i++)
             {
-                switch (schema.Fields[i].Type)
+                switch (schema.Fields[i].DataType)
                 {
-                    case FieldType.None:
+                    case FieldDataType.None:
                         break;
-                    case FieldType.Primitive:
+                    case FieldDataType.Primitive:
                         Field field = schema.Fields[i];
                         Assert.IsNotNull(field);
                         Assert.That(field.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;
-                    case FieldType.Map:
+                    case FieldDataType.Map:
 //                        MapField mapField = schema.Fields[i].Cast<MapField>();
 //                        Assert.IsNotNull(mapField);
 //                        Assert.AreEqual("field2", mapField.Id);
                         break;
-                    case FieldType.List:
+                    case FieldDataType.List:
 //                        ListField listField = schema.Fields[i].Cast<ListField>();
 //                        Assert.IsNotNull(listField);
 //                        Assert.AreEqual("field3", listField.Id);
                         break;
-                    case FieldType.Decimal:
+                    case FieldDataType.Decimal:
                         DecimalField decimalField = schema.Fields[i].Cast<DecimalField>();
                         Assert.IsNotNull(decimalField);
                         Assert.AreEqual("field6", decimalField.Id);
                         break;
-                    case FieldType.Structure:
+                    case FieldDataType.Structure:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -130,7 +129,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_negative_index()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
+                .Field("field1", FieldDataType.Primitive)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(-1, out _));
@@ -140,7 +139,7 @@ namespace Butter.Tests
         public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive)
+                .Field("field1", FieldDataType.Primitive)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(schema.Fields.Count + 1, out _));

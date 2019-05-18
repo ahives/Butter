@@ -12,17 +12,16 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Data.Internal
 {
     using System;
-    using Grammar;
+    using Metadata;
 
-    public interface ISchemaBuilder
+    class MissingColumnValue :
+        Value
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        public string Data { get; }
+        public DataType DataType => DataType.NONE;
+        public Type ClrType => typeof(byte[]);
     }
 }

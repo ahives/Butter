@@ -12,18 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter.Grammar
 {
-    public interface IValueList
+    using System;
+
+    public interface Field :
+        IEquatable<Field>
     {
-        void Add(Value value);
-
-        bool HasValues { get; }
-
-        int Count { get; }
-
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+        string Id { get; }
+        
+        bool IsNullable { get; }
+        
+        FieldDataType DataType { get; }
     }
 }

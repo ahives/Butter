@@ -1,7 +1,6 @@
 namespace Butter.Tests
 {
-    using Data;
-    using Data.Model;
+    using Grammar;
     using NUnit.Framework;
 
     [TestFixture]
@@ -11,11 +10,11 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_true()
         {
             var schema1 = Schema.Builder()
-                .Field("city", FieldType.Primitive, false)
+                .Field("city", FieldDataType.Primitive, false)
                 .Build();
             
             var schema2 = Schema.Builder()
-                .Field("city", FieldType.Primitive, false)
+                .Field("city", FieldDataType.Primitive, false)
                 .Build();
 
             Assert.IsTrue(schema1.Fields[0].EqualTo(schema2.Fields[0]));
@@ -25,11 +24,11 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
             var schema1 = Schema.Builder()
-                .Field("city", FieldType.Primitive, false)
+                .Field("city", FieldDataType.Primitive, false)
                 .Build();
 
             var schema2 = Schema.Builder()
-                .Field("city", FieldType.List, false)
+                .Field("city", FieldDataType.List, false)
                 .Build();
 
             Assert.IsFalse(schema1.Fields[0].EqualTo(schema2.Fields[0]));
@@ -39,8 +38,8 @@ namespace Butter.Tests
         public void Verify_EqualsTo_returns_false()
         {
             var schema = Schema.Builder()
-                .Field("city", FieldType.Primitive, false)
-                .Field("state", FieldType.Primitive, false)
+                .Field("city", FieldDataType.Primitive, false)
+                .Field("state", FieldDataType.Primitive, false)
                 .Build();
 
             Assert.IsFalse(schema.Fields[0].EqualTo(schema.Fields[1]));

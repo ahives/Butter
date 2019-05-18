@@ -12,17 +12,19 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar.Internal
 {
-    using System;
-    using Grammar;
-
-    public interface ISchemaBuilder
+    public class MissingDecimalField :
+        DecimalField
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        public bool Equals(Field other) => false;
+
+        public string Id { get; }
+        public bool IsNullable => true;
+        public FieldDataType DataType => FieldDataType.Decimal;
+        public bool Equals(DecimalField other) => false;
+
+        public int Scale { get; }
+        public int Precision { get; }
     }
 }

@@ -1,7 +1,6 @@
 namespace Butter.Tests
 {
-    using Data;
-    using Data.Model;
+    using Grammar;
     using NUnit.Framework;
 
     [TestFixture]
@@ -11,7 +10,7 @@ namespace Butter.Tests
         public void Test()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, x =>
+                .Field("field1", FieldDataType.Primitive, x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);

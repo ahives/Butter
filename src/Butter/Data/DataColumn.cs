@@ -14,16 +14,31 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    public interface IValueList
+    using Grammar;
+
+    public class DataColumn
     {
-        void Add(Value value);
+        public static Column Create(Field field, IValueList values)
+        {
+            if (field == null || values == null)
+                return DataCache.Empty;
+            
+            return new ColumnImpl(field, values);
+        }
 
-        bool HasValues { get; }
+        class ColumnImpl :
+            Column
+        {
+            public ColumnImpl(Field field, IValueList values)
+            {
+                Field = field;
+                Values = values;
+                HasValues = values != null && values.HasValues;
+            }
 
-        int Count { get; }
-
-        Value this[int index] { get; }
-
-        bool TryGetValue(int index, out Value value);
+            public Field Field { get; }
+            public IValueList Values { get; }
+            public bool HasValues { get; }
+        }
     }
 }

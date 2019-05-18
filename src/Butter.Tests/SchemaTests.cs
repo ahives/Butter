@@ -1,6 +1,6 @@
 namespace Butter.Tests
 {
-    using Data.Model;
+    using Grammar;
     using NUnit.Framework;
 
     [TestFixture]
@@ -30,11 +30,11 @@ namespace Butter.Tests
 //            ISchema schema = new Schema();
 //            ISchemaBuilder builder = Schema.Builder().DefineField("field1", x => x.IsNullable());
             var schema = Schema.Builder()
-                .Field("field1", FieldType.Primitive, false)
-                .Field("field2", FieldType.Primitive, false)
-                .Field("field3", FieldType.Primitive, false)
-                .Field("field4", FieldType.Primitive, false)
-                .Field("field5", FieldType.Primitive, false)
+                .Field("field1", FieldDataType.Primitive, false)
+                .Field("field2", FieldDataType.Primitive, false)
+                .Field("field3", FieldDataType.Primitive, false)
+                .Field("field4", FieldDataType.Primitive, false)
+                .Field("field5", FieldDataType.Primitive, false)
                 .Build();
 //            schema.Fields.Add<SomeCriteria>("field1", new SomeCriteriaImpl());
 //            schema.Fields.Add(descriptor.Define("field1"));

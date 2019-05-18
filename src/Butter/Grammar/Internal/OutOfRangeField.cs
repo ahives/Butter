@@ -12,17 +12,25 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar.Internal
 {
-    using System;
-    using Grammar;
-
-    public interface ISchemaBuilder
+    class OutOfRangeField :
+        Field
     {
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false);
-        
-        ISchema Build();
+        public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");
+        public bool IsNullable => true;
+        public FieldDataType DataType => FieldDataType.None;
+
+        public bool Equals(Field other) => false;
+
+        public override bool Equals(object obj) => Equals((Field)obj);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
+            }
+        }
     }
 }
