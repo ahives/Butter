@@ -1,6 +1,7 @@
 namespace Butter.Tests
 {
     using System;
+    using System.Collections.Generic;
     using Grammar;
     using NUnit.Framework;
 
@@ -33,6 +34,75 @@ namespace Butter.Tests
             
             Assert.IsNotNull(schema.Fields[4]);
             Assert.AreEqual("field5", schema.Fields[4].Id);
+        }
+
+        [Test]
+        public void Verify_TryGetValue_will_not_throw_when_index_less_than_zero()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Build();
+            
+            Assert.IsFalse(schema.Fields.TryGetValue(-1, out Field field));
+            Assert.IsNotNull(field);
+        }
+
+        [Test]
+        public void Verify_TryGetValue_will_not_throw_when_index_greater_than_count()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Build();
+
+            int count = schema.Fields.Count;
+            Assert.IsFalse(schema.Fields.TryGetValue(count + 1, out Field field));
+            Assert.IsNotNull(field);
+        }
+
+        [Test]
+        public void Verify_TryGetValue_will_return_field()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Build();
+
+            Assert.IsTrue(schema.Fields.TryGetValue(3, out Field field));
+            Assert.IsNotNull(field);
+            Assert.AreEqual("field4", field.Id);
+            Assert.AreEqual(FieldDataType.Primitive, field.DataType);
+        }
+
+        [Test]
+        public void Verify_TryGetValue_will_return_field_given_identifier()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Build();
+
+            Assert.IsTrue(schema.Fields.TryGetValue("field4", out Field field));
+            Assert.IsNotNull(field);
+            Assert.AreEqual("field4", field.Id);
+            Assert.AreEqual(FieldDataType.Primitive, field.DataType);
         }
 
         [Test]
@@ -123,6 +193,92 @@ namespace Butter.Tests
             IFieldList fields = new FieldList();
             
             Assert.IsFalse(fields.TryGetValue(0, out _));
+        }
+
+        [Test]
+        public void Verify_does_not_allow_adding_duplicate_fields_using_AddRange()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Build();
+            var field = Schema.Field.Builder<FieldBuilder>()
+                .Identifier("field1")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            schema.Fields.AddRange(field);
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(1, schema.Fields.Count);
+        }
+
+        [Test]
+        public void Verify_does_not_allow_adding_any_null_fields_using_AddRange_via_params()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Build();
+            var field = Schema.Field.Builder<FieldBuilder>()
+                .Identifier("field2")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            schema.Fields.AddRange(field, null);
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(2, schema.Fields.Count);
+        }
+
+        [Test]
+        public void Verify_does_not_allow_adding_any_null_fields_using_AddRange_via_IList()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Build();
+            var field = Schema.Field.Builder<FieldBuilder>()
+                .Identifier("field2")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            IList<Field> fields = new List<Field>();
+            fields.Add(field);
+            fields.Add(null);
+            
+            schema.Fields.AddRange(fields);
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(2, schema.Fields.Count);
+        }
+
+        [Test]
+        public void Verify_does_not_allow_adding_all_null_fields_using_AddRange_via_params()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Build();
+            
+            schema.Fields.AddRange(null);
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(1, schema.Fields.Count);
+        }
+
+        [Test]
+        public void Verify_does_not_allow_adding_all_null_fields_using_AddRange_via_IList()
+        {
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Build();
+
+            IList<Field> fields = null;
+            
+            schema.Fields.AddRange(fields);
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(1, schema.Fields.Count);
         }
 
         [Test]

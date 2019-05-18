@@ -22,8 +22,13 @@ namespace Butter.Tests
                 })
                 .Build();
 
-            var fields = schema.Fields.ToEnumerable();
-            Assert.AreEqual(6, fields);
+            int count = 0;
+            foreach (var field in schema.Fields.ToEnumerable())
+            {
+                count++;
+            }
+
+            Assert.AreEqual(6, count);
         }
     }
 }

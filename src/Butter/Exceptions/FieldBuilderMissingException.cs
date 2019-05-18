@@ -17,24 +17,24 @@ namespace Butter
     using System;
     using System.Runtime.Serialization;
 
-    public class BuilderMissingException :
+    public class FieldBuilderMissingException :
         Exception
     {
-        public BuilderMissingException()
+        public FieldBuilderMissingException()
         {
         }
 
-        protected BuilderMissingException(SerializationInfo info, StreamingContext context)
+        protected FieldBuilderMissingException(SerializationInfo info, StreamingContext context)
             : base(info, context)
         {
         }
 
-        public BuilderMissingException(string message)
+        public FieldBuilderMissingException(string message)
             : base(message)
         {
         }
 
-        public BuilderMissingException(string message, Exception innerException)
+        public FieldBuilderMissingException(string message, Exception innerException)
             : base(message, innerException)
         {
         }

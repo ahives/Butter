@@ -86,7 +86,7 @@ namespace Butter
             public static T Builder<T>()
             {
                 if (!_builderCache.ContainsKey(typeof(T).FullName))
-                    throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
+                    throw new FieldBuilderMissingException($"Failed to find implementation for builder '{typeof(T)}'");
 
                 return (T) _builderCache[typeof(T).FullName];
             }
