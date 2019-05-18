@@ -38,7 +38,7 @@ namespace Butter
             var impl = new DecimalDefinitionImpl();
             definition(impl);
             
-            _fields.Add(new DecimalFieldImpl(fieldId, nullable, fieldType, impl.Scale.Value, impl.Precision.Value));
+            _fields.Add(new DecimalFieldImpl(fieldId, impl.Scale.Value, impl.Precision.Value, nullable));
             
             return this;
         }

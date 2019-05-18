@@ -12,12 +12,24 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Model.Definition
+namespace Butter.Data
 {
-    public interface DecimalDefinition
+    using System.Collections.Generic;
+    using Model;
+
+    public static class FieldListExtensions
     {
-        void SetScale(int scale);
-        
-        void SetPrecision(int precision);
+        /// <summary>
+        /// Returns a IEnumerable on <see cref="FieldList"/>
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                yield return fields[i];
+            }
+        }
     }
 }

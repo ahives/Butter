@@ -17,6 +17,5 @@ namespace Butter.Data.Model.Definition
     public interface FieldDefinition
     {
         void IsNullable();
-        void Precision(int precision);
     }
 }

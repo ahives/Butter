@@ -12,12 +12,31 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data.Model.Definition
+namespace Butter
 {
-    public interface DecimalDefinition
+    using Data.Model;
+    using Data.Model.Internal;
+
+    class MapFieldBuilderImpl :
+        MapFieldBuilder
     {
-        void SetScale(int scale);
-        
-        void SetPrecision(int precision);
+        string _fieldId;
+        bool _nullable;
+
+        public MapFieldBuilder Identifier(string fieldId)
+        {
+            _fieldId = fieldId;
+            
+            return this;
+        }
+
+        public MapFieldBuilder IsNullable()
+        {
+            _nullable = true;
+            
+            return this;
+        }
+
+        public MapField Build() => new MapFieldImpl(_fieldId, _nullable);
     }
 }

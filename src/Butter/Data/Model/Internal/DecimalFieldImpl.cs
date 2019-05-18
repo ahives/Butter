@@ -19,11 +19,11 @@ namespace Butter.Data.Model.Internal
     class DecimalFieldImpl :
         DecimalField
     {
-        public DecimalFieldImpl(string fieldId, bool nullable, FieldType fieldType, int scale, int precision)
+        public DecimalFieldImpl(string fieldId, int scale, int precision, bool nullable = false)
         {
             Id = fieldId;
             IsNullable = nullable;
-            Type = fieldType;
+            Type = FieldType.Decimal;
             Scale = scale;
             Precision = precision;
         }

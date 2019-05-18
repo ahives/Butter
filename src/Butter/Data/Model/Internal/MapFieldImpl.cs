@@ -19,10 +19,11 @@ namespace Butter.Data.Model.Internal
     class MapFieldImpl :
         MapField
     {
-        public MapFieldImpl(string id)
+        public MapFieldImpl(string id, bool isNullable = false)
         {
             Id = id;
             Type = FieldType.Map;
+            IsNullable = isNullable;
         }
 
         public string Id { get; }

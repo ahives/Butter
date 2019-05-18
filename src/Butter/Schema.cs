@@ -15,15 +15,15 @@
 namespace Butter
 {
     using System;
+    using System.Collections.Generic;
     using Data;
-    using Data.Model;
 
     public class Schema :
         ISchema, IEquatable<Schema>
     {
         public IFieldList Fields { get; }
 
-        internal Schema(params Field[] fields)
+        internal Schema(params Data.Model.Field[] fields)
         {
             Fields = new FieldList();
             Fields.AddRange(fields);
@@ -67,5 +67,28 @@ namespace Butter
         }
 
         public override int GetHashCode() => Fields != null ? Fields.GetHashCode() : 0;
+
+        public class Field
+        {
+            static readonly IDictionary<string, object> _builderCache;
+        
+            static Field()
+            {
+                _builderCache = new Dictionary<string, object>
+                {
+                    {typeof(FieldBuilder).FullName, new FieldBuilderImpl()},
+                    {typeof(DecimalFieldBuilder).FullName, new DecimalFieldBuilderImpl()},
+                    {typeof(MapFieldBuilder).FullName, new MapFieldBuilderImpl()}
+                };
+            }
+
+            public static T Builder<T>()
+            {
+                if (!_builderCache.ContainsKey(typeof(T).FullName))
+                    throw new BuilderMissingException($"Failed to find implementation class for interface {typeof(T)}");
+
+                return (T) _builderCache[typeof(T).FullName];
+            }
+        }
     }
 }
