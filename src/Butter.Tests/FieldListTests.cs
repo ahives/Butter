@@ -120,10 +120,11 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
             
-            var violations = schema.Fields.Validate();
+            schema.Validate();
+//            var violations = schema.Fields.Validate();
             
-            Assert.IsTrue(schema.Fields.HasErrors);
-            Assert.AreEqual(1, violations.Count);
+//            Assert.IsTrue(schema.Fields.HasErrors);
+            Assert.AreEqual(1, schema.Validations.Count);
         }
 
         [Test]
@@ -214,15 +215,16 @@ namespace Butter.Tests
                 .IsNullable()
                 .Build();
             
-            schema.Fields.AddRange(field, null);
+            schema.Fields.AddRange(field, null, null, null);
             
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(2, schema.Fields.Count);
+
+            schema.Validate();
+//            var violations = schema.Fields.Validate();
             
-            var violations = schema.Fields.Validate();
-            
-            Assert.IsTrue(schema.Fields.HasErrors);
-            Assert.AreEqual(1, violations.Count);
+//            Assert.IsTrue(schema.Fields.HasErrors);
+            Assert.AreEqual(3, schema.Validations.Count);
         }
 
         [Test]

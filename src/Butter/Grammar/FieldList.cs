@@ -23,12 +23,11 @@ namespace Butter.Grammar
         IFieldList, IEquatable<FieldList>
     {
         readonly List<Field> _fields;
-        readonly ValidationList _validations;
         int _count;
-        bool _hasErrors;
+
+        readonly List<IObserver<ValidationContext>> _observers;
 
         public bool HasValues => _fields != null && _fields.Any();
-        public bool HasErrors => _hasErrors;
         public int Count => _count;
 
         public Field this[int index]
@@ -44,7 +43,7 @@ namespace Butter.Grammar
         public FieldList()
         {
             _fields = new List<Field>();
-            _validations = new ValidationListImpl();
+            _observers = new List<IObserver<ValidationContext>>();
             _count = 0;
         }
 
@@ -52,29 +51,22 @@ namespace Butter.Grammar
         {
             if (field == null)
             {
-                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
-                _hasErrors = true;
+                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                 return;
             }
             
             if (Contains(field))
-            {
-                _validations.Add(new ValidationResultImpl($"FIELD '{field.Id}' ALREADY EXISTS.", ValidationType.Error));
-                _hasErrors = true;
-            }
+                NotifyObservers(field, new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
             
             _fields.Add(field);
             _count = _fields.Count;
         }
 
-        public ValidationList Validate() => _validations;
-
         public void AddRange(IList<Field> fields)
         {
             if (fields == null)
             {
-                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
-                _hasErrors = true;
+                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                 return;
             }
             
@@ -82,16 +74,12 @@ namespace Butter.Grammar
             {
                 if (fields[i] == null)
                 {
-                    _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
-                    _hasErrors = true;
+                    NotifyObservers(null, new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                     continue;
                 }
                 
                 if (Contains(fields[i]))
-                {
-                    _validations.Add(new ValidationResultImpl($"FIELD '{fields[i].Id}' ALREADY EXISTS.", ValidationType.Error));
-                    _hasErrors = true;
-                }
+                    NotifyObservers(fields[i], new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
                 
                 _fields.Add(fields[i]);
                 _count++;
@@ -102,8 +90,7 @@ namespace Butter.Grammar
         {
             if (fields == null)
             {
-                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
-                _hasErrors = true;
+                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                 return;
             }
             
@@ -111,16 +98,12 @@ namespace Butter.Grammar
             {
                 if (fields[i] == null)
                 {
-                    _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
-                    _hasErrors = true;
+                    NotifyObservers(null, new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                     continue;
                 }
                 
                 if (Contains(fields[i]))
-                {
-                    _validations.Add(new ValidationResultImpl($"FIELD '{fields[i].Id}' ALREADY EXISTS.", ValidationType.Error));
-                    _hasErrors = true;
-                }
+                    NotifyObservers(fields[i], new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
                 
                 _fields.Add(fields[i]);
                 _count++;
@@ -188,6 +171,14 @@ namespace Butter.Grammar
             return true;
         }
 
+        public IDisposable Subscribe(IObserver<ValidationContext> observer)
+        {
+            if (!_observers.Contains(observer))
+                _observers.Add(observer);
+
+            return new Unsubscriber(_observers, observer);
+        }
+
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -207,6 +198,42 @@ namespace Butter.Grammar
             unchecked
             {
                 return ((_fields != null ? _fields.GetHashCode() : 0) * 397) ^ _count;
+            }
+        }
+
+        void NotifyObservers(Field field, ValidationResultImpl validationResult, bool hasErrors)
+        {
+            foreach (var observer in _observers)
+            {
+                observer.OnNext(new ValidationContextImpl(field, validationResult, hasErrors));
+            }
+        }
+
+        void NotifyObservers(ValidationResult validationResult, bool hasErrors)
+        {
+            foreach (var observer in _observers)
+            {
+                observer.OnNext(new ValidationContextImpl(null, validationResult, hasErrors));
+            }
+        }
+
+        
+        class Unsubscriber :
+            IDisposable
+        {
+            readonly List<IObserver<ValidationContext>> _observers;
+            readonly IObserver<ValidationContext> _observer;
+
+            public Unsubscriber(List<IObserver<ValidationContext>> observers, IObserver<ValidationContext> observer)
+            {
+                _observers = observers;
+                _observer = observer;
+            }
+
+            public void Dispose()
+            {
+                if (_observer != null && _observers.Contains(_observer))
+                    _observers.Remove(_observer);
             }
         }
 

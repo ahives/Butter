@@ -25,5 +25,7 @@ namespace Butter.Grammar
         bool TryGetValue(int index, out ValidationResult validation);
 
         bool Contains(ValidationResult validation);
+
+        void Clear();
     }
 }

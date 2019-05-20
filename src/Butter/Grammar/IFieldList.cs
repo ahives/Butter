@@ -14,13 +14,15 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
+    using System;
     using System.Collections.Generic;
 
-    public interface IFieldList
+    public interface IFieldList :
+        IObservable<ValidationContext>
     {
         void Add(Field field);
 
-        ValidationList Validate();
+//        ValidationList Validate();
 
         void AddRange(params Field[] fields);
 
@@ -28,7 +30,7 @@ namespace Butter.Grammar
         
         bool HasValues { get; }
 
-        bool HasErrors { get; }
+//        bool HasErrors { get; }
         
         int Count { get; }
         

@@ -74,7 +74,12 @@ namespace Butter.Grammar.Internal
 
         public bool Contains(ValidationResult validation) => validation != null && _validations.Contains(validation, new ValidationComparer());
 
-        
+        public void Clear()
+        {
+            _validations.Clear();
+        }
+
+
         class ValidationComparer :
             IEqualityComparer<ValidationResult>
         {

@@ -20,24 +20,49 @@ namespace Butter
     using Grammar.Internal;
 
     public class Schema :
-        ISchema, IEquatable<Schema>
+        ISchema, IEquatable<Schema>, IObserver<ValidationContext>
     {
+        IDisposable _unsubscribe;
         public IFieldList Fields { get; }
+        public ValidationList Validations { get; }
 
         internal Schema(params Grammar.Field[] fields)
         {
             Fields = new FieldList();
             Fields.AddRange(fields);
+
+            Validations = new ValidationListImpl();
+
+            Subscribe(Fields);
         }
 
         internal Schema(IFieldList fields)
         {
             Fields = fields;
+
+            Validations = new ValidationListImpl();
+
+            Subscribe(Fields);
         }
 
         internal Schema()
         {
             Fields = new FieldList();
+
+            Validations = new ValidationListImpl();
+
+            Subscribe(Fields);
+        }
+
+        public void Validate()
+        {
+            Validations.Clear();
+        }
+
+        void Subscribe(IObservable<ValidationContext> provider)
+        {
+            if (provider != null)
+                _unsubscribe = provider.Subscribe(this);
         }
 
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
@@ -90,6 +115,22 @@ namespace Butter
 
                 return (T) _builderCache[typeof(T).FullName];
             }
+        }
+
+        public void OnCompleted()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnError(Exception error)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void OnNext(ValidationContext value)
+        {
+            Console.WriteLine(value.ValidationResult.Reason);
+            Validations.Add(value.ValidationResult);
         }
     }
 }

@@ -20,5 +20,9 @@ namespace Butter
     public interface ISchema
     {
         IFieldList Fields { get; }
+        
+        ValidationList Validations { get; }
+
+        void Validate();
     }
 }

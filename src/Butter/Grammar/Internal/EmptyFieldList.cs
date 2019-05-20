@@ -14,6 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Grammar.Internal
 {
+    using System;
     using System.Collections.Generic;
 
     class EmptyFieldList :
@@ -54,5 +55,7 @@ namespace Butter.Grammar.Internal
         {
             throw new System.NotImplementedException();
         }
+
+        public IDisposable Subscribe(IObserver<ValidationContext> observer) => throw new NotImplementedException();
     }
 }
