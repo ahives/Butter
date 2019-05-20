@@ -14,30 +14,11 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System.Collections.Generic;
+    using Internal;
 
-    public interface IFieldList
+    static class ValidationCache
     {
-        void Add(Field field);
-
-        ValidationList Validate();
-
-        void AddRange(params Field[] fields);
-
-        void AddRange(IList<Field> fields);
-        
-        bool HasValues { get; }
-
-        bool HasErrors { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
+        public static readonly ValidationResult MissingValidationResult = new MissingValidationResultImpl();
+        public static readonly ValidationList MissingValidationList = new MissingValidationListImpl();
     }
 }

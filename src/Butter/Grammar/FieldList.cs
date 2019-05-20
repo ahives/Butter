@@ -17,14 +17,18 @@ namespace Butter.Grammar
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Internal;
 
     public class FieldList :
         IFieldList, IEquatable<FieldList>
     {
         readonly List<Field> _fields;
+        readonly ValidationList _validations;
         int _count;
+        bool _hasErrors;
 
         public bool HasValues => _fields != null && _fields.Any();
+        public bool HasErrors => _hasErrors;
         public int Count => _count;
 
         public Field this[int index]
@@ -40,27 +44,54 @@ namespace Butter.Grammar
         public FieldList()
         {
             _fields = new List<Field>();
+            _validations = new ValidationListImpl();
             _count = 0;
         }
 
         public void Add(Field field)
         {
-            if (field == null || Contains(field))
+            if (field == null)
+            {
+                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
+                _hasErrors = true;
                 return;
+            }
+            
+            if (Contains(field))
+            {
+                _validations.Add(new ValidationResultImpl($"FIELD '{field.Id}' ALREADY EXISTS.", ValidationType.Error));
+                _hasErrors = true;
+            }
             
             _fields.Add(field);
             _count = _fields.Count;
         }
 
+        public ValidationList Validate() => _validations;
+
         public void AddRange(IList<Field> fields)
         {
             if (fields == null)
+            {
+                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
+                _hasErrors = true;
                 return;
+            }
             
             for (int i = 0; i < fields.Count; i++)
             {
-                if (fields[i] == null || Contains(fields[i]))
+                if (fields[i] == null)
+                {
+                    _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
+                    _hasErrors = true;
                     continue;
+                }
+                
+                if (Contains(fields[i]))
+                {
+                    _validations.Add(new ValidationResultImpl($"FIELD '{fields[i].Id}' ALREADY EXISTS.", ValidationType.Error));
+                    _hasErrors = true;
+                }
                 
                 _fields.Add(fields[i]);
                 _count++;
@@ -70,12 +101,26 @@ namespace Butter.Grammar
         public void AddRange(params Field[] fields)
         {
             if (fields == null)
+            {
+                _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
+                _hasErrors = true;
                 return;
+            }
             
             for (int i = 0; i < fields.Length; i++)
             {
-                if (fields[i] == null || Contains(fields[i]))
+                if (fields[i] == null)
+                {
+                    _validations.Add(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error));
+                    _hasErrors = true;
                     continue;
+                }
+                
+                if (Contains(fields[i]))
+                {
+                    _validations.Add(new ValidationResultImpl($"FIELD '{fields[i].Id}' ALREADY EXISTS.", ValidationType.Error));
+                    _hasErrors = true;
+                }
                 
                 _fields.Add(fields[i]);
                 _count++;

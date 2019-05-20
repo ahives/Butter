@@ -17,19 +17,19 @@ namespace Butter.Grammar.Internal
     using System;
     using System.Threading;
 
-    class SchemaBuilder :
+    class SchemaBuilderImpl :
         ISchemaBuilder
     {
         readonly FieldList _fields = new FieldList();
 
-        public ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, bool nullable = false)
+        public ISchemaBuilder Field(string fieldId, FieldDataType dataType, bool nullable = false)
         {
-            _fields.Add(new FieldImpl(fieldId, fieldDataType, nullable));
+            _fields.Add(new FieldImpl(fieldId, dataType, nullable));
             
             return this;
         }
 
-        public ISchemaBuilder Field(string fieldId, FieldDataType fieldDataType, Action<DecimalDefinition> definition, bool nullable = false)
+        public ISchemaBuilder Field(string fieldId, Action<DecimalDefinition> definition, bool nullable = false)
         {
             var impl = new DecimalDefinitionImpl();
             definition(impl);

@@ -15,7 +15,7 @@ namespace Butter.Tests
                 .Field("field3", FieldDataType.List)
                 .Field("field4", FieldDataType.Primitive)
                 .Field("field5", FieldDataType.Primitive)
-                .Field("field6", FieldDataType.Decimal, x =>
+                .Field("field6",x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);

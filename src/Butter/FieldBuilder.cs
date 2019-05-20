@@ -20,7 +20,7 @@ namespace Butter
     {
         FieldBuilder Identifier(string fieldId);
 
-        FieldBuilder DataType(FieldDataType fieldDataType);
+        FieldBuilder DataType(FieldDataType dataType);
 
         FieldBuilder IsNullable();
 

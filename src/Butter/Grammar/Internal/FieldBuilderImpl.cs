@@ -18,7 +18,7 @@ namespace Butter.Grammar.Internal
         FieldBuilder
     {
         string _fieldId;
-        FieldDataType _fieldDataType;
+        FieldDataType _dataType;
         bool _nullable;
 
         public FieldBuilder Identifier(string fieldId)
@@ -28,9 +28,9 @@ namespace Butter.Grammar.Internal
             return this;
         }
 
-        public FieldBuilder DataType(FieldDataType fieldDataType)
+        public FieldBuilder DataType(FieldDataType dataType)
         {
-            _fieldDataType = fieldDataType;
+            _dataType = dataType;
             
             return this;
         }
@@ -42,6 +42,6 @@ namespace Butter.Grammar.Internal
             return this;
         }
 
-        public Field Build() => new FieldImpl(_fieldId, _fieldDataType, _nullable);
+        public Field Build() => new FieldImpl(_fieldId, _dataType, _nullable);
     }
 }

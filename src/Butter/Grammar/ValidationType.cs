@@ -14,30 +14,9 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System.Collections.Generic;
-
-    public interface IFieldList
+    public enum ValidationType
     {
-        void Add(Field field);
-
-        ValidationList Validate();
-
-        void AddRange(params Field[] fields);
-
-        void AddRange(IList<Field> fields);
-        
-        bool HasValues { get; }
-
-        bool HasErrors { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
+        Error,
+        Warning
     }
 }

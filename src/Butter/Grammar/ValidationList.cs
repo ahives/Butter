@@ -14,30 +14,16 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System.Collections.Generic;
-
-    public interface IFieldList
+    public interface ValidationList
     {
-        void Add(Field field);
-
-        ValidationList Validate();
-
-        void AddRange(params Field[] fields);
-
-        void AddRange(IList<Field> fields);
-        
-        bool HasValues { get; }
-
-        bool HasErrors { get; }
+        void Add(ValidationResult validation);
         
         int Count { get; }
         
-        Field this[int index] { get; }
+        ValidationResult this[int index] { get; }
 
-        bool TryGetValue(int index, out Field field);
+        bool TryGetValue(int index, out ValidationResult validation);
 
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
+        bool Contains(ValidationResult validation);
     }
 }

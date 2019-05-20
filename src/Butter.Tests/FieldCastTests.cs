@@ -10,7 +10,7 @@ namespace Butter.Tests
         public void Test()
         {
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Decimal, x =>
+                .Field("field1",x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);

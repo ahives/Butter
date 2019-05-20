@@ -20,6 +20,7 @@ namespace Butter.Grammar.Internal
         IFieldList
     {
         public bool HasValues => false;
+        public bool HasErrors => true;
         public int Count => 0;
         public Field this[int index] => SchemaCache.MissingField;
 
@@ -46,6 +47,8 @@ namespace Butter.Grammar.Internal
         {
             throw new System.NotImplementedException();
         }
+
+        public ValidationList Validate() => throw new System.NotImplementedException();
 
         public void AddRange(params Field[] fields)
         {

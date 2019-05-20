@@ -40,7 +40,7 @@ namespace Butter
             Fields = new FieldList();
         }
 
-        public static ISchemaBuilder Builder() => new SchemaBuilder();
+        public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
 
         public bool Equals(Schema other)
         {

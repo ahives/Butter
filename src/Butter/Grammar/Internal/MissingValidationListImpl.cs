@@ -12,32 +12,29 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Grammar.Internal
 {
-    using System.Collections.Generic;
+    using System;
 
-    public interface IFieldList
+    class MissingValidationListImpl :
+        ValidationList
     {
-        void Add(Field field);
+        public void Add(ValidationResult validation)
+        {
+            throw new NotImplementedException();
+        }
 
-        ValidationList Validate();
+        public bool HasErrors => false;
+        public int Count => 0;
 
-        void AddRange(params Field[] fields);
+        public ValidationResult this[int index] => ValidationCache.MissingValidationResult;
 
-        void AddRange(IList<Field> fields);
-        
-        bool HasValues { get; }
+        public bool TryGetValue(int index, out ValidationResult validation)
+        {
+            validation = ValidationCache.MissingValidationResult;
+            return false;
+        }
 
-        bool HasErrors { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
+        public bool Contains(ValidationResult validation) => false;
     }
 }

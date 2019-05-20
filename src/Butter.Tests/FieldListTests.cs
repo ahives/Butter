@@ -118,23 +118,12 @@ namespace Butter.Tests
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(5, schema.Fields.Count);
-        }
-
-        [Test]
-        public void Verify_cannot_add_list_range_of_fields_with_same_identifier()
-        {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Build();
+            Assert.AreEqual(6, schema.Fields.Count);
             
-            Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(5, schema.Fields.Count);
+            var violations = schema.Fields.Validate();
+            
+            Assert.IsTrue(schema.Fields.HasErrors);
+            Assert.AreEqual(1, violations.Count);
         }
 
         [Test]
@@ -146,7 +135,7 @@ namespace Butter.Tests
                 .Field("field3", FieldDataType.List)
                 .Field("field4", FieldDataType.Primitive)
                 .Field("field5", FieldDataType.Primitive)
-                .Field("field6", FieldDataType.Decimal, x =>
+                .Field("field6",x =>
                 {
                     x.SetPrecision(2);
                     x.SetScale(4);
@@ -210,7 +199,7 @@ namespace Butter.Tests
             schema.Fields.AddRange(field);
             
             Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(1, schema.Fields.Count);
+            Assert.AreEqual(2, schema.Fields.Count);
         }
 
         [Test]
@@ -229,6 +218,11 @@ namespace Butter.Tests
             
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(2, schema.Fields.Count);
+            
+            var violations = schema.Fields.Validate();
+            
+            Assert.IsTrue(schema.Fields.HasErrors);
+            Assert.AreEqual(1, violations.Count);
         }
 
         [Test]
