@@ -1,6 +1,7 @@
 namespace Butter.Tests
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using Grammar;
     using NUnit.Framework;
@@ -106,28 +107,6 @@ namespace Butter.Tests
         }
 
         [Test]
-        public void Verify_cannot_add_fields_with_same_identifier()
-        {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Build();
-            
-            Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(6, schema.Fields.Count);
-            
-            schema.Validate();
-//            var violations = schema.Fields.Validate();
-            
-//            Assert.IsTrue(schema.Fields.HasErrors);
-            Assert.AreEqual(1, schema.Validations.Count);
-        }
-
-        [Test]
         public void Verify_can_access_list_with_multiple_field_types()
         {
             var schema = Schema.Builder()
@@ -204,6 +183,27 @@ namespace Butter.Tests
         }
 
         [Test]
+        public void Verify_cannot_add_fields_with_same_identifier()
+        {
+            ISchemaValidator validator = new SchemaValidator();
+            var schema = Schema.Builder()
+                .Field("field1", FieldDataType.Primitive)
+                .Field("field2", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .Field("field4", FieldDataType.Primitive)
+                .Field("field5", FieldDataType.Primitive)
+                .Field("field3", FieldDataType.Primitive)
+                .RegisterObserver(validator)
+                .Build();
+            
+            Assert.IsTrue(schema.Fields.HasValues);
+            Assert.AreEqual(6, schema.Fields.Count);
+
+            Assert.IsNotEmpty(validator.Validation);
+            Assert.AreEqual(1, validator.Validation.Count);
+        }
+
+        [Test]
         public void Verify_does_not_allow_adding_any_null_fields_using_AddRange_via_params()
         {
             var schema = Schema.Builder()
@@ -220,11 +220,9 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(2, schema.Fields.Count);
 
-            schema.Validate();
-//            var violations = schema.Fields.Validate();
+//            schema.Validate();
             
-//            Assert.IsTrue(schema.Fields.HasErrors);
-            Assert.AreEqual(3, schema.Validations.Count);
+//            Assert.AreEqual(3, schema.Validations.Count);
         }
 
         [Test]

@@ -17,15 +17,14 @@ namespace Butter.Grammar
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using Internal;
 
     public class FieldList :
         IFieldList, IEquatable<FieldList>
     {
+        readonly bool _notifyObservers;
         readonly List<Field> _fields;
+        readonly List<IObserver<Field>> _observers;
         int _count;
-
-        readonly List<IObserver<ValidationContext>> _observers;
 
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
@@ -40,10 +39,11 @@ namespace Butter.Grammar
             }
         }
 
-        public FieldList()
+        public FieldList(bool notifyObservers = true)
         {
+            _notifyObservers = notifyObservers;
             _fields = new List<Field>();
-            _observers = new List<IObserver<ValidationContext>>();
+            _observers = new List<IObserver<Field>>();
             _count = 0;
         }
 
@@ -51,62 +51,53 @@ namespace Butter.Grammar
         {
             if (field == null)
             {
-                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
+                NotifyObservers(field);
                 return;
             }
             
-            if (Contains(field))
-                NotifyObservers(field, new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
-            
             _fields.Add(field);
             _count = _fields.Count;
+            
+            NotifyObservers(field);
         }
 
         public void AddRange(IList<Field> fields)
         {
             if (fields == null)
-            {
-                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                 return;
-            }
             
             for (int i = 0; i < fields.Count; i++)
             {
                 if (fields[i] == null)
                 {
-                    NotifyObservers(null, new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
+                    NotifyObservers(fields[i]);
                     continue;
                 }
                 
-                if (Contains(fields[i]))
-                    NotifyObservers(fields[i], new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
-                
                 _fields.Add(fields[i]);
                 _count++;
+                
+                NotifyObservers(fields[i]);
             }
         }
 
         public void AddRange(params Field[] fields)
         {
             if (fields == null)
-            {
-                NotifyObservers(new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
                 return;
-            }
             
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] == null)
                 {
-                    NotifyObservers(null, new ValidationResultImpl("FIELD == NULL.", ValidationType.Error), true);
+                    NotifyObservers(fields[i]);
                     continue;
                 }
                 
-                if (Contains(fields[i]))
-                    NotifyObservers(fields[i], new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error), true);
-                
                 _fields.Add(fields[i]);
                 _count++;
+                
+                NotifyObservers(fields[i]);
             }
         }
 
@@ -171,7 +162,7 @@ namespace Butter.Grammar
             return true;
         }
 
-        public IDisposable Subscribe(IObserver<ValidationContext> observer)
+        public IDisposable Subscribe(IObserver<Field> observer)
         {
             if (!_observers.Contains(observer))
                 _observers.Add(observer);
@@ -201,19 +192,14 @@ namespace Butter.Grammar
             }
         }
 
-        void NotifyObservers(Field field, ValidationResultImpl validationResult, bool hasErrors)
+        void NotifyObservers(Field field)
         {
+            if (!_notifyObservers)
+                return;
+            
             foreach (var observer in _observers)
             {
-                observer.OnNext(new ValidationContextImpl(field, validationResult, hasErrors));
-            }
-        }
-
-        void NotifyObservers(ValidationResult validationResult, bool hasErrors)
-        {
-            foreach (var observer in _observers)
-            {
-                observer.OnNext(new ValidationContextImpl(null, validationResult, hasErrors));
+                observer.OnNext(field);
             }
         }
 
@@ -221,10 +207,10 @@ namespace Butter.Grammar
         class Unsubscriber :
             IDisposable
         {
-            readonly List<IObserver<ValidationContext>> _observers;
-            readonly IObserver<ValidationContext> _observer;
+            readonly List<IObserver<Field>> _observers;
+            readonly IObserver<Field> _observer;
 
-            public Unsubscriber(List<IObserver<ValidationContext>> observers, IObserver<ValidationContext> observer)
+            public Unsubscriber(List<IObserver<Field>> observers, IObserver<Field> observer)
             {
                 _observers = observers;
                 _observer = observer;

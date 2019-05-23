@@ -19,6 +19,6 @@ namespace Butter.Grammar
     static class ValidationCache
     {
         public static readonly ValidationResult MissingValidationResult = new MissingValidationResultImpl();
-        public static readonly ValidationList MissingValidationList = new MissingValidationListImpl();
+        public static readonly IValidationList MissingValidationList = new MissingValidationListImpl();
     }
 }

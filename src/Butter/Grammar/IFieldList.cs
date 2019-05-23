@@ -18,19 +18,15 @@ namespace Butter.Grammar
     using System.Collections.Generic;
 
     public interface IFieldList :
-        IObservable<ValidationContext>
+        IObservable<Field>
     {
         void Add(Field field);
-
-//        ValidationList Validate();
 
         void AddRange(params Field[] fields);
 
         void AddRange(IList<Field> fields);
         
         bool HasValues { get; }
-
-//        bool HasErrors { get; }
         
         int Count { get; }
         

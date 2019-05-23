@@ -19,17 +19,15 @@ namespace Butter.Grammar
     class ValidationContextImpl :
         ValidationContext
     {
-        public ValidationContextImpl(Field field, ValidationResult validationResult, bool hasErrors)
+        public ValidationContextImpl(Field field, ValidationResult validationResult)
         {
             Field = field;
             ValidationResult = validationResult;
-            HasErrors = hasErrors;
             Timestamp = DateTimeOffset.UtcNow;
         }
 
         public Field Field { get; }
         public ValidationResult ValidationResult { get; }
-        public bool HasErrors { get; }
         public DateTimeOffset Timestamp { get; }
     }
 }

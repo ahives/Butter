@@ -22,8 +22,6 @@ namespace Butter.Grammar
         
         ValidationResult ValidationResult { get; }
         
-        bool HasErrors { get; }
-        
         DateTimeOffset Timestamp { get; }
     }
 }

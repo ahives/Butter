@@ -17,7 +17,7 @@ namespace Butter.Grammar.Internal
     using System;
 
     class MissingValidationListImpl :
-        ValidationList
+        IValidationList
     {
         public void Add(ValidationResult validation)
         {

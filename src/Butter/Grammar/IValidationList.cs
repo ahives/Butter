@@ -12,17 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar
 {
-    using System;
-    using Grammar;
-
-    public interface ISchema
+    public interface IValidationList
     {
-        IFieldList Fields { get; }
+        void Add(ValidationResult validation);
+        
+        int Count { get; }
+        
+        ValidationResult this[int index] { get; }
 
-//        ISchema RegisterObserver(IObserver<Field> observer);
+        bool TryGetValue(int index, out ValidationResult validation);
 
-//        ISchema NotifyObservers();
+        bool Contains(ValidationResult validation);
+
+        void Clear();
     }
 }

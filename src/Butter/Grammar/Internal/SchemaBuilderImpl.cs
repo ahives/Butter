@@ -15,12 +15,14 @@
 namespace Butter.Grammar.Internal
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading;
 
     class SchemaBuilderImpl :
         ISchemaBuilder
     {
-        readonly FieldList _fields = new FieldList();
+        readonly List<Field> _fields = new List<Field>();
+        readonly List<IObserver<Field>> _observers = new List<IObserver<Field>>();
 
         public ISchemaBuilder Field(string fieldId, FieldDataType dataType, bool nullable = false)
         {
@@ -39,7 +41,15 @@ namespace Butter.Grammar.Internal
             return this;
         }
 
-        public ISchema Build() => new Schema(_fields);
+        public ISchemaBuilder RegisterObserver(IObserver<Field> observer)
+        {
+            if (!_observers.Contains(observer))
+                _observers.Add(observer);
+            
+            return this;
+        }
+
+        public ISchema Build() => new Schema(_fields, _observers);
 
 
         class DecimalDefinitionImpl :

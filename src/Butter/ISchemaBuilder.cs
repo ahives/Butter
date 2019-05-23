@@ -22,6 +22,8 @@ namespace Butter
         ISchemaBuilder Field(string fieldId, FieldDataType dataType, bool nullable = false);
         
         ISchemaBuilder Field(string fieldId, Action<DecimalDefinition> definition, bool nullable = false);
+
+        ISchemaBuilder RegisterObserver(IObserver<Field> observer);
         
         ISchema Build();
     }

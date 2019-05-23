@@ -20,49 +20,22 @@ namespace Butter
     using Grammar.Internal;
 
     public class Schema :
-        ISchema, IEquatable<Schema>, IObserver<ValidationContext>
+        ISchema, IEquatable<Schema>
     {
         IDisposable _unsubscribe;
         public IFieldList Fields { get; }
-        public ValidationList Validations { get; }
 
-        internal Schema(params Grammar.Field[] fields)
+        internal Schema(IList<Grammar.Field> fields, IList<IObserver<Grammar.Field>> observers)
         {
             Fields = new FieldList();
+            
+            for (int i = 0; i < observers.Count; i++)
+            {
+                if (observers[i] != null)
+                    _unsubscribe = Fields.Subscribe(observers[i]);
+            }
+            
             Fields.AddRange(fields);
-
-            Validations = new ValidationListImpl();
-
-            Subscribe(Fields);
-        }
-
-        internal Schema(IFieldList fields)
-        {
-            Fields = fields;
-
-            Validations = new ValidationListImpl();
-
-            Subscribe(Fields);
-        }
-
-        internal Schema()
-        {
-            Fields = new FieldList();
-
-            Validations = new ValidationListImpl();
-
-            Subscribe(Fields);
-        }
-
-        public void Validate()
-        {
-            Validations.Clear();
-        }
-
-        void Subscribe(IObservable<ValidationContext> provider)
-        {
-            if (provider != null)
-                _unsubscribe = provider.Subscribe(this);
         }
 
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
@@ -115,22 +88,6 @@ namespace Butter
 
                 return (T) _builderCache[typeof(T).FullName];
             }
-        }
-
-        public void OnCompleted()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnError(Exception error)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void OnNext(ValidationContext value)
-        {
-            Console.WriteLine(value.ValidationResult.Reason);
-            Validations.Add(value.ValidationResult);
         }
     }
 }

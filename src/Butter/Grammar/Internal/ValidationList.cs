@@ -17,13 +17,13 @@ namespace Butter.Grammar.Internal
     using System.Collections.Generic;
     using System.Linq;
 
-    class ValidationListImpl :
-        ValidationList
+    public class ValidationList :
+        IValidationList
     {
         readonly List<ValidationResult> _validations;
         int _count;
 
-        public ValidationListImpl()
+        public ValidationList()
         {
             _validations = new List<ValidationResult>();
             _count = 0;
