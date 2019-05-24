@@ -17,11 +17,12 @@ namespace Butter
     using System;
     using System.Collections.Generic;
     using Grammar;
+    using Notification;
 
     public interface ISchemaValidator :
-        IObserver<Field>
+        IObserver<NotificationContext>
     {
-        void Subscribe(IObservable<Field> provider);
+        void Subscribe(IObservable<NotificationContext> provider);
         
         IList<ValidationContext> Validation { get; }
     }

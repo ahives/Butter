@@ -17,12 +17,13 @@ namespace Butter.Grammar.Internal
     using System;
     using System.Collections.Generic;
     using System.Threading;
+    using Notification;
 
     class SchemaBuilderImpl :
         ISchemaBuilder
     {
         readonly List<Field> _fields = new List<Field>();
-        readonly List<IObserver<Field>> _observers = new List<IObserver<Field>>();
+        readonly List<IObserver<NotificationContext>> _observers = new List<IObserver<NotificationContext>>();
 
         public ISchemaBuilder Field(string fieldId, FieldDataType dataType, bool nullable = false)
         {
@@ -41,7 +42,7 @@ namespace Butter.Grammar.Internal
             return this;
         }
 
-        public ISchemaBuilder RegisterObserver(IObserver<Field> observer)
+        public ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer)
         {
             if (!_observers.Contains(observer))
                 _observers.Add(observer);

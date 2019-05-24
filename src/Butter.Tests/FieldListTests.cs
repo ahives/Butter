@@ -193,11 +193,16 @@ namespace Butter.Tests
                 .Field("field4", FieldDataType.Primitive)
                 .Field("field5", FieldDataType.Primitive)
                 .Field("field3", FieldDataType.Primitive)
+                .Field("field6", x =>
+                {
+                    x.SetPrecision(2);
+                    x.SetScale(4);
+                })
                 .RegisterObserver(validator)
                 .Build();
             
             Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(6, schema.Fields.Count);
+            Assert.AreEqual(7, schema.Fields.Count);
 
             Assert.IsNotEmpty(validator.Validation);
             Assert.AreEqual(1, validator.Validation.Count);

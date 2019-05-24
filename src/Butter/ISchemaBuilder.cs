@@ -16,6 +16,7 @@ namespace Butter
 {
     using System;
     using Grammar;
+    using Notification;
 
     public interface ISchemaBuilder
     {
@@ -23,7 +24,7 @@ namespace Butter
         
         ISchemaBuilder Field(string fieldId, Action<DecimalDefinition> definition, bool nullable = false);
 
-        ISchemaBuilder RegisterObserver(IObserver<Field> observer);
+        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
         
         ISchema Build();
     }

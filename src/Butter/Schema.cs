@@ -18,22 +18,21 @@ namespace Butter
     using System.Collections.Generic;
     using Grammar;
     using Grammar.Internal;
+    using Notification;
 
     public class Schema :
-        ISchema, IEquatable<Schema>
+        ISchema, IEquatable<Schema>, IDisposable
     {
-        IDisposable _unsubscribe;
+        readonly List<IDisposable> _disposableObservers;
         public IFieldList Fields { get; }
 
-        internal Schema(IList<Grammar.Field> fields, IList<IObserver<Grammar.Field>> observers)
+        internal Schema(IList<Grammar.Field> fields, IList<IObserver<NotificationContext>> observers)
         {
+            _disposableObservers = new List<IDisposable>();
+            
             Fields = new FieldList();
             
-            for (int i = 0; i < observers.Count; i++)
-            {
-                if (observers[i] != null)
-                    _unsubscribe = Fields.Subscribe(observers[i]);
-            }
+            ConnectObservers(observers);
             
             Fields.AddRange(fields);
         }
@@ -66,6 +65,23 @@ namespace Butter
         }
 
         public override int GetHashCode() => Fields != null ? Fields.GetHashCode() : 0;
+
+        public void Dispose()
+        {
+            for (int i = 0; i < _disposableObservers.Count; i++)
+            {
+                _disposableObservers[i].Dispose();
+            }
+        }
+
+        void ConnectObservers(IList<IObserver<NotificationContext>> observers)
+        {
+            for (int i = 0; i < observers.Count; i++)
+            {
+                if (observers[i] != null)
+                    _disposableObservers.Add(Fields.Subscribe(observers[i]));
+            }
+        }
 
         public class Field
         {

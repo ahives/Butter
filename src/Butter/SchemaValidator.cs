@@ -18,6 +18,7 @@ namespace Butter
     using System.Collections.Generic;
     using Grammar;
     using Grammar.Internal;
+    using Notification;
 
     public class SchemaValidator :
         ISchemaValidator
@@ -34,7 +35,7 @@ namespace Butter
             _fields = new FieldList(false);
         }
 
-        public void Subscribe(IObservable<Field> provider)
+        public void Subscribe(IObservable<NotificationContext> provider)
         {
             if (provider != null)
                 _unsubscribe = provider.Subscribe(this);
@@ -50,7 +51,7 @@ namespace Butter
             throw new NotImplementedException();
         }
 
-        public void OnNext(Field value)
+        public void OnNext(NotificationContext value)
         {
             if (value == null)
             {
@@ -59,22 +60,19 @@ namespace Butter
                 
                 Validation.Add(context);
                 
-                Console.WriteLine(result.Reason);
-                
                 return;
             }
 
-            if (_fields.Contains(value))
+            if (_fields.Contains(value.Field))
             {
                 var result = new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error);
-                var context = new ValidationContextImpl(value, result);
-                
-                Validation.Add(context);
+                var context = new ValidationContextImpl(value.Field, result);
                 
                 Console.WriteLine(result.Reason);
+                Validation.Add(context);
             }
             
-            _fields.Add(value);
+            _fields.Add(value.Field);
         }
     }
 }

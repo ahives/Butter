@@ -17,13 +17,12 @@ namespace Butter.Grammar
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Notification;
 
     public class FieldList :
-        IFieldList, IEquatable<FieldList>
+        ObservableList, IFieldList, IEquatable<FieldList>
     {
-        readonly bool _notifyObservers;
         readonly List<Field> _fields;
-        readonly List<IObserver<Field>> _observers;
         int _count;
 
         public bool HasValues => _fields != null && _fields.Any();
@@ -39,11 +38,9 @@ namespace Butter.Grammar
             }
         }
 
-        public FieldList(bool notifyObservers = true)
+        public FieldList(bool notifyObservers = true) : base(notifyObservers)
         {
-            _notifyObservers = notifyObservers;
             _fields = new List<Field>();
-            _observers = new List<IObserver<Field>>();
             _count = 0;
         }
 
@@ -51,14 +48,14 @@ namespace Butter.Grammar
         {
             if (field == null)
             {
-                NotifyObservers(field);
+                NotifyObservers(field, SchemaActionType.None);
                 return;
             }
             
             _fields.Add(field);
             _count = _fields.Count;
             
-            NotifyObservers(field);
+            NotifyObservers(field, SchemaActionType.Add);
         }
 
         public void AddRange(IList<Field> fields)
@@ -70,14 +67,14 @@ namespace Butter.Grammar
             {
                 if (fields[i] == null)
                 {
-                    NotifyObservers(fields[i]);
+                    NotifyObservers(fields[i], SchemaActionType.None);
                     continue;
                 }
                 
                 _fields.Add(fields[i]);
                 _count++;
                 
-                NotifyObservers(fields[i]);
+                NotifyObservers(fields[i], SchemaActionType.Add);
             }
         }
 
@@ -90,14 +87,14 @@ namespace Butter.Grammar
             {
                 if (fields[i] == null)
                 {
-                    NotifyObservers(fields[i]);
+                    NotifyObservers(fields[i], SchemaActionType.None);
                     continue;
                 }
                 
                 _fields.Add(fields[i]);
                 _count++;
                 
-                NotifyObservers(fields[i]);
+                NotifyObservers(fields[i], SchemaActionType.Add);
             }
         }
 
@@ -162,14 +159,6 @@ namespace Butter.Grammar
             return true;
         }
 
-        public IDisposable Subscribe(IObserver<Field> observer)
-        {
-            if (!_observers.Contains(observer))
-                _observers.Add(observer);
-
-            return new Unsubscriber(_observers, observer);
-        }
-
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj))
@@ -189,37 +178,6 @@ namespace Butter.Grammar
             unchecked
             {
                 return ((_fields != null ? _fields.GetHashCode() : 0) * 397) ^ _count;
-            }
-        }
-
-        void NotifyObservers(Field field)
-        {
-            if (!_notifyObservers)
-                return;
-            
-            foreach (var observer in _observers)
-            {
-                observer.OnNext(field);
-            }
-        }
-
-        
-        class Unsubscriber :
-            IDisposable
-        {
-            readonly List<IObserver<Field>> _observers;
-            readonly IObserver<Field> _observer;
-
-            public Unsubscriber(List<IObserver<Field>> observers, IObserver<Field> observer)
-            {
-                _observers = observers;
-                _observer = observer;
-            }
-
-            public void Dispose()
-            {
-                if (_observer != null && _observers.Contains(_observer))
-                    _observers.Remove(_observer);
             }
         }
 

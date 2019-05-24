@@ -14,15 +14,10 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using System;
     using Grammar;
 
     public interface ISchema
     {
         IFieldList Fields { get; }
-
-//        ISchema RegisterObserver(IObserver<Field> observer);
-
-//        ISchema NotifyObservers();
     }
 }

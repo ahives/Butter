@@ -16,6 +16,7 @@ namespace Butter.Grammar.Internal
 {
     using System;
     using System.Collections.Generic;
+    using Notification;
 
     class EmptyFieldList :
         IFieldList
@@ -55,6 +56,6 @@ namespace Butter.Grammar.Internal
             throw new System.NotImplementedException();
         }
 
-        public IDisposable Subscribe(IObserver<Field> observer) => throw new NotImplementedException();
+        public IDisposable Subscribe(IObserver<NotificationContext> observer) => throw new NotImplementedException();
     }
 }

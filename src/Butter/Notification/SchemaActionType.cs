@@ -12,31 +12,12 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Notification
 {
-    using System;
-    using System.Collections.Generic;
-    using Notification;
-
-    public interface IFieldList :
-        IObservable<NotificationContext>
+    public enum SchemaActionType
     {
-        void Add(Field field);
-
-        void AddRange(params Field[] fields);
-
-        void AddRange(IList<Field> fields);
-        
-        bool HasValues { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
+        Add,
+        Delete,
+        None
     }
 }
