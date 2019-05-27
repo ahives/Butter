@@ -15,17 +15,32 @@
 namespace Butter.Grammar.Internal
 {
     using System;
+    using Validation;
 
-    class MissingValidationResultImpl :
-        ValidationResult
+    class MissingValidationListImpl :
+        IValidationList
     {
-        public MissingValidationResultImpl()
+        public void Add(ValidationResult validation)
         {
-            DateTimestamp = DateTimeOffset.UtcNow;
+            throw new NotImplementedException();
         }
 
-        public string Reason => "Missing validation";
-        public DateTimeOffset DateTimestamp { get; }
-        public ValidationType Type => ValidationType.Error;
+        public bool HasErrors => false;
+        public int Count => 0;
+
+        public ValidationResult this[int index] => ValidationCache.MissingValidationResult;
+
+        public bool TryGetValue(int index, out ValidationResult validation)
+        {
+            validation = ValidationCache.MissingValidationResult;
+            return false;
+        }
+
+        public bool Contains(ValidationResult validation) => false;
+        
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

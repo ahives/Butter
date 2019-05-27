@@ -12,22 +12,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Grammar.Internal
 {
     using System;
+    using Validation;
 
-    class ValidationContextImpl :
-        ValidationContext
+    class MissingValidationResultImpl :
+        ValidationResult
     {
-        public ValidationContextImpl(Field field, ValidationResult validationResult)
+        public MissingValidationResultImpl()
         {
-            Field = field;
-            ValidationResult = validationResult;
-            Timestamp = DateTimeOffset.UtcNow;
+            DateTimestamp = DateTimeOffset.UtcNow;
         }
 
-        public Field Field { get; }
-        public ValidationResult ValidationResult { get; }
-        public DateTimeOffset Timestamp { get; }
+        public string Reason => "Missing validation";
+        public DateTimeOffset DateTimestamp { get; }
+        public ValidationType Type => ValidationType.Error;
     }
 }

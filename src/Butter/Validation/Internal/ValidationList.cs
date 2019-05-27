@@ -16,6 +16,7 @@ namespace Butter.Grammar.Internal
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Validation;
 
     public class ValidationList :
         IValidationList

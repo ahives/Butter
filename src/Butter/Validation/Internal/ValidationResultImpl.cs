@@ -15,6 +15,7 @@
 namespace Butter.Grammar.Internal
 {
     using System;
+    using Validation;
 
     class ValidationResultImpl :
         ValidationResult
