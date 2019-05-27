@@ -19,11 +19,24 @@ namespace Butter.Grammar
     public static class FieldListExtensions
     {
         /// <summary>
-        /// Returns a IEnumerable on <see cref="FieldList"/>
+        /// Returns a IEnumerable on <see cref="IFieldList"/>
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
         public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                yield return fields[i];
+            }
+        }
+        
+        /// <summary>
+        /// Returns a IEnumerable on <see cref="IReadOnlyFieldList"/>
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static IEnumerable<Field> ToEnumerable(this IReadOnlyFieldList fields)
         {
             for (int i = 0; i < fields.Count; i++)
             {

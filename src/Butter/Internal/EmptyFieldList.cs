@@ -14,13 +14,10 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using System;
-    using System.Collections.Generic;
     using Grammar;
-    using Notification;
 
     class EmptyFieldList :
-        IFieldList
+        IReadOnlyFieldList
     {
         public bool HasValues => false;
         public int Count => 0;
@@ -39,22 +36,5 @@ namespace Butter.Internal
         }
 
         public bool Contains(Field field) => false;
-
-        public void AddRange(IList<Field> fields)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Add(Field field)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void AddRange(params Field[] fields)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public IDisposable Subscribe(IObserver<NotificationContext> observer) => throw new NotImplementedException();
     }
 }

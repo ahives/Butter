@@ -22,7 +22,7 @@ namespace Butter.Grammar
         public static readonly DecimalField MissingDecimalField = new MissingDecimalField();
         public static readonly MapField MissingMapField = new MissingMapField();
         public static readonly ListField MissingListField = new MissingListField();
-        public static readonly IFieldList EmptyFieldList = new EmptyFieldList();
+        public static readonly IReadOnlyFieldList EmptyFieldList = new EmptyFieldList();
         public static readonly Field OutOfRangeField = new OutOfRangeField();
     }
 }

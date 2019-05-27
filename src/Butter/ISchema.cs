@@ -18,6 +18,6 @@ namespace Butter
 
     public interface ISchema
     {
-        IFieldList Fields { get; }
+        IReadOnlyFieldList Fields { get; }
     }
 }

@@ -14,25 +14,35 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System;
     using System.Collections.Generic;
     using Notification;
 
-    public interface IFieldList :
-        IObservable<NotificationContext>, IReadOnlyFieldList
+    public abstract class BaseFieldList :
+        ObservableList
     {
-        void Add(Field field);
+        protected readonly List<Field> _fields;
+        protected int _count;
 
-        void AddRange(params Field[] fields);
+        protected BaseFieldList(bool notifyObservers)
+            : base(notifyObservers)
+        {
+            _fields = new List<Field>();
+            _count = 0;
+        }
 
-        void AddRange(IList<Field> fields);
+        
+        protected class FieldComparer :
+            IEqualityComparer<Field>
+        {
+            public bool Equals(Field x, Field y)
+            {
+                if (x == null || y == null)
+                    return false;
 
-        Field Remove(int index);
+                return x.Id == y.Id;
+            }
 
-        Field Remove(string id);
-
-        bool TryRemove(int index, out Field item);
-
-        bool TryRemove(string id, out Field item);
+            public int GetHashCode(Field obj) => obj.Id.GetHashCode();
+        }
     }
 }

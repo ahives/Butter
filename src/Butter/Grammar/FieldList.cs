@@ -16,32 +16,98 @@ namespace Butter.Grammar
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Notification;
 
     public class FieldList :
-        ObservableList, IFieldList, IEquatable<FieldList>
+        ReadOnlyFieldList, IFieldList, IEquatable<FieldList>
     {
-        readonly List<Field> _fields;
-        int _count;
-
-        public bool HasValues => _fields != null && _fields.Any();
-        public int Count => _count;
-
-        public Field this[int index]
+        public FieldList(bool notifyObservers = true)
+            : base(notifyObservers)
         {
-            get
-            {
-                TryGetValue(index, out var field);
-
-                return field;
-            }
         }
 
-        public FieldList(bool notifyObservers = true) : base(notifyObservers)
+        public Field Remove(int index)
         {
-            _fields = new List<Field>();
-            _count = 0;
+            if (index > _count || index < 0)
+                return SchemaCache.MissingField;
+
+            if (!TryGetValue(index, out Field field))
+                return SchemaCache.MissingField;
+                
+            NotifyObservers(field, SchemaActionType.Delete);
+                
+            _fields.RemoveAt(index);
+            _count = _fields.Count;
+
+            return field;
+        }
+
+        public Field Remove(string id)
+        {
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                if (_fields[i].Id != id)
+                    continue;
+
+                Field field = _fields[i];
+                
+                _fields.RemoveAt(i);
+                _count = _fields.Count;
+                
+                NotifyObservers(field, SchemaActionType.Delete);
+                
+                return field;
+            }
+
+            return SchemaCache.MissingField;
+        }
+
+        public bool TryRemove(int index, out Field item)
+        {
+            if (index > _count || index < 0)
+            {
+                item = SchemaCache.MissingField;
+
+                return false;
+            }
+
+            if (!TryGetValue(index, out Field field))
+            {
+                item = SchemaCache.MissingField;
+
+                return false;
+            }
+            
+            item = field;
+            
+            _fields.RemoveAt(index);
+            _count = _fields.Count;
+            
+            NotifyObservers(field, SchemaActionType.Delete);
+
+            return true;
+        }
+
+        public bool TryRemove(string id, out Field item)
+        {
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                if (_fields[i].Id != id)
+                    continue;
+                
+                item = _fields[i];
+
+                _fields.RemoveAt(i);
+                _count = _fields.Count;
+                
+                NotifyObservers(item, SchemaActionType.Delete);
+            
+                return true;
+            }
+            
+            item = SchemaCache.MissingField;
+
+            return false;
         }
 
         public void Add(Field field)
@@ -98,47 +164,6 @@ namespace Butter.Grammar
             }
         }
 
-        public bool TryGetValue(int index, out Field field)
-        {
-            if (index < 0 || _count <= 0)
-            {
-                field = SchemaCache.OutOfRangeField;
-                return false;
-            }
-
-            if (index < _count)
-            {
-                field = _fields[index];
-                return true;
-            }
-
-            field = SchemaCache.OutOfRangeField;
-            return false;
-        }
-
-        public bool TryGetValue(string id, out Field field)
-        {
-            if (_count <= 0)
-            {
-                field = SchemaCache.OutOfRangeField;
-                return false;
-            }
-
-            for (int i = 0; i < _count; i++)
-            {
-                if (_fields[i].Id != id)
-                    continue;
-                
-                field = _fields[i];
-                return true;
-            }
-            
-            field = SchemaCache.OutOfRangeField;
-            return false;
-        }
-
-        public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
-
         public bool Equals(FieldList other)
         {
             if (ReferenceEquals(null, other))
@@ -179,21 +204,6 @@ namespace Butter.Grammar
             {
                 return ((_fields != null ? _fields.GetHashCode() : 0) * 397) ^ _count;
             }
-        }
-
-
-        class FieldComparer :
-            IEqualityComparer<Field>
-        {
-            public bool Equals(Field x, Field y)
-            {
-                if (x == null || y == null)
-                    return false;
-
-                return x.Id == y.Id;
-            }
-
-            public int GetHashCode(Field obj) => obj.Id.GetHashCode();
         }
     }
 }

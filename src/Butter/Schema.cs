@@ -24,17 +24,19 @@ namespace Butter
         ISchema, IEquatable<Schema>, IDisposable
     {
         readonly List<IDisposable> _disposableObservers;
-        public IFieldList Fields { get; }
+        readonly FieldList _fields;
+
+        public IReadOnlyFieldList Fields => _fields;
 
         internal Schema(IList<Grammar.Field> fields, IList<IObserver<NotificationContext>> observers)
         {
             _disposableObservers = new List<IDisposable>();
             
-            Fields = new FieldList();
+            _fields = new FieldList();
             
             ConnectObservers(observers);
             
-            Fields.AddRange(fields);
+            _fields.AddRange(fields);
         }
 
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
@@ -47,7 +49,7 @@ namespace Butter
             if (ReferenceEquals(this, other))
                 return true;
 
-            return Fields.Equals(other.Fields);
+            return _fields.Equals(other.Fields);
         }
 
         public override bool Equals(object obj)
@@ -64,7 +66,7 @@ namespace Butter
             return Equals((Schema) obj);
         }
 
-        public override int GetHashCode() => Fields != null ? Fields.GetHashCode() : 0;
+        public override int GetHashCode() => _fields != null ? _fields.GetHashCode() : 0;
 
         public void Dispose()
         {
@@ -79,7 +81,7 @@ namespace Butter
             for (int i = 0; i < observers.Count; i++)
             {
                 if (observers[i] != null)
-                    _disposableObservers.Add(Fields.Subscribe(observers[i]));
+                    _disposableObservers.Add(_fields.Subscribe(observers[i]));
             }
         }
 

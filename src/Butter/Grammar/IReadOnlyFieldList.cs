@@ -14,25 +14,18 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System;
-    using System.Collections.Generic;
-    using Notification;
-
-    public interface IFieldList :
-        IObservable<NotificationContext>, IReadOnlyFieldList
+    public interface IReadOnlyFieldList
     {
-        void Add(Field field);
+        bool HasValues { get; }
+        
+        int Count { get; }
+        
+        Field this[int index] { get; }
 
-        void AddRange(params Field[] fields);
+        bool TryGetValue(int index, out Field field);
 
-        void AddRange(IList<Field> fields);
+        bool TryGetValue(string id, out Field field);
 
-        Field Remove(int index);
-
-        Field Remove(string id);
-
-        bool TryRemove(int index, out Field item);
-
-        bool TryRemove(string id, out Field item);
+        bool Contains(Field field);
     }
 }
