@@ -16,6 +16,12 @@ namespace Butter.Grammar
 {
     public static class FieldExtensions
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static bool EqualTo(this Field source, Field target)
         {
             if (source == null && target == null)

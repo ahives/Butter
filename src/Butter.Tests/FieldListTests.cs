@@ -5,6 +5,7 @@ namespace Butter.Tests
     using System.Collections.Generic;
     using Grammar;
     using NUnit.Framework;
+    using Validation;
 
     [TestFixture]
     public class FieldListTests
@@ -200,7 +201,10 @@ namespace Butter.Tests
                 })
                 .RegisterObserver(validator)
                 .Build();
+//                .Validate();
             
+//            validator.Validate();
+
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(7, schema.Fields.Count);
 

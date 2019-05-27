@@ -17,7 +17,7 @@ namespace Butter
     using System;
     using System.Collections.Generic;
     using Grammar;
-    using Grammar.Internal;
+    using Internal;
     using Notification;
 
     public class Schema :

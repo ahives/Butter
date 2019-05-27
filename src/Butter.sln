@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butter", "Butter\Butter.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butter.Tests", "Butter.Tests\Butter.Tests.csproj", "{2C712D03-A47A-4AF8-A256-84FD2212A562}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Butter.Validation", "Butter.Validation\Butter.Validation.csproj", "{88D64851-3AD4-482E-8D00-418A99BDDEA3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C712D03-A47A-4AF8-A256-84FD2212A562}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88D64851-3AD4-482E-8D00-418A99BDDEA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88D64851-3AD4-482E-8D00-418A99BDDEA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88D64851-3AD4-482E-8D00-418A99BDDEA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88D64851-3AD4-482E-8D00-418A99BDDEA3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

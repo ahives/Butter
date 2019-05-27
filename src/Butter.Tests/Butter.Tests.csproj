@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Butter.Validation\Butter.Validation.csproj" />
       <ProjectReference Include="..\Butter\Butter.csproj" />
     </ItemGroup>
 
