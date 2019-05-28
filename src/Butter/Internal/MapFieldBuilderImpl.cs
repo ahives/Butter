@@ -22,7 +22,7 @@ namespace Butter.Internal
         string _fieldId;
         bool _nullable;
 
-        public MapFieldBuilder Identifier(string fieldId)
+        public MapFieldBuilder Id(string fieldId)
         {
             _fieldId = fieldId;
             

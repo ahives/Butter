@@ -39,6 +39,10 @@ namespace Butter
             _fields.AddRange(fields);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
 
         public bool Equals(Schema other)
@@ -99,6 +103,12 @@ namespace Butter
                 };
             }
 
+            /// <summary>
+            /// Returns a field builder from cache memory.
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <returns></returns>
+            /// <exception cref="FieldBuilderMissingException"></exception>
             public static T Builder<T>()
             {
                 if (!_builderCache.ContainsKey(typeof(T).FullName))

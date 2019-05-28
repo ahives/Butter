@@ -19,9 +19,9 @@ namespace Butter.Internal
     class DecimalFieldImpl :
         DecimalField
     {
-        public DecimalFieldImpl(string fieldId, int scale, int precision, bool nullable = false)
+        public DecimalFieldImpl(string id, int scale, int precision, bool nullable = false)
         {
-            Id = fieldId;
+            Id = id;
             IsNullable = nullable;
             DataType = FieldDataType.Decimal;
             Scale = scale;

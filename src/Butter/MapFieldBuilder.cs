@@ -18,7 +18,7 @@ namespace Butter
 
     public interface MapFieldBuilder
     {
-        MapFieldBuilder Identifier(string fieldId);
+        MapFieldBuilder Id(string fieldId);
 
         MapFieldBuilder IsNullable();
 

@@ -12,7 +12,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -20,7 +20,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -28,7 +28,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -51,7 +51,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -59,7 +59,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -67,7 +67,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -90,7 +90,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -98,7 +98,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -106,7 +106,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -129,7 +129,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -137,7 +137,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -145,7 +145,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -168,7 +168,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -176,7 +176,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -184,7 +184,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -207,7 +207,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -215,7 +215,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -223,7 +223,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -246,7 +246,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -254,7 +254,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -262,7 +262,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -285,7 +285,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -293,7 +293,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -301,7 +301,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -324,7 +324,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -332,7 +332,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -340,7 +340,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -361,7 +361,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -369,7 +369,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -377,7 +377,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -398,7 +398,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -406,7 +406,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -414,7 +414,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -435,7 +435,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -443,7 +443,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -451,7 +451,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -472,7 +472,7 @@ namespace Butter.Tests
             var fields = new FieldList(false);
 
             var field1 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -480,7 +480,7 @@ namespace Butter.Tests
             fields.Add(field1);
             
             var field2 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field2")
+                .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
@@ -488,7 +488,7 @@ namespace Butter.Tests
             fields.Add(field2);
             
             var field3 = Schema.Field.Builder<FieldBuilder>()
-                .Identifier("field3")
+                .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();

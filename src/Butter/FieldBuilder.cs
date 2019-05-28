@@ -18,7 +18,7 @@ namespace Butter
 
     public interface FieldBuilder
     {
-        FieldBuilder Identifier(string fieldId);
+        FieldBuilder Id(string id);
 
         FieldBuilder DataType(FieldDataType dataType);
 

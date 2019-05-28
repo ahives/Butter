@@ -9,7 +9,7 @@ namespace Butter.Tests
         public void Test()
         {
             var field = Schema.Field.Builder<DecimalFieldBuilder>()
-                .Identifier("field1")
+                .Id("field1")
                 .Precision(2)
                 .Build();
 

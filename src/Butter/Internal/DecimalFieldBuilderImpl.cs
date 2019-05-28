@@ -19,14 +19,21 @@ namespace Butter.Internal
     class DecimalFieldBuilderImpl :
         DecimalFieldBuilder
     {
-        string _fieldId;
+        string _id;
         bool _nullable;
         int _scale;
         int _precision;
 
-        public DecimalFieldBuilder Identifier(string fieldId)
+        public DecimalFieldBuilderImpl()
         {
-            _fieldId = fieldId;
+            _nullable = false;
+            _scale = 2;
+            _precision = 3;
+        }
+
+        public DecimalFieldBuilder Id(string id)
+        {
+            _id = id;
             
             return this;
         }
@@ -52,6 +59,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public DecimalField Build() => new DecimalFieldImpl(_fieldId, _scale, _precision, _nullable);
+        public DecimalField Build() => new DecimalFieldImpl(_id, _scale, _precision, _nullable);
     }
 }

@@ -19,13 +19,13 @@ namespace Butter.Internal
     class FieldBuilderImpl :
         FieldBuilder
     {
-        string _fieldId;
+        string _id;
         FieldDataType _dataType;
         bool _nullable;
 
-        public FieldBuilder Identifier(string fieldId)
+        public FieldBuilder Id(string id)
         {
-            _fieldId = fieldId;
+            _id = id;
             
             return this;
         }
@@ -44,6 +44,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public Field Build() => new FieldImpl(_fieldId, _dataType, _nullable);
+        public Field Build() => new FieldImpl(_id, _dataType, _nullable);
     }
 }

@@ -18,7 +18,7 @@ namespace Butter
 
     public interface DecimalFieldBuilder
     {
-        DecimalFieldBuilder Identifier(string fieldId);
+        DecimalFieldBuilder Id(string id);
 
         DecimalFieldBuilder IsNullable();
 
