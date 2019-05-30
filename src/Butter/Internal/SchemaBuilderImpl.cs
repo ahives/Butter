@@ -26,19 +26,26 @@ namespace Butter.Internal
         readonly List<Field> _fields = new List<Field>();
         readonly List<IObserver<NotificationContext>> _observers = new List<IObserver<NotificationContext>>();
 
-        public ISchemaBuilder Field(string fieldId, FieldDataType dataType, bool nullable = false)
+        public ISchemaBuilder Field(string id, FieldDataType dataType, bool nullable = false)
         {
-            _fields.Add(new FieldImpl(fieldId, dataType, nullable));
+            _fields.Add(new FieldImpl(id, dataType, nullable));
             
             return this;
         }
 
-        public ISchemaBuilder Field(string fieldId, Action<DecimalDefinition> definition, bool nullable = false)
+        public ISchemaBuilder Field(string id, Action<DecimalFieldDefinition> definition, bool nullable = false)
         {
-            var impl = new DecimalDefinitionImpl();
+            var impl = new DecimalFieldDefinitionImpl();
             definition(impl);
             
-            _fields.Add(new DecimalFieldImpl(fieldId, impl.Scale.Value, impl.Precision.Value, nullable));
+            _fields.Add(new DecimalFieldImpl(id, impl.Scale.Value, impl.Precision.Value, nullable));
+            
+            return this;
+        }
+
+        public ISchemaBuilder Field(string id, IReadOnlyFieldList fields, bool nullable = false)
+        {
+            _fields.Add(new StructFieldImpl(id, fields, isNullable:nullable));
             
             return this;
         }
@@ -54,8 +61,8 @@ namespace Butter.Internal
         public ISchema Build() => new Schema(_fields, _observers);
 
 
-        class DecimalDefinitionImpl :
-            DecimalDefinition
+        class DecimalFieldDefinitionImpl :
+            DecimalFieldDefinition
         {
             int _precision;
             int _scale;
@@ -63,7 +70,7 @@ namespace Butter.Internal
             public Lazy<int> Scale { get; }
             public Lazy<int> Precision { get; }
 
-            public DecimalDefinitionImpl()
+            public DecimalFieldDefinitionImpl()
             {
                 Scale = new Lazy<int>(() => _scale, LazyThreadSafetyMode.PublicationOnly);
                 Precision = new Lazy<int>(() => _precision, LazyThreadSafetyMode.PublicationOnly);

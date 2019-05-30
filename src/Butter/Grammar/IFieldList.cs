@@ -19,7 +19,7 @@ namespace Butter.Grammar
     using Notification;
 
     public interface IFieldList :
-        IObservable<NotificationContext>, IReadOnlyFieldList
+        IObservable<NotificationContext>, IReadOnlyFieldList, IEquatable<IFieldList>
     {
         void Add(Field field);
 

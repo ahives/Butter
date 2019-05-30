@@ -12,12 +12,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar
 {
-    public interface DecimalDefinition
+    using System;
+
+    public interface StructField :
+        Field, IEquatable<StructField>
     {
-        void SetScale(int scale);
-        
-        void SetPrecision(int precision);
+        IReadOnlyFieldList Fields { get; }
     }
 }

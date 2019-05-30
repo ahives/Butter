@@ -40,7 +40,7 @@ namespace Butter
         }
 
         /// <summary>
-        /// 
+        /// Builds the schema.
         /// </summary>
         /// <returns></returns>
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();

@@ -14,20 +14,10 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using System;
-    using Grammar;
-    using Notification;
-
-    public interface ISchemaBuilder
+    public interface DecimalFieldDefinition
     {
-        ISchemaBuilder Field(string id, FieldDataType dataType, bool nullable = false);
+        void SetScale(int scale);
         
-        ISchemaBuilder Field(string id, Action<DecimalFieldDefinition> definition, bool nullable = false);
-        
-        ISchemaBuilder Field(string id, IReadOnlyFieldList fields, bool nullable = false);
-
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        void SetPrecision(int precision);
     }
 }

@@ -14,12 +14,11 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    using System;
     using System.Collections.Generic;
     using Notification;
 
     public class FieldList :
-        ReadOnlyFieldList, IFieldList, IEquatable<FieldList>
+        ReadOnlyFieldList, IFieldList
     {
         public FieldList(bool notifyObservers = true)
             : base(notifyObservers)
@@ -164,7 +163,7 @@ namespace Butter.Grammar
             }
         }
 
-        public bool Equals(FieldList other)
+        public bool Equals(IFieldList other)
         {
             if (ReferenceEquals(null, other))
                 return false;
@@ -172,7 +171,7 @@ namespace Butter.Grammar
             if (ReferenceEquals(this, other))
                 return true;
 
-            if (_count != other._count)
+            if (_count != other.Count)
                 return false;
 
             for (int i = 0; i < other.Count; i++)

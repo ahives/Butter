@@ -77,5 +77,25 @@ namespace Butter.Grammar
         }
 
         public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
+
+        public bool Equals(IReadOnlyFieldList other)
+        {
+            if (ReferenceEquals(null, other))
+                return false;
+            
+            if (ReferenceEquals(this, other))
+                return true;
+
+            if (_count != other.Count)
+                return false;
+
+            for (int i = 0; i < other.Count; i++)
+            {
+                if (!_fields.Contains(other[i]))
+                    return false;
+            }
+
+            return true;
+        }
     }
 }

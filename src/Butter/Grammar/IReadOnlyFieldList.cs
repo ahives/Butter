@@ -14,7 +14,10 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
-    public interface IReadOnlyFieldList
+    using System;
+
+    public interface IReadOnlyFieldList :
+        IEquatable<IReadOnlyFieldList>
     {
         bool HasValues { get; }
         
