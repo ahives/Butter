@@ -117,6 +117,12 @@ namespace Butter.Grammar
                 return;
             }
             
+            if (_fields.Contains(field))
+            {
+                NotifyObservers(field, SchemaActionType.FieldAlreadyExists);
+                return;
+            }
+            
             _fields.Add(field);
             _count = _fields.Count;
             
@@ -147,7 +153,7 @@ namespace Butter.Grammar
         {
             if (fields == null)
                 return;
-            
+
             for (int i = 0; i < fields.Length; i++)
             {
                 if (fields[i] == null)
@@ -155,10 +161,17 @@ namespace Butter.Grammar
                     NotifyObservers(fields[i], SchemaActionType.None);
                     continue;
                 }
-                
+
+                if (_fields.Contains(fields[i]))
+                {
+                    NotifyObservers(fields[i], SchemaActionType.FieldAlreadyExists);
+                    continue;
+                }
+
+
                 _fields.Add(fields[i]);
                 _count++;
-                
+
                 NotifyObservers(fields[i], SchemaActionType.Add);
             }
         }

@@ -18,6 +18,7 @@ namespace Butter.Notification
     {
         Add,
         Delete,
-        None
+        None,
+        FieldAlreadyExists
     }
 }
