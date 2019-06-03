@@ -16,37 +16,38 @@ namespace Butter.Internal
 {
     using System;
     using System.Collections.Generic;
-    using System.Threading;
     using Grammar;
     using Notification;
 
     class SchemaBuilderImpl :
         ISchemaBuilder
     {
-        readonly List<Field> _fields = new List<Field>();
+        readonly List<FieldSpec> _specifications = new List<FieldSpec>();
         readonly List<IObserver<NotificationContext>> _observers = new List<IObserver<NotificationContext>>();
 
-        public ISchemaBuilder Field(string id, FieldDataType dataType, bool nullable = false)
+        public ISchemaBuilder Field(FieldSpec specification)
         {
-            _fields.Add(new FieldImpl(id, dataType, nullable));
-            
+            _specifications.Add(specification);
+
             return this;
         }
 
-        public ISchemaBuilder Field(string id, Action<DecimalFieldDefinition> definition, bool nullable = false)
+        public ISchemaBuilder Field<T>(Func<T, FieldSpec> builder)
+            where T : ISpecificationBuilder
         {
-            var impl = new DecimalFieldDefinitionImpl();
-            definition(impl);
-            
-            _fields.Add(new DecimalFieldImpl(id, impl.Scale.Value, impl.Precision.Value, nullable));
-            
+            T specBuilder = Butter.Field.Builder<T>();
+
+            var specification = builder(specBuilder);
+
+            _specifications.Add(specification);
+
             return this;
         }
 
-        public ISchemaBuilder Field(string id, IReadOnlyFieldList fields, bool nullable = false)
+        public ISchemaBuilder Fields(IReadOnlyFieldList specifications)
         {
-            _fields.Add(new StructFieldImpl(id, fields, isNullable:nullable));
-            
+            _specifications.AddRange(specifications.ToList());
+
             return this;
         }
 
@@ -58,33 +59,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public ISchema Build() => new Schema(_fields, _observers);
-
-
-        class DecimalFieldDefinitionImpl :
-            DecimalFieldDefinition
-        {
-            int _precision;
-            int _scale;
-
-            public Lazy<int> Scale { get; }
-            public Lazy<int> Precision { get; }
-
-            public DecimalFieldDefinitionImpl()
-            {
-                Scale = new Lazy<int>(() => _scale, LazyThreadSafetyMode.PublicationOnly);
-                Precision = new Lazy<int>(() => _precision, LazyThreadSafetyMode.PublicationOnly);
-            }
-
-            public void SetScale(int scale)
-            {
-                _scale = scale;
-            }
-
-            public void SetPrecision(int precision)
-            {
-                _precision = precision;
-            }
-        }
+        public ISchema Build() => new Schema(_specifications, _observers);
     }
 }

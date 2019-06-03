@@ -10,8 +10,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_attempting_to_access_negative_index()
         {
+            FieldSpec spec = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
+                .Field(spec)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(-1, out _));
@@ -20,8 +25,13 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_attempting_to_access_greater_than_count_index()
         {
+            FieldSpec spec = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
+                .Field(spec)
                 .Build();
             
             Assert.IsFalse(schema.Fields.TryGetValue(schema.Fields.Count + 1, out _));
@@ -50,13 +60,43 @@ namespace Butter.Tests
                 [Test]
         public void Verify_can_access_list_using_indexer()
         {
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
                 .Build();
             
             Assert.IsNotNull(schema.Fields[0]);
@@ -78,49 +118,139 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryGetValue_will_not_throw_when_index_less_than_zero()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
                 .Build();
             
-            Assert.IsFalse(schema.Fields.TryGetValue(-1, out Field field));
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Build();
+            
+            Assert.IsFalse(schema.Fields.TryGetValue(-1, out FieldSpec field));
             Assert.IsNotNull(field);
         }
 
         [Test]
         public void Verify_TryGetValue_will_not_throw_when_index_greater_than_count()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Build();
+            
             int count = schema.Fields.Count;
-            Assert.IsFalse(schema.Fields.TryGetValue(count + 1, out Field field));
+            Assert.IsFalse(schema.Fields.TryGetValue(count + 1, out FieldSpec field));
             Assert.IsNotNull(field);
         }
 
         [Test]
         public void Verify_TryGetValue_will_return_field()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
-            Assert.IsTrue(schema.Fields.TryGetValue(3, out Field field));
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Build();
+            
+            Assert.IsTrue(schema.Fields.TryGetValue(3, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
             Assert.AreEqual(FieldDataType.Primitive, field.DataType);
@@ -129,16 +259,46 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryGetValue_will_return_field_given_identifier()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
-            Assert.IsTrue(schema.Fields.TryGetValue("field4", out Field field));
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Build();
+            
+            Assert.IsTrue(schema.Fields.TryGetValue("field4", out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
             Assert.AreEqual(FieldDataType.Primitive, field.DataType);
@@ -147,19 +307,45 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_access_list_with_multiple_field_types()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Map)
-                .Field("field3", FieldDataType.List)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field6",x =>
-                {
-                    x.SetPrecision(2);
-                    x.SetScale(4);
-                })
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.List)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.List)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.List)
+                .Build();
+            
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Build();
+            
             for (int i = 0; i < schema.Fields.Count; i++)
             {
                 switch (schema.Fields[i].DataType)
@@ -167,9 +353,9 @@ namespace Butter.Tests
                     case FieldDataType.None:
                         break;
                     case FieldDataType.Primitive:
-                        Field field = schema.Fields[i];
-                        Assert.IsNotNull(field);
-                        Assert.That(field.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
+                        FieldSpec specification = schema.Fields[i];
+                        Assert.IsNotNull(specification);
+                        Assert.That(specification.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;
                     case FieldDataType.Map:
 //                        MapField mapField = schema.Fields[i].Cast<MapField>();
@@ -182,11 +368,11 @@ namespace Butter.Tests
 //                        Assert.AreEqual("field3", listField.Id);
                         break;
                     case FieldDataType.Decimal:
-                        DecimalField decimalField = schema.Fields[i].Cast<DecimalField>();
-                        Assert.IsNotNull(decimalField);
-                        Assert.AreEqual("field6", decimalField.Id);
+                        DecimalFieldSpec spec = schema.Fields[i].Cast<DecimalFieldSpec>();
+                        Assert.IsNotNull(spec);
+                        Assert.AreEqual("field6", spec.Id);
                         break;
-                    case FieldDataType.Structure:
+                    case FieldDataType.Struct:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

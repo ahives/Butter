@@ -16,8 +16,8 @@ namespace Butter.Grammar
 {
     using System;
 
-    public interface Field :
-        IEquatable<Field>
+    public interface FieldSpec :
+        IEquatable<FieldSpec>
     {
         string Id { get; }
         

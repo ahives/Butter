@@ -16,10 +16,10 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class ListFieldImpl :
-        ListField
+    class ListFieldSpecImpl :
+        ListFieldSpec
     {
-        public ListFieldImpl(string id)
+        public ListFieldSpecImpl(string id)
         {
             Id = id;
             DataType = FieldDataType.List;
@@ -29,7 +29,7 @@ namespace Butter.Internal
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
 
-        public bool Equals(ListField other)
+        public bool Equals(ListFieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -37,7 +37,7 @@ namespace Butter.Internal
             return string.Equals(Id, other.Id) && DataType == other.DataType;
         }
 
-        public bool Equals(Field other)
+        public bool Equals(FieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -56,7 +56,7 @@ namespace Butter.Internal
             if (obj.GetType() != this.GetType())
                 return false;
             
-            return Equals((Field)obj);
+            return Equals((FieldSpec)obj);
         }
 
         public override int GetHashCode()

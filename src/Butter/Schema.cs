@@ -28,7 +28,7 @@ namespace Butter
 
         public IReadOnlyFieldList Fields => _fields;
 
-        internal Schema(IList<Grammar.Field> fields, IList<IObserver<NotificationContext>> observers)
+        internal Schema(IList<FieldSpec> fields, IList<IObserver<NotificationContext>> observers)
         {
             _disposableObservers = new List<IDisposable>();
             
@@ -86,35 +86,6 @@ namespace Butter
             {
                 if (observers[i] != null)
                     _disposableObservers.Add(_fields.Subscribe(observers[i]));
-            }
-        }
-
-        public class Field
-        {
-            static readonly IDictionary<string, object> _builderCache;
-        
-            static Field()
-            {
-                _builderCache = new Dictionary<string, object>
-                {
-                    {typeof(FieldBuilder).FullName, new FieldBuilderImpl()},
-                    {typeof(DecimalFieldBuilder).FullName, new DecimalFieldBuilderImpl()},
-                    {typeof(MapFieldBuilder).FullName, new MapFieldBuilderImpl()}
-                };
-            }
-
-            /// <summary>
-            /// Returns a field builder from cache memory.
-            /// </summary>
-            /// <typeparam name="T"></typeparam>
-            /// <returns></returns>
-            /// <exception cref="FieldBuilderMissingException"></exception>
-            public static T Builder<T>()
-            {
-                if (!_builderCache.ContainsKey(typeof(T).FullName))
-                    throw new FieldBuilderMissingException($"Failed to find implementation for builder '{typeof(T)}'");
-
-                return (T) _builderCache[typeof(T).FullName];
             }
         }
     }

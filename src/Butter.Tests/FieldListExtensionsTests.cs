@@ -9,17 +9,44 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            DecimalFieldSpec spec6 = Field.Builder<DecimalFieldSpecBuilder>()
+                .Id("field6")
+                .Precision(2)
+                .Scale(4)
+                .Build();
+            
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Map)
-                .Field("field3", FieldDataType.List)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field6",x =>
-                {
-                    x.SetPrecision(2);
-                    x.SetScale(4);
-                })
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
                 .Build();
 
             int count = 0;

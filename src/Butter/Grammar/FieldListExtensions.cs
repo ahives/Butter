@@ -23,7 +23,7 @@ namespace Butter.Grammar
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        public static IEnumerable<FieldSpec> ToEnumerable(this IFieldList fields)
         {
             for (int i = 0; i < fields.Count; i++)
             {
@@ -36,7 +36,7 @@ namespace Butter.Grammar
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IReadOnlyFieldList fields)
+        public static IEnumerable<FieldSpec> ToEnumerable(this IReadOnlyFieldList fields)
         {
             for (int i = 0; i < fields.Count; i++)
             {

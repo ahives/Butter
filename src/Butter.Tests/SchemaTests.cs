@@ -9,14 +9,39 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_add_fields_after_construction()
         {
-            var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive, false)
-                .Field("field2", FieldDataType.Primitive, false)
-                .Field("field3", FieldDataType.Primitive, false)
-                .Field("field4", FieldDataType.Primitive, false)
-                .Field("field5", FieldDataType.Primitive, false)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
+            var schema = Schema.Builder()
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Build();
+            
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(5, schema.Fields.Count);
         }

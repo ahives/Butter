@@ -11,47 +11,100 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
                 .Id("fieldA")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
             
-            fields.Add(field1);
+            fields.Add(spec1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
                 .Id("fieldB")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
             
-            fields.Add(field2);
+            fields.Add(spec2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
                 .Id("fieldC")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
             
-            fields.Add(field3);
+            fields.Add(spec3);
+
+            DecimalFieldSpec spec4 = Field.Builder<DecimalFieldSpecBuilder>()
+                .Id("fieldD")
+                .Precision(5)
+                .Scale(2)
+                .Build();
+            
+            fields.Add(spec4);
+
+            var spec5 = Field.Builder<StructFieldSpecBuilder>()
+                .Id("field1")
+                .IsNullable()
+                .Fields(fields)
+                .Build();
 
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Map)
-                .Field("field3", FieldDataType.List)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field6",x =>
-                {
-                    x.SetPrecision(2);
-                    x.SetScale(4);
-                })
-                .Field("field7", fields)
+                .Field(spec5)
+                .Field<FieldSpecBuilder>(x => x.Id("field6").IsNullable().Build())
+                .Field<FieldSpecBuilder>(x => x.Id("field7").IsNullable().Build())
+                .Field<FieldSpecBuilder>(x => x.Id("field8").IsNullable().Build())
+                .Field<FieldSpecBuilder>(x => x.Id("field9").IsNullable().Build())
+                .Field<FieldSpecBuilder>(x => x.Id("field10").IsNullable().Build())
                 .Build();
 
             IReadOnlyFieldList fieldList = schema.Fields.SelectMany();
             
             Assert.AreEqual(10, fieldList.Count);
+        }
+
+        [Test]
+        public void Test1()
+        {
+            var fields = new FieldList(false);
+
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("fieldA")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            fields.Add(spec1);
+            
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("fieldB")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            fields.Add(spec2);
+            
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("fieldC")
+                .DataType(FieldDataType.Primitive)
+                .IsNullable()
+                .Build();
+            
+            fields.Add(spec3);
+
+            DecimalFieldSpec spec4 = Field.Builder<DecimalFieldSpecBuilder>()
+                .Id("field")
+                .Precision(5)
+                .Scale(2)
+                .Build();
+            
+            fields.Add(spec4);
+
+            var schema = Schema.Builder()
+                .Field<StructFieldSpecBuilder>(x => x.Id("fieldX").IsNullable().Fields(fields).Build())
+                .Build();
+
+            Assert.AreEqual(1, schema.Fields.Count);
         }
     }
 }

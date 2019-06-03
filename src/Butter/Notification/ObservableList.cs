@@ -38,14 +38,14 @@ namespace Butter.Notification
             return new UnsubscribeObserver(_observers, observer);
         }
 
-        protected void NotifyObservers(Field field, SchemaActionType schemaActionType)
+        protected void NotifyObservers(FieldSpec specification, SchemaActionType schemaActionType)
         {
             if (!_notifyObservers)
                 return;
             
             foreach (var observer in _observers)
             {
-                observer.OnNext(new NotificationContextImpl(field, schemaActionType));
+                observer.OnNext(new NotificationContextImpl(specification, schemaActionType));
             }
         }
         

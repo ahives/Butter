@@ -20,21 +20,21 @@ namespace Butter.Grammar
     public abstract class BaseFieldList :
         ObservableList
     {
-        protected readonly List<Field> _fields;
+        protected readonly List<FieldSpec> _fields;
         protected int _count;
 
         protected BaseFieldList(bool notifyObservers)
             : base(notifyObservers)
         {
-            _fields = new List<Field>();
+            _fields = new List<FieldSpec>();
             _count = 0;
         }
 
         
         protected class FieldComparer :
-            IEqualityComparer<Field>
+            IEqualityComparer<FieldSpec>
         {
-            public bool Equals(Field x, Field y)
+            public bool Equals(FieldSpec x, FieldSpec y)
             {
                 if (x == null || y == null)
                     return false;
@@ -42,7 +42,7 @@ namespace Butter.Grammar
                 return x.Id == y.Id;
             }
 
-            public int GetHashCode(Field obj) => obj.Id.GetHashCode();
+            public int GetHashCode(FieldSpec obj) => obj.Id.GetHashCode();
         }
     }
 }

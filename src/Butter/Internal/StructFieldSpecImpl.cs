@@ -16,21 +16,23 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class MapFieldImpl :
-        MapField
+    class StructFieldSpecImpl :
+        StructFieldSpec
     {
-        public MapFieldImpl(string id, bool isNullable = false)
-        {
-            Id = id;
-            DataType = FieldDataType.Map;
-            IsNullable = isNullable;
-        }
-
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public IReadOnlyFieldList Fields { get; }
 
-        public bool Equals(Field other)
+        public StructFieldSpecImpl(string id, IReadOnlyFieldList fields, FieldDataType dataType = FieldDataType.Struct, bool isNullable = false)
+        {
+            Id = id;
+            IsNullable = isNullable;
+            DataType = dataType;
+            Fields = fields;
+        }
+
+        public bool Equals(FieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -38,34 +40,15 @@ namespace Butter.Internal
             return string.Equals(Id, other.Id) && DataType == other.DataType;
         }
 
-        public bool Equals(MapField other)
+        public bool Equals(StructFieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
 
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
+            if (Fields.Count != other.Fields.Count)
                 return false;
             
-            if (ReferenceEquals(this, obj))
-                return true;
-            
-            if (obj.GetType() != this.GetType())
-                return false;
-            
-            return Equals((Field)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
-            }
+            return string.Equals(Id, other.Id) && DataType == other.DataType && Fields.Equals(other.Fields);
         }
     }
 }

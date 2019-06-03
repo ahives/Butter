@@ -12,18 +12,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter.Grammar
 {
-    using Grammar;
+    using System;
 
-    class MissingMapField :
-        MapField
+    public interface ListFieldSpec :
+        FieldSpec, IEquatable<ListFieldSpec>
     {
-        public string Id { get; }
-        public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Map;
-
-        public bool Equals(MapField other) => false;
-        public bool Equals(Field other) => false;
+        
     }
 }

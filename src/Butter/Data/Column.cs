@@ -18,7 +18,7 @@ namespace Butter.Data
 
     public interface Column
     {
-        Field Field { get; }
+        FieldSpec Specification { get; }
         
         IValueList Values { get; }
         

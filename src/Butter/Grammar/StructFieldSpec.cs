@@ -16,8 +16,8 @@ namespace Butter.Grammar
 {
     using System;
 
-    public interface StructField :
-        Field, IEquatable<StructField>
+    public interface StructFieldSpec :
+        FieldSpec, IEquatable<StructFieldSpec>
     {
         IReadOnlyFieldList Fields { get; }
     }

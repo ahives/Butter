@@ -15,6 +15,7 @@
 namespace Butter.Grammar
 {
     using System;
+    using System.Collections.Generic;
 
     public static class ReadOnlyFieldListExtensions
     {
@@ -32,7 +33,7 @@ namespace Butter.Grammar
             {
                 switch (source[i])
                 {
-                    case StructField field:
+                    case StructFieldSpec field:
                         fields.AddRange(field);
                         for (int j = 0; j < field.Fields.Count; j++)
                         {
@@ -40,19 +41,19 @@ namespace Butter.Grammar
                         }
                         break;
                     
-                    case ListField field:
+                    case ListFieldSpec field:
                         fields.AddRange(field);
                         break;
                     
-                    case MapField field:
+                    case MapFieldSpec field:
                         fields.AddRange(field);
                         break;
                     
-                    case DecimalField field:
+                    case DecimalFieldSpec field:
                         fields.AddRange(field);
                         break;
                     
-                    case Field field:
+                    case FieldSpec field:
                         fields.AddRange(field);
                         break;
                         
@@ -62,6 +63,23 @@ namespace Butter.Grammar
             }
 
             return fields;
+        }
+
+        /// <summary>
+        /// Converts a IReadOnlyFieldList into a <see cref="IList{T}"/>
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static IList<FieldSpec> ToList(this IReadOnlyFieldList source)
+        {
+            var list = new List<FieldSpec>();
+            
+            for (int i = 0; i < source.Count; i++)
+            {
+                list.Add(source[i]);
+            }
+
+            return list;
         }
     }
 }

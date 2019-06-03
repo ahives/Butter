@@ -12,16 +12,27 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
     using Grammar;
 
-    public interface MapFieldBuilder
+    class MissingFieldSpec :
+        FieldSpec
     {
-        MapFieldBuilder Id(string fieldId);
+        public string Id => "[Butter].[missing_field_spec]";
+        public bool IsNullable => true;
+        public FieldDataType DataType => FieldDataType.Primitive;
 
-        MapFieldBuilder IsNullable();
+        public bool Equals(FieldSpec other) => false;
 
-        MapField Build();
+        public override bool Equals(object obj) => Equals((FieldSpec)obj);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
+            }
+        }
     }
 }

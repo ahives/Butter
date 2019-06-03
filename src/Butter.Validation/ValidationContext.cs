@@ -19,7 +19,7 @@ namespace Butter.Validation
 
     public interface ValidationContext
     {
-        Field Field { get; }
+        FieldSpec Specification { get; }
         
         ValidationResult ValidationResult { get; }
         

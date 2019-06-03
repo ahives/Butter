@@ -12,33 +12,21 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Data
+namespace Butter
 {
     using Grammar;
 
-    public class DataColumn
+    public interface StructFieldSpecBuilder :
+        ISpecificationBuilder
     {
-        public static Column Create(FieldSpec specification, IValueList values)
-        {
-            if (specification == null || values == null)
-                return DataCache.Empty;
-            
-            return new ColumnImpl(specification, values);
-        }
+        StructFieldSpecBuilder Id(string id);
 
-        class ColumnImpl :
-            Column
-        {
-            public ColumnImpl(FieldSpec specification, IValueList values)
-            {
-                Specification = specification;
-                Values = values;
-                HasValues = values != null && values.HasValues;
-            }
+        StructFieldSpecBuilder Field<T>(T specification) where T : FieldSpec;
 
-            public FieldSpec Specification { get; }
-            public IValueList Values { get; }
-            public bool HasValues { get; }
-        }
+        StructFieldSpecBuilder Fields(IReadOnlyFieldList specifications);
+
+        StructFieldSpecBuilder IsNullable();
+
+        StructFieldSpec Build();
     }
 }

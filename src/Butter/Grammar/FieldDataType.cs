@@ -21,6 +21,6 @@ namespace Butter.Grammar
         Decimal,
         List,
         Map,
-        Structure
+        Struct
     }
 }

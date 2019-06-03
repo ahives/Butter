@@ -11,7 +11,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -19,7 +19,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -27,7 +27,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -38,10 +38,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove("field1");
+            FieldSpec specification = fields.Remove("field1");
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -50,7 +50,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -58,7 +58,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -66,7 +66,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -77,10 +77,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove("field2");
+            FieldSpec specification = fields.Remove("field2");
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -89,7 +89,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -97,7 +97,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -105,7 +105,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -116,10 +116,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove("field3");
+            FieldSpec specification = fields.Remove("field3");
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -128,7 +128,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -136,7 +136,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -144,7 +144,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -155,10 +155,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove(0);
+            FieldSpec specification = fields.Remove(0);
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -167,7 +167,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -175,7 +175,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -183,7 +183,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -194,10 +194,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove(-1);
+            FieldSpec specification = fields.Remove(-1);
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(3, fields.Count);
         }
 
@@ -206,7 +206,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -214,7 +214,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -222,7 +222,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -233,10 +233,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove(5);
+            FieldSpec specification = fields.Remove(5);
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(3, fields.Count);
         }
 
@@ -245,7 +245,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -253,7 +253,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -261,7 +261,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -272,10 +272,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove(1);
+            FieldSpec specification = fields.Remove(1);
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -284,7 +284,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -292,7 +292,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -300,7 +300,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -311,10 +311,10 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            Field field = fields.Remove(2);
+            FieldSpec specification = fields.Remove(2);
             
-            Assert.IsNotNull(field);
-            Assert.IsFalse(fields.Contains(field));
+            Assert.IsNotNull(specification);
+            Assert.IsFalse(fields.Contains(specification));
             Assert.AreEqual(2, fields.Count);
         }
 
@@ -323,7 +323,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -331,7 +331,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -339,7 +339,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -349,7 +349,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsFalse(fields.TryRemove(-1, out Field field));
+            Assert.IsFalse(fields.TryRemove(-1, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(3, fields.Count);
@@ -360,7 +360,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -368,7 +368,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -376,7 +376,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -386,7 +386,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsFalse(fields.TryRemove(5, out Field field));
+            Assert.IsFalse(fields.TryRemove(5, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(3, fields.Count);
@@ -397,7 +397,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -405,7 +405,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -413,7 +413,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -423,7 +423,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(0, out Field field));
+            Assert.IsTrue(fields.TryRemove(0, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);
@@ -434,7 +434,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -442,7 +442,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -450,7 +450,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -460,7 +460,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(1, out Field field));
+            Assert.IsTrue(fields.TryRemove(1, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);
@@ -471,7 +471,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList(false);
 
-            var field1 = Schema.Field.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldSpecBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -479,7 +479,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = Schema.Field.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldSpecBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -487,7 +487,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            var field3 = Schema.Field.Builder<FieldBuilder>()
+            var field3 = Field.Builder<FieldSpecBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -497,7 +497,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(2, out Field field));
+            Assert.IsTrue(fields.TryRemove(2, out FieldSpec field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);

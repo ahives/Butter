@@ -12,33 +12,23 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter
 {
     using Grammar;
 
-    class EmptyFieldList :
-        IReadOnlyFieldList
+    public interface MapFieldSpecBuilder :
+        ISpecificationBuilder
     {
-        public bool HasValues => false;
-        public int Count => 0;
-        public FieldSpec this[int index] => SchemaCache.MissingFieldSpec;
+        MapFieldSpecBuilder Id(string id);
 
-        public FieldSpec this[string id] => SchemaCache.MissingFieldSpec;
+        MapFieldSpecBuilder Map(FieldSpec key, FieldSpec value);
 
-        public bool TryGetValue(int index, out FieldSpec specification)
-        {
-            specification = SchemaCache.MissingFieldSpec;
-            return false;
-        }
+        MapFieldSpecBuilder Key(FieldSpec key);
 
-        public bool TryGetValue(string id, out FieldSpec specification)
-        {
-            specification = SchemaCache.MissingFieldSpec;
-            return false;
-        }
+        MapFieldSpecBuilder Value(FieldSpec value);
 
-        public bool Contains(FieldSpec specification) => false;
-        
-        public bool Equals(IReadOnlyFieldList other) => false;
+        MapFieldSpecBuilder IsNullable();
+
+        MapFieldSpec Build();
     }
 }

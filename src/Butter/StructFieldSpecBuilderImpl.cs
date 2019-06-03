@@ -12,53 +12,53 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter
 {
     using Grammar;
+    using Internal;
 
-    class DecimalFieldBuilderImpl :
-        DecimalFieldBuilder
+    class StructFieldSpecBuilderImpl :
+        StructFieldSpecBuilder
     {
         string _id;
+        FieldSpec _specification;
+        readonly IFieldList _specifications;
         bool _nullable;
-        int _scale;
-        int _precision;
 
-        public DecimalFieldBuilderImpl()
+        public StructFieldSpecBuilderImpl()
         {
-            _nullable = false;
-            _scale = 2;
-            _precision = 3;
+            _specifications = new FieldList(false);
         }
 
-        public DecimalFieldBuilder Id(string id)
+        public StructFieldSpecBuilder Id(string id)
         {
             _id = id;
-            
+
             return this;
         }
 
-        public DecimalFieldBuilder IsNullable()
+        public StructFieldSpecBuilder Field<T>(T specification)
+            where T : FieldSpec
+        {
+            _specifications.Add(specification);
+
+            return this;
+        }
+
+        public StructFieldSpecBuilder Fields(IReadOnlyFieldList specifications)
+        {
+            _specifications.AddRange(specifications.ToList());
+
+            return this;
+        }
+
+        public StructFieldSpecBuilder IsNullable()
         {
             _nullable = true;
-            
-            return this;
-        }
-
-        public DecimalFieldBuilder Scale(int scale)
-        {
-            _scale = scale;
 
             return this;
         }
 
-        public DecimalFieldBuilder Precision(int precision)
-        {
-            _precision = precision;
-
-            return this;
-        }
-
-        public DecimalField Build() => new DecimalFieldImpl(_id, _scale, _precision, _nullable);
+        public StructFieldSpec Build() => new StructFieldSpecImpl(_id, _specifications, isNullable:_nullable);
     }
 }

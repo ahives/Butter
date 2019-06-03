@@ -85,23 +85,23 @@ namespace Butter.Validation
             if (value == null)
             {
                 var result = new ValidationResultImpl("FIELD == NULL.", ValidationType.Error);
-                var context = new ValidationContextImpl(SchemaCache.MissingField, result);
+                var context = new ValidationContextImpl(SchemaCache.MissingFieldSpec, result);
                 
                 Validation.Add(context);
                 
                 return;
             }
 
-            if (_fields.Contains(value.Field))
+            if (_fields.Contains(value.Specification))
             {
                 var result = new ValidationResultImpl("FIELD ALREADY EXISTS.", ValidationType.Error);
-                var context = new ValidationContextImpl(value.Field, result);
+                var context = new ValidationContextImpl(value.Specification, result);
                 
                 Console.WriteLine(result.Reason);
                 Validation.Add(context);
             }
             
-            _fields.Add(value.Field);
+            _fields.Add(value.Specification);
         }
     }
 }

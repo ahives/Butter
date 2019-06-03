@@ -16,10 +16,10 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class DecimalFieldImpl :
-        DecimalField
+    class DecimalFieldSpecImpl :
+        DecimalFieldSpec
     {
-        public DecimalFieldImpl(string id, int scale, int precision, bool nullable = false)
+        public DecimalFieldSpecImpl(string id, int scale, int precision, bool nullable = false)
         {
             Id = id;
             IsNullable = nullable;
@@ -28,13 +28,20 @@ namespace Butter.Internal
             Precision = precision;
         }
 
+        public DecimalFieldSpecImpl(string id, bool nullable)
+        {
+            Id = id;
+            IsNullable = nullable;
+            DataType = FieldDataType.Decimal;
+        }
+
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public int Scale { get; }
         public int Precision { get; }
 
-        public bool Equals(DecimalField other)
+        public bool Equals(DecimalFieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -42,7 +49,7 @@ namespace Butter.Internal
             return string.Equals(Id, other.Id) && DataType == other.DataType;
         }
 
-        public bool Equals(Field other)
+        public bool Equals(FieldSpec other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -61,7 +68,7 @@ namespace Butter.Internal
             if (obj.GetType() != this.GetType())
                 return false;
             
-            return Equals((DecimalFieldImpl) obj);
+            return Equals((DecimalFieldSpecImpl) obj);
         }
 
         public override int GetHashCode()

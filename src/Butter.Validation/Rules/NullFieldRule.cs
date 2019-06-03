@@ -25,13 +25,13 @@ namespace Butter.Validation.Rules
     {
         public override void Define()
         {
-            IEnumerable<Field> fields = null;
+            IEnumerable<FieldSpec> fields = null;
             
             Name(nameof(NullFieldRule));
 
             When()
                 .Query(() => fields, x =>
-                    x.Match<Field>(f => f == null)
+                    x.Match<FieldSpec>(f => f == null)
                         .Collect()
                         .Where(f => f.Any()));
 

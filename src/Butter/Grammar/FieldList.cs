@@ -25,13 +25,13 @@ namespace Butter.Grammar
         {
         }
 
-        public Field Remove(int index)
+        public FieldSpec Remove(int index)
         {
             if (index > _count || index < 0)
-                return SchemaCache.MissingField;
+                return SchemaCache.MissingFieldSpec;
 
-            if (!TryGetValue(index, out Field field))
-                return SchemaCache.MissingField;
+            if (!TryGetValue(index, out FieldSpec field))
+                return SchemaCache.MissingFieldSpec;
                 
             NotifyObservers(field, SchemaActionType.Delete);
                 
@@ -41,43 +41,43 @@ namespace Butter.Grammar
             return field;
         }
 
-        public Field Remove(string id)
+        public FieldSpec Remove(string id)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
 
-                Field field = _fields[i];
+                FieldSpec specification = _fields[i];
                 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
                 
-                NotifyObservers(field, SchemaActionType.Delete);
+                NotifyObservers(specification, SchemaActionType.Delete);
                 
-                return field;
+                return specification;
             }
 
-            return SchemaCache.MissingField;
+            return SchemaCache.MissingFieldSpec;
         }
 
-        public bool TryRemove(int index, out Field item)
+        public bool TryRemove(int index, out FieldSpec specification)
         {
             if (index > _count || index < 0)
             {
-                item = SchemaCache.MissingField;
+                specification = SchemaCache.MissingFieldSpec;
 
                 return false;
             }
 
-            if (!TryGetValue(index, out Field field))
+            if (!TryGetValue(index, out FieldSpec field))
             {
-                item = SchemaCache.MissingField;
+                specification = SchemaCache.MissingFieldSpec;
 
                 return false;
             }
             
-            item = field;
+            specification = field;
             
             _fields.RemoveAt(index);
             _count = _fields.Count;
@@ -87,79 +87,79 @@ namespace Butter.Grammar
             return true;
         }
 
-        public bool TryRemove(string id, out Field item)
+        public bool TryRemove(string id, out FieldSpec specification)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
                 
-                item = _fields[i];
+                specification = _fields[i];
 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
                 
-                NotifyObservers(item, SchemaActionType.Delete);
+                NotifyObservers(specification, SchemaActionType.Delete);
             
                 return true;
             }
             
-            item = SchemaCache.MissingField;
+            specification = SchemaCache.MissingFieldSpec;
 
             return false;
         }
 
-        public void Add(Field field)
+        public void Add(FieldSpec specification)
         {
-            if (field == null)
+            if (specification == null)
             {
-                NotifyObservers(field, SchemaActionType.None);
+                NotifyObservers(specification, SchemaActionType.None);
                 return;
             }
             
-            _fields.Add(field);
+            _fields.Add(specification);
             _count = _fields.Count;
             
-            NotifyObservers(field, SchemaActionType.Add);
+            NotifyObservers(specification, SchemaActionType.Add);
         }
 
-        public void AddRange(IList<Field> fields)
+        public void AddRange(IList<FieldSpec> specifications)
         {
-            if (fields == null)
+            if (specifications == null)
                 return;
             
-            for (int i = 0; i < fields.Count; i++)
+            for (int i = 0; i < specifications.Count; i++)
             {
-                if (fields[i] == null)
+                if (specifications[i] == null)
                 {
-                    NotifyObservers(fields[i], SchemaActionType.None);
+                    NotifyObservers(specifications[i], SchemaActionType.None);
                     continue;
                 }
                 
-                _fields.Add(fields[i]);
+                _fields.Add(specifications[i]);
                 _count++;
                 
-                NotifyObservers(fields[i], SchemaActionType.Add);
+                NotifyObservers(specifications[i], SchemaActionType.Add);
             }
         }
 
-        public void AddRange(params Field[] fields)
+        public void AddRange(params FieldSpec[] specifications)
         {
-            if (fields == null)
+            if (specifications == null)
                 return;
             
-            for (int i = 0; i < fields.Length; i++)
+            for (int i = 0; i < specifications.Length; i++)
             {
-                if (fields[i] == null)
+                if (specifications[i] == null)
                 {
-                    NotifyObservers(fields[i], SchemaActionType.None);
+                    NotifyObservers(specifications[i], SchemaActionType.None);
                     continue;
                 }
                 
-                _fields.Add(fields[i]);
+                _fields.Add(specifications[i]);
                 _count++;
                 
-                NotifyObservers(fields[i], SchemaActionType.Add);
+                NotifyObservers(specifications[i], SchemaActionType.Add);
             }
         }
 

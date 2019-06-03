@@ -20,14 +20,34 @@ namespace Butter
 
     public interface ISchemaBuilder
     {
-        ISchemaBuilder Field(string id, FieldDataType dataType, bool nullable = false);
-        
-        ISchemaBuilder Field(string id, Action<DecimalFieldDefinition> definition, bool nullable = false);
-        
-        ISchemaBuilder Field(string id, IReadOnlyFieldList fields, bool nullable = false);
+        ISchemaBuilder Field(FieldSpec specification);
 
+        ISchemaBuilder Field<T>(Func<T, FieldSpec> builder)
+            where T : ISpecificationBuilder;
+
+        ISchemaBuilder Fields(IReadOnlyFieldList specifications);
+        
         ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
         
         ISchema Build();
+    }
+
+    public interface IFieldMap<out TKey, out TValue>
+    {
+        TKey Key { get; }
+        
+        TValue Value { get; }
+    }
+
+    class FieldMapImpl : IFieldMap<FieldSpec, FieldSpec>
+    {
+        public FieldMapImpl(FieldSpec key, FieldSpec value)
+        {
+            Key = key;
+            Value = value;
+        }
+
+        public FieldSpec Key { get; }
+        public FieldSpec Value { get; }
     }
 }

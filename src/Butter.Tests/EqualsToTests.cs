@@ -9,12 +9,17 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
+            FieldSpec spec = Field.Builder<FieldSpecBuilder>()
+                .Id("city")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
             var schema1 = Schema.Builder()
-                .Field("city", FieldDataType.Primitive, false)
+                .Field(spec)
                 .Build();
             
             var schema2 = Schema.Builder()
-                .Field("city", FieldDataType.Primitive, false)
+                .Field(spec)
                 .Build();
 
             Assert.IsTrue(schema1.Fields[0].EqualTo(schema2.Fields[0]));
@@ -23,12 +28,22 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            var schema1 = Schema.Builder()
-                .Field("city", FieldDataType.Primitive, false)
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("city")
+                .DataType(FieldDataType.Primitive)
                 .Build();
 
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("city")
+                .DataType(FieldDataType.Decimal)
+                .Build();
+
+            var schema1 = Schema.Builder()
+                .Field(spec1)
+                .Build();
+            
             var schema2 = Schema.Builder()
-                .Field("city", FieldDataType.List, false)
+                .Field(spec2)
                 .Build();
 
             Assert.IsFalse(schema1.Fields[0].EqualTo(schema2.Fields[0]));
@@ -37,9 +52,19 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("city")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("state")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
             var schema = Schema.Builder()
-                .Field("city", FieldDataType.Primitive, false)
-                .Field("state", FieldDataType.Primitive, false)
+                .Field(spec1)
+                .Field(spec2)
                 .Build();
 
             Assert.IsFalse(schema.Fields[0].EqualTo(schema.Fields[1]));
@@ -61,8 +86,8 @@ namespace Butter.Tests
         [Test]
         public void Verify_null_objects_are_equal()
         {
-            Field field1 = null;
-            Field field2 = null;
+            FieldSpec field1 = null;
+            FieldSpec field2 = null;
             
             Assert.IsFalse(field1.EqualTo(field2));
         }

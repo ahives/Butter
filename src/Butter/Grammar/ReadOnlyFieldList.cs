@@ -22,11 +22,21 @@ namespace Butter.Grammar
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
 
-        public Field this[int index]
+        public FieldSpec this[int index]
         {
             get
             {
-                TryGetValue(index, out var field);
+                TryGetValue(index, out FieldSpec field);
+
+                return field;
+            }
+        }
+
+        public FieldSpec this[string id]
+        {
+            get
+            {
+                TryGetValue(id, out FieldSpec field);
 
                 return field;
             }
@@ -37,29 +47,29 @@ namespace Butter.Grammar
         {
         }
 
-        public bool TryGetValue(int index, out Field field)
+        public bool TryGetValue(int index, out FieldSpec specification)
         {
             if (index < 0 || _count <= 0)
             {
-                field = SchemaCache.OutOfRangeField;
+                specification = SchemaCache.OutOfRangeFieldSpec;
                 return false;
             }
 
             if (index < _count)
             {
-                field = _fields[index];
+                specification = _fields[index];
                 return true;
             }
 
-            field = SchemaCache.OutOfRangeField;
+            specification = SchemaCache.OutOfRangeFieldSpec;
             return false;
         }
 
-        public bool TryGetValue(string id, out Field field)
+        public bool TryGetValue(string id, out FieldSpec specification)
         {
             if (_count <= 0)
             {
-                field = SchemaCache.OutOfRangeField;
+                specification = SchemaCache.OutOfRangeFieldSpec;
                 return false;
             }
 
@@ -68,15 +78,15 @@ namespace Butter.Grammar
                 if (_fields[i].Id != id)
                     continue;
                 
-                field = _fields[i];
+                specification = _fields[i];
                 return true;
             }
             
-            field = SchemaCache.OutOfRangeField;
+            specification = SchemaCache.OutOfRangeFieldSpec;
             return false;
         }
 
-        public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
+        public bool Contains(FieldSpec specification) => specification != null && _fields.Contains(specification, new FieldComparer());
 
         public bool Equals(IReadOnlyFieldList other)
         {

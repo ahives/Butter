@@ -12,38 +12,9 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter
 {
-    using Grammar;
-
-    class FieldBuilderImpl :
-        FieldBuilder
+    public interface ISpecificationBuilder
     {
-        string _id;
-        FieldDataType _dataType;
-        bool _nullable;
-
-        public FieldBuilder Id(string id)
-        {
-            _id = id;
-            
-            return this;
-        }
-
-        public FieldBuilder DataType(FieldDataType dataType)
-        {
-            _dataType = dataType;
-            
-            return this;
-        }
-
-        public FieldBuilder IsNullable()
-        {
-            _nullable = true;
-            
-            return this;
-        }
-
-        public Field Build() => new FieldImpl(_id, _dataType, _nullable);
     }
 }

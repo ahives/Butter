@@ -12,21 +12,19 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter
 {
     using Grammar;
 
-    public class MissingDecimalField :
-        DecimalField
+    public interface FieldSpecBuilder :
+        ISpecificationBuilder
     {
-        public bool Equals(Field other) => false;
+        FieldSpecBuilder Id(string id);
 
-        public string Id { get; }
-        public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Decimal;
-        public bool Equals(DecimalField other) => false;
+        FieldSpecBuilder DataType(FieldDataType dataType);
 
-        public int Scale { get; }
-        public int Precision { get; }
+        FieldSpecBuilder IsNullable();
+
+        FieldSpec Build();
     }
 }

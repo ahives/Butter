@@ -10,19 +10,50 @@ namespace Butter.Validation.Tests
         public void Verify_cannot_add_fields_with_same_identifier()
         {
             ISchemaValidator validator = new SchemaValidator();
+            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+                .Id("field1")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+                .Id("field2")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+                .Id("field4")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+                .Id("field5")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+
+            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+                .Id("field3")
+                .DataType(FieldDataType.Primitive)
+                .Build();
+            
+            DecimalFieldSpec spec7 = Field.Builder<DecimalFieldSpecBuilder>()
+                .Id("field6")
+                .Precision(2)
+                .Scale(4)
+                .Build();
+
             var schema = Schema.Builder()
-                .Field("field1", FieldDataType.Primitive)
-                .Field("field2", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field4", FieldDataType.Primitive)
-                .Field("field5", FieldDataType.Primitive)
-                .Field("field3", FieldDataType.Primitive)
-                .Field("field6", x =>
-                {
-                    x.SetPrecision(2);
-                    x.SetScale(4);
-                })
-                .RegisterObserver(validator)
+                .Field(spec1)
+                .Field(spec2)
+                .Field(spec3)
+                .Field(spec4)
+                .Field(spec5)
+                .Field(spec6)
+                .Field(spec7)
                 .Build();
 //                .Validate();
             

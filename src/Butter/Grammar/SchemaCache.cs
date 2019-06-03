@@ -14,15 +14,38 @@
 // ***********************************************************************************
 namespace Butter.Grammar
 {
+    using System;
     using Internal;
 
     public static class SchemaCache
     {
-        public static readonly Field MissingField = new MissingField();
-        public static readonly DecimalField MissingDecimalField = new MissingDecimalField();
-        public static readonly MapField MissingMapField = new MissingMapField();
-        public static readonly ListField MissingListField = new MissingListField();
+        public static readonly FieldSpec MissingFieldSpec = new MissingFieldSpec();
+        public static readonly DecimalFieldSpec MissingDecimalFieldSpec = new MissingDecimalFieldSpec();
+        public static readonly MapFieldSpec MissingMapFieldSpec = new MissingMapFieldSpec();
+        public static readonly ListFieldSpec MissingListFieldSpec = new MissingListFieldSpec();
+        public static readonly StructFieldSpec MissingStructFieldSpec = new MissingStructFieldSpec();
         public static readonly IReadOnlyFieldList EmptyFieldList = new EmptyFieldList();
-        public static readonly Field OutOfRangeField = new OutOfRangeField();
+        public static readonly FieldSpec OutOfRangeFieldSpec = new OutOfRangeFieldSpec();
+
+        public static T GetMissingField<T>(this Type type)
+        {
+            switch (type)
+            {
+                case MapFieldSpec _:
+                    return (T) MissingMapFieldSpec;
+
+                case ListFieldSpec _:
+                    return (T) MissingListFieldSpec;
+
+                case StructFieldSpec _:
+                    return (T) MissingStructFieldSpec;
+
+                case DecimalFieldSpec _:
+                    return (T) MissingDecimalFieldSpec;
+
+                default:
+                    throw new Exception();
+            }
+        }
     }
 }
