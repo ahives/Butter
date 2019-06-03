@@ -12,23 +12,12 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar
 {
-    using System;
-    using Grammar;
-    using Notification;
-
-    public interface ISchemaBuilder
+    public interface FieldMap<out TKey, out TValue>
     {
-        ISchemaBuilder Field(FieldSpec specification);
-
-        ISchemaBuilder Field<T>(Func<T, FieldSpec> builder)
-            where T : ISpecificationBuilder;
-
-        ISchemaBuilder Fields(IReadOnlyFieldList specifications);
+        TKey Key { get; }
         
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        TValue Value { get; }
     }
 }

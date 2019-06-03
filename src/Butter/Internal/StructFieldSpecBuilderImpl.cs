@@ -12,10 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
+    using System;
     using Grammar;
-    using Internal;
 
     class StructFieldSpecBuilderImpl :
         StructFieldSpecBuilder
@@ -40,6 +40,18 @@ namespace Butter
         public StructFieldSpecBuilder Field<T>(T specification)
             where T : FieldSpec
         {
+            _specifications.Add(specification);
+
+            return this;
+        }
+
+        public StructFieldSpecBuilder Field<T>(Func<T, FieldSpec> builder)
+            where T : ISpecificationBuilder
+        {
+            T specBuilder = Butter.Field.Builder<T>();
+
+            var specification = builder(specBuilder);
+
             _specifications.Add(specification);
 
             return this;

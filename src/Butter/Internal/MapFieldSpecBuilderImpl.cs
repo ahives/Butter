@@ -25,7 +25,7 @@ namespace Butter.Internal
         Lazy<bool> _nullable;
         Lazy<FieldSpec> _key;
         Lazy<FieldSpec> _value;
-        IFieldMap<FieldSpec,FieldSpec> _mapping;
+        FieldMap<FieldSpec,FieldSpec> _mapping;
 
         public MapFieldSpecBuilder Id(string id)
         {
@@ -70,6 +70,6 @@ namespace Butter.Internal
             return new MapFieldSpecImpl(_id.Value, _mapping, _nullable.Value);
         }
 
-        public IFieldMap<FieldSpec, FieldSpec> Mapping => _mapping;
+        public FieldMap<FieldSpec, FieldSpec> Mapping => _mapping;
     }
 }

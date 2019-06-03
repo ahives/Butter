@@ -19,7 +19,7 @@ namespace Butter.Internal
     class MapFieldSpecImpl :
         MapFieldSpec
     {
-        public MapFieldSpecImpl(string id, IFieldMap<FieldSpec, FieldSpec> field, bool isNullable = false)
+        public MapFieldSpecImpl(string id, FieldMap<FieldSpec, FieldSpec> field, bool isNullable = false)
         {
             Id = id;
             Key = field != null ? field.Key : SchemaCache.MissingFieldSpec;

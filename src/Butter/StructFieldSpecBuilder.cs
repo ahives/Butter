@@ -14,6 +14,7 @@
 // ***********************************************************************************
 namespace Butter
 {
+    using System;
     using Grammar;
 
     public interface StructFieldSpecBuilder :
@@ -21,7 +22,11 @@ namespace Butter
     {
         StructFieldSpecBuilder Id(string id);
 
-        StructFieldSpecBuilder Field<T>(T specification) where T : FieldSpec;
+        StructFieldSpecBuilder Field<T>(T specification)
+            where T : FieldSpec;
+
+        StructFieldSpecBuilder Field<T>(Func<T, FieldSpec> builder)
+            where T : ISpecificationBuilder;
 
         StructFieldSpecBuilder Fields(IReadOnlyFieldList specifications);
 

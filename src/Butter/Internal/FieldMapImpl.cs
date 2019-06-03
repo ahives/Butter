@@ -12,23 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
-    using System;
     using Grammar;
-    using Notification;
 
-    public interface ISchemaBuilder
+    class FieldMapImpl :
+        FieldMap<FieldSpec, FieldSpec>
     {
-        ISchemaBuilder Field(FieldSpec specification);
+        public FieldMapImpl(FieldSpec key, FieldSpec value)
+        {
+            Key = key;
+            Value = value;
+        }
 
-        ISchemaBuilder Field<T>(Func<T, FieldSpec> builder)
-            where T : ISpecificationBuilder;
-
-        ISchemaBuilder Fields(IReadOnlyFieldList specifications);
-        
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        public FieldSpec Key { get; }
+        public FieldSpec Value { get; }
     }
 }
