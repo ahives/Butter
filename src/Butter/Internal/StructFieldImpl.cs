@@ -16,15 +16,15 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class StructFieldSpecImpl :
-        StructFieldSpec
+    class StructFieldImpl :
+        StructField
     {
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public IReadOnlyFieldList Fields { get; }
 
-        public StructFieldSpecImpl(string id, IReadOnlyFieldList fields, FieldDataType dataType = FieldDataType.Struct, bool isNullable = false)
+        public StructFieldImpl(string id, IReadOnlyFieldList fields, FieldDataType dataType = FieldDataType.Struct, bool isNullable = false)
         {
             Id = id;
             IsNullable = isNullable;
@@ -32,7 +32,7 @@ namespace Butter.Internal
             Fields = fields;
         }
 
-        public bool Equals(FieldSpec other)
+        public bool Equals(Field other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -40,7 +40,7 @@ namespace Butter.Internal
             return string.Equals(Id, other.Id) && DataType == other.DataType;
         }
 
-        public bool Equals(StructFieldSpec other)
+        public bool Equals(StructField other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;

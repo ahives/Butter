@@ -16,14 +16,14 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class MissingListFieldSpec :
-        ListFieldSpec
+    class MissingListField :
+        ListField
     {
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.List;
 
-        public bool Equals(ListFieldSpec other) => false;
-        public bool Equals(FieldSpec other) => false;
+        public bool Equals(ListField other) => false;
+        public bool Equals(Field other) => false;
     }
 }

@@ -14,51 +14,62 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
+    using System;
     using Grammar;
 
-    class DecimalFieldSpecBuilderImpl :
-        DecimalFieldSpecBuilder
+    class StructFieldBuilderImpl :
+        StructFieldBuilder
     {
         string _id;
         bool _nullable;
-        int _scale;
-        int _precision;
+        readonly IFieldList _specifications;
 
-        public DecimalFieldSpecBuilderImpl()
+        public StructFieldBuilderImpl()
         {
-            _nullable = false;
-            _scale = 2;
-            _precision = 3;
+            _specifications = new FieldList(false);
         }
 
-        public DecimalFieldSpecBuilder Id(string id)
+        public StructFieldBuilder Id(string id)
         {
             _id = id;
-            
+
             return this;
         }
 
-        public DecimalFieldSpecBuilder IsNullable()
+        public StructFieldBuilder Field<T>(T specification)
+            where T : Field
+        {
+            _specifications.Add(specification);
+
+            return this;
+        }
+
+        public StructFieldBuilder Field<T>(Func<T, Field> builder)
+            where T : ISpecificationBuilder
+        {
+            T specBuilder = FieldSpec.Builder<T>();
+
+            var specification = builder(specBuilder);
+
+            _specifications.Add(specification);
+
+            return this;
+        }
+
+        public StructFieldBuilder Fields(IReadOnlyFieldList specifications)
+        {
+            _specifications.AddRange(specifications.ToList());
+
+            return this;
+        }
+
+        public StructFieldBuilder IsNullable()
         {
             _nullable = true;
-            
-            return this;
-        }
-
-        public DecimalFieldSpecBuilder Scale(int scale)
-        {
-            _scale = scale;
 
             return this;
         }
 
-        public DecimalFieldSpecBuilder Precision(int precision)
-        {
-            _precision = precision;
-
-            return this;
-        }
-
-        public DecimalFieldSpec Build() => new DecimalFieldSpecImpl(_id, _scale, _precision, _nullable);
+        public StructField Build() => new StructFieldImpl(_id, _specifications, isNullable:_nullable);
     }
 }

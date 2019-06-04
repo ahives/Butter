@@ -12,13 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Internal
 {
-    using System;
+    using Grammar;
 
-    public interface ListFieldSpec :
-        FieldSpec, IEquatable<ListFieldSpec>
+    public class MissingStructField :
+        StructField
     {
+        public string Id => "[Butter].[missing_field_spec]";
+        public bool IsNullable => false;
+        public FieldDataType DataType => FieldDataType.Struct;
+        public IReadOnlyFieldList Fields => new EmptyFieldList();
         
+        public bool Equals(Field other) => false;
+
+        public bool Equals(StructField other) => false;
     }
 }

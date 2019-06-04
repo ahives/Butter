@@ -9,27 +9,27 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_add_fields_after_construction()
         {
-            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+            Field spec1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+            Field spec2 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+            Field spec3 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+            Field spec4 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+            Field spec5 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();

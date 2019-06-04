@@ -25,13 +25,13 @@ namespace Butter.Grammar
         {
         }
 
-        public FieldSpec Remove(int index)
+        public Field Remove(int index)
         {
             if (index > _count || index < 0)
-                return SchemaCache.MissingFieldSpec;
+                return SchemaCache.MissingField;
 
-            if (!TryGetValue(index, out FieldSpec field))
-                return SchemaCache.MissingFieldSpec;
+            if (!TryGetValue(index, out Field field))
+                return SchemaCache.MissingField;
                 
             NotifyObservers(field, SchemaActionType.Delete);
                 
@@ -41,14 +41,14 @@ namespace Butter.Grammar
             return field;
         }
 
-        public FieldSpec Remove(string id)
+        public Field Remove(string id)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
 
-                FieldSpec specification = _fields[i];
+                Field specification = _fields[i];
                 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
@@ -58,21 +58,21 @@ namespace Butter.Grammar
                 return specification;
             }
 
-            return SchemaCache.MissingFieldSpec;
+            return SchemaCache.MissingField;
         }
 
-        public bool TryRemove(int index, out FieldSpec specification)
+        public bool TryRemove(int index, out Field specification)
         {
             if (index > _count || index < 0)
             {
-                specification = SchemaCache.MissingFieldSpec;
+                specification = SchemaCache.MissingField;
 
                 return false;
             }
 
-            if (!TryGetValue(index, out FieldSpec field))
+            if (!TryGetValue(index, out Field field))
             {
-                specification = SchemaCache.MissingFieldSpec;
+                specification = SchemaCache.MissingField;
 
                 return false;
             }
@@ -87,7 +87,7 @@ namespace Butter.Grammar
             return true;
         }
 
-        public bool TryRemove(string id, out FieldSpec specification)
+        public bool TryRemove(string id, out Field specification)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -104,12 +104,12 @@ namespace Butter.Grammar
                 return true;
             }
             
-            specification = SchemaCache.MissingFieldSpec;
+            specification = SchemaCache.MissingField;
 
             return false;
         }
 
-        public void Add(FieldSpec specification)
+        public void Add(Field specification)
         {
             if (specification == null)
             {
@@ -123,7 +123,7 @@ namespace Butter.Grammar
             NotifyObservers(specification, SchemaActionType.Add);
         }
 
-        public void AddRange(IList<FieldSpec> specifications)
+        public void AddRange(IList<Field> specifications)
         {
             if (specifications == null)
                 return;
@@ -143,7 +143,7 @@ namespace Butter.Grammar
             }
         }
 
-        public void AddRange(params FieldSpec[] specifications)
+        public void AddRange(params Field[] specifications)
         {
             if (specifications == null)
                 return;

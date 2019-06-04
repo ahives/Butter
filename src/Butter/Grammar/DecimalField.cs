@@ -16,8 +16,8 @@ namespace Butter.Grammar
 {
     using System;
 
-    public interface DecimalFieldSpec :
-        FieldSpec, IEquatable<DecimalFieldSpec>
+    public interface DecimalField :
+        Field, IEquatable<DecimalField>
     {
         int Scale { get; }
         

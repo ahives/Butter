@@ -16,16 +16,16 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class MissingFieldSpec :
-        FieldSpec
+    class OutOfRangeField :
+        Field
     {
-        public string Id => "[Butter].[missing_field_spec]";
+        public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");
         public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Primitive;
+        public FieldDataType DataType => FieldDataType.None;
 
-        public bool Equals(FieldSpec other) => false;
+        public bool Equals(Field other) => false;
 
-        public override bool Equals(object obj) => Equals((FieldSpec)obj);
+        public override bool Equals(object obj) => Equals((Field)obj);
 
         public override int GetHashCode()
         {

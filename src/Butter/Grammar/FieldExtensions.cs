@@ -24,7 +24,7 @@ namespace Butter.Grammar
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool EqualTo(this FieldSpec source, FieldSpec target)
+        public static bool EqualTo(this Field source, Field target)
         {
             if (source == null && target == null)
                 return false;
@@ -42,27 +42,31 @@ namespace Butter.Grammar
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <exception cref="NotSupportedCastException"></exception>
-        public static T Cast<T>(this FieldSpec specification)
+        public static T Cast<T>(this Field specification)
         {
             T Missing()
             {
-                if (typeof(T) == typeof(DecimalFieldSpec))
-                    return (T) SchemaCache.MissingDecimalFieldSpec;
+                if (typeof(T) == typeof(DecimalField))
+                    return (T) SchemaCache.MissingDecimalField;
 
-                if (typeof(T) == typeof(MapFieldSpec))
-                    return (T) SchemaCache.MissingMapFieldSpec;
+                if (typeof(T) == typeof(MapField))
+                    return (T) SchemaCache.MissingMapField;
 
-                if (typeof(T) == typeof(ListFieldSpec))
-                    return (T) SchemaCache.MissingListFieldSpec;
+                if (typeof(T) == typeof(StructField))
+                    return (T) SchemaCache.MissingStructField;
 
-                return (T) SchemaCache.MissingFieldSpec;
+                if (typeof(T) == typeof(ListField))
+                    return (T) SchemaCache.MissingListField;
+
+                return (T) SchemaCache.MissingField;
             }
 
             T Cast()
             {
-                if (typeof(T) == typeof(DecimalFieldSpec) ||
-                    typeof(T) == typeof(MapFieldSpec) ||
-                    typeof(T) == typeof(ListFieldSpec))
+                if (typeof(T) == typeof(DecimalField) ||
+                    typeof(T) == typeof(MapField) ||
+                    typeof(T) == typeof(StructField) ||
+                    typeof(T) == typeof(ListField))
                 {
                     return (T) specification;
                 }
@@ -74,23 +78,23 @@ namespace Butter.Grammar
         }
 
         /// <summary>
-        /// Convert a field of type <see cref="FieldSpec"/> to a field of type <see cref="T"/>
+        /// Convert a field of type <see cref="Field"/> to a field of type <see cref="T"/>
         /// </summary>
         /// <param name="source"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T ConvertTo<T>(this FieldSpec source)
-            where T : MapFieldSpec
+        public static T ConvertTo<T>(this Field source)
+            where T : MapField
         {
-            if (typeof(T) == typeof(MapFieldSpec))
+            if (typeof(T) == typeof(MapField))
             {
-                MapFieldSpec specification = new MapFieldSpecImpl(source.Id, source.IsNullable);
+                MapField specification = new MapFieldImpl(source.Id, source.IsNullable);
                 return (T) specification;
             }
 
-            if (typeof(T) == typeof(DecimalFieldSpec))
+            if (typeof(T) == typeof(DecimalField))
             {
-                DecimalFieldSpec specification = new DecimalFieldSpecImpl(source.Id, source.IsNullable);
+                DecimalField specification = new DecimalFieldImpl(source.Id, source.IsNullable);
                 return (T) specification;
             }
 

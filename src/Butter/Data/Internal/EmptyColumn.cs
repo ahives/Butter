@@ -19,7 +19,7 @@ namespace Butter.Data.Internal
     class EmptyColumn :
         Column
     {
-        public FieldSpec Specification => SchemaCache.MissingFieldSpec;
+        public Field Specification => SchemaCache.MissingField;
         public IValueList Values => DataCache.MissingValueList;
         public bool HasValues => false;
     }

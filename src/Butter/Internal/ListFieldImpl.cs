@@ -16,21 +16,28 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class FieldSpecImpl :
-        FieldSpec
+    class ListFieldImpl :
+        ListField
     {
-        public FieldSpecImpl(string id, FieldDataType dataType = FieldDataType.Primitive, bool isNullable = false)
+        public ListFieldImpl(string id)
         {
             Id = id;
-            IsNullable = isNullable;
-            DataType = dataType;
+            DataType = FieldDataType.List;
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
 
-        public bool Equals(FieldSpec other)
+        public bool Equals(ListField other)
+        {
+            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
+                return false;
+
+            return string.Equals(Id, other.Id) && DataType == other.DataType;
+        }
+
+        public bool Equals(Field other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -49,7 +56,7 @@ namespace Butter.Internal
             if (obj.GetType() != this.GetType())
                 return false;
             
-            return Equals((FieldSpec)obj);
+            return Equals((Field)obj);
         }
 
         public override int GetHashCode()

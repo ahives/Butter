@@ -9,32 +9,32 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+            Field spec1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+            Field spec2 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+            Field spec3 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+            Field spec4 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+            Field spec5 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            DecimalFieldSpec spec6 = Field.Builder<DecimalFieldSpecBuilder>()
+            DecimalField spec6 = FieldSpec.Builder<DecimalFieldBuilder>()
                 .Id("field6")
                 .Precision(2)
                 .Scale(4)

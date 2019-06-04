@@ -12,27 +12,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Internal
+namespace Butter.Grammar
 {
-    using Grammar;
+    using System;
 
-    class OutOfRangeFieldSpec :
-        FieldSpec
+    public interface ListField :
+        Field, IEquatable<ListField>
     {
-        public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");
-        public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.None;
-
-        public bool Equals(FieldSpec other) => false;
-
-        public override bool Equals(object obj) => Equals((FieldSpec)obj);
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
-            }
-        }
+        
     }
 }

@@ -16,15 +16,17 @@ namespace Butter
 {
     using Grammar;
 
-    public interface FieldSpecBuilder :
+    public interface DecimalFieldBuilder :
         ISpecificationBuilder
     {
-        FieldSpecBuilder Id(string id);
+        DecimalFieldBuilder Id(string id);
 
-        FieldSpecBuilder DataType(FieldDataType dataType);
+        DecimalFieldBuilder IsNullable();
 
-        FieldSpecBuilder IsNullable();
+        DecimalFieldBuilder Scale(int scale);
+        
+        DecimalFieldBuilder Precision(int precision);
 
-        FieldSpec Build();
+        DecimalField Build();
     }
 }

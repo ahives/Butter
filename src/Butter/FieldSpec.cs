@@ -14,24 +14,13 @@
 // ***********************************************************************************
 namespace Butter
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Internal;
 
-    public class Field
+    public class FieldSpec
     {
-        static readonly IDictionary<string, object> _builderCache;
-        
-        static Field()
-        {
-            _builderCache = new Dictionary<string, object>
-            {
-                {typeof(FieldSpecBuilder).FullName, new FieldSpecBuilderImpl()},
-                {typeof(DecimalFieldSpecBuilder).FullName, new DecimalFieldSpecBuilderImpl()},
-                {typeof(StructFieldSpecBuilder).FullName, new StructFieldSpecBuilderImpl()},
-                {typeof(MapFieldSpecBuilder).FullName, new MapFieldSpecBuilderImpl()}
-            };
-        }
-
         /// <summary>
         /// Returns a field builder from cache memory.
         /// </summary>
@@ -40,10 +29,15 @@ namespace Butter
         /// <exception cref="FieldBuilderMissingException"></exception>
         public static T Builder<T>()
         {
-            if (!_builderCache.ContainsKey(typeof(T).FullName))
+            Type type = typeof(T)
+                .Assembly
+                .GetTypes()
+                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
+            
+            if (type == null)
                 throw new FieldBuilderMissingException($"Failed to find implementation for builder '{typeof(T)}'");
 
-            return (T) _builderCache[typeof(T).FullName];
+            return (T)Activator.CreateInstance(type);
         }
     }
 }

@@ -17,15 +17,15 @@ namespace Butter.Internal
     using Grammar;
 
     class FieldMapImpl :
-        FieldMap<FieldSpec, FieldSpec>
+        FieldMap<Field, Field>
     {
-        public FieldMapImpl(FieldSpec key, FieldSpec value)
+        public FieldMapImpl(Field key, Field value)
         {
             Key = key;
             Value = value;
         }
 
-        public FieldSpec Key { get; }
-        public FieldSpec Value { get; }
+        public Field Key { get; }
+        public Field Value { get; }
     }
 }

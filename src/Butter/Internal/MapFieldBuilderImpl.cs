@@ -18,58 +18,58 @@ namespace Butter.Internal
     using System.Threading;
     using Grammar;
 
-    class MapFieldSpecBuilderImpl :
-        MapFieldSpecBuilder
+    class MapFieldBuilderImpl :
+        MapFieldBuilder
     {
         Lazy<string> _id;
         Lazy<bool> _nullable;
-        Lazy<FieldSpec> _key;
-        Lazy<FieldSpec> _value;
-        FieldMap<FieldSpec,FieldSpec> _mapping;
+        Lazy<Field> _key;
+        Lazy<Field> _value;
+        FieldMap<Field,Field> _mapping;
 
-        public MapFieldSpecBuilder Id(string id)
+        public MapFieldBuilder Id(string id)
         {
             _id = new Lazy<string>(() => id, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldSpecBuilder Map(FieldSpec key, FieldSpec value)
+        public MapFieldBuilder Map(Field key, Field value)
         {
-            _key = new Lazy<FieldSpec>(() => key, LazyThreadSafetyMode.PublicationOnly);
-            _value = new Lazy<FieldSpec>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<Field>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<Field>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
 
-        public MapFieldSpecBuilder Key(FieldSpec key)
+        public MapFieldBuilder Key(Field key)
         {
-            _key = new Lazy<FieldSpec>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<Field>(() => key, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldSpecBuilder Value(FieldSpec value)
+        public MapFieldBuilder Value(Field value)
         {
-            _value = new Lazy<FieldSpec>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<Field>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
 
-        public MapFieldSpecBuilder IsNullable()
+        public MapFieldBuilder IsNullable()
         {
             _nullable = new Lazy<bool>(() => true, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldSpec Build()
+        public MapField Build()
         {
             _mapping = new FieldMapImpl(_key.Value, _value.Value);
             
-            return new MapFieldSpecImpl(_id.Value, _mapping, _nullable.Value);
+            return new MapFieldImpl(_id.Value, _mapping, _nullable.Value);
         }
 
-        public FieldMap<FieldSpec, FieldSpec> Mapping => _mapping;
+        public FieldMap<Field, Field> Mapping => _mapping;
     }
 }

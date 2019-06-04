@@ -16,34 +16,49 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class FieldSpecBuilderImpl :
-        FieldSpecBuilder
+    class DecimalFieldBuilderImpl :
+        DecimalFieldBuilder
     {
         string _id;
-        FieldDataType _dataType;
         bool _nullable;
+        int _scale;
+        int _precision;
 
-        public FieldSpecBuilder Id(string id)
+        public DecimalFieldBuilderImpl()
+        {
+            _nullable = false;
+            _scale = 2;
+            _precision = 3;
+        }
+
+        public DecimalFieldBuilder Id(string id)
         {
             _id = id;
             
             return this;
         }
 
-        public FieldSpecBuilder DataType(FieldDataType dataType)
-        {
-            _dataType = dataType;
-            
-            return this;
-        }
-
-        public FieldSpecBuilder IsNullable()
+        public DecimalFieldBuilder IsNullable()
         {
             _nullable = true;
             
             return this;
         }
 
-        public FieldSpec Build() => new FieldSpecImpl(_id, _dataType, _nullable);
+        public DecimalFieldBuilder Scale(int scale)
+        {
+            _scale = scale;
+
+            return this;
+        }
+
+        public DecimalFieldBuilder Precision(int precision)
+        {
+            _precision = precision;
+
+            return this;
+        }
+
+        public DecimalField Build() => new DecimalFieldImpl(_id, _scale, _precision, _nullable);
     }
 }

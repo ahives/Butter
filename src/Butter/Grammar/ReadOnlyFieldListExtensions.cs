@@ -33,27 +33,27 @@ namespace Butter.Grammar
             {
                 switch (source[i])
                 {
-                    case StructFieldSpec field:
-                        fields.AddRange(field);
+                    case StructField field:
+                        fields.Add(field);
                         for (int j = 0; j < field.Fields.Count; j++)
                         {
                             fields.Add(field.Fields[j]);
                         }
                         break;
                     
-                    case ListFieldSpec field:
+                    case ListField field:
                         fields.AddRange(field);
                         break;
                     
-                    case MapFieldSpec field:
+                    case MapField field:
                         fields.AddRange(field);
                         break;
                     
-                    case DecimalFieldSpec field:
+                    case DecimalField field:
                         fields.AddRange(field);
                         break;
                     
-                    case FieldSpec field:
+                    case Field field:
                         fields.AddRange(field);
                         break;
                         
@@ -70,9 +70,9 @@ namespace Butter.Grammar
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static IList<FieldSpec> ToList(this IReadOnlyFieldList source)
+        public static IList<Field> ToList(this IReadOnlyFieldList source)
         {
-            var list = new List<FieldSpec>();
+            var list = new List<Field>();
             
             for (int i = 0; i < source.Count; i++)
             {

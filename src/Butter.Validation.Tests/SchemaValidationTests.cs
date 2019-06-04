@@ -10,37 +10,37 @@ namespace Butter.Validation.Tests
         public void Verify_cannot_add_fields_with_same_identifier()
         {
             ISchemaValidator validator = new SchemaValidator();
-            FieldSpec spec1 = Field.Builder<FieldSpecBuilder>()
+            Field spec1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec2 = Field.Builder<FieldSpecBuilder>()
+            Field spec2 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec3 = Field.Builder<FieldSpecBuilder>()
+            Field spec3 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec4 = Field.Builder<FieldSpecBuilder>()
+            Field spec4 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec5 = Field.Builder<FieldSpecBuilder>()
+            Field spec5 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            FieldSpec spec6 = Field.Builder<FieldSpecBuilder>()
+            Field spec6 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
             
-            DecimalFieldSpec spec7 = Field.Builder<DecimalFieldSpecBuilder>()
+            DecimalField spec7 = FieldSpec.Builder<DecimalFieldBuilder>()
                 .Id("field6")
                 .Precision(2)
                 .Scale(4)

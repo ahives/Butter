@@ -28,7 +28,7 @@ namespace Butter
 
         public IReadOnlyFieldList Fields => _fields;
 
-        internal Schema(IList<FieldSpec> fields, IList<IObserver<NotificationContext>> observers)
+        internal Schema(IList<Field> fields, IList<IObserver<NotificationContext>> observers)
         {
             _disposableObservers = new List<IDisposable>();
             

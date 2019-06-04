@@ -16,16 +16,34 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    public class MissingStructFieldSpec :
-        StructFieldSpec
+    class FieldBuilderImpl :
+        FieldBuilder
     {
-        public string Id => "[Butter].[missing_field_spec]";
-        public bool IsNullable => false;
-        public FieldDataType DataType => FieldDataType.Struct;
-        public IReadOnlyFieldList Fields => new EmptyFieldList();
-        
-        public bool Equals(FieldSpec other) => false;
+        string _id;
+        FieldDataType _dataType;
+        bool _nullable;
 
-        public bool Equals(StructFieldSpec other) => false;
+        public FieldBuilder Id(string id)
+        {
+            _id = id;
+            
+            return this;
+        }
+
+        public FieldBuilder DataType(FieldDataType dataType)
+        {
+            _dataType = dataType;
+            
+            return this;
+        }
+
+        public FieldBuilder IsNullable()
+        {
+            _nullable = true;
+            
+            return this;
+        }
+
+        public Field Build() => new FieldImpl(_id, _dataType, _nullable);
     }
 }

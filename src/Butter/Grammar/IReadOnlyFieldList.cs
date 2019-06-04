@@ -23,14 +23,14 @@ namespace Butter.Grammar
         
         int Count { get; }
         
-        FieldSpec this[int index] { get; }
+        Field this[int index] { get; }
         
-        FieldSpec this[string id] { get; }
+        Field this[string id] { get; }
 
-        bool TryGetValue(int index, out FieldSpec specification);
+        bool TryGetValue(int index, out Field specification);
 
-        bool TryGetValue(string id, out FieldSpec specification);
+        bool TryGetValue(string id, out Field specification);
 
-        bool Contains(FieldSpec specification);
+        bool Contains(Field specification);
     }
 }

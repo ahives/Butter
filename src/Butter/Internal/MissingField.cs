@@ -16,17 +16,23 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    public class MissingDecimalFieldSpec :
-        DecimalFieldSpec
+    class MissingField :
+        Field
     {
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Decimal;
-        public int Scale => 0;
-        public int Precision => 0;
-        
-        public bool Equals(FieldSpec other) => false;
+        public FieldDataType DataType => FieldDataType.Primitive;
 
-        public bool Equals(DecimalFieldSpec other) => false;
+        public bool Equals(Field other) => false;
+
+        public override bool Equals(object obj) => Equals((Field)obj);
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
+            }
+        }
     }
 }

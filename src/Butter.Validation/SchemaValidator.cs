@@ -85,7 +85,7 @@ namespace Butter.Validation
             if (value == null)
             {
                 var result = new ValidationResultImpl("FIELD == NULL.", ValidationType.Error);
-                var context = new ValidationContextImpl(SchemaCache.MissingFieldSpec, result);
+                var context = new ValidationContextImpl(SchemaCache.MissingField, result);
                 
                 Validation.Add(context);
                 

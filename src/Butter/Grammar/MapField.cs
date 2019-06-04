@@ -16,11 +16,11 @@ namespace Butter.Grammar
 {
     using System;
 
-    public interface MapFieldSpec :
-        FieldSpec, IEquatable<MapFieldSpec>
+    public interface MapField :
+        Field, IEquatable<MapField>
     {
-        FieldSpec Key { get; }
+        Field Key { get; }
         
-        FieldSpec Value { get; }
+        Field Value { get; }
     }
 }

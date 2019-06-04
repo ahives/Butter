@@ -22,21 +22,21 @@ namespace Butter.Grammar
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
 
-        public FieldSpec this[int index]
+        public Field this[int index]
         {
             get
             {
-                TryGetValue(index, out FieldSpec field);
+                TryGetValue(index, out Field field);
 
                 return field;
             }
         }
 
-        public FieldSpec this[string id]
+        public Field this[string id]
         {
             get
             {
-                TryGetValue(id, out FieldSpec field);
+                TryGetValue(id, out Field field);
 
                 return field;
             }
@@ -47,11 +47,11 @@ namespace Butter.Grammar
         {
         }
 
-        public bool TryGetValue(int index, out FieldSpec specification)
+        public bool TryGetValue(int index, out Field specification)
         {
             if (index < 0 || _count <= 0)
             {
-                specification = SchemaCache.OutOfRangeFieldSpec;
+                specification = SchemaCache.OutOfRangeField;
                 return false;
             }
 
@@ -61,15 +61,15 @@ namespace Butter.Grammar
                 return true;
             }
 
-            specification = SchemaCache.OutOfRangeFieldSpec;
+            specification = SchemaCache.OutOfRangeField;
             return false;
         }
 
-        public bool TryGetValue(string id, out FieldSpec specification)
+        public bool TryGetValue(string id, out Field specification)
         {
             if (_count <= 0)
             {
-                specification = SchemaCache.OutOfRangeFieldSpec;
+                specification = SchemaCache.OutOfRangeField;
                 return false;
             }
 
@@ -82,11 +82,11 @@ namespace Butter.Grammar
                 return true;
             }
             
-            specification = SchemaCache.OutOfRangeFieldSpec;
+            specification = SchemaCache.OutOfRangeField;
             return false;
         }
 
-        public bool Contains(FieldSpec specification) => specification != null && _fields.Contains(specification, new FieldComparer());
+        public bool Contains(Field specification) => specification != null && _fields.Contains(specification, new FieldComparer());
 
         public bool Equals(IReadOnlyFieldList other)
         {

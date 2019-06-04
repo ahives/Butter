@@ -21,14 +21,14 @@ namespace Butter.Internal
     class NotificationContextImpl :
         NotificationContext
     {
-        public NotificationContextImpl(FieldSpec specification, SchemaActionType action)
+        public NotificationContextImpl(Field specification, SchemaActionType action)
         {
             Specification = specification;
             Action = action;
             Timestamp = DateTimeOffset.UtcNow;
         }
 
-        public FieldSpec Specification { get; }
+        public Field Specification { get; }
         public SchemaActionType Action { get; }
         public DateTimeOffset Timestamp { get; }
     }

@@ -12,26 +12,17 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Grammar
 {
     using System;
-    using Grammar;
 
-    public interface StructFieldSpecBuilder :
-        ISpecificationBuilder
+    public interface Field :
+        IEquatable<Field>
     {
-        StructFieldSpecBuilder Id(string id);
-
-        StructFieldSpecBuilder Field<T>(T specification)
-            where T : FieldSpec;
-
-        StructFieldSpecBuilder Field<T>(Func<T, FieldSpec> builder)
-            where T : ISpecificationBuilder;
-
-        StructFieldSpecBuilder Fields(IReadOnlyFieldList specifications);
-
-        StructFieldSpecBuilder IsNullable();
-
-        StructFieldSpec Build();
+        string Id { get; }
+        
+        bool IsNullable { get; }
+        
+        FieldDataType DataType { get; }
     }
 }

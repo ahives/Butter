@@ -21,18 +21,18 @@ namespace Butter.Grammar
     public interface IFieldList :
         IObservable<NotificationContext>, IReadOnlyFieldList, IEquatable<IFieldList>
     {
-        void Add(FieldSpec specification);
+        void Add(Field specification);
 
-        void AddRange(params FieldSpec[] specifications);
+        void AddRange(params Field[] specifications);
 
-        void AddRange(IList<FieldSpec> specifications);
+        void AddRange(IList<Field> specifications);
 
-        FieldSpec Remove(int index);
+        Field Remove(int index);
 
-        FieldSpec Remove(string id);
+        Field Remove(string id);
 
-        bool TryRemove(int index, out FieldSpec specification);
+        bool TryRemove(int index, out Field specification);
 
-        bool TryRemove(string id, out FieldSpec specification);
+        bool TryRemove(string id, out Field specification);
     }
 }

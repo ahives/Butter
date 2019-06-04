@@ -16,23 +16,23 @@ namespace Butter.Internal
 {
     using Grammar;
 
-    class MapFieldSpecImpl :
-        MapFieldSpec
+    class MapFieldImpl :
+        MapField
     {
-        public MapFieldSpecImpl(string id, FieldMap<FieldSpec, FieldSpec> field, bool isNullable = false)
+        public MapFieldImpl(string id, FieldMap<Field, Field> field, bool isNullable = false)
         {
             Id = id;
-            Key = field != null ? field.Key : SchemaCache.MissingFieldSpec;
-            Value = field != null ? field.Value : SchemaCache.MissingFieldSpec;
+            Key = field != null ? field.Key : SchemaCache.MissingField;
+            Value = field != null ? field.Value : SchemaCache.MissingField;
             DataType = FieldDataType.Map;
             IsNullable = isNullable;
         }
 
-        public MapFieldSpecImpl(string id, bool isNullable)
+        public MapFieldImpl(string id, bool isNullable)
         {
             Id = id;
-            Key = SchemaCache.MissingFieldSpec;
-            Value = SchemaCache.MissingFieldSpec;
+            Key = SchemaCache.MissingField;
+            Value = SchemaCache.MissingField;
             DataType = FieldDataType.Map;
             IsNullable = isNullable;
         }
@@ -40,10 +40,10 @@ namespace Butter.Internal
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
-        public FieldSpec Key { get; }
-        public FieldSpec Value { get; }
+        public Field Key { get; }
+        public Field Value { get; }
 
-        public bool Equals(FieldSpec other)
+        public bool Equals(Field other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -51,7 +51,7 @@ namespace Butter.Internal
             return string.Equals(Id, other.Id) && DataType == other.DataType;
         }
 
-        public bool Equals(MapFieldSpec other)
+        public bool Equals(MapField other)
         {
             if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
                 return false;
@@ -70,7 +70,7 @@ namespace Butter.Internal
             if (obj.GetType() != this.GetType())
                 return false;
             
-            return Equals((FieldSpec)obj);
+            return Equals((Field)obj);
         }
 
         public override int GetHashCode()
