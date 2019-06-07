@@ -16,9 +16,9 @@ namespace Butter
 {
     using System;
     using System.Collections.Generic;
-    using Grammar;
     using Internal;
     using Notification;
+    using Specification;
 
     public class Schema :
         ISchema, IEquatable<Schema>, IDisposable

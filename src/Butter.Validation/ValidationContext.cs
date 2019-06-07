@@ -15,7 +15,7 @@
 namespace Butter.Validation
 {
     using System;
-    using Grammar;
+    using Specification;
 
     public interface ValidationContext
     {

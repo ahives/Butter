@@ -16,8 +16,8 @@ namespace Butter.Notification
 {
     using System;
     using System.Collections.Generic;
-    using Grammar;
     using Internal;
+    using Specification;
 
     public abstract class ObservableList
     {

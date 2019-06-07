@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using Grammar;
+    using Specification;
 
     class MissingField :
         Field

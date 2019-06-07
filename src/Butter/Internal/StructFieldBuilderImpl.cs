@@ -15,7 +15,7 @@
 namespace Butter.Internal
 {
     using System;
-    using Grammar;
+    using Specification;
 
     class StructFieldBuilderImpl :
         StructFieldBuilder

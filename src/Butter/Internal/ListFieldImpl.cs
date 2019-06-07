@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using Grammar;
+    using Specification;
 
     class ListFieldImpl :
         ListField
@@ -28,43 +28,5 @@ namespace Butter.Internal
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
-
-        public bool Equals(ListField other)
-        {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public bool Equals(Field other)
-        {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-                return false;
-            
-            if (ReferenceEquals(this, obj))
-                return true;
-            
-            if (obj.GetType() != this.GetType())
-                return false;
-            
-            return Equals((Field)obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
-            }
-        }
     }
 }

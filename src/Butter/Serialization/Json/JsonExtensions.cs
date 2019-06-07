@@ -4,8 +4,8 @@ namespace Butter.Serialization.Json
     using System.IO;
     using System.Text;
     using Data;
-    using Grammar;
     using Newtonsoft.Json;
+    using Specification;
 
     public static class JsonExtensions
     {

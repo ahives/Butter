@@ -15,11 +15,11 @@
 namespace Butter.Notification
 {
     using System;
-    using Grammar;
+    using Specification;
 
     public interface NotificationContext
     {
-        Field Specification { get; }
+        Field Field { get; }
         
         SchemaActionType Action { get; }
         

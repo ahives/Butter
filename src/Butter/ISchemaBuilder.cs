@@ -15,8 +15,8 @@
 namespace Butter
 {
     using System;
-    using Grammar;
     using Notification;
+    using Specification;
 
     public interface ISchemaBuilder
     {

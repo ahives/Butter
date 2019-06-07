@@ -16,10 +16,12 @@ namespace Butter.Validation.Rules
 {
     using System.Collections.Generic;
     using System.Linq;
-    using Grammar;
+    using Notification;
     using NRules.Fluent.Dsl;
+    using Specification;
 
     [Tag("FieldValidation")]
+    [Description("NULL FIELD")]
     public class NullFieldRule :
         Rule
     {

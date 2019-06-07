@@ -15,20 +15,20 @@
 namespace Butter.Internal
 {
     using System;
-    using Grammar;
     using Notification;
+    using Specification;
 
     class NotificationContextImpl :
         NotificationContext
     {
         public NotificationContextImpl(Field specification, SchemaActionType action)
         {
-            Specification = specification;
+            Field = specification;
             Action = action;
             Timestamp = DateTimeOffset.UtcNow;
         }
 
-        public Field Specification { get; }
+        public Field Field { get; }
         public SchemaActionType Action { get; }
         public DateTimeOffset Timestamp { get; }
     }

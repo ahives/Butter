@@ -12,13 +12,27 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Specification
 {
     using System;
+    using System.Collections.Generic;
+    using Notification;
 
-    public interface StructField :
-        Field, IEquatable<StructField>
+    public interface IFieldList :
+        IObservable<NotificationContext>, IReadOnlyFieldList, IEquatable<IFieldList>
     {
-        IReadOnlyFieldList Fields { get; }
+        void Add(Field field);
+
+        void AddRange(params Field[] fields);
+
+        void AddRange(IList<Field> field);
+
+        Field Remove(int index);
+
+        Field Remove(string id);
+
+        bool TryRemove(int index, out Field field);
+
+        bool TryRemove(string id, out Field field);
     }
 }

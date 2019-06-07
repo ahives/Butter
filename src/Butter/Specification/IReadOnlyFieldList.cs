@@ -12,10 +12,25 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Specification
 {
-    public interface MapFieldDefinition :
-        FieldDefinition
+    using System;
+
+    public interface IReadOnlyFieldList :
+        IEquatable<IReadOnlyFieldList>
     {
+        bool HasValues { get; }
+        
+        int Count { get; }
+        
+        Field this[int index] { get; }
+        
+        Field this[string id] { get; }
+
+        bool TryGetValue(int index, out Field field);
+
+        bool TryGetValue(string id, out Field field);
+
+        bool Contains(Field field);
     }
 }

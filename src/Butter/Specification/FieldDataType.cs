@@ -12,10 +12,15 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Specification
 {
-    public interface ListFieldDefinition :
-        FieldDefinition
+    public enum FieldDataType
     {
+        None,
+        Primitive,
+        Decimal,
+        List,
+        Map,
+        Struct
     }
 }

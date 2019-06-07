@@ -15,9 +15,7 @@
 namespace Butter
 {
     using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using Internal;
 
     public class FieldSpec
     {
@@ -28,6 +26,7 @@ namespace Butter
         /// <returns></returns>
         /// <exception cref="FieldBuilderMissingException"></exception>
         public static T Builder<T>()
+            where T : ISpecificationBuilder
         {
             Type type = typeof(T)
                 .Assembly

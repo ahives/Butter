@@ -12,12 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Specification
 {
-    public interface FieldMap<out TKey, out TValue>
+    public interface ListField :
+        Field
     {
-        TKey Key { get; }
         
-        TValue Value { get; }
     }
 }

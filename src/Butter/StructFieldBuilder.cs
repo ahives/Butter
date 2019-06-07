@@ -15,7 +15,7 @@
 namespace Butter
 {
     using System;
-    using Grammar;
+    using Specification;
 
     public interface StructFieldBuilder :
         ISpecificationBuilder

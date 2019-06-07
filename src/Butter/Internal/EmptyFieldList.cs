@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using Grammar;
+    using Specification;
 
     class EmptyFieldList :
         IReadOnlyFieldList
@@ -25,19 +25,19 @@ namespace Butter.Internal
 
         public Field this[string id] => SchemaCache.MissingField;
 
-        public bool TryGetValue(int index, out Field specification)
+        public bool TryGetValue(int index, out Field field)
         {
-            specification = SchemaCache.MissingField;
+            field = SchemaCache.MissingField;
             return false;
         }
 
-        public bool TryGetValue(string id, out Field specification)
+        public bool TryGetValue(string id, out Field field)
         {
-            specification = SchemaCache.MissingField;
+            field = SchemaCache.MissingField;
             return false;
         }
 
-        public bool Contains(Field specification) => false;
+        public bool Contains(Field field) => false;
         
         public bool Equals(IReadOnlyFieldList other) => false;
     }

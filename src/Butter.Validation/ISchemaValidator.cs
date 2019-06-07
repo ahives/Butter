@@ -25,6 +25,6 @@ namespace Butter.Validation
         
         IList<ValidationContext> Validation { get; }
 
-//        void Validate();
+        void Validate();
     }
 }

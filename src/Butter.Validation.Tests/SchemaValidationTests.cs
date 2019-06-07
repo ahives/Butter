@@ -1,7 +1,7 @@
 namespace Butter.Validation.Tests
 {
-    using Grammar;
     using NUnit.Framework;
+    using Specification;
 
     [TestFixture]
     public class SchemaValidationTests
@@ -10,60 +10,33 @@ namespace Butter.Validation.Tests
         public void Verify_cannot_add_fields_with_same_identifier()
         {
             ISchemaValidator validator = new SchemaValidator();
-            Field spec1 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field1")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-
-            Field spec2 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field2")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-
-            Field spec3 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field3")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-
-            Field spec4 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field4")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-
-            Field spec5 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field5")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-
-            Field spec6 = FieldSpec.Builder<FieldBuilder>()
-                .Id("field3")
-                .DataType(FieldDataType.Primitive)
-                .Build();
-            
-            DecimalField spec7 = FieldSpec.Builder<DecimalFieldBuilder>()
-                .Id("field6")
-                .Precision(2)
-                .Scale(4)
-                .Build();
-
             var schema = Schema.Builder()
-                .Field(spec1)
-                .Field(spec2)
-                .Field(spec3)
-                .Field(spec4)
-                .Field(spec5)
-                .Field(spec6)
-                .Field(spec7)
+                .Field<StructFieldBuilder>(x =>
+                {
+                    return x.Id("field1")
+                        .Field<FieldBuilder>(f => f.Id("fieldA").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<FieldBuilder>(f => f.Id("fieldB").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<FieldBuilder>(f => f.Id("fieldC").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<DecimalFieldBuilder>(f => f.Id("fieldD").Precision(5).Scale(2).IsNullable().Build())
+                        .Build();
+                })
+                .Field<FieldBuilder>(x => x.Id("field2").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field3").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field4").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field5").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field6").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field3").IsNullable().Build())
+                .RegisterObserver(validator)
                 .Build();
 //                .Validate();
             
-//            validator.Validate();
+            validator.Validate();
 
-            Assert.IsTrue(schema.Fields.HasValues);
-            Assert.AreEqual(7, schema.Fields.Count);
-
-            Assert.IsNotEmpty(validator.Validation);
-            Assert.AreEqual(1, validator.Validation.Count);
+//            Assert.IsTrue(schema.Fields.HasValues);
+//            Assert.AreEqual(7, schema.Fields.Count);
+//
+//            Assert.IsNotEmpty(validator.Validation);
+//            Assert.AreEqual(1, validator.Validation.Count);
         }
 
     }

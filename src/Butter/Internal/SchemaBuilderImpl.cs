@@ -16,8 +16,8 @@ namespace Butter.Internal
 {
     using System;
     using System.Collections.Generic;
-    using Grammar;
     using Notification;
+    using Specification;
 
     class SchemaBuilderImpl :
         ISchemaBuilder

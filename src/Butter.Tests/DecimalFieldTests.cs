@@ -1,7 +1,7 @@
 namespace Butter.Tests
 {
-    using Grammar;
     using NUnit.Framework;
+    using Specification;
 
     [TestFixture]
     public class DecimalFieldTests

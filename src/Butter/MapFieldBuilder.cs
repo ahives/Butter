@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using Grammar;
+    using Specification;
 
     public interface MapFieldBuilder :
         ISpecificationBuilder

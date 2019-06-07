@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using Grammar;
+    using Specification;
 
     class StructFieldImpl :
         StructField
@@ -24,31 +24,20 @@ namespace Butter.Internal
         public FieldDataType DataType { get; }
         public IReadOnlyFieldList Fields { get; }
 
-        public StructFieldImpl(string id, IReadOnlyFieldList fields, FieldDataType dataType = FieldDataType.Struct, bool isNullable = false)
+        public StructFieldImpl(string id, IReadOnlyFieldList fields, bool isNullable = false)
         {
             Id = id;
             IsNullable = isNullable;
-            DataType = dataType;
+            DataType = FieldDataType.Struct;
             Fields = fields;
         }
 
-        public bool Equals(Field other)
+        public StructFieldImpl(string id, bool isNullable)
         {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public bool Equals(StructField other)
-        {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            if (Fields.Count != other.Fields.Count)
-                return false;
-            
-            return string.Equals(Id, other.Id) && DataType == other.DataType && Fields.Equals(other.Fields);
+            Id = id;
+            IsNullable = isNullable;
+            DataType = FieldDataType.Struct;
+            Fields = SchemaCache.EmptyFieldList;
         }
     }
 }

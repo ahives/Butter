@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data.Internal
 {
-    using Grammar;
+    using Specification;
 
     class EmptyColumn :
         Column

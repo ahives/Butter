@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Data
 {
-    using Grammar;
+    using Specification;
 
     public class DataColumn
     {

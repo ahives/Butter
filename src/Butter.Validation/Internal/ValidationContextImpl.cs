@@ -15,7 +15,7 @@
 namespace Butter.Validation.Internal
 {
     using System;
-    using Grammar;
+    using Specification;
 
     class ValidationContextImpl :
         ValidationContext

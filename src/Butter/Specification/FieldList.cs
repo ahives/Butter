@@ -12,7 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Specification
 {
     using System.Collections.Generic;
     using Notification;
@@ -20,7 +20,7 @@ namespace Butter.Grammar
     public class FieldList :
         ReadOnlyFieldList, IFieldList
     {
-        public FieldList(bool notifyObservers = true)
+        public FieldList(bool notifyObservers = false)
             : base(notifyObservers)
         {
         }
@@ -61,105 +61,105 @@ namespace Butter.Grammar
             return SchemaCache.MissingField;
         }
 
-        public bool TryRemove(int index, out Field specification)
+        public bool TryRemove(int index, out Field field)
         {
             if (index > _count || index < 0)
             {
-                specification = SchemaCache.MissingField;
+                field = SchemaCache.MissingField;
 
                 return false;
             }
 
-            if (!TryGetValue(index, out Field field))
+            if (!TryGetValue(index, out Field spec))
             {
-                specification = SchemaCache.MissingField;
+                field = SchemaCache.MissingField;
 
                 return false;
             }
             
-            specification = field;
+            field = spec;
             
             _fields.RemoveAt(index);
             _count = _fields.Count;
             
-            NotifyObservers(field, SchemaActionType.Delete);
+            NotifyObservers(spec, SchemaActionType.Delete);
 
             return true;
         }
 
-        public bool TryRemove(string id, out Field specification)
+        public bool TryRemove(string id, out Field field)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
                 
-                specification = _fields[i];
+                field = _fields[i];
 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
                 
-                NotifyObservers(specification, SchemaActionType.Delete);
+                NotifyObservers(field, SchemaActionType.Delete);
             
                 return true;
             }
             
-            specification = SchemaCache.MissingField;
+            field = SchemaCache.MissingField;
 
             return false;
         }
 
-        public void Add(Field specification)
+        public void Add(Field field)
         {
-            if (specification == null)
+            if (field == null)
             {
-                NotifyObservers(specification, SchemaActionType.None);
+                NotifyObservers(field, SchemaActionType.None);
                 return;
             }
             
-            _fields.Add(specification);
+            _fields.Add(field);
             _count = _fields.Count;
             
-            NotifyObservers(specification, SchemaActionType.Add);
+            NotifyObservers(field, SchemaActionType.Add);
         }
 
-        public void AddRange(IList<Field> specifications)
+        public void AddRange(IList<Field> field)
         {
-            if (specifications == null)
+            if (field == null)
                 return;
             
-            for (int i = 0; i < specifications.Count; i++)
+            for (int i = 0; i < field.Count; i++)
             {
-                if (specifications[i] == null)
+                if (field[i] == null)
                 {
-                    NotifyObservers(specifications[i], SchemaActionType.None);
+                    NotifyObservers(field[i], SchemaActionType.None);
                     continue;
                 }
                 
-                _fields.Add(specifications[i]);
+                _fields.Add(field[i]);
                 _count++;
                 
-                NotifyObservers(specifications[i], SchemaActionType.Add);
+                NotifyObservers(field[i], SchemaActionType.Add);
             }
         }
 
-        public void AddRange(params Field[] specifications)
+        public void AddRange(params Field[] fields)
         {
-            if (specifications == null)
+            if (fields == null)
                 return;
             
-            for (int i = 0; i < specifications.Length; i++)
+            for (int i = 0; i < fields.Length; i++)
             {
-                if (specifications[i] == null)
+                if (fields[i] == null)
                 {
-                    NotifyObservers(specifications[i], SchemaActionType.None);
+                    NotifyObservers(fields[i], SchemaActionType.None);
                     continue;
                 }
                 
-                _fields.Add(specifications[i]);
+                _fields.Add(fields[i]);
                 _count++;
                 
-                NotifyObservers(specifications[i], SchemaActionType.Add);
+                NotifyObservers(fields[i], SchemaActionType.Add);
             }
         }
 

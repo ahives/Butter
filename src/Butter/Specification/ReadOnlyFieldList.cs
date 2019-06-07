@@ -12,7 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Specification
 {
     using System.Linq;
 
@@ -47,29 +47,29 @@ namespace Butter.Grammar
         {
         }
 
-        public bool TryGetValue(int index, out Field specification)
+        public bool TryGetValue(int index, out Field field)
         {
             if (index < 0 || _count <= 0)
             {
-                specification = SchemaCache.OutOfRangeField;
+                field = SchemaCache.OutOfRangeField;
                 return false;
             }
 
             if (index < _count)
             {
-                specification = _fields[index];
+                field = _fields[index];
                 return true;
             }
 
-            specification = SchemaCache.OutOfRangeField;
+            field = SchemaCache.OutOfRangeField;
             return false;
         }
 
-        public bool TryGetValue(string id, out Field specification)
+        public bool TryGetValue(string id, out Field field)
         {
             if (_count <= 0)
             {
-                specification = SchemaCache.OutOfRangeField;
+                field = SchemaCache.OutOfRangeField;
                 return false;
             }
 
@@ -78,15 +78,15 @@ namespace Butter.Grammar
                 if (_fields[i].Id != id)
                     continue;
                 
-                specification = _fields[i];
+                field = _fields[i];
                 return true;
             }
             
-            specification = SchemaCache.OutOfRangeField;
+            field = SchemaCache.OutOfRangeField;
             return false;
         }
 
-        public bool Contains(Field specification) => specification != null && _fields.Contains(specification, new FieldComparer());
+        public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
 
         public bool Equals(IReadOnlyFieldList other)
         {

@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using Grammar;
+    using Specification;
 
     class DecimalFieldImpl :
         DecimalField
@@ -40,43 +40,5 @@ namespace Butter.Internal
         public FieldDataType DataType { get; }
         public int Scale { get; }
         public int Precision { get; }
-
-        public bool Equals(DecimalField other)
-        {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public bool Equals(Field other)
-        {
-            if (string.IsNullOrWhiteSpace(Id) || other == null || string.IsNullOrWhiteSpace(other.Id))
-                return false;
-
-            return string.Equals(Id, other.Id) && DataType == other.DataType;
-        }
-
-        public override bool Equals(object obj)
-        {
-            if (ReferenceEquals(null, obj))
-                return false;
-            
-            if (ReferenceEquals(this, obj))
-                return true;
-            
-            if (obj.GetType() != this.GetType())
-                return false;
-            
-            return Equals((DecimalFieldImpl) obj);
-        }
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
-            }
-        }
     }
 }

@@ -12,36 +12,37 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Specification
 {
     using System.Collections.Generic;
+    using Notification;
 
-    public static class FieldListExtensions
+    public abstract class BaseFieldList :
+        ObservableList
     {
-        /// <summary>
-        /// Returns a IEnumerable on <see cref="IFieldList"/>
-        /// </summary>
-        /// <param name="fields"></param>
-        /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        protected readonly List<Field> _fields;
+        protected int _count;
+
+        protected BaseFieldList(bool notifyObservers)
+            : base(notifyObservers)
         {
-            for (int i = 0; i < fields.Count; i++)
-            {
-                yield return fields[i];
-            }
+            _fields = new List<Field>();
+            _count = 0;
         }
+
         
-        /// <summary>
-        /// Returns a IEnumerable on <see cref="IReadOnlyFieldList"/>
-        /// </summary>
-        /// <param name="fields"></param>
-        /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IReadOnlyFieldList fields)
+        protected class FieldComparer :
+            IEqualityComparer<Field>
         {
-            for (int i = 0; i < fields.Count; i++)
+            public bool Equals(Field x, Field y)
             {
-                yield return fields[i];
+                if (x == null || y == null)
+                    return false;
+
+                return x.Id == y.Id;
             }
+
+            public int GetHashCode(Field obj) => obj.Id.GetHashCode();
         }
     }
 }

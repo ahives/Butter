@@ -16,7 +16,7 @@ namespace Butter.Internal
 {
     using System;
     using System.Threading;
-    using Grammar;
+    using Specification;
 
     class MapFieldBuilderImpl :
         MapFieldBuilder

@@ -4,7 +4,7 @@ namespace Butter.Tests
     using Specification;
 
     [TestFixture]
-    public class StructFieldTests
+    public class SelectManyTests
     {
         [Test]
         public void Verify_can_access_struct_fields_by_id()
@@ -64,51 +64,9 @@ namespace Butter.Tests
 
             Assert.IsNotNull(fields["field1"]);
             Assert.IsNotNull(fields["field1"].Cast<StructField>().Fields["fieldB"]);
+            Assert.AreEqual(6, fields.Count);
+            Assert.AreEqual(10, fields.SelectMany().Count);
         }
 
-        [Test]
-        public void Verify_can_set_by_schema_builder()
-        {
-            var fields = new FieldList();
-
-            Field field1 = FieldSpec.Builder<FieldBuilder>()
-                .Id("fieldA")
-                .DataType(FieldDataType.Primitive)
-                .IsNullable()
-                .Build();
-            
-            fields.Add(field1);
-            
-            Field field2 = FieldSpec.Builder<FieldBuilder>()
-                .Id("fieldB")
-                .DataType(FieldDataType.Primitive)
-                .IsNullable()
-                .Build();
-            
-            fields.Add(field2);
-            
-            Field field3 = FieldSpec.Builder<FieldBuilder>()
-                .Id("fieldC")
-                .DataType(FieldDataType.Primitive)
-                .IsNullable()
-                .Build();
-            
-            fields.Add(field3);
-
-            DecimalField field4 = FieldSpec.Builder<DecimalFieldBuilder>()
-                .Id("field")
-                .Precision(5)
-                .Scale(2)
-                .Build();
-            
-            fields.Add(field4);
-
-            var schema = Schema.Builder()
-                .Field<StructFieldBuilder>(x => x.Id("fieldX").IsNullable().Fields(fields).Build())
-                .Build();
-
-            Assert.AreEqual(1, schema.Fields.Count);
-            Assert.AreEqual(5, schema.Fields.SelectMany().Count);
-        }
     }
 }

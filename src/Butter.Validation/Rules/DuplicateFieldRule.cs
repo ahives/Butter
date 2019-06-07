@@ -12,12 +12,32 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Validation.Rules
 {
-    public interface DecimalFieldDefinition
+    using System.Collections.Generic;
+    using System.Linq;
+    using Notification;
+    using NRules.Fluent.Dsl;
+    using Specification;
+
+    [Tag("FieldValidation")]
+    [Description("DUPLICATE FIELD")]
+    public class DuplicateFieldRule :
+        Rule
     {
-        void SetScale(int scale);
-        
-        void SetPrecision(int precision);
+        public override void Define()
+        {
+            IEnumerable<Field> fields = null;
+            
+            Name(nameof(DuplicateFieldRule));
+
+            When()
+                .Query(() => fields, x =>
+                    x.Match<Field>(f => fields.Contains(f))
+                        .Collect());
+
+            Then()
+                .Do(x => x.NoOp());
+        }
     }
 }

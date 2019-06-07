@@ -12,7 +12,7 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Grammar
+namespace Butter.Specification
 {
     using System;
     using System.Collections.Generic;
@@ -63,6 +63,19 @@ namespace Butter.Grammar
             }
 
             return fields;
+        }
+        
+        /// <summary>
+        /// Returns a IEnumerable on <see cref="IReadOnlyFieldList"/>
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static IEnumerable<Field> ToEnumerable(this IReadOnlyFieldList fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                yield return fields[i];
+            }
         }
 
         /// <summary>
