@@ -32,5 +32,7 @@ namespace Butter.Specification
         bool TryGetValue(string id, out Field field);
 
         bool Contains(Field field);
+
+        bool Contains(string id);
     }
 }

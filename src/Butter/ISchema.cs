@@ -14,6 +14,7 @@
 // ***********************************************************************************
 namespace Butter
 {
+    using System;
     using Specification;
 
     public interface ISchema
@@ -22,5 +23,23 @@ namespace Butter
         /// 
         /// </summary>
         IReadOnlyFieldList Fields { get; }
+
+        /// <summary>
+        /// Removes the first field matching the criteria
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        T Remove<T>(Func<T, bool> criteria)
+            where T : Field;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
+        IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
+            where T : Field;
     }
 }

@@ -26,6 +26,7 @@ namespace Butter.Validation.Tests
                 .Field<FieldBuilder>(x => x.Id("field5").IsNullable().Build())
                 .Field<FieldBuilder>(x => x.Id("field6").IsNullable().Build())
                 .Field<FieldBuilder>(x => x.Id("field3").IsNullable().Build())
+                .Field(null)
                 .RegisterObserver(validator)
                 .Build();
 //                .Validate();

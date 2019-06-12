@@ -14,6 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Specification
 {
+    using System;
     using System.Collections.Generic;
     using Notification;
 
@@ -123,6 +124,24 @@ namespace Butter.Specification
             NotifyObservers(field, SchemaActionType.Add);
         }
 
+        public void Add<TBuilder>(Func<TBuilder, Field> criteria)
+            where TBuilder : ISpecificationBuilder
+        {
+            TBuilder builder = FieldSpec.Builder<TBuilder>();
+            Field field = criteria(builder);
+            
+            if (field == null)
+            {
+                NotifyObservers(field, SchemaActionType.None);
+                return;
+            }
+            
+            _fields.Add(field);
+            _count = _fields.Count;
+            
+            NotifyObservers(field, SchemaActionType.Add);
+        }
+
         public void AddRange(IList<Field> field)
         {
             if (field == null)
@@ -176,7 +195,7 @@ namespace Butter.Specification
 
             for (int i = 0; i < other.Count; i++)
             {
-                if (!_fields.Contains(other[i]))
+                if (!Contains(other[i].Id))
                     return false;
             }
 

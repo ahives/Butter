@@ -38,11 +38,11 @@ namespace Butter.Specification
         /// <summary>
         /// Cast the given field to a field of type <see cref="T"/>.
         /// </summary>
-        /// <param name="specification"></param>
+        /// <param name="field"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <exception cref="NotSupportedCastException"></exception>
-        public static T Cast<T>(this Field specification)
+        public static T Cast<T>(this Field field)
         {
             T Missing()
             {
@@ -64,17 +64,18 @@ namespace Butter.Specification
             T Cast()
             {
                 if (typeof(T) == typeof(DecimalField) ||
+                    typeof(T) == typeof(Field) ||
                     typeof(T) == typeof(MapField) ||
                     typeof(T) == typeof(StructField) ||
                     typeof(T) == typeof(ListField))
                 {
-                    return (T) specification;
+                    return (T) field;
                 }
 
                 throw new NotSupportedCastException($"{typeof(T).FullName} is not a support object to cast to.");
             }
 
-            return specification == null ? Missing() : Cast();
+            return field == null ? Missing() : Cast();
         }
 
         /// <summary>
@@ -88,20 +89,20 @@ namespace Butter.Specification
         {
             if (typeof(T) == typeof(MapField))
             {
-                MapField specification = new MapFieldImpl(source.Id, source.IsNullable);
-                return (T) specification;
+                MapField field = new MapFieldImpl(source.Id, source.IsNullable);
+                return (T) field;
             }
 
             if (typeof(T) == typeof(DecimalField))
             {
-                DecimalField specification = new DecimalFieldImpl(source.Id, source.IsNullable);
-                return (T) specification;
+                DecimalField field = new DecimalFieldImpl(source.Id, source.IsNullable);
+                return (T) field;
             }
 
             if (typeof(T) == typeof(StructField))
             {
-                StructField specification = new StructFieldImpl(source.Id, source.IsNullable);
-                return (T) specification;
+                StructField field = new StructFieldImpl(source.Id, source.IsNullable);
+                return (T) field;
             }
 
             return typeof(T).GetMissingField<T>();

@@ -20,6 +20,7 @@ namespace Butter.Validation
     using NRules;
     using NRules.Diagnostics;
     using NRules.Fluent;
+    using NRules.RuleModel;
     using Rules;
     using Serialization.Json;
     using Specification;
@@ -56,11 +57,14 @@ namespace Butter.Validation
 
         void OnRuleFiredEventHandler(object sender, AgendaEventArgs e)
         {
-            foreach (var fact in e.Facts)
+            foreach (IFactMatch fact in e.Facts)
             {
-                    Console.WriteLine(fact.Value);
-                foreach (var field in (IEnumerable<Field>) fact.Value)
+                    Console.WriteLine(e.Rule.Name);
+                    Console.WriteLine(fact.Value.GetType());
+                    
+                foreach (var field in (IEnumerable<Field>)fact.Value)
                 {
+                    Console.WriteLine(field.ToJsonString());
                     if (field == null)
                     {
                         Console.WriteLine($"Field 'null'");

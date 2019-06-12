@@ -23,14 +23,14 @@ namespace Butter
     public class Schema :
         ISchema, IEquatable<Schema>, IDisposable
     {
-        readonly List<IDisposable> _disposableObservers;
+        readonly List<IDisposable> _observers;
         readonly FieldList _fields;
 
         public IReadOnlyFieldList Fields => _fields;
 
         internal Schema(IList<Field> fields, IList<IObserver<NotificationContext>> observers)
         {
-            _disposableObservers = new List<IDisposable>();
+            _observers = new List<IDisposable>();
             
             _fields = new FieldList();
             
@@ -44,6 +44,38 @@ namespace Butter
         /// </summary>
         /// <returns></returns>
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
+
+        public T Remove<T>(Func<T, bool> criteria)
+            where T : Field
+        {
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                T field = _fields[i].Cast<T>();
+                if (!criteria(field))
+                    continue;
+                
+                return _fields.Remove(i).Cast<T>();
+            }
+
+            return typeof(T).GetMissingField<T>();
+        }
+
+        public IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
+            where T : Field
+        {
+            var fields = new FieldList();
+            
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                T field = _fields[i].Cast<T>();
+                if (!criteria(field))
+                    continue;
+                
+                fields.Add(_fields.Remove(i));
+            }
+
+            return fields;
+        }
 
         public bool Equals(Schema other)
         {
@@ -74,9 +106,9 @@ namespace Butter
 
         public void Dispose()
         {
-            for (int i = 0; i < _disposableObservers.Count; i++)
+            for (int i = 0; i < _observers.Count; i++)
             {
-                _disposableObservers[i].Dispose();
+                _observers[i].Dispose();
             }
         }
 
@@ -85,7 +117,7 @@ namespace Butter
             for (int i = 0; i < observers.Count; i++)
             {
                 if (observers[i] != null)
-                    _disposableObservers.Add(_fields.Subscribe(observers[i]));
+                    _observers.Add(_fields.Subscribe(observers[i]));
             }
         }
     }

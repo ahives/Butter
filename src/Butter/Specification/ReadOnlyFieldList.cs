@@ -88,6 +88,20 @@ namespace Butter.Specification
 
         public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
 
+        public bool Contains(string id)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return false;
+            
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                if (_fields[i].Id == id)
+                    return true;
+            }
+
+            return false;
+        }
+
         public bool Equals(IReadOnlyFieldList other)
         {
             if (ReferenceEquals(null, other))
@@ -101,7 +115,7 @@ namespace Butter.Specification
 
             for (int i = 0; i < other.Count; i++)
             {
-                if (!_fields.Contains(other[i]))
+                if (!Contains(other[i].Id))
                     return false;
             }
 

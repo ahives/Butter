@@ -38,7 +38,8 @@ namespace Butter.Internal
         }
 
         public bool Contains(Field field) => false;
-        
+        public bool Contains(string id) => false;
+
         public bool Equals(IReadOnlyFieldList other) => false;
     }
 }

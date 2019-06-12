@@ -23,6 +23,9 @@ namespace Butter.Specification
     {
         void Add(Field field);
 
+        void Add<TBuilder>(Func<TBuilder, Field> criteria)
+            where TBuilder : ISpecificationBuilder;
+
         void AddRange(params Field[] fields);
 
         void AddRange(IList<Field> field);

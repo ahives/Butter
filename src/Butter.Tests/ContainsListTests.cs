@@ -67,11 +67,13 @@ namespace Butter.Tests
                 .IsNullable()
                 .Build();
             
-            Assert.IsTrue(fields.Contains(field));
+            IReadOnlyFieldList temp = fields;
+            
+            Assert.IsTrue(temp.Contains(field));
         }
 
         [Test]
-        public void Verify_cannot_find_field()
+        public void Verify_cannot_find_field_by_field()
         {
             var fields = new FieldList();
             
@@ -87,7 +89,25 @@ namespace Butter.Tests
                 .IsNullable()
                 .Build();
             
-            Assert.IsFalse(fields.Contains(field));
+            IReadOnlyFieldList temp = fields;
+            
+            Assert.IsFalse(temp.Contains(field));
+        }
+
+        [Test]
+        public void Verify_cannot_find_field_by_field_id()
+        {
+            var fields = new FieldList();
+            
+            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+
+            IReadOnlyFieldList temp = fields;
+            
+            Assert.IsFalse(temp.Contains("field7"));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_allow_adding_duplicate_fields_using_AddRange()
         {
-            var fields = new FieldList(false);
+            var fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -35,7 +35,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_allow_adding_any_null_fields_using_AddRange_via_params()
         {
-            var fields = new FieldList(false);
+            var fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -60,7 +60,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_allow_adding_any_null_fields_using_AddRange_via_IList()
         {
-            var fields = new FieldList(false);
+            var fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -89,7 +89,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_allow_adding_all_null_fields_using_AddRange_via_params()
         {
-            var fields = new FieldList(false);
+            var fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -108,7 +108,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_allow_adding_all_null_fields_using_AddRange_via_IList()
         {
-            var fields = new FieldList(false);
+            var fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
