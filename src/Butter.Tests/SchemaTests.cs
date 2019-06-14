@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using System;
     using NUnit.Framework;
     using Specification;
 
@@ -72,6 +73,29 @@ namespace Butter.Tests
             Field field = schema.Remove<Field>(x => x.Id == "field3");
             
             Assert.AreEqual(5, schema.Fields.Count);
+        }
+        
+        [Test]
+        public void Verify_can_output_schema()
+        {
+            var schema = Schema.Builder()
+                .Field<StructFieldBuilder>(x =>
+                {
+                    return x.Id("field1")
+                        .Field<FieldBuilder>(f => f.Id("fieldA").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<FieldBuilder>(f => f.Id("fieldB").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<FieldBuilder>(f => f.Id("fieldC").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<DecimalFieldBuilder>(f => f.Id("fieldD").Precision(5).Scale(2).IsNullable().Build())
+                        .Build();
+                })
+                .Field<FieldBuilder>(x => x.Id("field2").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field3").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field4").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field5").IsNullable().Build())
+                .Field<FieldBuilder>(x => x.Id("field6").IsNullable().Build())
+                .Build();
+            
+            Console.WriteLine(schema.Fields.ToString());
         }
         
         [Test]

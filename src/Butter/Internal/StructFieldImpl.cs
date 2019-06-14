@@ -39,5 +39,7 @@ namespace Butter.Internal
             DataType = FieldDataType.Struct;
             Fields = SchemaCache.EmptyFieldList;
         }
+
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }
 }

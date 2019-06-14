@@ -16,6 +16,7 @@ namespace Butter
 {
     using System;
     using Metadata;
+    using Specification;
 
     public static class DataTypeExtensions
     {

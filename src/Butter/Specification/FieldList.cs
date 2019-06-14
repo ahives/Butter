@@ -16,6 +16,7 @@ namespace Butter.Specification
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using Notification;
 
     public class FieldList :
@@ -222,6 +223,20 @@ namespace Butter.Specification
             {
                 return ((_fields != null ? _fields.GetHashCode() : 0) * 397) ^ _count;
             }
+        }
+
+        public override string ToString()
+        {
+            var buffer = new StringBuilder();
+
+            buffer.AppendLine("\t[FIELDS]");
+            
+            for (int i = 0; i < _count; i++)
+            {
+                buffer.AppendLine($"\t\t=> [{i + 1}] {_fields[i]}");
+            }
+
+            return buffer.ToString();
         }
     }
 }

@@ -29,5 +29,7 @@ namespace Butter.Internal
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }
 }

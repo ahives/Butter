@@ -9,7 +9,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_first_using_id()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -48,7 +48,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_middle_using_id()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -87,7 +87,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_last_using_id()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -126,7 +126,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_first_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -165,7 +165,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_remove_does_not_throw_when_index_less_than_zero()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -204,7 +204,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_remove_does_not_throw_when_index_greater_than_field_list()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -243,7 +243,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_middle_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -282,7 +282,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_remove_field_last_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -321,7 +321,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryRemove_does_not_throw_when_index_less_than_zero()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -358,7 +358,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryRemove_does_not_throw_when_index_greater_than_field_list()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -395,7 +395,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryRemove_can_remove_field_first_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -432,7 +432,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryRemove_can_remove_field_middle_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")
@@ -469,7 +469,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_TryRemove_can_remove_field_last_using_index()
         {
-            var fields = new FieldList(false);
+            IFieldList fields = new FieldList();
 
             var field1 = FieldSpec.Builder<FieldBuilder>()
                 .Id("field1")

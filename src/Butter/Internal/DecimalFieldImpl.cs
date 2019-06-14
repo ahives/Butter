@@ -40,5 +40,7 @@ namespace Butter.Internal
         public FieldDataType DataType { get; }
         public int Scale { get; }
         public int Precision { get; }
+
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }
 }

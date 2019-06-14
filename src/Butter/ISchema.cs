@@ -20,12 +20,12 @@ namespace Butter
     public interface ISchema
     {
         /// <summary>
-        /// 
+        /// Read-only list of fields.
         /// </summary>
         IReadOnlyFieldList Fields { get; }
 
         /// <summary>
-        /// Removes the first field matching the criteria
+        /// Removes the first field matching the criteria.
         /// </summary>
         /// <param name="criteria"></param>
         /// <typeparam name="T"></typeparam>
@@ -34,7 +34,7 @@ namespace Butter
             where T : Field;
 
         /// <summary>
-        /// 
+        /// Removes all fields found matching the criteria.
         /// </summary>
         /// <param name="criteria"></param>
         /// <typeparam name="T"></typeparam>
