@@ -22,6 +22,7 @@ namespace Butter.Internal
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.List;
+        public bool HasValue => false;
 
         public bool Equals(ListField other) => false;
         public bool Equals(Field other) => false;

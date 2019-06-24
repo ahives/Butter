@@ -26,18 +26,21 @@ namespace Butter.Internal
             DataType = FieldDataType.Decimal;
             Scale = scale;
             Precision = precision;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
-        public DecimalFieldImpl(string id, bool nullable)
+        public DecimalFieldImpl(string id, bool nullable = false)
         {
             Id = id;
             IsNullable = nullable;
             DataType = FieldDataType.Decimal;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public bool HasValue { get; }
         public int Scale { get; }
         public int Precision { get; }
 

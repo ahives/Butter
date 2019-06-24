@@ -22,6 +22,7 @@ namespace Butter.Internal
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Map;
+        public bool HasValue => false;
         public Field Key => SchemaCache.MissingField;
         public Field Value => SchemaCache.MissingField;
 

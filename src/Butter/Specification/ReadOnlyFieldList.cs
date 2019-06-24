@@ -57,6 +57,12 @@ namespace Butter.Specification
 
             if (index < _count)
             {
+                if (_fields[index] == null)
+                {
+                    field = SchemaCache.MissingField;
+                    return false;
+                }
+                
                 field = _fields[index];
                 return true;
             }
@@ -75,6 +81,9 @@ namespace Butter.Specification
 
             for (int i = 0; i < _count; i++)
             {
+                if (_fields[i] == null)
+                    continue;
+                
                 if (_fields[i].Id != id)
                     continue;
                 
@@ -82,7 +91,7 @@ namespace Butter.Specification
                 return true;
             }
             
-            field = SchemaCache.OutOfRangeField;
+            field = SchemaCache.MissingField;
             return false;
         }
 

@@ -23,10 +23,12 @@ namespace Butter.Internal
         {
             Id = id;
             DataType = FieldDataType.List;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public bool HasValue { get; }
     }
 }

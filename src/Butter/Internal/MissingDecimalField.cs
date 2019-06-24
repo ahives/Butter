@@ -16,12 +16,13 @@ namespace Butter.Internal
 {
     using Specification;
 
-    public class MissingDecimalField :
+    class MissingDecimalField :
         DecimalField
     {
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Decimal;
+        public bool HasValue => false;
         public int Scale => 0;
         public int Precision => 0;
         

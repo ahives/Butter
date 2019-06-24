@@ -22,6 +22,7 @@ namespace Butter.Internal
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public bool HasValue { get; }
         public IReadOnlyFieldList Fields { get; }
 
         public StructFieldImpl(string id, IReadOnlyFieldList fields, bool isNullable = false)
@@ -30,6 +31,7 @@ namespace Butter.Internal
             IsNullable = isNullable;
             DataType = FieldDataType.Struct;
             Fields = fields;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public StructFieldImpl(string id, bool isNullable)
@@ -38,6 +40,7 @@ namespace Butter.Internal
             IsNullable = isNullable;
             DataType = FieldDataType.Struct;
             Fields = SchemaCache.EmptyFieldList;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";

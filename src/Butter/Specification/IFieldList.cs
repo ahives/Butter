@@ -16,6 +16,7 @@ namespace Butter.Specification
 {
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json.Bson;
     using Notification;
 
     public interface IFieldList :
@@ -37,5 +38,13 @@ namespace Butter.Specification
         bool TryRemove(int index, out Field field);
 
         bool TryRemove(string id, out Field field);
+
+        Field Replace(int index, Field field);
+
+        Field Replace(string id, Field field);
+
+        bool TryReplace(int index, Field field, out Field replaced);
+
+        bool TryReplace(string id, Field field, out Field replaced);
     }
 }

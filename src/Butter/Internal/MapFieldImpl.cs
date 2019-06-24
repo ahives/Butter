@@ -26,6 +26,7 @@ namespace Butter.Internal
             Value = field != null ? field.Value : SchemaCache.MissingField;
             DataType = FieldDataType.Map;
             IsNullable = isNullable;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public MapFieldImpl(string id, bool isNullable)
@@ -35,11 +36,13 @@ namespace Butter.Internal
             Value = SchemaCache.MissingField;
             DataType = FieldDataType.Map;
             IsNullable = isNullable;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public bool HasValue { get; }
         public Field Key { get; }
         public Field Value { get; }
 

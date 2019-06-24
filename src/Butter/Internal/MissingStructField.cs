@@ -16,12 +16,13 @@ namespace Butter.Internal
 {
     using Specification;
 
-    public class MissingStructField :
+    class MissingStructField :
         StructField
     {
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => false;
         public FieldDataType DataType => FieldDataType.Struct;
+        public bool HasValue => false;
         public IReadOnlyFieldList Fields => new EmptyFieldList();
         
         public bool Equals(Field other) => false;

@@ -36,10 +36,7 @@ namespace Butter.Tests
             IReadOnlyFieldList fields = new FieldList();
             
             Assert.IsFalse(fields.TryGetValue(0, out var f1));
-            Assert.Throws<FieldOutOfRangeException>(() =>
-            {
-                Assert.AreEqual("field1", f1.Id);
-            });
+            Assert.AreEqual("[Butter].[missing_field_spec]", f1.Id);
         }
 
         [Test]
@@ -50,7 +47,6 @@ namespace Butter.Tests
             Assert.IsFalse(fields.TryGetValue(0, out _));
         }
         
-
         [Test]
         public void Verify_TryGetValue_will_not_throw_when_index_less_than_zero()
         {

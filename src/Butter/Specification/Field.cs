@@ -21,5 +21,7 @@ namespace Butter.Specification
         bool IsNullable { get; }
         
         FieldDataType DataType { get; }
+        
+        bool HasValue { get; }
     }
 }

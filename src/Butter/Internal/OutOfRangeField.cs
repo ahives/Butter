@@ -19,9 +19,10 @@ namespace Butter.Internal
     class OutOfRangeField :
         Field
     {
-        public string Id => throw new FieldOutOfRangeException("No field at the specified index could be found.");
+        public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.None;
+        public bool HasValue => false;
 
         public bool Equals(Field other) => false;
 

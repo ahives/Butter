@@ -24,11 +24,13 @@ namespace Butter.Internal
             Id = id;
             IsNullable = isNullable;
             DataType = dataType;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
+        public bool HasValue { get; }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }

@@ -71,16 +71,13 @@ namespace Butter.Tests
         }
 
         [Test]
-        public void Verify_throws_when_empty_field_accessed()
+        public void Verify_does_not_throw_when_empty_field_accessed()
         {
             IFieldList fields = new FieldList();
             fields.Add(null);
             
             Assert.IsFalse(fields.TryGetValue(0, out var f1));
-            Assert.Throws<FieldOutOfRangeException>(() =>
-            {
-                string fieldId = f1.Id;
-            });
+            Assert.AreEqual("[Butter].[missing_field_spec]", f1.Id);
         }
 
         [Test]

@@ -20,12 +20,12 @@ namespace Butter
 
     public interface ISchemaBuilder
     {
-        ISchemaBuilder Field(Field specification);
+        ISchemaBuilder Field(Field field);
 
         ISchemaBuilder Field<T>(Func<T, Field> builder)
             where T : ISpecificationBuilder;
 
-        ISchemaBuilder Fields(IReadOnlyFieldList specifications);
+        ISchemaBuilder Fields(IReadOnlyFieldList fields);
         
         ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
         

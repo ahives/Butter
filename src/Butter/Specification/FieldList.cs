@@ -50,14 +50,14 @@ namespace Butter.Specification
                 if (_fields[i].Id != id)
                     continue;
 
-                Field specification = _fields[i];
+                Field field = _fields[i];
                 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
                 
-                NotifyObservers(specification, SchemaActionType.Delete);
+                NotifyObservers(field, SchemaActionType.Delete);
                 
-                return specification;
+                return field;
             }
 
             return SchemaCache.MissingField;
@@ -68,14 +68,12 @@ namespace Butter.Specification
             if (index > _count || index < 0)
             {
                 field = SchemaCache.MissingField;
-
                 return false;
             }
 
             if (!TryGetValue(index, out Field spec))
             {
                 field = SchemaCache.MissingField;
-
                 return false;
             }
             
@@ -100,7 +98,7 @@ namespace Butter.Specification
 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
-                
+
                 NotifyObservers(field, SchemaActionType.Delete);
             
                 return true;
@@ -108,6 +106,94 @@ namespace Butter.Specification
             
             field = SchemaCache.MissingField;
 
+            return false;
+        }
+
+        public Field Replace(int index, Field field)
+        {
+            if (index < 0 || index > _count)
+                return SchemaCache.MissingField;
+
+            if (!TryGetValue(index, out Field previous))
+                return SchemaCache.MissingField;
+
+            _fields[index] = field;
+            
+            NotifyObservers(field, SchemaActionType.Replace);
+
+            return previous;
+        }
+
+        public Field Replace(string id, Field field)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+                return SchemaCache.MissingField;
+
+            if (!TryGetValue(id, out Field previous))
+                return SchemaCache.MissingField;
+
+            for (int i = 0; i < _count; i++)
+            {
+                if (_fields[i].Id != id)
+                    continue;
+
+                _fields[i] = field;
+            
+                NotifyObservers(field, SchemaActionType.Replace);
+                break;
+            }
+
+            return previous;
+        }
+
+        public bool TryReplace(int index, Field field, out Field replaced)
+        {
+            if (index < 0 || index > _count)
+            {
+                replaced = SchemaCache.MissingField;
+                return false;
+            }
+            
+            if (!TryGetValue(index, out replaced))
+            {
+                replaced = SchemaCache.MissingField;
+                return false;
+            }
+
+            _fields[index] = field;
+                
+            NotifyObservers(field, SchemaActionType.Replace);
+            
+            return true;
+        }
+
+        public bool TryReplace(string id, Field field, out Field replaced)
+        {
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                replaced = SchemaCache.MissingField;
+                return false;
+            }
+
+            if (!TryGetValue(id, out replaced))
+            {
+                replaced = SchemaCache.MissingField;
+                return false;
+            }
+
+            for (int i = 0; i < _count; i++)
+            {
+                if (_fields[i].Id != id)
+                    continue;
+
+                _fields[i] = field;
+                
+                NotifyObservers(field, SchemaActionType.Replace);
+                
+                return true;
+            }
+            
+            replaced = SchemaCache.MissingField;
             return false;
         }
 

@@ -41,5 +41,9 @@ namespace Butter
         /// <returns></returns>
         IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
             where T : Field;
+
+        T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
+            where T : Field
+            where TBuilder : ISpecificationBuilder;
     }
 }

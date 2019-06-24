@@ -18,6 +18,8 @@ namespace Butter.Notification
     {
         Add,
         Delete,
+        Modify,
+        Replace,
         None
     }
 }

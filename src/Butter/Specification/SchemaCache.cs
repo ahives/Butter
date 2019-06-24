@@ -42,6 +42,9 @@ namespace Butter.Specification
 
                 case DecimalField _:
                     return (T) MissingDecimalField;
+                
+                case Field _:
+                    return (T) MissingField;
 
                 default:
                     throw new Exception();

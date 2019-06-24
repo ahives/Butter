@@ -25,9 +25,9 @@ namespace Butter.Internal
         readonly List<Field> _specifications = new List<Field>();
         readonly List<IObserver<NotificationContext>> _observers = new List<IObserver<NotificationContext>>();
 
-        public ISchemaBuilder Field(Field specification)
+        public ISchemaBuilder Field(Field field)
         {
-            _specifications.Add(specification);
+            _specifications.Add(field);
 
             return this;
         }
@@ -44,9 +44,9 @@ namespace Butter.Internal
             return this;
         }
 
-        public ISchemaBuilder Fields(IReadOnlyFieldList specifications)
+        public ISchemaBuilder Fields(IReadOnlyFieldList fields)
         {
-            _specifications.AddRange(specifications.ToList());
+            _specifications.AddRange(fields.ToList());
 
             return this;
         }

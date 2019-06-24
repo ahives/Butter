@@ -72,9 +72,30 @@ namespace Butter
                     continue;
                 
                 fields.Add(_fields.Remove(i));
+                i = 0;
             }
 
             return fields;
+        }
+
+        public T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
+            where T : Field
+            where TBuilder : ISpecificationBuilder
+        {
+            TBuilder b = FieldSpec.Builder<TBuilder>();
+            T field = builder(b);
+
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                T current = _fields[i].Cast<T>();
+
+                if (criteria(current))
+                    return !_fields.TryReplace(current.Id, field, out Field previous)
+                        ? typeof(T).GetMissingField<T>()
+                        : previous.Cast<T>();
+            }
+
+            return typeof(T).GetMissingField<T>();
         }
 
         public bool Equals(Schema other)
