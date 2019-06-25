@@ -19,14 +19,11 @@ namespace Butter.Internal
     class MissingMapField :
         MapField
     {
-        public string Id => "[Butter].[missing_field_spec]";
+        public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Map;
         public bool HasValue => false;
-        public Field Key => SchemaCache.MissingField;
-        public Field Value => SchemaCache.MissingField;
-
-        public bool Equals(MapField other) => false;
-        public bool Equals(Field other) => false;
+        public SchemaField Key => SchemaCache.MissingField;
+        public SchemaField Value => SchemaCache.MissingField;
     }
 }

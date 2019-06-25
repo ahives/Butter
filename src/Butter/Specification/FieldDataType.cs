@@ -17,6 +17,7 @@ namespace Butter.Specification
     public enum FieldDataType
     {
         None,
+        DateTimeOffset,
         Primitive,
         Decimal,
         List,

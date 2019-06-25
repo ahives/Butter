@@ -19,7 +19,7 @@ namespace Butter.Notification
 
     public interface NotificationContext
     {
-        Field Field { get; }
+        SchemaField Field { get; }
         
         SchemaActionType Action { get; }
         

@@ -14,24 +14,17 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using System;
     using Specification;
 
-    public interface StructFieldBuilder :
+    public interface DateTimeFieldBuilder :
         ISpecificationBuilder
     {
-        StructFieldBuilder Id(string id);
+        DateTimeFieldBuilder Id(string id);
 
-        StructFieldBuilder Field<T>(T specification)
-            where T : SchemaField;
+        DateTimeFieldBuilder IsNullable();
 
-        StructFieldBuilder Field<T>(Func<T, SchemaField> builder)
-            where T : ISpecificationBuilder;
+        DateTimeFieldBuilder Encoding(DateTimeEncoding encoding);
 
-        StructFieldBuilder Fields(IReadOnlyFieldList specifications);
-
-        StructFieldBuilder IsNullable();
-
-        StructField Build();
+        DateTimeField Build();
     }
 }

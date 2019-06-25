@@ -23,9 +23,9 @@ namespace Butter.Internal
     {
         Lazy<string> _id;
         Lazy<bool> _nullable;
-        Lazy<Field> _key;
-        Lazy<Field> _value;
-        FieldMap<Field,Field> _mapping;
+        Lazy<SchemaField> _key;
+        Lazy<SchemaField> _value;
+        FieldMap<SchemaField,SchemaField> _mapping;
 
         public MapFieldBuilder Id(string id)
         {
@@ -34,24 +34,24 @@ namespace Butter.Internal
             return this;
         }
 
-        public MapFieldBuilder Map(Field key, Field value)
+        public MapFieldBuilder Map(SchemaField key, SchemaField value)
         {
-            _key = new Lazy<Field>(() => key, LazyThreadSafetyMode.PublicationOnly);
-            _value = new Lazy<Field>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<SchemaField>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<SchemaField>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
 
-        public MapFieldBuilder Key(Field key)
+        public MapFieldBuilder Key(SchemaField key)
         {
-            _key = new Lazy<Field>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<SchemaField>(() => key, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldBuilder Value(Field value)
+        public MapFieldBuilder Value(SchemaField value)
         {
-            _value = new Lazy<Field>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<SchemaField>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
@@ -70,6 +70,6 @@ namespace Butter.Internal
             return new MapFieldImpl(_id.Value, _mapping, _nullable.Value);
         }
 
-        public FieldMap<Field, Field> Mapping => _mapping;
+        public FieldMap<SchemaField, SchemaField> Mapping => _mapping;
     }
 }

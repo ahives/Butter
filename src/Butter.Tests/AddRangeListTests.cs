@@ -12,7 +12,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            var field1 = FieldSpec.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -20,7 +20,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = FieldSpec.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -37,7 +37,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            var field1 = FieldSpec.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -45,7 +45,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field2 = FieldSpec.Builder<FieldBuilder>()
+            var field2 = Field.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -62,7 +62,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            var field1 = FieldSpec.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -70,13 +70,13 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            var field = FieldSpec.Builder<FieldBuilder>()
+            var field = Field.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
                 .Build();
             
-            IList<Field> fields2 = new List<Field>();
+            IList<SchemaField> fields2 = new List<SchemaField>();
             fields.Add(field);
             fields.Add(null);
             
@@ -91,7 +91,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            var field1 = FieldSpec.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -110,7 +110,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            var field1 = FieldSpec.Builder<FieldBuilder>()
+            var field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -118,7 +118,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            IList<Field> fields2 = null;
+            IList<SchemaField> fields2 = null;
             
             fields.AddRange(fields2);
             

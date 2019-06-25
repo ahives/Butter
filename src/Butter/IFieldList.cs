@@ -12,39 +12,39 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using System;
     using System.Collections.Generic;
-    using Newtonsoft.Json.Bson;
     using Notification;
+    using Specification;
 
     public interface IFieldList :
         IObservable<NotificationContext>, IReadOnlyFieldList, IEquatable<IFieldList>
     {
-        void Add(Field field);
+        void Add(SchemaField field);
 
-        void Add<TBuilder>(Func<TBuilder, Field> criteria)
+        void Add<TBuilder>(Func<TBuilder, SchemaField> criteria)
             where TBuilder : ISpecificationBuilder;
 
-        void AddRange(params Field[] fields);
+        void AddRange(params SchemaField[] fields);
 
-        void AddRange(IList<Field> field);
+        void AddRange(IList<SchemaField> field);
 
-        Field Remove(int index);
+        SchemaField Remove(int index);
 
-        Field Remove(string id);
+        SchemaField Remove(string id);
 
-        bool TryRemove(int index, out Field field);
+        bool TryRemove(int index, out SchemaField field);
 
-        bool TryRemove(string id, out Field field);
+        bool TryRemove(string id, out SchemaField field);
 
-        Field Replace(int index, Field field);
+        SchemaField Replace(int index, SchemaField field);
 
-        Field Replace(string id, Field field);
+        SchemaField Replace(string id, SchemaField field);
 
-        bool TryReplace(int index, Field field, out Field replaced);
+        bool TryReplace(int index, SchemaField field, out SchemaField replaced);
 
-        bool TryReplace(string id, Field field, out Field replaced);
+        bool TryReplace(string id, SchemaField field, out SchemaField replaced);
     }
 }

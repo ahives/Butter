@@ -17,7 +17,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3")
                 .Precision(2)
                 .Scale(5)
@@ -26,7 +26,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace(2, field);
+            SchemaField replaced = fields.Replace(2, field);
 
             Assert.AreEqual(5, fields.Count);
 
@@ -49,7 +49,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -58,7 +58,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace(10, field);
+            SchemaField replaced = fields.Replace(10, field);
 
             Assert.AreEqual(5, fields.Count);
             Assert.IsFalse(replaced.HasValue);
@@ -76,7 +76,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -85,7 +85,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace(-1, field);
+            SchemaField replaced = fields.Replace(-1, field);
 
             Assert.AreEqual(5, fields.Count);
             Assert.IsFalse(replaced.HasValue);
@@ -103,7 +103,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -112,7 +112,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace("field4", field);
+            SchemaField replaced = fields.Replace("field4", field);
 
             Assert.AreEqual(5, fields.Count);
             Assert.IsTrue(replaced.HasValue);
@@ -130,7 +130,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -139,7 +139,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace("fieldX", field);
+            SchemaField replaced = fields.Replace("fieldX", field);
 
             Assert.AreEqual(5, fields.Count);
             Assert.IsFalse(replaced.HasValue);
@@ -156,7 +156,7 @@ namespace Butter.Tests
             fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            Field field = FieldSpec.Builder<DecimalFieldBuilder>()
+            SchemaField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -165,7 +165,7 @@ namespace Butter.Tests
 
             Assert.AreEqual(5, fields.Count);
             
-            Field replaced = fields.Replace(string.Empty, field);
+            SchemaField replaced = fields.Replace(string.Empty, field);
 
             Assert.AreEqual(5, fields.Count);
             Assert.IsFalse(replaced.HasValue);

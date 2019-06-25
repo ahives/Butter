@@ -62,7 +62,7 @@ namespace Butter.Validation
                     Console.WriteLine(e.Rule.Name);
                     Console.WriteLine(fact.Value.GetType());
                     
-                foreach (var field in (IEnumerable<Field>)fact.Value)
+                foreach (var field in (IEnumerable<SchemaField>)fact.Value)
                 {
                     Console.WriteLine(field.ToJsonString());
                     if (field == null)

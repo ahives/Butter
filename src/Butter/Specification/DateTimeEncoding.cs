@@ -12,23 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Specification
 {
-    using System;
-    using Notification;
-    using Specification;
-
-    public interface ISchemaBuilder
+    public enum DateTimeEncoding
     {
-        ISchemaBuilder Field(SchemaField field);
-
-        ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
-            where T : ISpecificationBuilder;
-
-        ISchemaBuilder Fields(IReadOnlyFieldList fields);
-        
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        Default,
+        DateOnly
     }
 }

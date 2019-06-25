@@ -16,22 +16,13 @@ namespace Butter.Internal
 {
     using Specification;
 
-    class FieldImpl :
-        Field
+    public class MissingDateTimeField :
+        DateTimeField
     {
-        public FieldImpl(string id, FieldDataType dataType = FieldDataType.Primitive, bool isNullable = false)
-        {
-            Id = id;
-            IsNullable = isNullable;
-            DataType = dataType;
-            HasValue = !string.IsNullOrWhiteSpace(id);
-        }
-
-        public string Id { get; }
-        public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
-        public bool HasValue { get; }
-
-        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
+        public string Id => "[Butter].[missing_field]";
+        public bool IsNullable => true;
+        public FieldDataType DataType => FieldDataType.DateTimeOffset;
+        public bool HasValue => false;
+        public DateTimeEncoding Encoding => DateTimeEncoding.Default;
     }
 }

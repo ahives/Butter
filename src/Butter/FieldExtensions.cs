@@ -12,9 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using Internal;
+    using Specification;
 
     public static class FieldExtensions
     {
@@ -24,7 +25,7 @@ namespace Butter.Specification
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool EqualTo(this Field source, Field target)
+        public static bool EqualTo(this SchemaField source, SchemaField target)
         {
             if (source == null && target == null)
                 return false;
@@ -42,7 +43,7 @@ namespace Butter.Specification
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <exception cref="NotSupportedCastException"></exception>
-        public static T Cast<T>(this Field field)
+        public static T Cast<T>(this SchemaField field)
         {
             T Missing()
             {
@@ -58,15 +59,19 @@ namespace Butter.Specification
                 if (typeof(T) == typeof(ListField))
                     return (T) SchemaCache.MissingListField;
 
+                if (typeof(T) == typeof(DateTimeField))
+                    return (T) SchemaCache.MissingDateTimeField;
+
                 return (T) SchemaCache.MissingField;
             }
 
             T Cast()
             {
                 if (typeof(T) == typeof(DecimalField) ||
-                    typeof(T) == typeof(Field) ||
+                    typeof(T) == typeof(SchemaField) ||
                     typeof(T) == typeof(MapField) ||
                     typeof(T) == typeof(StructField) ||
+                    typeof(T) == typeof(DateTimeField) ||
                     typeof(T) == typeof(ListField))
                 {
                     return (T) field;
@@ -79,12 +84,12 @@ namespace Butter.Specification
         }
 
         /// <summary>
-        /// Convert a field of type <see cref="Field"/> to a field of type <see cref="T"/>
+        /// Convert a field of type <see cref="SchemaField"/> to a field of type <see cref="T"/>
         /// </summary>
         /// <param name="source"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T ConvertTo<T>(this Field source)
+        public static T ConvertTo<T>(this SchemaField source)
             where T : MapField
         {
             if (typeof(T) == typeof(MapField))

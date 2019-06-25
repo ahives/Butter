@@ -8,7 +8,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            var field = FieldSpec.Builder<DecimalFieldBuilder>()
+            var field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field1")
                 .Precision(2)
                 .Build();

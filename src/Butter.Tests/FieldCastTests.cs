@@ -9,7 +9,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            DecimalField field = FieldSpec.Builder<DecimalFieldBuilder>()
+            DecimalField field = Field.Builder<DecimalFieldBuilder>()
                 .Id("field1")
                 .Precision(2)
                 .Scale(4)
@@ -22,8 +22,8 @@ namespace Butter.Tests
         [Test]
         public void Verify_()
         {
-            Field specification = null;
-            Field field1 = specification.Cast<Field>();
+            SchemaField specification = null;
+            SchemaField field1 = specification.Cast<SchemaField>();
 
             Assert.IsNotNull(field1);
             Assert.AreEqual(FieldDataType.Primitive, field1.DataType);

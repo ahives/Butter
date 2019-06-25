@@ -12,12 +12,13 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
     using Notification;
+    using Specification;
 
     public class FieldList :
         ReadOnlyFieldList, IFieldList
@@ -27,12 +28,12 @@ namespace Butter.Specification
         {
         }
 
-        public Field Remove(int index)
+        public SchemaField Remove(int index)
         {
             if (index > _count || index < 0)
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(index, out Field field))
+            if (!TryGetValue(index, out SchemaField field))
                 return SchemaCache.MissingField;
                 
             NotifyObservers(field, SchemaActionType.Delete);
@@ -43,14 +44,14 @@ namespace Butter.Specification
             return field;
         }
 
-        public Field Remove(string id)
+        public SchemaField Remove(string id)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
 
-                Field field = _fields[i];
+                SchemaField field = _fields[i];
                 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
@@ -63,7 +64,7 @@ namespace Butter.Specification
             return SchemaCache.MissingField;
         }
 
-        public bool TryRemove(int index, out Field field)
+        public bool TryRemove(int index, out SchemaField field)
         {
             if (index > _count || index < 0)
             {
@@ -71,7 +72,7 @@ namespace Butter.Specification
                 return false;
             }
 
-            if (!TryGetValue(index, out Field spec))
+            if (!TryGetValue(index, out SchemaField spec))
             {
                 field = SchemaCache.MissingField;
                 return false;
@@ -87,7 +88,7 @@ namespace Butter.Specification
             return true;
         }
 
-        public bool TryRemove(string id, out Field field)
+        public bool TryRemove(string id, out SchemaField field)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -109,12 +110,12 @@ namespace Butter.Specification
             return false;
         }
 
-        public Field Replace(int index, Field field)
+        public SchemaField Replace(int index, SchemaField field)
         {
             if (index < 0 || index > _count)
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(index, out Field previous))
+            if (!TryGetValue(index, out SchemaField previous))
                 return SchemaCache.MissingField;
 
             _fields[index] = field;
@@ -124,12 +125,12 @@ namespace Butter.Specification
             return previous;
         }
 
-        public Field Replace(string id, Field field)
+        public SchemaField Replace(string id, SchemaField field)
         {
             if (string.IsNullOrWhiteSpace(id))
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(id, out Field previous))
+            if (!TryGetValue(id, out SchemaField previous))
                 return SchemaCache.MissingField;
 
             for (int i = 0; i < _count; i++)
@@ -146,7 +147,7 @@ namespace Butter.Specification
             return previous;
         }
 
-        public bool TryReplace(int index, Field field, out Field replaced)
+        public bool TryReplace(int index, SchemaField field, out SchemaField replaced)
         {
             if (index < 0 || index > _count)
             {
@@ -167,7 +168,7 @@ namespace Butter.Specification
             return true;
         }
 
-        public bool TryReplace(string id, Field field, out Field replaced)
+        public bool TryReplace(string id, SchemaField field, out SchemaField replaced)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -197,7 +198,7 @@ namespace Butter.Specification
             return false;
         }
 
-        public void Add(Field field)
+        public void Add(SchemaField field)
         {
             if (field == null)
             {
@@ -211,11 +212,11 @@ namespace Butter.Specification
             NotifyObservers(field, SchemaActionType.Add);
         }
 
-        public void Add<TBuilder>(Func<TBuilder, Field> criteria)
+        public void Add<TBuilder>(Func<TBuilder, SchemaField> criteria)
             where TBuilder : ISpecificationBuilder
         {
-            TBuilder builder = FieldSpec.Builder<TBuilder>();
-            Field field = criteria(builder);
+            TBuilder builder = Field.Builder<TBuilder>();
+            SchemaField field = criteria(builder);
             
             if (field == null)
             {
@@ -229,7 +230,7 @@ namespace Butter.Specification
             NotifyObservers(field, SchemaActionType.Add);
         }
 
-        public void AddRange(IList<Field> field)
+        public void AddRange(IList<SchemaField> field)
         {
             if (field == null)
                 return;
@@ -249,7 +250,7 @@ namespace Butter.Specification
             }
         }
 
-        public void AddRange(params Field[] fields)
+        public void AddRange(params SchemaField[] fields)
         {
             if (fields == null)
                 return;

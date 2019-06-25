@@ -9,7 +9,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            DecimalField spec = FieldSpec.Builder<DecimalFieldBuilder>()
+            DecimalField spec = Field.Builder<DecimalFieldBuilder>()
                 .Id("field")
                 .IsNullable()
                 .Precision(2)

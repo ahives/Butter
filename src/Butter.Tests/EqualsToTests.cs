@@ -9,7 +9,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            Field spec = FieldSpec.Builder<FieldBuilder>()
+            SchemaField spec = Field.Builder<FieldBuilder>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
@@ -28,12 +28,12 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            Field spec1 = FieldSpec.Builder<FieldBuilder>()
+            SchemaField spec1 = Field.Builder<FieldBuilder>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            Field spec2 = FieldSpec.Builder<FieldBuilder>()
+            SchemaField spec2 = Field.Builder<FieldBuilder>()
                 .Id("city")
                 .DataType(FieldDataType.Decimal)
                 .Build();
@@ -52,12 +52,12 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            Field spec1 = FieldSpec.Builder<FieldBuilder>()
+            SchemaField spec1 = Field.Builder<FieldBuilder>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            Field spec2 = FieldSpec.Builder<FieldBuilder>()
+            SchemaField spec2 = Field.Builder<FieldBuilder>()
                 .Id("state")
                 .DataType(FieldDataType.Primitive)
                 .Build();
@@ -83,8 +83,8 @@ namespace Butter.Tests
         [Test]
         public void Verify_null_objects_are_equal()
         {
-            Field field1 = null;
-            Field field2 = null;
+            SchemaField field1 = null;
+            SchemaField field2 = null;
             
             Assert.IsFalse(field1.EqualTo(field2));
         }

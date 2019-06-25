@@ -19,15 +19,11 @@ namespace Butter.Internal
     class MissingDecimalField :
         DecimalField
     {
-        public string Id => "[Butter].[missing_field_spec]";
+        public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Decimal;
         public bool HasValue => false;
         public int Scale => 0;
         public int Precision => 0;
-        
-        public bool Equals(Field other) => false;
-
-        public bool Equals(DecimalField other) => false;
     }
 }

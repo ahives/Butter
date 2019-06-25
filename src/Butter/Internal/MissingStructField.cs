@@ -19,14 +19,15 @@ namespace Butter.Internal
     class MissingStructField :
         StructField
     {
-        public string Id => "[Butter].[missing_field_spec]";
-        public bool IsNullable => false;
+        public MissingStructField()
+        {
+            Fields = new EmptyFieldList();
+        }
+
+        public string Id => "[Butter].[missing_field]";
+        public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Struct;
         public bool HasValue => false;
-        public IReadOnlyFieldList Fields => new EmptyFieldList();
-        
-        public bool Equals(Field other) => false;
-
-        public bool Equals(StructField other) => false;
+        public IReadOnlyFieldList Fields { get; }
     }
 }

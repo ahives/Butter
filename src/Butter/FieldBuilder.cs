@@ -25,6 +25,6 @@ namespace Butter
 
         FieldBuilder IsNullable();
 
-        Field Build();
+        SchemaField Build();
     }
 }

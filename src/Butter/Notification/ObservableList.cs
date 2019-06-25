@@ -38,7 +38,7 @@ namespace Butter.Notification
             return new UnsubscribeObserver(_observers, observer);
         }
 
-        protected void NotifyObservers(Field specification, SchemaActionType schemaActionType)
+        protected void NotifyObservers(SchemaField specification, SchemaActionType schemaActionType)
         {
             if (!_notifyObservers)
                 return;

@@ -20,14 +20,14 @@ namespace Butter.Validation.Internal
     class ValidationContextImpl :
         ValidationContext
     {
-        public ValidationContextImpl(Field specification, ValidationResult validationResult)
+        public ValidationContextImpl(SchemaField specification, ValidationResult validationResult)
         {
             Specification = specification;
             ValidationResult = validationResult;
             Timestamp = DateTimeOffset.UtcNow;
         }
 
-        public Field Specification { get; }
+        public SchemaField Specification { get; }
         public ValidationResult ValidationResult { get; }
         public DateTimeOffset Timestamp { get; }
     }

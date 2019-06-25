@@ -12,11 +12,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -37,11 +37,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field2").DataType(FieldDataType.Map).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field3").DataType(FieldDataType.List).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(FieldSpec.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field2").DataType(FieldDataType.Map).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field3").DataType(FieldDataType.List).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -52,7 +52,7 @@ namespace Butter.Tests
                     case FieldDataType.None:
                         break;
                     case FieldDataType.Primitive:
-                        Field specification = temp[i];
+                        SchemaField specification = temp[i];
                         Assert.IsNotNull(specification);
                         Assert.That(specification.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;

@@ -27,13 +27,13 @@ namespace Butter.Validation.Rules
     {
         public override void Define()
         {
-            IEnumerable<Field> fields = null;
+            IEnumerable<SchemaField> fields = null;
             
             Name(nameof(DuplicateFieldRule));
 
             When()
                 .Query(() => fields, x =>
-                    x.Match<Field>(f => fields.Contains(f))
+                    x.Match<SchemaField>(f => fields.Contains(f))
                         .Collect());
 
             Then()

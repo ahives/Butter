@@ -14,35 +14,9 @@
 // ***********************************************************************************
 namespace Butter.Specification
 {
-    using System.Collections.Generic;
-    using Notification;
-
-    public abstract class BaseFieldList :
-        ObservableList
+    public interface DateTimeField :
+        SchemaField
     {
-        protected readonly List<Field> _fields;
-        protected int _count;
-
-        protected BaseFieldList(bool notifyObservers)
-            : base(notifyObservers)
-        {
-            _fields = new List<Field>();
-            _count = 0;
-        }
-
-        
-        protected class FieldComparer :
-            IEqualityComparer<Field>
-        {
-            public bool Equals(Field x, Field y)
-            {
-                if (x == null || y == null)
-                    return false;
-
-                return x.Id == y.Id;
-            }
-
-            public int GetHashCode(Field obj) => obj.Id.GetHashCode();
-        }
+        DateTimeEncoding Encoding { get; }
     }
 }

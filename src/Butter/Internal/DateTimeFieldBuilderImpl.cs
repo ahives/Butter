@@ -12,31 +12,38 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
-    using System;
-    using System.Linq;
+    using Specification;
 
-    public class FieldSpec
+    class DateTimeFieldBuilderImpl :
+        DateTimeFieldBuilder
     {
-        /// <summary>
-        /// Returns a field builder from cache memory.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
-        /// <exception cref="FieldBuilderMissingException"></exception>
-        public static T Builder<T>()
-            where T : ISpecificationBuilder
-        {
-            Type type = typeof(T)
-                .Assembly
-                .GetTypes()
-                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
-            
-            if (type == null)
-                throw new FieldBuilderMissingException($"Failed to find implementation for builder '{typeof(T)}'");
+        string _id;
+        bool _nullable;
+        DateTimeEncoding _encoding;
 
-            return (T)Activator.CreateInstance(type);
+        public DateTimeFieldBuilder Id(string id)
+        {
+            _id = id;
+            
+            return this;
         }
+
+        public DateTimeFieldBuilder IsNullable()
+        {
+            _nullable = true;
+            
+            return this;
+        }
+
+        public DateTimeFieldBuilder Encoding(DateTimeEncoding encoding)
+        {
+            _encoding = encoding;
+            
+            return this;
+        }
+
+        public DateTimeField Build() => new DateTimeFieldImpl(_id, _encoding, _nullable);
     }
 }

@@ -12,20 +12,22 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using System;
     using Internal;
+    using Specification;
 
     public static class SchemaCache
     {
-        public static readonly Field MissingField = new MissingField();
+        public static readonly SchemaField MissingField = new MissingField();
         public static readonly DecimalField MissingDecimalField = new MissingDecimalField();
         public static readonly MapField MissingMapField = new MissingMapField();
         public static readonly ListField MissingListField = new MissingListField();
         public static readonly StructField MissingStructField = new MissingStructField();
+        public static readonly DateTimeField MissingDateTimeField = new MissingDateTimeField();
         public static readonly IReadOnlyFieldList EmptyFieldList = new EmptyFieldList();
-        public static readonly Field OutOfRangeField = new OutOfRangeField();
+        public static readonly SchemaField OutOfRangeField = new OutOfRangeField();
 
         public static T GetMissingField<T>(this Type type)
         {
@@ -42,8 +44,11 @@ namespace Butter.Specification
 
                 case DecimalField _:
                     return (T) MissingDecimalField;
+
+                case DateTimeField _:
+                    return (T) MissingDateTimeField;
                 
-                case Field _:
+                case SchemaField _:
                     return (T) MissingField;
 
                 default:

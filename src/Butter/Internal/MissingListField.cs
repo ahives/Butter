@@ -19,12 +19,9 @@ namespace Butter.Internal
     class MissingListField :
         ListField
     {
-        public string Id => "[Butter].[missing_field_spec]";
+        public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.List;
         public bool HasValue => false;
-
-        public bool Equals(ListField other) => false;
-        public bool Equals(Field other) => false;
     }
 }

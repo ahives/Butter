@@ -12,23 +12,31 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
-    using System.Collections.Generic;
+    using System;
+    using System.Linq;
 
-    public static class FieldListExtensions
+    public class Field
     {
         /// <summary>
-        /// Returns a IEnumerable on <see cref="IFieldList"/>
+        /// Returns a field builder from cache memory.
         /// </summary>
-        /// <param name="fields"></param>
+        /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IFieldList fields)
+        /// <exception cref="FieldBuilderMissingException"></exception>
+        public static T Builder<T>()
+            where T : ISpecificationBuilder
         {
-            for (int i = 0; i < fields.Count; i++)
-            {
-                yield return fields[i];
-            }
+            Type type = typeof(T)
+                .Assembly
+                .GetTypes()
+                .FirstOrDefault(x => typeof(T).IsAssignableFrom(x) && !x.IsInterface);
+            
+            if (type == null)
+                throw new FieldBuilderMissingException($"Failed to find implementation for builder '{typeof(T)}'");
+
+            return (T)Activator.CreateInstance(type);
         }
     }
 }

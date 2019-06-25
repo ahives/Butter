@@ -12,10 +12,11 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using System;
     using System.Collections.Generic;
+    using Specification;
 
     public static class ReadOnlyFieldListExtensions
     {
@@ -53,7 +54,11 @@ namespace Butter.Specification
                         fields.AddRange(field);
                         break;
                     
-                    case Field field:
+                    case DateTimeField field:
+                        fields.AddRange(field);
+                        break;
+                    
+                    case SchemaField field:
                         fields.AddRange(field);
                         break;
                         
@@ -70,7 +75,7 @@ namespace Butter.Specification
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static IEnumerable<Field> ToEnumerable(this IReadOnlyFieldList fields)
+        public static IEnumerable<SchemaField> ToEnumerable(this IReadOnlyFieldList fields)
         {
             for (int i = 0; i < fields.Count; i++)
             {
@@ -83,9 +88,9 @@ namespace Butter.Specification
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static IList<Field> ToList(this IReadOnlyFieldList source)
+        public static IList<SchemaField> ToList(this IReadOnlyFieldList source)
         {
-            var list = new List<Field>();
+            var list = new List<SchemaField>();
             
             for (int i = 0; i < source.Count; i++)
             {

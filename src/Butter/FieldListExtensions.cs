@@ -12,27 +12,24 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
-    using System;
+    using System.Collections.Generic;
+    using Specification;
 
-    public interface IReadOnlyFieldList :
-        IEquatable<IReadOnlyFieldList>
+    public static class FieldListExtensions
     {
-        bool HasValues { get; }
-        
-        int Count { get; }
-        
-        Field this[int index] { get; }
-        
-        Field this[string id] { get; }
-
-        bool TryGetValue(int index, out Field field);
-
-        bool TryGetValue(string id, out Field field);
-
-        bool Contains(Field field);
-
-        bool Contains(string id);
+        /// <summary>
+        /// Returns a IEnumerable on <see cref="IFieldList"/>
+        /// </summary>
+        /// <param name="fields"></param>
+        /// <returns></returns>
+        public static IEnumerable<SchemaField> ToEnumerable(this IFieldList fields)
+        {
+            for (int i = 0; i < fields.Count; i++)
+            {
+                yield return fields[i];
+            }
+        }
     }
 }

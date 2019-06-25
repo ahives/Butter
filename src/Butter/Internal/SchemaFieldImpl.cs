@@ -12,23 +12,26 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
-    using System;
-    using Notification;
     using Specification;
 
-    public interface ISchemaBuilder
+    class SchemaFieldImpl :
+        SchemaField
     {
-        ISchemaBuilder Field(SchemaField field);
+        public SchemaFieldImpl(string id, FieldDataType dataType = FieldDataType.Primitive, bool isNullable = false)
+        {
+            Id = id;
+            IsNullable = isNullable;
+            DataType = dataType;
+            HasValue = !string.IsNullOrWhiteSpace(id);
+        }
 
-        ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
-            where T : ISpecificationBuilder;
+        public string Id { get; }
+        public bool IsNullable { get; }
+        public FieldDataType DataType { get; }
+        public bool HasValue { get; }
 
-        ISchemaBuilder Fields(IReadOnlyFieldList fields);
-        
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }
 }

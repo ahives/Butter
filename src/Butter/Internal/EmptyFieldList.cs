@@ -21,23 +21,23 @@ namespace Butter.Internal
     {
         public bool HasValues => false;
         public int Count => 0;
-        public Field this[int index] => SchemaCache.MissingField;
+        public SchemaField this[int index] => SchemaCache.MissingField;
 
-        public Field this[string id] => SchemaCache.MissingField;
+        public SchemaField this[string id] => SchemaCache.MissingField;
 
-        public bool TryGetValue(int index, out Field field)
+        public bool TryGetValue(int index, out SchemaField field)
         {
             field = SchemaCache.MissingField;
             return false;
         }
 
-        public bool TryGetValue(string id, out Field field)
+        public bool TryGetValue(string id, out SchemaField field)
         {
             field = SchemaCache.MissingField;
             return false;
         }
 
-        public bool Contains(Field field) => false;
+        public bool Contains(SchemaField field) => false;
         public bool Contains(string id) => false;
 
         public bool Equals(IReadOnlyFieldList other) => false;

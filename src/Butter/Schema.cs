@@ -16,6 +16,7 @@ namespace Butter
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using Internal;
     using Notification;
     using Specification;
@@ -28,7 +29,7 @@ namespace Butter
 
         public IReadOnlyFieldList Fields => _fields;
 
-        internal Schema(IList<Field> fields, IList<IObserver<NotificationContext>> observers)
+        internal Schema(IList<SchemaField> fields, IList<IObserver<NotificationContext>> observers)
         {
             _observers = new List<IDisposable>();
             
@@ -46,7 +47,7 @@ namespace Butter
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
 
         public T Remove<T>(Func<T, bool> criteria)
-            where T : Field
+            where T : SchemaField
         {
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -61,7 +62,7 @@ namespace Butter
         }
 
         public IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
-            where T : Field
+            where T : SchemaField
         {
             var fields = new FieldList();
             
@@ -78,11 +79,26 @@ namespace Butter
             return fields;
         }
 
+        public string Report()
+        {
+            StringBuilder builder = new StringBuilder();
+
+            builder.AppendLine("Schema Summary");
+            builder.AppendLine("\tFields");
+            
+            for (int i = 0; i < _fields.Count; i++)
+            {
+                builder.AppendLine(_fields[i].ToString());
+            }
+
+            return builder.ToString();
+        }
+
         public T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
-            where T : Field
+            where T : SchemaField
             where TBuilder : ISpecificationBuilder
         {
-            TBuilder b = FieldSpec.Builder<TBuilder>();
+            TBuilder b = Field.Builder<TBuilder>();
             T field = builder(b);
 
             for (int i = 0; i < _fields.Count; i++)
@@ -90,7 +106,7 @@ namespace Butter
                 T current = _fields[i].Cast<T>();
 
                 if (criteria(current))
-                    return !_fields.TryReplace(current.Id, field, out Field previous)
+                    return !_fields.TryReplace(current.Id, field, out SchemaField previous)
                         ? typeof(T).GetMissingField<T>()
                         : previous.Cast<T>();
             }

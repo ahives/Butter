@@ -14,22 +14,26 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using System;
-    using Notification;
     using Specification;
 
-    class NotificationContextImpl :
-        NotificationContext
+    class DateTimeFieldImpl :
+        DateTimeField
     {
-        public NotificationContextImpl(SchemaField specification, SchemaActionType action)
+        public DateTimeFieldImpl(string id, DateTimeEncoding encoding = DateTimeEncoding.Default, bool isNullable = false)
         {
-            Field = specification;
-            Action = action;
-            Timestamp = DateTimeOffset.UtcNow;
+            Id = id;
+            IsNullable = isNullable;
+            Encoding = encoding;
+            DataType = FieldDataType.DateTimeOffset;
+            HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
-        public SchemaField Field { get; }
-        public SchemaActionType Action { get; }
-        public DateTimeOffset Timestamp { get; }
+        public string Id { get; }
+        public bool IsNullable { get; }
+        public FieldDataType DataType { get; }
+        public bool HasValue { get; }
+        public DateTimeEncoding Encoding { get; }
+
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}, Encoding = {Encoding}]";
     }
 }

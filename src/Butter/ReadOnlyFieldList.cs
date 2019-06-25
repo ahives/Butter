@@ -12,9 +12,10 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter.Specification
+namespace Butter
 {
     using System.Linq;
+    using Specification;
 
     public class ReadOnlyFieldList :
         BaseFieldList, IReadOnlyFieldList
@@ -22,21 +23,21 @@ namespace Butter.Specification
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
 
-        public Field this[int index]
+        public SchemaField this[int index]
         {
             get
             {
-                TryGetValue(index, out Field field);
+                TryGetValue(index, out SchemaField field);
 
                 return field;
             }
         }
 
-        public Field this[string id]
+        public SchemaField this[string id]
         {
             get
             {
-                TryGetValue(id, out Field field);
+                TryGetValue(id, out SchemaField field);
 
                 return field;
             }
@@ -47,7 +48,7 @@ namespace Butter.Specification
         {
         }
 
-        public bool TryGetValue(int index, out Field field)
+        public bool TryGetValue(int index, out SchemaField field)
         {
             if (index < 0 || _count <= 0)
             {
@@ -71,7 +72,7 @@ namespace Butter.Specification
             return false;
         }
 
-        public bool TryGetValue(string id, out Field field)
+        public bool TryGetValue(string id, out SchemaField field)
         {
             if (_count <= 0)
             {
@@ -95,7 +96,7 @@ namespace Butter.Specification
             return false;
         }
 
-        public bool Contains(Field field) => field != null && _fields.Contains(field, new FieldComparer());
+        public bool Contains(SchemaField field) => field != null && _fields.Contains(field, new FieldComparer());
 
         public bool Contains(string id)
         {

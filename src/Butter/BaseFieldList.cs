@@ -14,21 +14,36 @@
 // ***********************************************************************************
 namespace Butter
 {
-    using System;
+    using System.Collections.Generic;
     using Notification;
     using Specification;
 
-    public interface ISchemaBuilder
+    public abstract class BaseFieldList :
+        ObservableList
     {
-        ISchemaBuilder Field(SchemaField field);
+        protected readonly List<SchemaField> _fields;
+        protected int _count;
 
-        ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
-            where T : ISpecificationBuilder;
+        protected BaseFieldList(bool notifyObservers)
+            : base(notifyObservers)
+        {
+            _fields = new List<SchemaField>();
+            _count = 0;
+        }
 
-        ISchemaBuilder Fields(IReadOnlyFieldList fields);
         
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
-        
-        ISchema Build();
+        protected class FieldComparer :
+            IEqualityComparer<SchemaField>
+        {
+            public bool Equals(SchemaField x, SchemaField y)
+            {
+                if (x == null || y == null)
+                    return false;
+
+                return x.Id == y.Id;
+            }
+
+            public int GetHashCode(SchemaField obj) => obj.Id.GetHashCode();
+        }
     }
 }

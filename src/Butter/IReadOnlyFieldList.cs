@@ -15,20 +15,25 @@
 namespace Butter
 {
     using System;
-    using Notification;
     using Specification;
 
-    public interface ISchemaBuilder
+    public interface IReadOnlyFieldList :
+        IEquatable<IReadOnlyFieldList>
     {
-        ISchemaBuilder Field(SchemaField field);
-
-        ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
-            where T : ISpecificationBuilder;
-
-        ISchemaBuilder Fields(IReadOnlyFieldList fields);
+        bool HasValues { get; }
         
-        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
+        int Count { get; }
         
-        ISchema Build();
+        SchemaField this[int index] { get; }
+        
+        SchemaField this[string id] { get; }
+
+        bool TryGetValue(int index, out SchemaField field);
+
+        bool TryGetValue(string id, out SchemaField field);
+
+        bool Contains(SchemaField field);
+
+        bool Contains(string id);
     }
 }

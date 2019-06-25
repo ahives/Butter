@@ -44,6 +44,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public Field Build() => new FieldImpl(_id, _dataType, _nullable);
+        public SchemaField Build() => new SchemaFieldImpl(_id, _dataType, _nullable);
     }
 }

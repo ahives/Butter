@@ -37,17 +37,17 @@ namespace Butter.Internal
         }
 
         public StructFieldBuilder Field<T>(T specification)
-            where T : Field
+            where T : SchemaField
         {
             _specifications.Add(specification);
 
             return this;
         }
 
-        public StructFieldBuilder Field<T>(Func<T, Field> builder)
+        public StructFieldBuilder Field<T>(Func<T, SchemaField> builder)
             where T : ISpecificationBuilder
         {
-            T specBuilder = FieldSpec.Builder<T>();
+            T specBuilder = Butter.Field.Builder<T>();
 
             var specification = builder(specBuilder);
 

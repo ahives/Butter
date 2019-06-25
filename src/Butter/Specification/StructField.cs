@@ -15,7 +15,7 @@
 namespace Butter.Specification
 {
     public interface StructField :
-        Field
+        SchemaField
     {
         IReadOnlyFieldList Fields { get; }
     }

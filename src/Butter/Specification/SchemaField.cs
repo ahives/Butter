@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Specification
 {
-    public interface Field
+    public interface SchemaField
     {
         string Id { get; }
         
