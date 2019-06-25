@@ -25,7 +25,7 @@ namespace Butter
         /// <param name="source"></param>
         /// <param name="target"></param>
         /// <returns></returns>
-        public static bool EqualTo(this SchemaField source, SchemaField target)
+        public static bool EqualTo(this PrimitiveField source, PrimitiveField target)
         {
             if (source == null && target == null)
                 return false;
@@ -43,7 +43,7 @@ namespace Butter
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         /// <exception cref="NotSupportedCastException"></exception>
-        public static T Cast<T>(this SchemaField field)
+        public static T Cast<T>(this PrimitiveField field)
         {
             T Missing()
             {
@@ -68,7 +68,7 @@ namespace Butter
             T Cast()
             {
                 if (typeof(T) == typeof(DecimalField) ||
-                    typeof(T) == typeof(SchemaField) ||
+                    typeof(T) == typeof(PrimitiveField) ||
                     typeof(T) == typeof(MapField) ||
                     typeof(T) == typeof(StructField) ||
                     typeof(T) == typeof(DateTimeField) ||
@@ -84,12 +84,12 @@ namespace Butter
         }
 
         /// <summary>
-        /// Convert a field of type <see cref="SchemaField"/> to a field of type <see cref="T"/>
+        /// Convert a field of type <see cref="PrimitiveField"/> to a field of type <see cref="T"/>
         /// </summary>
         /// <param name="source"></param>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public static T ConvertTo<T>(this SchemaField source)
+        public static T ConvertTo<T>(this PrimitiveField source)
             where T : MapField
         {
             if (typeof(T) == typeof(MapField))

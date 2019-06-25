@@ -17,7 +17,7 @@ namespace Butter.Tests
             fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            SchemaField field = Field.Builder<FieldBuilder>()
+            PrimitiveField field = Field.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -39,7 +39,7 @@ namespace Butter.Tests
             fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            SchemaField field = Field.Builder<FieldBuilder>()
+            PrimitiveField field = Field.Builder<FieldBuilder>()
                 .Id("field7")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -61,7 +61,7 @@ namespace Butter.Tests
             fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            SchemaField field = Field.Builder<FieldBuilder>()
+            PrimitiveField field = Field.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -83,7 +83,7 @@ namespace Butter.Tests
             fields.Add(Field.Builder<FieldBuilder>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
             fields.Add(Field.Builder<FieldBuilder>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            SchemaField field = Field.Builder<FieldBuilder>()
+            PrimitiveField field = Field.Builder<FieldBuilder>()
                 .Id("field7")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()

@@ -17,7 +17,7 @@ namespace Butter.Internal
     using Specification;
 
     class MissingField :
-        SchemaField
+        PrimitiveField
     {
         public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;

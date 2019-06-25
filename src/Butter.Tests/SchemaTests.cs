@@ -10,27 +10,27 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_add_fields_after_construction()
         {
-            SchemaField field1 = Field.Builder<FieldBuilder>()
+            PrimitiveField field1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField field2 = Field.Builder<FieldBuilder>()
+            PrimitiveField field2 = Field.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField field3 = Field.Builder<FieldBuilder>()
+            PrimitiveField field3 = Field.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField field4 = Field.Builder<FieldBuilder>()
+            PrimitiveField field4 = Field.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField field5 = Field.Builder<FieldBuilder>()
+            PrimitiveField field5 = Field.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
@@ -70,7 +70,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            SchemaField field = schema.Remove<SchemaField>(x => x.Id == "field3");
+            PrimitiveField field = schema.Remove<PrimitiveField>(x => x.Id == "field3");
             
             Assert.AreEqual(5, schema.Fields.Count);
         }
@@ -113,7 +113,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            IReadOnlyFieldList fields = schema.RemoveAll<SchemaField>(x => x.Id == "field1");
+            IReadOnlyFieldList fields = schema.RemoveAll<PrimitiveField>(x => x.Id == "field1");
             
             Assert.AreEqual(3, schema.Fields.Count);
             Assert.AreEqual(3, fields.Count);

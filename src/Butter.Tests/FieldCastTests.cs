@@ -22,8 +22,8 @@ namespace Butter.Tests
         [Test]
         public void Verify_()
         {
-            SchemaField specification = null;
-            SchemaField field1 = specification.Cast<SchemaField>();
+            PrimitiveField specification = null;
+            PrimitiveField field1 = specification.Cast<PrimitiveField>();
 
             Assert.IsNotNull(field1);
             Assert.AreEqual(FieldDataType.Primitive, field1.DataType);

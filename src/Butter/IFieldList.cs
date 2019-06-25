@@ -22,29 +22,29 @@ namespace Butter
     public interface IFieldList :
         IObservable<NotificationContext>, IReadOnlyFieldList, IEquatable<IFieldList>
     {
-        void Add(SchemaField field);
+        void Add(PrimitiveField field);
 
-        void Add<TBuilder>(Func<TBuilder, SchemaField> criteria)
+        void Add<TBuilder>(Func<TBuilder, PrimitiveField> criteria)
             where TBuilder : ISpecificationBuilder;
 
-        void AddRange(params SchemaField[] fields);
+        void AddRange(params PrimitiveField[] fields);
 
-        void AddRange(IList<SchemaField> field);
+        void AddRange(IList<PrimitiveField> field);
 
-        SchemaField Remove(int index);
+        PrimitiveField Remove(int index);
 
-        SchemaField Remove(string id);
+        PrimitiveField Remove(string id);
 
-        bool TryRemove(int index, out SchemaField field);
+        bool TryRemove(int index, out PrimitiveField field);
 
-        bool TryRemove(string id, out SchemaField field);
+        bool TryRemove(string id, out PrimitiveField field);
 
-        SchemaField Replace(int index, SchemaField field);
+        PrimitiveField Replace(int index, PrimitiveField field);
 
-        SchemaField Replace(string id, SchemaField field);
+        PrimitiveField Replace(string id, PrimitiveField field);
 
-        bool TryReplace(int index, SchemaField field, out SchemaField replaced);
+        bool TryReplace(int index, PrimitiveField field, out PrimitiveField replaced);
 
-        bool TryReplace(string id, SchemaField field, out SchemaField replaced);
+        bool TryReplace(string id, PrimitiveField field, out PrimitiveField replaced);
     }
 }

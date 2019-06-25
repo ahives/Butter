@@ -52,7 +52,7 @@ namespace Butter.Tests
                     case FieldDataType.None:
                         break;
                     case FieldDataType.Primitive:
-                        SchemaField specification = temp[i];
+                        PrimitiveField specification = temp[i];
                         Assert.IsNotNull(specification);
                         Assert.That(specification.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;

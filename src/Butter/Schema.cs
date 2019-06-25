@@ -29,7 +29,7 @@ namespace Butter
 
         public IReadOnlyFieldList Fields => _fields;
 
-        internal Schema(IList<SchemaField> fields, IList<IObserver<NotificationContext>> observers)
+        internal Schema(IList<PrimitiveField> fields, IList<IObserver<NotificationContext>> observers)
         {
             _observers = new List<IDisposable>();
             
@@ -47,7 +47,7 @@ namespace Butter
         public static ISchemaBuilder Builder() => new SchemaBuilderImpl();
 
         public T Remove<T>(Func<T, bool> criteria)
-            where T : SchemaField
+            where T : PrimitiveField
         {
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -62,7 +62,7 @@ namespace Butter
         }
 
         public IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
-            where T : SchemaField
+            where T : PrimitiveField
         {
             var fields = new FieldList();
             
@@ -95,7 +95,7 @@ namespace Butter
         }
 
         public T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
-            where T : SchemaField
+            where T : PrimitiveField
             where TBuilder : ISpecificationBuilder
         {
             TBuilder b = Field.Builder<TBuilder>();
@@ -106,7 +106,7 @@ namespace Butter
                 T current = _fields[i].Cast<T>();
 
                 if (criteria(current))
-                    return !_fields.TryReplace(current.Id, field, out SchemaField previous)
+                    return !_fields.TryReplace(current.Id, field, out PrimitiveField previous)
                         ? typeof(T).GetMissingField<T>()
                         : previous.Cast<T>();
             }

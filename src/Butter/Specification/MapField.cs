@@ -15,10 +15,10 @@
 namespace Butter.Specification
 {
     public interface MapField :
-        SchemaField
+        PrimitiveField
     {
-        SchemaField Key { get; }
+        PrimitiveField Key { get; }
         
-        SchemaField Value { get; }
+        PrimitiveField Value { get; }
     }
 }

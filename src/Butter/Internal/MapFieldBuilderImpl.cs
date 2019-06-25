@@ -23,9 +23,9 @@ namespace Butter.Internal
     {
         Lazy<string> _id;
         Lazy<bool> _nullable;
-        Lazy<SchemaField> _key;
-        Lazy<SchemaField> _value;
-        FieldMap<SchemaField,SchemaField> _mapping;
+        Lazy<PrimitiveField> _key;
+        Lazy<PrimitiveField> _value;
+        FieldMap<PrimitiveField,PrimitiveField> _mapping;
 
         public MapFieldBuilder Id(string id)
         {
@@ -34,24 +34,24 @@ namespace Butter.Internal
             return this;
         }
 
-        public MapFieldBuilder Map(SchemaField key, SchemaField value)
+        public MapFieldBuilder Map(PrimitiveField key, PrimitiveField value)
         {
-            _key = new Lazy<SchemaField>(() => key, LazyThreadSafetyMode.PublicationOnly);
-            _value = new Lazy<SchemaField>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
 
-        public MapFieldBuilder Key(SchemaField key)
+        public MapFieldBuilder Key(PrimitiveField key)
         {
-            _key = new Lazy<SchemaField>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldBuilder Value(SchemaField value)
+        public MapFieldBuilder Value(PrimitiveField value)
         {
-            _value = new Lazy<SchemaField>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
@@ -70,6 +70,6 @@ namespace Butter.Internal
             return new MapFieldImpl(_id.Value, _mapping, _nullable.Value);
         }
 
-        public FieldMap<SchemaField, SchemaField> Mapping => _mapping;
+        public FieldMap<PrimitiveField, PrimitiveField> Mapping => _mapping;
     }
 }

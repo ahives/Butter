@@ -17,16 +17,16 @@ namespace Butter.Internal
     using Specification;
 
     class OutOfRangeField :
-        SchemaField
+        PrimitiveField
     {
         public string Id => "[Butter].[missing_field_spec]";
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.None;
         public bool HasValue => false;
 
-        public bool Equals(SchemaField other) => false;
+        public bool Equals(PrimitiveField other) => false;
 
-        public override bool Equals(object obj) => Equals((SchemaField)obj);
+        public override bool Equals(object obj) => Equals((PrimitiveField)obj);
 
         public override int GetHashCode()
         {

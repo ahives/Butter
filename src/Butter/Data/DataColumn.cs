@@ -18,7 +18,7 @@ namespace Butter.Data
 
     public class DataColumn
     {
-        public static Column Create(SchemaField specification, IValueList values)
+        public static Column Create(PrimitiveField specification, IValueList values)
         {
             if (specification == null || values == null)
                 return DataCache.Empty;
@@ -29,14 +29,14 @@ namespace Butter.Data
         class ColumnImpl :
             Column
         {
-            public ColumnImpl(SchemaField specification, IValueList values)
+            public ColumnImpl(PrimitiveField specification, IValueList values)
             {
                 Specification = specification;
                 Values = values;
                 HasValues = values != null && values.HasValues;
             }
 
-            public SchemaField Specification { get; }
+            public PrimitiveField Specification { get; }
             public IValueList Values { get; }
             public bool HasValues { get; }
         }

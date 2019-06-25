@@ -60,7 +60,7 @@ namespace Butter.Tests
 
             IReadOnlyFieldList temp = fields;
             
-            Assert.IsFalse(temp.TryGetValue(-1, out SchemaField field));
+            Assert.IsFalse(temp.TryGetValue(-1, out PrimitiveField field));
             Assert.IsNotNull(field);
         }
 
@@ -78,7 +78,7 @@ namespace Butter.Tests
             IReadOnlyFieldList temp = fields;
             
             int count = temp.Count;
-            Assert.IsFalse(temp.TryGetValue(count + 1, out SchemaField field));
+            Assert.IsFalse(temp.TryGetValue(count + 1, out PrimitiveField field));
             Assert.IsNotNull(field);
         }
 
@@ -95,7 +95,7 @@ namespace Butter.Tests
 
             IReadOnlyFieldList temp = fields;
             
-            Assert.IsTrue(temp.TryGetValue(3, out SchemaField field));
+            Assert.IsTrue(temp.TryGetValue(3, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
             Assert.AreEqual(FieldDataType.Primitive, field.DataType);
@@ -114,7 +114,7 @@ namespace Butter.Tests
 
             IReadOnlyFieldList temp = fields;
             
-            Assert.IsTrue(temp.TryGetValue("field4", out SchemaField field));
+            Assert.IsTrue(temp.TryGetValue("field4", out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
             Assert.AreEqual(FieldDataType.Primitive, field.DataType);
@@ -133,7 +133,7 @@ namespace Butter.Tests
 
             IReadOnlyFieldList temp = fields;
             
-            Assert.IsTrue(temp.TryGetValue("field4", out SchemaField field));
+            Assert.IsTrue(temp.TryGetValue("field4", out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
             Assert.AreEqual(FieldDataType.Primitive, field.DataType);

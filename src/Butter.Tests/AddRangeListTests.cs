@@ -76,7 +76,7 @@ namespace Butter.Tests
                 .IsNullable()
                 .Build();
             
-            IList<SchemaField> fields2 = new List<SchemaField>();
+            IList<PrimitiveField> fields2 = new List<PrimitiveField>();
             fields.Add(field);
             fields.Add(null);
             
@@ -118,7 +118,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            IList<SchemaField> fields2 = null;
+            IList<PrimitiveField> fields2 = null;
             
             fields.AddRange(fields2);
             

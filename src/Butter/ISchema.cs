@@ -31,7 +31,7 @@ namespace Butter
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         T Remove<T>(Func<T, bool> criteria)
-            where T : SchemaField;
+            where T : PrimitiveField;
 
         /// <summary>
         /// Removes all fields found matching the criteria.
@@ -40,7 +40,7 @@ namespace Butter
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
         IReadOnlyFieldList RemoveAll<T>(Func<T, bool> criteria)
-            where T : SchemaField;
+            where T : PrimitiveField;
 
 //        T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
 //            where T : Field

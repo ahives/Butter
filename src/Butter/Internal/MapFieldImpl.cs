@@ -19,7 +19,7 @@ namespace Butter.Internal
     class MapFieldImpl :
         MapField
     {
-        public MapFieldImpl(string id, FieldMap<SchemaField, SchemaField> field, bool isNullable = false)
+        public MapFieldImpl(string id, FieldMap<PrimitiveField, PrimitiveField> field, bool isNullable = false)
         {
             Id = id;
             Key = field != null ? field.Key : SchemaCache.MissingField;
@@ -43,8 +43,8 @@ namespace Butter.Internal
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public bool HasValue { get; }
-        public SchemaField Key { get; }
-        public SchemaField Value { get; }
+        public PrimitiveField Key { get; }
+        public PrimitiveField Value { get; }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }

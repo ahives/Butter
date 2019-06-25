@@ -28,12 +28,12 @@ namespace Butter
         {
         }
 
-        public SchemaField Remove(int index)
+        public PrimitiveField Remove(int index)
         {
             if (index > _count || index < 0)
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(index, out SchemaField field))
+            if (!TryGetValue(index, out PrimitiveField field))
                 return SchemaCache.MissingField;
                 
             NotifyObservers(field, SchemaActionType.Delete);
@@ -44,14 +44,14 @@ namespace Butter
             return field;
         }
 
-        public SchemaField Remove(string id)
+        public PrimitiveField Remove(string id)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
                 if (_fields[i].Id != id)
                     continue;
 
-                SchemaField field = _fields[i];
+                PrimitiveField field = _fields[i];
                 
                 _fields.RemoveAt(i);
                 _count = _fields.Count;
@@ -64,7 +64,7 @@ namespace Butter
             return SchemaCache.MissingField;
         }
 
-        public bool TryRemove(int index, out SchemaField field)
+        public bool TryRemove(int index, out PrimitiveField field)
         {
             if (index > _count || index < 0)
             {
@@ -72,7 +72,7 @@ namespace Butter
                 return false;
             }
 
-            if (!TryGetValue(index, out SchemaField spec))
+            if (!TryGetValue(index, out PrimitiveField spec))
             {
                 field = SchemaCache.MissingField;
                 return false;
@@ -88,7 +88,7 @@ namespace Butter
             return true;
         }
 
-        public bool TryRemove(string id, out SchemaField field)
+        public bool TryRemove(string id, out PrimitiveField field)
         {
             for (int i = 0; i < _fields.Count; i++)
             {
@@ -110,12 +110,12 @@ namespace Butter
             return false;
         }
 
-        public SchemaField Replace(int index, SchemaField field)
+        public PrimitiveField Replace(int index, PrimitiveField field)
         {
             if (index < 0 || index > _count)
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(index, out SchemaField previous))
+            if (!TryGetValue(index, out PrimitiveField previous))
                 return SchemaCache.MissingField;
 
             _fields[index] = field;
@@ -125,12 +125,12 @@ namespace Butter
             return previous;
         }
 
-        public SchemaField Replace(string id, SchemaField field)
+        public PrimitiveField Replace(string id, PrimitiveField field)
         {
             if (string.IsNullOrWhiteSpace(id))
                 return SchemaCache.MissingField;
 
-            if (!TryGetValue(id, out SchemaField previous))
+            if (!TryGetValue(id, out PrimitiveField previous))
                 return SchemaCache.MissingField;
 
             for (int i = 0; i < _count; i++)
@@ -147,7 +147,7 @@ namespace Butter
             return previous;
         }
 
-        public bool TryReplace(int index, SchemaField field, out SchemaField replaced)
+        public bool TryReplace(int index, PrimitiveField field, out PrimitiveField replaced)
         {
             if (index < 0 || index > _count)
             {
@@ -168,7 +168,7 @@ namespace Butter
             return true;
         }
 
-        public bool TryReplace(string id, SchemaField field, out SchemaField replaced)
+        public bool TryReplace(string id, PrimitiveField field, out PrimitiveField replaced)
         {
             if (string.IsNullOrWhiteSpace(id))
             {
@@ -198,7 +198,7 @@ namespace Butter
             return false;
         }
 
-        public void Add(SchemaField field)
+        public void Add(PrimitiveField field)
         {
             if (field == null)
             {
@@ -212,11 +212,11 @@ namespace Butter
             NotifyObservers(field, SchemaActionType.Add);
         }
 
-        public void Add<TBuilder>(Func<TBuilder, SchemaField> criteria)
+        public void Add<TBuilder>(Func<TBuilder, PrimitiveField> criteria)
             where TBuilder : ISpecificationBuilder
         {
             TBuilder builder = Field.Builder<TBuilder>();
-            SchemaField field = criteria(builder);
+            PrimitiveField field = criteria(builder);
             
             if (field == null)
             {
@@ -230,7 +230,7 @@ namespace Butter
             NotifyObservers(field, SchemaActionType.Add);
         }
 
-        public void AddRange(IList<SchemaField> field)
+        public void AddRange(IList<PrimitiveField> field)
         {
             if (field == null)
                 return;
@@ -250,7 +250,7 @@ namespace Butter
             }
         }
 
-        public void AddRange(params SchemaField[] fields)
+        public void AddRange(params PrimitiveField[] fields)
         {
             if (fields == null)
                 return;

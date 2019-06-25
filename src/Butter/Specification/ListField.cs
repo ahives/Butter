@@ -15,7 +15,7 @@
 namespace Butter.Specification
 {
     public interface ListField :
-        SchemaField
+        PrimitiveField
     {
         
     }

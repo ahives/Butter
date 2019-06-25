@@ -23,9 +23,9 @@ namespace Butter
         StructFieldBuilder Id(string id);
 
         StructFieldBuilder Field<T>(T specification)
-            where T : SchemaField;
+            where T : PrimitiveField;
 
-        StructFieldBuilder Field<T>(Func<T, SchemaField> builder)
+        StructFieldBuilder Field<T>(Func<T, PrimitiveField> builder)
             where T : ISpecificationBuilder;
 
         StructFieldBuilder Fields(IReadOnlyFieldList specifications);

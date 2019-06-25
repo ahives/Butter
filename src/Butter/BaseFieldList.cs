@@ -21,21 +21,21 @@ namespace Butter
     public abstract class BaseFieldList :
         ObservableList
     {
-        protected readonly List<SchemaField> _fields;
+        protected readonly List<PrimitiveField> _fields;
         protected int _count;
 
         protected BaseFieldList(bool notifyObservers)
             : base(notifyObservers)
         {
-            _fields = new List<SchemaField>();
+            _fields = new List<PrimitiveField>();
             _count = 0;
         }
 
         
         protected class FieldComparer :
-            IEqualityComparer<SchemaField>
+            IEqualityComparer<PrimitiveField>
         {
-            public bool Equals(SchemaField x, SchemaField y)
+            public bool Equals(PrimitiveField x, PrimitiveField y)
             {
                 if (x == null || y == null)
                     return false;
@@ -43,7 +43,7 @@ namespace Butter
                 return x.Id == y.Id;
             }
 
-            public int GetHashCode(SchemaField obj) => obj.Id.GetHashCode();
+            public int GetHashCode(PrimitiveField obj) => obj.Id.GetHashCode();
         }
     }
 }

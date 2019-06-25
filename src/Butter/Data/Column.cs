@@ -18,7 +18,7 @@ namespace Butter.Data
 
     public interface Column
     {
-        SchemaField Specification { get; }
+        PrimitiveField Specification { get; }
         
         IValueList Values { get; }
         

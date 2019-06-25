@@ -17,7 +17,7 @@ namespace Butter
     using System;
     using System.Linq;
 
-    public class Field
+    public static class Field
     {
         /// <summary>
         /// Returns a field builder from cache memory.

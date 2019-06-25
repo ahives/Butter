@@ -16,34 +16,34 @@ namespace Butter.Internal
 {
     using Specification;
 
-    class FieldBuilderImpl :
-        FieldBuilder
+    class PrimitiveFieldBuilderImpl :
+        PrimitiveFieldBuilder
     {
         string _id;
         FieldDataType _dataType;
         bool _nullable;
 
-        public FieldBuilder Id(string id)
+        public PrimitiveFieldBuilder Id(string id)
         {
             _id = id;
             
             return this;
         }
 
-        public FieldBuilder DataType(FieldDataType dataType)
+        public PrimitiveFieldBuilder DataType(FieldDataType dataType)
         {
             _dataType = dataType;
             
             return this;
         }
 
-        public FieldBuilder IsNullable()
+        public PrimitiveFieldBuilder IsNullable()
         {
             _nullable = true;
             
             return this;
         }
 
-        public SchemaField Build() => new SchemaFieldImpl(_id, _dataType, _nullable);
+        public PrimitiveField Build() => new PrimitiveFieldImpl(_id, _dataType, _nullable);
     }
 }

@@ -23,21 +23,21 @@ namespace Butter
         public bool HasValues => _fields != null && _fields.Any();
         public int Count => _count;
 
-        public SchemaField this[int index]
+        public PrimitiveField this[int index]
         {
             get
             {
-                TryGetValue(index, out SchemaField field);
+                TryGetValue(index, out PrimitiveField field);
 
                 return field;
             }
         }
 
-        public SchemaField this[string id]
+        public PrimitiveField this[string id]
         {
             get
             {
-                TryGetValue(id, out SchemaField field);
+                TryGetValue(id, out PrimitiveField field);
 
                 return field;
             }
@@ -48,7 +48,7 @@ namespace Butter
         {
         }
 
-        public bool TryGetValue(int index, out SchemaField field)
+        public bool TryGetValue(int index, out PrimitiveField field)
         {
             if (index < 0 || _count <= 0)
             {
@@ -72,7 +72,7 @@ namespace Butter
             return false;
         }
 
-        public bool TryGetValue(string id, out SchemaField field)
+        public bool TryGetValue(string id, out PrimitiveField field)
         {
             if (_count <= 0)
             {
@@ -96,7 +96,7 @@ namespace Butter
             return false;
         }
 
-        public bool Contains(SchemaField field) => field != null && _fields.Contains(field, new FieldComparer());
+        public bool Contains(PrimitiveField field) => field != null && _fields.Contains(field, new FieldComparer());
 
         public bool Contains(string id)
         {

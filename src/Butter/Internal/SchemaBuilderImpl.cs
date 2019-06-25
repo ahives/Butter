@@ -22,17 +22,17 @@ namespace Butter.Internal
     class SchemaBuilderImpl :
         ISchemaBuilder
     {
-        readonly List<SchemaField> _specifications = new List<SchemaField>();
+        readonly List<PrimitiveField> _specifications = new List<PrimitiveField>();
         readonly List<IObserver<NotificationContext>> _observers = new List<IObserver<NotificationContext>>();
 
-        public ISchemaBuilder Field(SchemaField field)
+        public ISchemaBuilder Field(PrimitiveField field)
         {
             _specifications.Add(field);
 
             return this;
         }
 
-        public ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
+        public ISchemaBuilder Field<T>(Func<T, PrimitiveField> builder)
             where T : ISpecificationBuilder
         {
             T specBuilder = Butter.Field.Builder<T>();

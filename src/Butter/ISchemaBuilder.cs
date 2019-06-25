@@ -20,9 +20,9 @@ namespace Butter
 
     public interface ISchemaBuilder
     {
-        ISchemaBuilder Field(SchemaField field);
+        ISchemaBuilder Field(PrimitiveField field);
 
-        ISchemaBuilder Field<T>(Func<T, SchemaField> builder)
+        ISchemaBuilder Field<T>(Func<T, PrimitiveField> builder)
             where T : ISpecificationBuilder;
 
         ISchemaBuilder Fields(IReadOnlyFieldList fields);

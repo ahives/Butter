@@ -12,19 +12,26 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
     using Specification;
 
-    public interface FieldBuilder :
-        ISpecificationBuilder
+    class PrimitiveFieldImpl :
+        PrimitiveField
     {
-        FieldBuilder Id(string id);
+        public PrimitiveFieldImpl(string id, FieldDataType dataType = FieldDataType.Primitive, bool isNullable = false)
+        {
+            Id = id;
+            IsNullable = isNullable;
+            DataType = dataType;
+            HasValue = !string.IsNullOrWhiteSpace(id);
+        }
 
-        FieldBuilder DataType(FieldDataType dataType);
+        public string Id { get; }
+        public bool IsNullable { get; }
+        public FieldDataType DataType { get; }
+        public bool HasValue { get; }
 
-        FieldBuilder IsNullable();
-
-        SchemaField Build();
+        public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }
 }

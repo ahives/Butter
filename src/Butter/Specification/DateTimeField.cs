@@ -15,7 +15,7 @@
 namespace Butter.Specification
 {
     public interface DateTimeField :
-        SchemaField
+        PrimitiveField
     {
         DateTimeEncoding Encoding { get; }
     }

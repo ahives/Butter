@@ -24,15 +24,15 @@ namespace Butter
         
         int Count { get; }
         
-        SchemaField this[int index] { get; }
+        PrimitiveField this[int index] { get; }
         
-        SchemaField this[string id] { get; }
+        PrimitiveField this[string id] { get; }
 
-        bool TryGetValue(int index, out SchemaField field);
+        bool TryGetValue(int index, out PrimitiveField field);
 
-        bool TryGetValue(string id, out SchemaField field);
+        bool TryGetValue(string id, out PrimitiveField field);
 
-        bool Contains(SchemaField field);
+        bool Contains(PrimitiveField field);
 
         bool Contains(string id);
     }

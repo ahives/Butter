@@ -71,7 +71,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
 
-            SchemaField field1 = Field.Builder<FieldBuilder>()
+            PrimitiveField field1 = Field.Builder<FieldBuilder>()
                 .Id("fieldA")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -79,7 +79,7 @@ namespace Butter.Tests
             
             fields.Add(field1);
             
-            SchemaField field2 = Field.Builder<FieldBuilder>()
+            PrimitiveField field2 = Field.Builder<FieldBuilder>()
                 .Id("fieldB")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()
@@ -87,7 +87,7 @@ namespace Butter.Tests
             
             fields.Add(field2);
             
-            SchemaField field3 = Field.Builder<FieldBuilder>()
+            PrimitiveField field3 = Field.Builder<FieldBuilder>()
                 .Id("fieldC")
                 .DataType(FieldDataType.Primitive)
                 .IsNullable()

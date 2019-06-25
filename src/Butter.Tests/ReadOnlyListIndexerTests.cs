@@ -9,27 +9,27 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_return_field()
         {
-            SchemaField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec3 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec3 = Field.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec4 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec4 = Field.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec5 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec5 = Field.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
@@ -55,27 +55,27 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_cannot_return_field()
         {
-            SchemaField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec3 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec3 = Field.Builder<FieldBuilder>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec4 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec4 = Field.Builder<FieldBuilder>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            SchemaField spec5 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec5 = Field.Builder<FieldBuilder>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();

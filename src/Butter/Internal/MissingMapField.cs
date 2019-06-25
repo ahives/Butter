@@ -23,7 +23,7 @@ namespace Butter.Internal
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Map;
         public bool HasValue => false;
-        public SchemaField Key => SchemaCache.MissingField;
-        public SchemaField Value => SchemaCache.MissingField;
+        public PrimitiveField Key => SchemaCache.MissingField;
+        public PrimitiveField Value => SchemaCache.MissingField;
     }
 }

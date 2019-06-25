@@ -38,7 +38,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove("field1");
+            PrimitiveField specification = fields.Remove("field1");
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -77,7 +77,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove("field2");
+            PrimitiveField specification = fields.Remove("field2");
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -116,7 +116,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove("field3");
+            PrimitiveField specification = fields.Remove("field3");
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -155,7 +155,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove(0);
+            PrimitiveField specification = fields.Remove(0);
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -194,7 +194,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove(-1);
+            PrimitiveField specification = fields.Remove(-1);
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -233,7 +233,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove(5);
+            PrimitiveField specification = fields.Remove(5);
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -272,7 +272,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove(1);
+            PrimitiveField specification = fields.Remove(1);
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -311,7 +311,7 @@ namespace Butter.Tests
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
 
-            SchemaField specification = fields.Remove(2);
+            PrimitiveField specification = fields.Remove(2);
             
             Assert.IsNotNull(specification);
             Assert.IsFalse(fields.Contains(specification));
@@ -349,7 +349,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsFalse(fields.TryRemove(-1, out SchemaField field));
+            Assert.IsFalse(fields.TryRemove(-1, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(3, fields.Count);
@@ -386,7 +386,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsFalse(fields.TryRemove(5, out SchemaField field));
+            Assert.IsFalse(fields.TryRemove(5, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(3, fields.Count);
@@ -423,7 +423,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(0, out SchemaField field));
+            Assert.IsTrue(fields.TryRemove(0, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);
@@ -460,7 +460,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(1, out SchemaField field));
+            Assert.IsTrue(fields.TryRemove(1, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);
@@ -497,7 +497,7 @@ namespace Butter.Tests
             
             Assert.IsTrue(fields.HasValues);
             Assert.AreEqual(3, fields.Count);
-            Assert.IsTrue(fields.TryRemove(2, out SchemaField field));
+            Assert.IsTrue(fields.TryRemove(2, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.IsFalse(fields.Contains(field));
             Assert.AreEqual(2, fields.Count);

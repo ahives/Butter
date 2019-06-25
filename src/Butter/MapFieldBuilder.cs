@@ -21,11 +21,11 @@ namespace Butter
     {
         MapFieldBuilder Id(string id);
 
-        MapFieldBuilder Map(SchemaField key, SchemaField value);
+        MapFieldBuilder Map(PrimitiveField key, PrimitiveField value);
 
-        MapFieldBuilder Key(SchemaField key);
+        MapFieldBuilder Key(PrimitiveField key);
 
-        MapFieldBuilder Value(SchemaField value);
+        MapFieldBuilder Value(PrimitiveField value);
 
         MapFieldBuilder IsNullable();
 

@@ -58,7 +58,7 @@ namespace Butter
                         fields.AddRange(field);
                         break;
                     
-                    case SchemaField field:
+                    case PrimitiveField field:
                         fields.AddRange(field);
                         break;
                         
@@ -75,7 +75,7 @@ namespace Butter
         /// </summary>
         /// <param name="fields"></param>
         /// <returns></returns>
-        public static IEnumerable<SchemaField> ToEnumerable(this IReadOnlyFieldList fields)
+        public static IEnumerable<PrimitiveField> ToEnumerable(this IReadOnlyFieldList fields)
         {
             for (int i = 0; i < fields.Count; i++)
             {
@@ -88,9 +88,9 @@ namespace Butter
         /// </summary>
         /// <param name="source"></param>
         /// <returns></returns>
-        public static IList<SchemaField> ToList(this IReadOnlyFieldList source)
+        public static IList<PrimitiveField> ToList(this IReadOnlyFieldList source)
         {
-            var list = new List<SchemaField>();
+            var list = new List<PrimitiveField>();
             
             for (int i = 0; i < source.Count; i++)
             {

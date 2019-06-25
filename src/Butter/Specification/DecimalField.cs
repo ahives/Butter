@@ -15,7 +15,7 @@
 namespace Butter.Specification
 {
     public interface DecimalField :
-        SchemaField
+        PrimitiveField
     {
         int Scale { get; }
         

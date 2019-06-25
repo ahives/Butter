@@ -17,15 +17,15 @@ namespace Butter.Internal
     using Specification;
 
     class FieldMapImpl :
-        FieldMap<SchemaField, SchemaField>
+        FieldMap<PrimitiveField, PrimitiveField>
     {
-        public FieldMapImpl(SchemaField key, SchemaField value)
+        public FieldMapImpl(PrimitiveField key, PrimitiveField value)
         {
             Key = key;
             Value = value;
         }
 
-        public SchemaField Key { get; }
-        public SchemaField Value { get; }
+        public PrimitiveField Key { get; }
+        public PrimitiveField Value { get; }
     }
 }

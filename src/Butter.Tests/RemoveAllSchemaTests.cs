@@ -29,7 +29,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            IReadOnlyFieldList fields = schema.RemoveAll<SchemaField>(x => x.Id == "field3");
+            IReadOnlyFieldList fields = schema.RemoveAll<PrimitiveField>(x => x.Id == "field3");
 
             Assert.AreEqual(3, fields.Count);
         }
@@ -57,7 +57,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            IReadOnlyFieldList fields = schema.RemoveAll<SchemaField>(x => x.Id == "field1");
+            IReadOnlyFieldList fields = schema.RemoveAll<PrimitiveField>(x => x.Id == "field1");
 
             Assert.AreEqual(1, fields.Count);
         }
@@ -85,7 +85,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            IReadOnlyFieldList fields = schema.RemoveAll<SchemaField>(x => x.Id == "field6");
+            IReadOnlyFieldList fields = schema.RemoveAll<PrimitiveField>(x => x.Id == "field6");
 
             Assert.AreEqual(1, fields.Count);
         }
@@ -113,7 +113,7 @@ namespace Butter.Tests
             Assert.IsTrue(schema.Fields.HasValues);
             Assert.AreEqual(6, schema.Fields.Count);
 
-            IReadOnlyFieldList fields = schema.RemoveAll<SchemaField>(x => x.Id == "field7");
+            IReadOnlyFieldList fields = schema.RemoveAll<PrimitiveField>(x => x.Id == "field7");
 
             Assert.AreEqual(0, fields.Count);
         }
