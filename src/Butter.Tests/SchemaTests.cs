@@ -179,18 +179,19 @@ namespace Butter.Tests
             var schema = Schema.Builder()
                 .Field<Struct>(x =>
                 {
-                    return x.Id("field1")
+                    return x.Id("field3")
+                        .Index(3)
                         .Field<Primitive>(f => f.Id("fieldA").DataType(FieldDataType.Primitive).IsNullable().Build())
                         .Field<Primitive>(f => f.Id("fieldB").DataType(FieldDataType.Primitive).IsNullable().Build())
                         .Field<Primitive>(f => f.Id("fieldC").DataType(FieldDataType.Primitive).IsNullable().Build())
                         .Field<Decimal>(f => f.Id("fieldD").Precision(5).Scale(2).IsNullable().Build())
                         .Build();
                 })
-                .Field<Primitive>(x => x.Id("field6").IsNullable().Build())
-                .Field<Primitive>(x => x.Id("field7").IsNullable().Build())
-                .Field<Primitive>(x => x.Id("field8").IsNullable().Build())
-                .Field<Primitive>(x => x.Id("field9").IsNullable().Build())
-                .Field<Primitive>(x => x.Id("field10").IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field2").Index(2).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field1").Index(1).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field5").Index(5).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field4").Index(4).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field6").Index(6).IsNullable().Build())
                 .Build();
 
             Console.WriteLine(schema.Report());

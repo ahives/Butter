@@ -96,7 +96,9 @@ namespace Butter
             return false;
         }
 
-        public bool Contains(PrimitiveField field) => field != null && _fields.Contains(field, new FieldComparer());
+        public bool Contains(PrimitiveField field) => field != null && _fields.Contains(field, _containsComparer);
+
+        public void Sort() => _fields.Sort(_sortComparer);
 
         public bool Contains(string id)
         {

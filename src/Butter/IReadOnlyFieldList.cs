@@ -35,5 +35,7 @@ namespace Butter
         bool Contains(PrimitiveField field);
 
         bool Contains(string id);
+
+        void Sort();
     }
 }

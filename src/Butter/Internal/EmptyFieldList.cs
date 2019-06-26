@@ -40,6 +40,10 @@ namespace Butter.Internal
         public bool Contains(PrimitiveField field) => false;
         public bool Contains(string id) => false;
 
+        public void Sort()
+        {
+        }
+
         public bool Equals(IReadOnlyFieldList other) => false;
     }
 }
