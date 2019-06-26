@@ -13,11 +13,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -38,11 +38,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Map).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.List).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Map).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.List).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -50,29 +50,29 @@ namespace Butter.Tests
             {
                 switch (temp[i].DataType)
                 {
-                    case FieldDataType.None:
+                    case SchemaDataType.None:
                         break;
-                    case FieldDataType.Primitive:
+                    case SchemaDataType.Primitive:
                         PrimitiveField specification = temp[i];
                         Assert.IsNotNull(specification);
                         Assert.That(specification.Id, Is.EqualTo("field1").Or.EqualTo("field4").Or.EqualTo("field5"));
                         break;
-                    case FieldDataType.Map:
+                    case SchemaDataType.Map:
 //                        MapField mapField = schema.Fields[i].Cast<MapField>();
 //                        Assert.IsNotNull(mapField);
 //                        Assert.AreEqual("field2", mapField.Id);
                         break;
-                    case FieldDataType.List:
+                    case SchemaDataType.List:
 //                        ListField listField = schema.Fields[i].Cast<ListField>();
 //                        Assert.IsNotNull(listField);
 //                        Assert.AreEqual("field3", listField.Id);
                         break;
-                    case FieldDataType.Decimal:
+                    case SchemaDataType.Decimal:
                         DecimalField spec = temp[i].Cast<DecimalField>();
                         Assert.IsNotNull(spec);
                         Assert.AreEqual("field6", spec.Id);
                         break;
-                    case FieldDataType.Struct:
+                    case SchemaDataType.Struct:
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();

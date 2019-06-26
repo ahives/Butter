@@ -21,7 +21,7 @@ namespace Butter.Internal
     {
         public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.DateTimeOffset;
+        public SchemaDataType DataType => SchemaDataType.DateTimeOffset;
         public bool HasValue => false;
         public int Index => -1;
         public DateTimeEncoding Encoding => DateTimeEncoding.Default;

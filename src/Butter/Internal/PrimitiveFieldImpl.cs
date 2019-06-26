@@ -19,7 +19,7 @@ namespace Butter.Internal
     class PrimitiveFieldImpl :
         PrimitiveField
     {
-        public PrimitiveFieldImpl(string id, int index, FieldDataType dataType = FieldDataType.Primitive,
+        public PrimitiveFieldImpl(string id, int index, SchemaDataType dataType = SchemaDataType.Primitive,
             bool isNullable = false)
         {
             Id = id;
@@ -31,7 +31,7 @@ namespace Butter.Internal
 
         public string Id { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
         public int Index { get; }
 

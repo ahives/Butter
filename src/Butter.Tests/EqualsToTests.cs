@@ -12,7 +12,7 @@ namespace Butter.Tests
         {
             PrimitiveField spec = Field.Builder<Primitive>()
                 .Id("city")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             var schema1 = Schema.Builder()
@@ -31,12 +31,12 @@ namespace Butter.Tests
         {
             PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("city")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("city")
-                .DataType(FieldDataType.Decimal)
+                .DataType(SchemaDataType.Decimal)
                 .Build();
 
             var schema1 = Schema.Builder()
@@ -55,12 +55,12 @@ namespace Butter.Tests
         {
             PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("city")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("state")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             var schema = Schema.Builder()

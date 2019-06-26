@@ -23,7 +23,7 @@ namespace Butter.Builders
 
         Primitive Index(int index);
 
-        Primitive DataType(FieldDataType dataType);
+        Primitive DataType(SchemaDataType dataType);
 
         Primitive IsNullable();
 

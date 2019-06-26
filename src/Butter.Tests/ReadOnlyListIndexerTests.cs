@@ -12,27 +12,27 @@ namespace Butter.Tests
         {
             PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("field1")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("field2")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec3 = Field.Builder<Primitive>()
                 .Id("field3")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec4 = Field.Builder<Primitive>()
                 .Id("field4")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec5 = Field.Builder<Primitive>()
                 .Id("field5")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
             
             DecimalField spec6 = Field.Builder<Decimal>()
@@ -58,27 +58,27 @@ namespace Butter.Tests
         {
             PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("field1")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("field2")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec3 = Field.Builder<Primitive>()
                 .Id("field3")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec4 = Field.Builder<Primitive>()
                 .Id("field4")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
 
             PrimitiveField spec5 = Field.Builder<Primitive>()
                 .Id("field5")
-                .DataType(FieldDataType.Primitive)
+                .DataType(SchemaDataType.Primitive)
                 .Build();
             
             DecimalField spec6 = Field.Builder<Decimal>()

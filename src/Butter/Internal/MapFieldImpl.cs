@@ -25,7 +25,7 @@ namespace Butter.Internal
             Index = index;
             Key = field != null ? field.Key : SchemaCache.MissingField;
             Value = field != null ? field.Value : SchemaCache.MissingField;
-            DataType = FieldDataType.Map;
+            DataType = SchemaDataType.Map;
             IsNullable = isNullable;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
@@ -36,7 +36,7 @@ namespace Butter.Internal
             Index = index;
             Key = SchemaCache.MissingField;
             Value = SchemaCache.MissingField;
-            DataType = FieldDataType.Map;
+            DataType = SchemaDataType.Map;
             IsNullable = isNullable;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
@@ -44,7 +44,7 @@ namespace Butter.Internal
         public string Id { get; }
         public int Index { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
         public PrimitiveField Key { get; }
         public PrimitiveField Value { get; }

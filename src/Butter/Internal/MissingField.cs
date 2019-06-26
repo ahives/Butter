@@ -21,7 +21,7 @@ namespace Butter.Internal
     {
         public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Primitive;
+        public SchemaDataType DataType => SchemaDataType.Primitive;
         public bool HasValue => false;
         public int Index => -1;
     }

@@ -25,13 +25,13 @@ namespace Butter.Internal
             Index = index;
             IsNullable = isNullable;
             Encoding = encoding;
-            DataType = FieldDataType.DateTimeOffset;
+            DataType = SchemaDataType.DateTimeOffset;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
         public DateTimeEncoding Encoding { get; }
         public int Index { get; }

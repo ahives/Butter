@@ -23,14 +23,14 @@ namespace Butter.Internal
         {
             Id = id;
             Index = index;
-            DataType = FieldDataType.List;
+            DataType = SchemaDataType.List;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public int Index { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
     }
 }

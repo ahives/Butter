@@ -26,7 +26,7 @@ namespace Butter.Internal
 
         public string Id => "[Butter].[missing_field]";
         public bool IsNullable => true;
-        public FieldDataType DataType => FieldDataType.Struct;
+        public SchemaDataType DataType => SchemaDataType.Struct;
         public bool HasValue => false;
         public IReadOnlyFieldList Fields { get; }
         public int Index => -1;

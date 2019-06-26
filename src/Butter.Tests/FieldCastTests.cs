@@ -27,7 +27,7 @@ namespace Butter.Tests
             PrimitiveField field1 = specification.Cast<PrimitiveField>();
 
             Assert.IsNotNull(field1);
-            Assert.AreEqual(FieldDataType.Primitive, field1.DataType);
+            Assert.AreEqual(SchemaDataType.Primitive, field1.DataType);
         }
     }
 }

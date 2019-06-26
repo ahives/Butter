@@ -24,7 +24,7 @@ namespace Butter.Internal
             Id = id;
             Index = index;
             IsNullable = nullable;
-            DataType = FieldDataType.Decimal;
+            DataType = SchemaDataType.Decimal;
             Scale = scale;
             Precision = precision;
             HasValue = !string.IsNullOrWhiteSpace(id);
@@ -35,13 +35,13 @@ namespace Butter.Internal
             Id = id;
             Index = index;
             IsNullable = nullable;
-            DataType = FieldDataType.Decimal;
+            DataType = SchemaDataType.Decimal;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
         public int Index { get; }
         public int Scale { get; }

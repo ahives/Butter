@@ -14,9 +14,9 @@ namespace Butter.Tests
                 .Field<Struct>(x =>
                 {
                     return x.Id("field1")
-                        .Field<Primitive>(f => f.Id("fieldA").DataType(FieldDataType.Primitive).IsNullable().Build())
-                        .Field<Primitive>(f => f.Id("fieldB").DataType(FieldDataType.Primitive).IsNullable().Build())
-                        .Field<Primitive>(f => f.Id("fieldC").DataType(FieldDataType.Primitive).IsNullable().Build())
+                        .Field<Primitive>(f => f.Id("fieldA").DataType(SchemaDataType.Primitive).IsNullable().Build())
+                        .Field<Primitive>(f => f.Id("fieldB").DataType(SchemaDataType.Primitive).IsNullable().Build())
+                        .Field<Primitive>(f => f.Id("fieldC").DataType(SchemaDataType.Primitive).IsNullable().Build())
                         .Field<Decimal>(f => f.Id("fieldD").Precision(5).Scale(2).IsNullable().Build())
                         .Build();
                 })

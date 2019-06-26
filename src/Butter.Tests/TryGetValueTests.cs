@@ -12,7 +12,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -24,7 +24,7 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
             
             IReadOnlyFieldList temp = fields;
             
@@ -53,11 +53,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -70,11 +70,11 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
@@ -88,18 +88,18 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
             Assert.IsTrue(temp.TryGetValue(3, out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
-            Assert.AreEqual(FieldDataType.Primitive, field.DataType);
+            Assert.AreEqual(SchemaDataType.Primitive, field.DataType);
         }
 
         [Test]
@@ -107,18 +107,18 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
             Assert.IsTrue(temp.TryGetValue("field4", out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
-            Assert.AreEqual(FieldDataType.Primitive, field.DataType);
+            Assert.AreEqual(SchemaDataType.Primitive, field.DataType);
         }
 
         [Test]
@@ -126,18 +126,18 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field1").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field2").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field3").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field4").DataType(SchemaDataType.Primitive).IsNullable().Build());
+            fields.Add(Field.Builder<Primitive>().Id("field5").DataType(SchemaDataType.Primitive).IsNullable().Build());
 
             IReadOnlyFieldList temp = fields;
             
             Assert.IsTrue(temp.TryGetValue("field4", out PrimitiveField field));
             Assert.IsNotNull(field);
             Assert.AreEqual("field4", field.Id);
-            Assert.AreEqual(FieldDataType.Primitive, field.DataType);
+            Assert.AreEqual(SchemaDataType.Primitive, field.DataType);
         }
 
         [Test]

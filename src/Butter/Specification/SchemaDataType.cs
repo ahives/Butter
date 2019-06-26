@@ -14,7 +14,7 @@
 // ***********************************************************************************
 namespace Butter.Specification
 {
-    public enum FieldDataType
+    public enum SchemaDataType
     {
         None,
         DateTimeOffset,

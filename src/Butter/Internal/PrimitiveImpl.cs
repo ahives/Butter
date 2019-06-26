@@ -21,7 +21,7 @@ namespace Butter.Internal
         Primitive
     {
         string _id;
-        FieldDataType _dataType;
+        SchemaDataType _dataType;
         bool _nullable;
         int _index;
 
@@ -39,7 +39,7 @@ namespace Butter.Internal
             return this;
         }
 
-        public Primitive DataType(FieldDataType dataType)
+        public Primitive DataType(SchemaDataType dataType)
         {
             _dataType = dataType;
             

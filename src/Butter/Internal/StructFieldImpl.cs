@@ -24,7 +24,7 @@ namespace Butter.Internal
             Id = id;
             Index = index;
             IsNullable = isNullable;
-            DataType = FieldDataType.Struct;
+            DataType = SchemaDataType.Struct;
             Fields = fields;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
@@ -34,14 +34,14 @@ namespace Butter.Internal
             Id = id;
             Index = index;
             IsNullable = isNullable;
-            DataType = FieldDataType.Struct;
+            DataType = SchemaDataType.Struct;
             Fields = SchemaCache.EmptyFieldList;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
         public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
+        public SchemaDataType DataType { get; }
         public bool HasValue { get; }
         public int Index { get; }
         public IReadOnlyFieldList Fields { get; }
