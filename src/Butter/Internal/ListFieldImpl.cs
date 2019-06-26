@@ -19,14 +19,16 @@ namespace Butter.Internal
     class ListFieldImpl :
         ListField
     {
-        public ListFieldImpl(string id)
+        public ListFieldImpl(string id, int index)
         {
             Id = id;
+            Index = index;
             DataType = FieldDataType.List;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
         public string Id { get; }
+        public int Index { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public bool HasValue { get; }

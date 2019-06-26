@@ -23,5 +23,6 @@ namespace Butter.Internal
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Primitive;
         public bool HasValue => false;
+        public int Index => -1;
     }
 }

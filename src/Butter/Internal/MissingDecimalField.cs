@@ -23,6 +23,7 @@ namespace Butter.Internal
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.Decimal;
         public bool HasValue => false;
+        public int Index => -1;
         public int Scale => 0;
         public int Precision => 0;
     }

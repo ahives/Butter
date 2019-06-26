@@ -21,6 +21,8 @@ namespace Butter.Builders
     {
         Decimal Id(string id);
 
+        Decimal Index(int index);
+
         Decimal IsNullable();
 
         Decimal Scale(int scale);

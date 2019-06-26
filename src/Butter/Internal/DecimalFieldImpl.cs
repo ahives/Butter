@@ -19,9 +19,10 @@ namespace Butter.Internal
     class DecimalFieldImpl :
         DecimalField
     {
-        public DecimalFieldImpl(string id, int scale, int precision, bool nullable = false)
+        public DecimalFieldImpl(string id, int index, int scale, int precision, bool nullable = false)
         {
             Id = id;
+            Index = index;
             IsNullable = nullable;
             DataType = FieldDataType.Decimal;
             Scale = scale;
@@ -29,9 +30,10 @@ namespace Butter.Internal
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
-        public DecimalFieldImpl(string id, bool nullable = false)
+        public DecimalFieldImpl(string id, int index, bool nullable = false)
         {
             Id = id;
+            Index = index;
             IsNullable = nullable;
             DataType = FieldDataType.Decimal;
             HasValue = !string.IsNullOrWhiteSpace(id);
@@ -41,6 +43,7 @@ namespace Butter.Internal
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public bool HasValue { get; }
+        public int Index { get; }
         public int Scale { get; }
         public int Precision { get; }
 

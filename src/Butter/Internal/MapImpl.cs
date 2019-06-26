@@ -14,63 +14,61 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
-    using System;
-    using System.Threading;
     using Builders;
     using Specification;
 
     class MapImpl :
         Map
     {
-        Lazy<string> _id;
-        Lazy<bool> _nullable;
-        Lazy<PrimitiveField> _key;
-        Lazy<PrimitiveField> _value;
-        FieldMap<PrimitiveField,PrimitiveField> _mapping;
+        string _id;
+        bool _nullable;
+        PrimitiveField _key;
+        PrimitiveField _value;
+        int _index;
 
         public Map Id(string id)
         {
-            _id = new Lazy<string>(() => id, LazyThreadSafetyMode.PublicationOnly);
+            _id = id;
             
+            return this;
+        }
+
+        public Map Index(int index)
+        {
+            _index = index;
+
             return this;
         }
 
         public Map Map(PrimitiveField key, PrimitiveField value)
         {
-            _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
-            _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _key = key;
+            _value = value;
 
             return this;
         }
 
         public Map Key(PrimitiveField key)
         {
-            _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
+            _key = key;
             
             return this;
         }
 
         public Map Value(PrimitiveField value)
         {
-            _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
+            _value = value;
 
             return this;
         }
 
         public Map IsNullable()
         {
-            _nullable = new Lazy<bool>(() => true, LazyThreadSafetyMode.PublicationOnly);
+            _nullable = true;
             
             return this;
         }
 
-        public MapField Build()
-        {
-            _mapping = new FieldMapImpl(_key.Value, _value.Value);
-            
-            return new MapFieldImpl(_id.Value, _mapping, _nullable.Value);
-        }
-
-        public FieldMap<PrimitiveField, PrimitiveField> Mapping => _mapping;
+        public MapField Build() => new MapFieldImpl(_id, _index, new FieldMapImpl(_key, _value), _nullable);
     }
 }

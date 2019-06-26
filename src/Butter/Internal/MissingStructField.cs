@@ -29,5 +29,6 @@ namespace Butter.Internal
         public FieldDataType DataType => FieldDataType.Struct;
         public bool HasValue => false;
         public IReadOnlyFieldList Fields { get; }
+        public int Index => -1;
     }
 }

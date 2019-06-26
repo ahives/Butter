@@ -19,9 +19,10 @@ namespace Butter.Internal
     class DateTimeFieldImpl :
         DateTimeField
     {
-        public DateTimeFieldImpl(string id, DateTimeEncoding encoding = DateTimeEncoding.Default, bool isNullable = false)
+        public DateTimeFieldImpl(string id, int index, DateTimeEncoding encoding = DateTimeEncoding.Default, bool isNullable = false)
         {
             Id = id;
+            Index = index;
             IsNullable = isNullable;
             Encoding = encoding;
             DataType = FieldDataType.DateTimeOffset;
@@ -33,6 +34,7 @@ namespace Butter.Internal
         public FieldDataType DataType { get; }
         public bool HasValue { get; }
         public DateTimeEncoding Encoding { get; }
+        public int Index { get; }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}, Encoding = {Encoding}]";
     }

@@ -24,6 +24,7 @@ namespace Butter.Internal
         bool _nullable;
         int _scale;
         int _precision;
+        int _index;
 
         public DecimalImpl()
         {
@@ -35,6 +36,13 @@ namespace Butter.Internal
         public Decimal Id(string id)
         {
             _id = id;
+            
+            return this;
+        }
+
+        public Decimal Index(int index)
+        {
+            _index = index;
             
             return this;
         }
@@ -60,6 +68,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public DecimalField Build() => new DecimalFieldImpl(_id, _scale, _precision, _nullable);
+        public DecimalField Build() => new DecimalFieldImpl(_id, _index, _scale, _precision, _nullable);
     }
 }

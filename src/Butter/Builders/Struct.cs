@@ -22,13 +22,15 @@ namespace Butter.Builders
     {
         Struct Id(string id);
 
-        Struct Field<T>(T specification)
+        Struct Index(int index);
+
+        Struct Field<T>(T field)
             where T : PrimitiveField;
 
         Struct Field<T>(Func<T, PrimitiveField> builder)
             where T : IFieldBuilder;
 
-        Struct Fields(IReadOnlyFieldList specifications);
+        Struct Fields(IReadOnlyFieldList fields);
 
         Struct IsNullable();
 

@@ -23,17 +23,6 @@ namespace Butter.Internal
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.None;
         public bool HasValue => false;
-
-        public bool Equals(PrimitiveField other) => false;
-
-        public override bool Equals(object obj) => Equals((PrimitiveField)obj);
-
-        public override int GetHashCode()
-        {
-            unchecked
-            {
-                return ((Id != null ? Id.GetHashCode() : 0) * 397) ^ (int) DataType;
-            }
-        }
+        public int Index => -1;
     }
 }

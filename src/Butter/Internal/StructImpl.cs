@@ -23,11 +23,12 @@ namespace Butter.Internal
     {
         string _id;
         bool _nullable;
-        readonly IFieldList _specifications;
+        readonly IFieldList _fields;
+        int _index;
 
         public StructImpl()
         {
-            _specifications = new FieldList(false);
+            _fields = new FieldList(false);
         }
 
         public Struct Id(string id)
@@ -37,10 +38,17 @@ namespace Butter.Internal
             return this;
         }
 
-        public Struct Field<T>(T specification)
+        public Struct Index(int index)
+        {
+            _index = index;
+            
+            return this;
+        }
+
+        public Struct Field<T>(T field)
             where T : PrimitiveField
         {
-            _specifications.Add(specification);
+            _fields.Add(field);
 
             return this;
         }
@@ -52,14 +60,14 @@ namespace Butter.Internal
 
             var specification = builder(specBuilder);
 
-            _specifications.Add(specification);
+            _fields.Add(specification);
 
             return this;
         }
 
-        public Struct Fields(IReadOnlyFieldList specifications)
+        public Struct Fields(IReadOnlyFieldList fields)
         {
-            _specifications.AddRange(specifications.ToList());
+            _fields.AddRange(fields.ToList());
 
             return this;
         }
@@ -71,6 +79,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public StructField Build() => new StructFieldImpl(_id, _specifications, isNullable:_nullable);
+        public StructField Build() => new StructFieldImpl(_id, _index, _fields, isNullable:_nullable);
     }
 }

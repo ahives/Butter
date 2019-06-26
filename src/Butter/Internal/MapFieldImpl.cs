@@ -19,9 +19,10 @@ namespace Butter.Internal
     class MapFieldImpl :
         MapField
     {
-        public MapFieldImpl(string id, FieldMap<PrimitiveField, PrimitiveField> field, bool isNullable = false)
+        public MapFieldImpl(string id, int index, FieldMap<PrimitiveField, PrimitiveField> field, bool isNullable = false)
         {
             Id = id;
+            Index = index;
             Key = field != null ? field.Key : SchemaCache.MissingField;
             Value = field != null ? field.Value : SchemaCache.MissingField;
             DataType = FieldDataType.Map;
@@ -29,9 +30,10 @@ namespace Butter.Internal
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
-        public MapFieldImpl(string id, bool isNullable)
+        public MapFieldImpl(string id, int index, bool isNullable)
         {
             Id = id;
+            Index = index;
             Key = SchemaCache.MissingField;
             Value = SchemaCache.MissingField;
             DataType = FieldDataType.Map;
@@ -40,6 +42,7 @@ namespace Butter.Internal
         }
 
         public string Id { get; }
+        public int Index { get; }
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public bool HasValue { get; }

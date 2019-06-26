@@ -23,10 +23,18 @@ namespace Butter.Internal
         string _id;
         bool _nullable;
         DateTimeEncoding _encoding;
+        int _index;
 
         public DateTime Id(string id)
         {
             _id = id;
+            
+            return this;
+        }
+
+        public DateTime Index(int index)
+        {
+            _index = index;
             
             return this;
         }
@@ -45,6 +53,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public DateTimeField Build() => new DateTimeFieldImpl(_id, _encoding, _nullable);
+        public DateTimeField Build() => new DateTimeFieldImpl(_id, _index, _encoding, _nullable);
     }
 }

@@ -94,19 +94,19 @@ namespace Butter
         {
             if (typeof(T) == typeof(MapField))
             {
-                MapField field = new MapFieldImpl(source.Id, source.IsNullable);
+                MapField field = new MapFieldImpl(source.Id, source.Index, source.IsNullable);
                 return (T) field;
             }
 
             if (typeof(T) == typeof(DecimalField))
             {
-                DecimalField field = new DecimalFieldImpl(source.Id, source.IsNullable);
+                DecimalField field = new DecimalFieldImpl(source.Id, source.Index, source.IsNullable);
                 return (T) field;
             }
 
             if (typeof(T) == typeof(StructField))
             {
-                StructField field = new StructFieldImpl(source.Id, source.IsNullable);
+                StructField field = new StructFieldImpl(source.Id, source.Index, source.IsNullable);
                 return (T) field;
             }
 

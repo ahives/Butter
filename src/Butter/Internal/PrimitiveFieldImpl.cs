@@ -19,9 +19,11 @@ namespace Butter.Internal
     class PrimitiveFieldImpl :
         PrimitiveField
     {
-        public PrimitiveFieldImpl(string id, FieldDataType dataType = FieldDataType.Primitive, bool isNullable = false)
+        public PrimitiveFieldImpl(string id, int index, FieldDataType dataType = FieldDataType.Primitive,
+            bool isNullable = false)
         {
             Id = id;
+            Index = index;
             IsNullable = isNullable;
             DataType = dataType;
             HasValue = !string.IsNullOrWhiteSpace(id);
@@ -31,6 +33,7 @@ namespace Butter.Internal
         public bool IsNullable { get; }
         public FieldDataType DataType { get; }
         public bool HasValue { get; }
+        public int Index { get; }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }

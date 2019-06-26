@@ -21,6 +21,8 @@ namespace Butter.Builders
     {
         DateTime Id(string id);
 
+        DateTime Index(int index);
+
         DateTime IsNullable();
 
         DateTime Encoding(DateTimeEncoding encoding);

@@ -20,6 +20,8 @@ namespace Butter.Builders
     {
         List Id(string id);
 
+        List Index(int index);
+
         List IsNullable();
 
         ListField Build();

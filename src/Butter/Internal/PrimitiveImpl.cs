@@ -23,10 +23,18 @@ namespace Butter.Internal
         string _id;
         FieldDataType _dataType;
         bool _nullable;
+        int _index;
 
         public Primitive Id(string id)
         {
             _id = id;
+            
+            return this;
+        }
+
+        public Primitive Index(int index)
+        {
+            _index = index;
             
             return this;
         }
@@ -45,6 +53,6 @@ namespace Butter.Internal
             return this;
         }
 
-        public PrimitiveField Build() => new PrimitiveFieldImpl(_id, _dataType, _nullable);
+        public PrimitiveField Build() => new PrimitiveFieldImpl(_id, _index, _dataType, _nullable);
     }
 }

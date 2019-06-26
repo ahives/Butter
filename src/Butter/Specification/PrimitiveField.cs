@@ -23,5 +23,7 @@ namespace Butter.Specification
         FieldDataType DataType { get; }
         
         bool HasValue { get; }
+        
+        int Index { get; }
     }
 }

@@ -21,6 +21,8 @@ namespace Butter.Builders
     {
         Map Id(string id);
 
+        Map Index(int index);
+
         Map Map(PrimitiveField key, PrimitiveField value);
 
         Map Key(PrimitiveField key);

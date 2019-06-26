@@ -21,6 +21,8 @@ namespace Butter.Builders
     {
         Primitive Id(string id);
 
+        Primitive Index(int index);
+
         Primitive DataType(FieldDataType dataType);
 
         Primitive IsNullable();

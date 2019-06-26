@@ -23,6 +23,7 @@ namespace Butter.Internal
         public bool IsNullable => true;
         public FieldDataType DataType => FieldDataType.DateTimeOffset;
         public bool HasValue => false;
+        public int Index => -1;
         public DateTimeEncoding Encoding => DateTimeEncoding.Default;
     }
 }

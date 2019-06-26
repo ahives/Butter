@@ -19,29 +19,32 @@ namespace Butter.Internal
     class StructFieldImpl :
         StructField
     {
-        public string Id { get; }
-        public bool IsNullable { get; }
-        public FieldDataType DataType { get; }
-        public bool HasValue { get; }
-        public IReadOnlyFieldList Fields { get; }
-
-        public StructFieldImpl(string id, IReadOnlyFieldList fields, bool isNullable = false)
+        public StructFieldImpl(string id, int index, IReadOnlyFieldList fields, bool isNullable = false)
         {
             Id = id;
+            Index = index;
             IsNullable = isNullable;
             DataType = FieldDataType.Struct;
             Fields = fields;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
 
-        public StructFieldImpl(string id, bool isNullable)
+        public StructFieldImpl(string id, int index, bool isNullable)
         {
             Id = id;
+            Index = index;
             IsNullable = isNullable;
             DataType = FieldDataType.Struct;
             Fields = SchemaCache.EmptyFieldList;
             HasValue = !string.IsNullOrWhiteSpace(id);
         }
+
+        public string Id { get; }
+        public bool IsNullable { get; }
+        public FieldDataType DataType { get; }
+        public bool HasValue { get; }
+        public int Index { get; }
+        public IReadOnlyFieldList Fields { get; }
 
         public override string ToString() => $"FIELD [ID = '{Id}', Data Type = {DataType.ToString()}, Nullable = {(IsNullable ? bool.TrueString : bool.FalseString)}]";
     }

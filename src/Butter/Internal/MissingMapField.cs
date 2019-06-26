@@ -25,5 +25,6 @@ namespace Butter.Internal
         public bool HasValue => false;
         public PrimitiveField Key => SchemaCache.MissingField;
         public PrimitiveField Value => SchemaCache.MissingField;
+        public int Index => -1;
     }
 }
