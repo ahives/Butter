@@ -12,26 +12,19 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
-    using System;
     using Specification;
 
-    public interface StructFieldBuilder :
-        ISpecificationBuilder
+    public interface DateTime :
+        IFieldBuilder
     {
-        StructFieldBuilder Id(string id);
+        DateTime Id(string id);
 
-        StructFieldBuilder Field<T>(T specification)
-            where T : PrimitiveField;
+        DateTime IsNullable();
 
-        StructFieldBuilder Field<T>(Func<T, PrimitiveField> builder)
-            where T : ISpecificationBuilder;
+        DateTime Encoding(DateTimeEncoding encoding);
 
-        StructFieldBuilder Fields(IReadOnlyFieldList specifications);
-
-        StructFieldBuilder IsNullable();
-
-        StructField Build();
+        DateTimeField Build();
     }
 }

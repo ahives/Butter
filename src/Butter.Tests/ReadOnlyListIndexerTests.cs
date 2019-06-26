@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Builders;
     using NUnit.Framework;
     using Specification;
 
@@ -9,32 +10,32 @@ namespace Butter.Tests
         [Test]
         public void Verify_can_return_field()
         {
-            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec3 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec3 = Field.Builder<Primitive>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec4 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec4 = Field.Builder<Primitive>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec5 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec5 = Field.Builder<Primitive>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
             
-            DecimalField spec6 = Field.Builder<DecimalFieldBuilder>()
+            DecimalField spec6 = Field.Builder<Decimal>()
                 .Id("field6")
                 .Precision(2)
                 .Scale(4)
@@ -55,32 +56,32 @@ namespace Butter.Tests
         [Test]
         public void Verify_does_not_throw_when_cannot_return_field()
         {
-            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("field1")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("field2")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec3 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec3 = Field.Builder<Primitive>()
                 .Id("field3")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec4 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec4 = Field.Builder<Primitive>()
                 .Id("field4")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec5 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec5 = Field.Builder<Primitive>()
                 .Id("field5")
                 .DataType(FieldDataType.Primitive)
                 .Build();
             
-            DecimalField spec6 = Field.Builder<DecimalFieldBuilder>()
+            DecimalField spec6 = Field.Builder<Decimal>()
                 .Id("field6")
                 .Precision(2)
                 .Scale(4)

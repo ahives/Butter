@@ -16,6 +16,7 @@ namespace Butter
 {
     using System;
     using System.Collections.Generic;
+    using Builders;
     using Notification;
     using Specification;
 
@@ -25,7 +26,7 @@ namespace Butter
         void Add(PrimitiveField field);
 
         void Add<TBuilder>(Func<TBuilder, PrimitiveField> criteria)
-            where TBuilder : ISpecificationBuilder;
+            where TBuilder : IFieldBuilder;
 
         void AddRange(params PrimitiveField[] fields);
 

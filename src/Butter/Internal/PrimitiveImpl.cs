@@ -12,19 +12,39 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Internal
 {
+    using Builders;
     using Specification;
 
-    public interface FieldBuilder :
-        ISpecificationBuilder
+    class PrimitiveImpl :
+        Primitive
     {
-        FieldBuilder Id(string id);
+        string _id;
+        FieldDataType _dataType;
+        bool _nullable;
 
-        FieldBuilder DataType(FieldDataType dataType);
+        public Primitive Id(string id)
+        {
+            _id = id;
+            
+            return this;
+        }
 
-        FieldBuilder IsNullable();
+        public Primitive DataType(FieldDataType dataType)
+        {
+            _dataType = dataType;
+            
+            return this;
+        }
 
-        PrimitiveField Build();
+        public Primitive IsNullable()
+        {
+            _nullable = true;
+            
+            return this;
+        }
+
+        public PrimitiveField Build() => new PrimitiveFieldImpl(_id, _dataType, _nullable);
     }
 }

@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Builders;
     using NUnit.Framework;
     using Specification;
 
@@ -9,7 +10,7 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_true()
         {
-            PrimitiveField spec = Field.Builder<FieldBuilder>()
+            PrimitiveField spec = Field.Builder<Primitive>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
@@ -28,12 +29,12 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false_when_types_different()
         {
-            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("city")
                 .DataType(FieldDataType.Decimal)
                 .Build();
@@ -52,12 +53,12 @@ namespace Butter.Tests
         [Test]
         public void Verify_EqualsTo_returns_false()
         {
-            PrimitiveField spec1 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec1 = Field.Builder<Primitive>()
                 .Id("city")
                 .DataType(FieldDataType.Primitive)
                 .Build();
 
-            PrimitiveField spec2 = Field.Builder<FieldBuilder>()
+            PrimitiveField spec2 = Field.Builder<Primitive>()
                 .Id("state")
                 .DataType(FieldDataType.Primitive)
                 .Build();

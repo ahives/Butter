@@ -16,6 +16,7 @@ namespace Butter.Internal
 {
     using System;
     using System.Collections.Generic;
+    using Builders;
     using Notification;
     using Specification;
 
@@ -33,7 +34,7 @@ namespace Butter.Internal
         }
 
         public ISchemaBuilder Field<T>(Func<T, PrimitiveField> builder)
-            where T : ISpecificationBuilder
+            where T : IFieldBuilder
         {
             T specBuilder = Butter.Field.Builder<T>();
 

@@ -12,23 +12,23 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
+    using System;
+    using Notification;
     using Specification;
 
-    public interface MapFieldBuilder :
-        ISpecificationBuilder
+    public interface ISchemaBuilder
     {
-        MapFieldBuilder Id(string id);
+        ISchemaBuilder Field(PrimitiveField field);
 
-        MapFieldBuilder Map(PrimitiveField key, PrimitiveField value);
+        ISchemaBuilder Field<T>(Func<T, PrimitiveField> builder)
+            where T : IFieldBuilder;
 
-        MapFieldBuilder Key(PrimitiveField key);
-
-        MapFieldBuilder Value(PrimitiveField value);
-
-        MapFieldBuilder IsNullable();
-
-        MapField Build();
+        ISchemaBuilder Fields(IReadOnlyFieldList fields);
+        
+        ISchemaBuilder RegisterObserver(IObserver<NotificationContext> observer);
+        
+        ISchema Build();
     }
 }

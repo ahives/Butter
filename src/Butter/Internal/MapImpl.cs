@@ -16,10 +16,11 @@ namespace Butter.Internal
 {
     using System;
     using System.Threading;
+    using Builders;
     using Specification;
 
-    class MapFieldBuilderImpl :
-        MapFieldBuilder
+    class MapImpl :
+        Map
     {
         Lazy<string> _id;
         Lazy<bool> _nullable;
@@ -27,14 +28,14 @@ namespace Butter.Internal
         Lazy<PrimitiveField> _value;
         FieldMap<PrimitiveField,PrimitiveField> _mapping;
 
-        public MapFieldBuilder Id(string id)
+        public Map Id(string id)
         {
             _id = new Lazy<string>(() => id, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldBuilder Map(PrimitiveField key, PrimitiveField value)
+        public Map Map(PrimitiveField key, PrimitiveField value)
         {
             _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
             _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
@@ -42,21 +43,21 @@ namespace Butter.Internal
             return this;
         }
 
-        public MapFieldBuilder Key(PrimitiveField key)
+        public Map Key(PrimitiveField key)
         {
             _key = new Lazy<PrimitiveField>(() => key, LazyThreadSafetyMode.PublicationOnly);
             
             return this;
         }
 
-        public MapFieldBuilder Value(PrimitiveField value)
+        public Map Value(PrimitiveField value)
         {
             _value = new Lazy<PrimitiveField>(() => value, LazyThreadSafetyMode.PublicationOnly);
 
             return this;
         }
 
-        public MapFieldBuilder IsNullable()
+        public Map IsNullable()
         {
             _nullable = new Lazy<bool>(() => true, LazyThreadSafetyMode.PublicationOnly);
             

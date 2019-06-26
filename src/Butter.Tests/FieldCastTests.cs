@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Builders;
     using NUnit.Framework;
     using Specification;
 
@@ -9,7 +10,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            DecimalField field = Field.Builder<DecimalFieldBuilder>()
+            DecimalField field = Field.Builder<Decimal>()
                 .Id("field1")
                 .Precision(2)
                 .Scale(4)

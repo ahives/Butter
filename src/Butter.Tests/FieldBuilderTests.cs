@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Builders;
     using NUnit.Framework;
 
     [TestFixture]
@@ -8,7 +9,7 @@ namespace Butter.Tests
         [Test]
         public void Test()
         {
-            var field = Field.Builder<DecimalFieldBuilder>()
+            var field = Field.Builder<Decimal>()
                 .Id("field1")
                 .Precision(2)
                 .Build();

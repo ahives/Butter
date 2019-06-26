@@ -1,5 +1,6 @@
 namespace Butter.Tests
 {
+    using Builders;
     using NUnit.Framework;
     using Specification;
 
@@ -11,13 +12,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3")
                 .Precision(2)
                 .Scale(5)
@@ -43,13 +44,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -70,13 +71,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -97,13 +98,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -124,13 +125,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)
@@ -150,13 +151,13 @@ namespace Butter.Tests
         {
             var fields = new FieldList();
             
-            fields.Add<FieldBuilder>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
-            fields.Add<FieldBuilder>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field1").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field2").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field3").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field4").DataType(FieldDataType.Primitive).IsNullable().Build());
+            fields.Add<Primitive>(x => x.Id("field5").DataType(FieldDataType.Primitive).IsNullable().Build());
 
-            PrimitiveField field = Field.Builder<DecimalFieldBuilder>()
+            PrimitiveField field = Field.Builder<Decimal>()
                 .Id("field3A")
                 .Precision(2)
                 .Scale(5)

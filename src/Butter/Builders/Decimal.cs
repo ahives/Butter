@@ -12,20 +12,20 @@
 // CONDITIONS OF ANY KIND, either express or implied. See the License for the
 // specific language governing permissions and limitations under the License.
 // ***********************************************************************************
-namespace Butter
+namespace Butter.Builders
 {
     using Specification;
 
-    public interface DecimalFieldBuilder :
-        ISpecificationBuilder
+    public interface Decimal :
+        IFieldBuilder
     {
-        DecimalFieldBuilder Id(string id);
+        Decimal Id(string id);
 
-        DecimalFieldBuilder IsNullable();
+        Decimal IsNullable();
 
-        DecimalFieldBuilder Scale(int scale);
+        Decimal Scale(int scale);
         
-        DecimalFieldBuilder Precision(int precision);
+        Decimal Precision(int precision);
 
         DecimalField Build();
     }

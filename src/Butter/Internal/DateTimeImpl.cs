@@ -14,51 +14,37 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
+    using Builders;
     using Specification;
 
-    class DecimalFieldBuilderImpl :
-        DecimalFieldBuilder
+    class DateTimeImpl :
+        DateTime
     {
         string _id;
         bool _nullable;
-        int _scale;
-        int _precision;
+        DateTimeEncoding _encoding;
 
-        public DecimalFieldBuilderImpl()
-        {
-            _nullable = false;
-            _scale = 2;
-            _precision = 3;
-        }
-
-        public DecimalFieldBuilder Id(string id)
+        public DateTime Id(string id)
         {
             _id = id;
             
             return this;
         }
 
-        public DecimalFieldBuilder IsNullable()
+        public DateTime IsNullable()
         {
             _nullable = true;
             
             return this;
         }
 
-        public DecimalFieldBuilder Scale(int scale)
+        public DateTime Encoding(DateTimeEncoding encoding)
         {
-            _scale = scale;
-
+            _encoding = encoding;
+            
             return this;
         }
 
-        public DecimalFieldBuilder Precision(int precision)
-        {
-            _precision = precision;
-
-            return this;
-        }
-
-        public DecimalField Build() => new DecimalFieldImpl(_id, _scale, _precision, _nullable);
+        public DateTimeField Build() => new DateTimeFieldImpl(_id, _encoding, _nullable);
     }
 }

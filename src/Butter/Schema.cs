@@ -17,6 +17,7 @@ namespace Butter
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using Builders;
     using Internal;
     using Notification;
     using Specification;
@@ -96,7 +97,7 @@ namespace Butter
 
         public T Modify<T, TBuilder>(Func<T, bool> criteria, Func<TBuilder, T> builder)
             where T : PrimitiveField
-            where TBuilder : ISpecificationBuilder
+            where TBuilder : IFieldBuilder
         {
             TBuilder b = Field.Builder<TBuilder>();
             T field = builder(b);

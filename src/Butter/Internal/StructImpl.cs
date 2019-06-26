@@ -14,36 +14,63 @@
 // ***********************************************************************************
 namespace Butter.Internal
 {
+    using System;
+    using Builders;
     using Specification;
 
-    class PrimitiveFieldBuilderImpl :
-        PrimitiveFieldBuilder
+    class StructImpl :
+        Struct
     {
         string _id;
-        FieldDataType _dataType;
         bool _nullable;
+        readonly IFieldList _specifications;
 
-        public PrimitiveFieldBuilder Id(string id)
+        public StructImpl()
+        {
+            _specifications = new FieldList(false);
+        }
+
+        public Struct Id(string id)
         {
             _id = id;
-            
+
             return this;
         }
 
-        public PrimitiveFieldBuilder DataType(FieldDataType dataType)
+        public Struct Field<T>(T specification)
+            where T : PrimitiveField
         {
-            _dataType = dataType;
-            
+            _specifications.Add(specification);
+
             return this;
         }
 
-        public PrimitiveFieldBuilder IsNullable()
+        public Struct Field<T>(Func<T, PrimitiveField> builder)
+            where T : IFieldBuilder
+        {
+            T specBuilder = Butter.Field.Builder<T>();
+
+            var specification = builder(specBuilder);
+
+            _specifications.Add(specification);
+
+            return this;
+        }
+
+        public Struct Fields(IReadOnlyFieldList specifications)
+        {
+            _specifications.AddRange(specifications.ToList());
+
+            return this;
+        }
+
+        public Struct IsNullable()
         {
             _nullable = true;
-            
+
             return this;
         }
 
-        public PrimitiveField Build() => new PrimitiveFieldImpl(_id, _dataType, _nullable);
+        public StructField Build() => new StructFieldImpl(_id, _specifications, isNullable:_nullable);
     }
 }
