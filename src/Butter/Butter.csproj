@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFrameworks>net462;netstandard2.0</TargetFrameworks>
-        <LangVersion>7.2</LangVersion>
+        <LangVersion>9</LangVersion>
+        <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
     
     <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">

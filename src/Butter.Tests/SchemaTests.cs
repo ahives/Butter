@@ -173,6 +173,46 @@ namespace Butter.Tests
             Assert.AreEqual(6, schema.Fields.Count);
         }
 
+        [Test]
+        public void Verify_can_access_struct_fields_by_id2()
+        {
+            var field = Field.Builder<Struct>()
+                .Id("field1")
+                .IsNullable()
+                .Field<Primitive>(x => x.Id("fieldA").DataType(SchemaDataType.Primitive).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("fieldB").DataType(SchemaDataType.Primitive).IsNullable().Build())
+                .Field<Primitive>(x => x.Id("fieldC").DataType(SchemaDataType.Primitive).IsNullable().Build())
+                .Field<Decimal>(x => x.Id("fieldD").Precision(5).Scale(2).IsNullable().Build())
+                .Build();
+
+            var schema = Schema.Builder()
+                .Field(field)
+                .Field<Primitive>(x => x.Id("field6").IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field7").IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field8").IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field9").IsNullable().Build())
+                .Field<Primitive>(x => x.Id("field10").IsNullable().Build())
+                .Build();
+
+            var builder = new SchemaBuilder()
+                .Build(x =>
+                {
+                    x.AddField<Primitive>(f =>
+                    {
+                        f.Id("");
+                        f.IsNullable();
+                    });
+                    x.AddField<Primitive>(f =>
+                    {
+                        f.Id("");
+                        f.IsNullable();
+                    });
+                });
+            Assert.IsNotNull(schema.Fields["field1"]);
+            Assert.IsNotNull(schema.Fields["field1"].Cast<StructField>().Fields["fieldB"]);
+            Assert.AreEqual(6, schema.Fields.Count);
+        }
+
         [Test, Explicit]
         public void Test()
         {
@@ -196,5 +236,34 @@ namespace Butter.Tests
 
             Console.WriteLine(schema.Report());
         }
+    }
+
+    public class SchemaBuilder
+    {
+        public SchemaBuilder()
+        {
+            throw new NotImplementedException();
+        }
+
+        public FakeSchema Build(Action<IFakeSchemaBuilder> action)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public interface FakeSchema
+    {
+    }
+
+    public interface IFakeSchemaBuilder
+    {
+        void AddField<T>(Action<FakeFieldBuilder> action);
+    }
+
+    public interface FakeFieldBuilder
+    {
+        void Id(string name);
+
+        void IsNullable();
     }
 }
